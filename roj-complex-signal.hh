@@ -1,0 +1,92 @@
+#ifndef _roj_complex_signal_
+#define _roj_complex_signal_
+
+/**
+ * @type: class
+ * @brief: Definition of roj_complex_signal class.
+ */
+
+/* ************************************************************************************************************************* */
+/* headers and declarations */
+
+#include "roj-external.hh"
+#include "roj-misc.hh"
+
+#include "roj-fourier-spectr.hh"
+class roj_fourier_spectrum;
+
+#include "roj-hilbert-equiv.hh"
+class roj_hilbert_equiv;
+
+#include "roj-real-array.hh"
+class roj_real_arrya;
+
+/* ************************************************************************************************************************* */
+/* complex signal class definition */
+
+class roj_complex_signal{
+private:
+
+  /* internal configuration */
+  roj_signal_config m_config;
+
+ public:
+
+  /* construction */
+  roj_complex_signal (roj_real_array*, roj_real_array* =NULL);
+  roj_complex_signal (roj_complex_signal*);
+  roj_complex_signal (roj_signal_config);
+  roj_complex_signal (char*, int=0);
+  ~roj_complex_signal ();
+
+  /* config methods */
+  bool compare_config (roj_signal_config);
+  roj_signal_config get_config();
+
+  /* waveform manipulation */
+  int copy(roj_complex_signal*, int =0);
+  void modulate(double);
+  void reverse();
+  void clear();
+
+  /* waveform manipulation with change its length */
+  unsigned int append_zero_head(double);
+  unsigned int append_zero_tail(double);
+  unsigned int append_cos_head(double);
+  unsigned int append_cos_tail(double);
+  unsigned int cut(double, double);
+
+  
+  /* get signal transforms */
+  roj_fourier_spectrum* get_spectrum();
+  roj_complex_signal* get_instantaneous_complex_frequency ();
+  roj_complex_signal* get_instantaneous_chirp_rate ();
+  roj_complex_signal* get_instantaneous_frequency ();
+
+  /* save to file */
+  void save(char *);
+  void save_wav(char *);
+
+  /* other useful methods */
+  complex double remove_const();
+  double remove_imag();
+  void conjugate();
+
+  double calc_energy();
+  bool check_real();
+  bool check_imag();
+  
+  /**
+   * @type: field
+   * @brief: This public field gives access to signal samples.
+   */
+  complex double* m_waveform; 
+
+  /* operators */
+  void operator += (roj_complex_signal*);
+  void operator -= (roj_complex_signal*);
+};
+
+
+#endif
+
