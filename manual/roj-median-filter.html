@@ -1,0 +1,60 @@
+<html>
+<head>
+   <title>ccROJ</title>
+   <link rel='stylesheet' href='style.css'>
+</head>
+<body>
+<iframe src='head.html'>
+</iframe><br>
+<a href='index.html'><< go back to the main page</a>
+<br><br>
+<div class="file">
+<span class="key">@files</span>:<br>
+roj-median-filter.hh <br>
+roj-median-filter.cc <br>
+</div>
+<br><div class='class'>
+<span class='key'>@brief</span>: Definitions of roj_median_filter class. <br>
+</div>
+<br><div class='constructor'>
+<span class='key'>@brief</span>: This is a constructor of roj_median_filter.  <br>
+<span class='key'>@param</span> [in] <span class='arg'>a_width</span>: A width (like order, in samples) of filter mask. <br>
+<span class='key'>@param</span> [in] <span class='arg'>a_height</span>: A height (like order, in samples) of filter mask. <br>
+<span class='key'>@sign</span>: <span class='bold'><span class='range'>roj_median_filter</span> <span class='range'></span>:: <span class='func'>roj_median_filter</span> <span class='func'></span>(int <span class='arg'>a_width</span>, int <span class='arg'>a_height</span>)</span><br>
+</div>
+<br><div class='destructor'>
+<span class='key'>@brief</span>: This is an filter deconstructor. It also release internal buffers.  <br>
+<span class='key'>@sign</span>: <span class='bold'><span class='range'>roj_median_filter</span> <span class='range'></span>:: ~<span class='func'>roj_median_filter</span> <span class='func'></span>()</span><br>
+</div>
+<br><div class='method'>
+<span class='key'>@brief</span>: This routine performs median filtering for an array whose type is roj_real_array. <br>
+<span class='key'>@param</span> [in] <span class='arg'>a_arr</span>: A given array for filtering. <br>
+<span class='key'>@param</span> [in] <span class='arg'>a_hop</span>: A hop size between steps of filtering. <br>
+<span class='key'>@return</span>: The filtered output array. <br>
+<span class='key'>@sign</span>: <span class='bold'>roj_real_array* <span class='range'>roj_median_filter</span> <span class='range'></span>:: <span class='func'>filtering</span> <span class='func'></span>(roj_real_array* <span class='arg'>a_arr</span>, int <span class='arg'>a_hop</span>)</span><br>
+</div>
+<br><div class='method'>
+<span class='key'>@brief</span>: This routine performs a smart median filtering for an array whose type is roj_real_array. <br>
+<span class='key'>@param</span> [in] <span class='arg'>a_arr</span>: A given array for filtering. <br>
+<span class='key'>@param</span> [in] <span class='arg'>a_hop</span>: A hop size between steps of filtering. <br>
+<span class='key'>@return</span>: The filtered output array. <br>
+<span class='key'>@sign</span>: <span class='bold'>roj_real_array* <span class='range'>roj_median_filter</span> <span class='range'></span>:: <span class='func'>smart_filtering</span> <span class='func'></span>(roj_real_array* <span class='arg'>a_arr</span>, int <span class='arg'>a_hop</span>)</span><br>
+</div>
+<br><div class='method'>
+<span class='key'>@brief</span>: This routine performs a smart median filtering for an image whose type is roj_real_matrix. <br>
+<span class='key'>@param</span> [in] <span class='arg'>a_arr</span>: A given image for filtering. <br>
+<span class='key'>@param</span> [in] <span class='arg'>a_hop</span>: A horizontal hop size between steps of filtering. <br>
+<span class='key'>@param</span> [in] <span class='arg'>a_hop</span>: A vertical hop size between steps of filtering. <br>
+<span class='key'>@return</span>: The filtered output image. <br>
+<span class='key'>@sign</span>: <span class='bold'>roj_real_matrix* <span class='range'>roj_median_filter</span> <span class='range'></span>:: <span class='func'>smart_filtering</span> <span class='func'></span>(roj_real_matrix* <span class='arg'>a_matrix</span>, int <span class='arg'>a_hop</span>, int <span class='arg'>a_vop</span>)</span><br>
+</div>
+<br><div class='method'>
+<span class='key'>@brief</span>: This routine allows to reset. <br>
+<span class='key'>@sign</span>: <span class='bold'>void <span class='range'>roj_median_filter</span> <span class='range'></span>:: <span class='func'>reset</span> <span class='func'></span>()</span><br>
+</div>
+<br>
+<a href='index.html'>
+<< go back to the main page
+</a>
+</body>
+</html>

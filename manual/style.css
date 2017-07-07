@@ -1,0 +1,118 @@
+a {
+    color: #00f;
+    text-decoration: none;
+}
+
+iframe {
+    border: none;
+    overflow:scroll;
+    width: 100%;
+}
+
+span.title{
+    font-weight:bold;
+}
+span.bold{
+    font-weight:bold;
+}
+
+span.arg{
+    color: Crimson;
+    font-weight:bold;
+}
+span.key{
+    color: purple;
+    font-weight: bold;
+}
+span.range{
+    color: green;
+}
+span.func{
+    color: MediumBlue;
+}
+span.field{
+    color: Maroon ;
+}
+
+table{
+    border: 1px solid black;
+}
+
+div.file {
+    background-color: yellow;
+    width: 100%;
+}
+
+div.class {
+    background-color: gold;
+    width: 100%;
+}
+
+div.module {
+    background-color: gold;
+    width: 100%;
+}
+
+div.constructor{
+    background-color: palegreen ;
+    width: 100%;
+}
+
+div.destructor{
+    background-color:  LightGray ;
+    width: 100%;
+}
+
+div.method{
+    background-color: PowderBlue ; 
+    width: 100%;
+}
+
+div.function{
+    background-color: Wheat ;
+    width: 100%;
+}
+
+div.operator{
+    background-color: pink;
+    width: 100%;
+}
+
+div.struct{
+    background-color: greenyellow;
+    width: 100%;
+}
+
+div.define{
+    background-color:Plum  ;
+    width: 100%;
+}
+
+div.private{
+    background-color:  LightSteelBlue ;
+    width: 100%;
+}
+
+div.field{
+    background-color: SandyBrown  ;
+    width: 100%;
+}
+
+div.alert{
+    background-color:  Tomato;
+    width: 100%;
+}
+
+
+#wrap {
+   width:700px;
+   margin:0 auto;
+}
+#left_col {
+   float:left;
+   width:350px;
+}
+#right_col {
+   float:right;
+   width:350px;
+}

@@ -1,0 +1,82 @@
+<html>
+<head>
+   <title>ccROJ</title>
+   <link rel='stylesheet' href='style.css'>
+</head>
+<body>
+<iframe src='head.html'>
+</iframe><br>
+<a href='index.html'><< go back to the main page</a>
+<br><br>
+<div class="file">
+<span class="key">@files</span>:<br>
+roj-image.hh <br>
+roj-image.cc <br>
+</div>
+<br><div class='class'>
+<span class='key'>@brief</span>: Definition of abstract roj_image class. <br>
+</div>
+<br><div class='method'>
+<span class='key'>@brief</span>: This routine returns imag parameters as a structure. <br>
+<span class='key'>@return</span>: the structure which contains the configuration. <br>
+<span class='key'>@sign</span>: <span class='bold'>roj_image_config <span class='range'>roj_image</span> <span class='range'></span>:: <span class='func'>get_config</span> <span class='func'></span>()</span><br>
+</div>
+<br><div class='method'>
+<span class='key'>@brief</span>: This routine checks configuration of the object. <br>
+<span class='key'>@return</span>: True if object is correctly configured, false otherwise. <br>
+<span class='key'>@sign</span>: <span class='bold'>bool <span class='range'>roj_image</span> <span class='range'></span>:: <span class='func'>check_config</span> <span class='func'></span>()</span><br>
+</div>
+<br><div class='method'>
+<span class='key'>@brief</span>: This routine compares the internal configuration to a given configuration. <br>
+<span class='key'>@param</span> [in] <span class='arg'>a_conf</span>: A pointer to the given configuration. <br>
+<span class='key'>@return</span>: True if configurations are equal, false oterwise. <br>
+<span class='key'>@sign</span>: <span class='bold'>bool <span class='range'>roj_image</span> <span class='range'></span>:: <span class='func'>compare_config</span> <span class='func'></span>(roj_image_config <span class='arg'>a_conf</span>)</span><br>
+</div>
+<br><div class='method'>
+<span class='key'>@brief</span>: This routine compares the internal time axis configuration to a given configuration. <br>
+<span class='key'>@param</span> [in] <span class='arg'>a_conf</span>: A pointer to the given configuration. <br>
+<span class='key'>@return</span>: True if configurations are equal, false oterwise. <br>
+<span class='key'>@sign</span>: <span class='bold'>bool <span class='range'>roj_image</span> <span class='range'></span>:: <span class='func'>compare_time_config</span> <span class='func'></span>(roj_image_config <span class='arg'>a_conf</span>)</span><br>
+</div>
+<br><div class='method'>
+<span class='key'>@brief</span>: This routine returns time argument by an index. <br>
+<span class='key'>@param</span> [in] <span class='arg'>a_index</span>: A given index. <br>
+<span class='key'>@return</span>: The returned time. <br>
+<span class='key'>@sign</span>: <span class='bold'>double <span class='range'>roj_image</span> <span class='range'></span>:: <span class='func'>get_time_by_index</span> <span class='func'></span>(int <span class='arg'>a_index</span>)</span><br>
+</div>
+<br><div class='method'>
+<span class='key'>@brief</span>: This routine returns frequency argument by an index. <br>
+<span class='key'>@param</span> [in] <span class='arg'>a_index</span>: A given index. <br>
+<span class='key'>@return</span>: The returned time. <br>
+<span class='key'>@sign</span>: <span class='bold'>double <span class='range'>roj_image</span> <span class='range'></span>:: <span class='func'>get_frequency_by_index</span> <span class='func'></span>(int <span class='arg'>a_index</span>)</span><br>
+</div>
+<br><div class='method'>
+<span class='key'>@brief</span>: This routine returns the nearest index for a given time argument. <br>
+<span class='key'>@param</span> [in] <span class='arg'>a_time</span>: A given time argument. <br>
+<span class='key'>@return</span>: The nearest index. <br>
+<span class='key'>@sign</span>: <span class='bold'>int <span class='range'>roj_image</span> <span class='range'></span>:: <span class='func'>get_index_by_time</span> <span class='func'></span>(double <span class='arg'>a_time</span>)</span><br>
+</div>
+<br><div class='method'>
+<span class='key'>@brief</span>: This routine returns the nearest index for a given frequency argument. <br>
+<span class='key'>@param</span> [in] <span class='arg'>a_freq</span>: A given frequency argument. <br>
+<span class='key'>@return</span>: The nearest index. <br>
+<span class='key'>@sign</span>: <span class='bold'>int <span class='range'>roj_image</span> <span class='range'></span>:: <span class='func'>get_index_by_frequency</span> <span class='func'></span>(double <span class='arg'>a_freq</span>)</span><br>
+</div>
+<br><div class='method'>
+<span class='key'>@brief</span>: Checking time index. <br>
+<span class='key'>@param</span> [in] <span class='arg'>a_index</span>: A given index. <br>
+<span class='key'>@return</span>: True if index is valid, false otherwise. <br>
+<span class='key'>@sign</span>: <span class='bold'>bool <span class='range'>roj_image</span> <span class='range'></span>:: <span class='func'>check_in_time_index</span> <span class='func'></span>(int <span class='arg'>a_index</span>)</span><br>
+</div>
+<br><div class='method'>
+<span class='key'>@brief</span>: Checking frequency index. <br>
+<span class='key'>@param</span> [in] <span class='arg'>a_index</span>: A given index. <br>
+<span class='key'>@return</span>: True if index is valid, false otherwise. <br>
+<span class='key'>@sign</span>: <span class='bold'>bool <span class='range'>roj_image</span> <span class='range'></span>:: <span class='func'>check_in_frequency_index</span> <span class='func'></span>(int <span class='arg'>a_index</span>)</span><br>
+</div>
+<br>
+<a href='index.html'>
+<< go back to the main page
+</a>
+</body>
+</html>

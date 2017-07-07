@@ -1,0 +1,67 @@
+<html>
+<head>
+   <title>ccROJ</title>
+   <link rel='stylesheet' href='style.css'>
+</head>
+<body>
+<iframe src='head.html'>
+</iframe><br>
+<a href='index.html'><< go back to the main page</a>
+<br><br>
+<div class="file">
+<span class="key">@files</span>:<br>
+roj-analyzer.hh <br>
+roj-analyzer.cc <br>
+</div>
+<br><div class='class'>
+<span class='key'>@brief</span>: Definition of roj_analyzer abstract class. <br>
+</div>
+<br><div class='define'>
+<span class='key'>@brief</span>: This const defines the code of chirp-rate K estimator. <br>
+<span class='key'>@sign</span>: <span class='bold'><span class='func'>define</span> CR_K_ESTIMATOR 0 </span><br>
+</div>
+<br><div class='define'>
+<span class='key'>@brief</span>: This const defines the code of chirp-rate D estimator. <br>
+<span class='key'>@sign</span>: <span class='bold'><span class='func'>define</span> CR_D_ESTIMATOR 1 </span><br>
+</div>
+<br><div class='define'>
+<span class='key'>@brief</span>: This const defines the code of chirp-rate F estimator. <br>
+<span class='key'>@sign</span>: <span class='bold'><span class='func'>define</span> CR_F_ESTIMATOR 2 </span><br>
+</div>
+<br><div class='define'>
+<span class='key'>@brief</span>: This const defines the code of first instantaneous frequency estimator. <br>
+<span class='key'>@sign</span>: <span class='bold'><span class='func'>define</span> IF_1_ESTIMATOR 0 </span><br>
+</div>
+<br><div class='define'>
+<span class='key'>@brief</span>: This const defines the code of second instantaneous frequency estimator. <br>
+<span class='key'>@sign</span>: <span class='bold'><span class='func'>define</span> IF_2_ESTIMATOR 1 </span><br>
+</div>
+</div>
+<br><div class='destructor'>
+<span class='key'>@brief</span>: This is an anayzer deconstructor. <br>
+<span class='key'>@sign</span>: <span class='bold'><span class='range'>roj_analyzer</span> <span class='range'></span>:: ~<span class='func'>roj_analyzer</span>()</span><br>
+</div>
+<br><div class='method'>
+<span class='key'>@brief</span>: This is functiona allows to set a signal for analysis. <br>
+<span class='key'>@param</span> [in] <span class='arg'>a_sample</span>: A pointer to a signal for filtering. <br>
+<span class='key'>@param</span> [in] <span class='arg'>a_hop</span>: A hopsize. <br>
+<span class='key'>@sign</span>: <span class='bold'>void <span class='range'>roj_analyzer</span> <span class='range'></span>:: <span class='func'>set_signal</span> <span class='func'></span>(roj_complex_signal* <span class='arg'>a_sig</span>, int <span class='arg'>a_hop</span>)</span><br>
+</div>
+<br><div class='method'>
+<span class='key'>@brief</span>: This is function allows to choose estimator of instantaneous frequency. <br>
+<span class='key'>@param</span> [in] <span class='arg'>a_code</span>: an estimator code. <br>
+<span class='key'>@return</span>: A pointer to obtained distribution. <br>
+<span class='key'>@sign</span>: <span class='bold'>roj_real_matrix* <span class='range'>roj_analyzer</span> <span class='range'></span>:: <span class='func'>get_instantaneous_frequency</span> <span class='func'></span>(int <span class='arg'>a_code</span>)</span><br>
+</div>
+<br><div class='method'>
+<span class='key'>@brief</span>: This is functiona allows to choose estimator of chirp-rate. <br>
+<span class='key'>@param</span> [in] <span class='arg'>a_code</span>: an estimator code. <br>
+<span class='key'>@return</span>: A pointer to obtained distribution. <br>
+<span class='key'>@sign</span>: <span class='bold'>roj_real_matrix* <span class='range'>roj_analyzer</span> <span class='range'></span>:: <span class='func'>get_chirp_rate</span> <span class='func'></span>(int <span class='arg'>a_code</span>)</span><br>
+</div>
+<br>
+<a href='index.html'>
+<< go back to the main page
+</a>
+</body>
+</html>

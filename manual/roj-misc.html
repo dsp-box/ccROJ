@@ -1,0 +1,176 @@
+<html>
+<head>
+   <title>ccROJ</title>
+   <link rel='stylesheet' href='style.css'>
+</head>
+<body>
+<iframe src='head.html'>
+</iframe><br>
+<a href='index.html'><< go back to the main page</a>
+<br><br>
+<div class="file">
+<span class="key">@files</span>:<br>
+roj-misc.hh <br>
+roj-misc.cc <br>
+</div>
+<br><div class='module'>
+<span class='key'>@brief</span>: In this module, various simple independent (separated) and useful functions and structures are introduced. It is intended to use them in other classes of this project as well as in stand alone programs. <br>
+</div>
+<br><div class='define'>
+<span class='key'>@brief</span>: This is a flag, which switch on debug printing. Comment this line if you do not want to print the debug communicates. <br>
+<span class='key'>@sign</span>: <span class='bold'><span class='func'>define</span> ROJ_DEBUG_ON </span><br>
+</div>
+<br><div class='define'>
+<span class='key'>@brief</span>: This is a flag, which switch on a progress. Comment this line if you do not want to print the progress. <br>
+<span class='key'>@sign</span>: <span class='bold'><span class='func'>define</span> ROJ_PROGRESS_ON </span><br>
+</div>
+<br><div class='define'>
+<span class='key'>@brief</span>: This is a const string, which defines the version number. Please do not change it manually. In order to change modify VERSION file and run 'make version' <br>
+<span class='key'>@sign</span>: <span class='bold'><span class='func'>define</span> ROJ_VERSION "0-40" </span><br>
+</div>
+<br><div class='define'>
+<span class='key'>@brief</span>: This is the alias to 2 pi value. <br>
+<span class='key'>@sign</span>: <span class='bold'><span class='func'>define</span> TWO_PI 6.2831853071795864769252866 </span><br>
+</div>
+<br><div class='define'>
+<span class='key'>@brief</span>: This is Euler number. <br>
+<span class='key'>@sign</span>: <span class='bold'><span class='func'>define</span> E_NUMBER 2.7182818284590452353602975 </span><br>
+</div>
+<br><div class='define'>
+<span class='key'>@brief</span>: Blackman-Harris window code. <br>
+<span class='key'>@sign</span>: <span class='bold'><span class='func'>define</span> ROJ_BH_WINDOW 0 </span><br>
+</div>
+<br><div class='define'>
+<span class='key'>@brief</span>: ODE filter type code <br>
+<span class='key'>@sign</span>: <span class='bold'><span class='func'>define</span> ROJ_ODE_FILTER 1 </span><br>
+</div>
+<br><div class='define'>
+<span class='key'>@brief</span>: please comment it if your consol does not support color text <br>
+<span class='key'>@sign</span>: <span class='bold'><span class='func'>define</span> ROJ_COLOR_TEXT  </span><br>
+</div>
+<br><div class='define'>
+<span class='key'>@brief</span>: debug prompt <br>
+<span class='key'>@sign</span>: <span class='bold'><span class='func'>define</span> ROJ_DEBUG_PROMPT "\033[1;<span class='func'>31m</span>(debug)\033[0m" </span><br>
+</div>
+<br><div class='struct'>
+<span class='key'>@brief</span>: This is a structure for roj_complex_signal configuration (as well as roj_fourier_spectrum and others). <br>
+<span class='bold'><span class='key'>@sign</span>: <span class='bold'> <span class='range'>struct</span> roj_signal_config</span> <span class='arg'></span></span><br>
+<span class='bold'>  unsigned int <span class='arg'>length</span></span><br>
+<span class='bold'>  double <span class='arg'>start</span></span><br>
+<span class='bold'>  double <span class='arg'>rate</span></span><br>
+</div>
+<br><div class='struct'>
+<span class='key'>@brief</span>: This is a structure for roj_real_array configuration. <br>
+<span class='bold'><span class='key'>@sign</span>: <span class='bold'> <span class='range'>struct</span> roj_array_config</span> <span class='arg'></span></span><br>
+<span class='bold'>  unsigned int <span class='arg'>length</span></span><br>
+<span class='bold'>  double <span class='arg'>min</span></span><br>
+<span class='bold'>  double <span class='arg'>max</span></span><br>
+</div>
+<br><div class='struct'>
+<span class='key'>@brief</span>: This is a structure for roj_real_matrix configuration. <br>
+<span class='bold'><span class='key'>@sign</span>: <span class='bold'> <span class='range'>struct</span> roj_image_config</span> <span class='arg'></span></span><br>
+<span class='bold'>  roj_array_config <span class='arg'>frequency</span></span><br>
+<span class='bold'>  roj_array_config <span class='arg'>time</span></span><br>
+</div>
+<br><div class='function'>
+<span class='key'>@brief</span>: The routine prints info about the project. <br>
+<span class='key'>@sign</span>: <span class='bold'>void <span class='func'>print_roj_info</span> <span class='func'></span>()</span><br>
+</div>
+<br><div class='function'>
+<span class='key'>@brief</span>: The routine checks that a given version is the same as the current version. <br>
+<span class='key'>@param</span> [in] <span class='arg'>a_major</span>: A major part of the version. <br>
+<span class='key'>@param</span> [in] <span class='arg'>a_minor</span>: A minor part of the version <br>
+<span class='key'>@sign</span>: <span class='bold'>void <span class='func'>require_roj_version</span> <span class='func'></span>(int <span class='arg'>a_major</span>, int <span class='arg'>a_minor</span>)</span><br>
+</div>
+<br><div class='function'>
+<span class='key'>@brief</span>: This function shoud be called if an error is detected. <br>
+<span class='key'>@param</span> [in] <span class='arg'>a_info</span>: A message, statement for printing in stderr. <br>
+<span class='key'>@sign</span>: <span class='bold'>void <span class='func'>call_error</span> <span class='func'></span>(const char* <span class='arg'>a_info</span>)</span><br>
+</div>
+<br><div class='function'>
+<span class='key'>@brief</span>: This function shoud be called if a warning is detected. <br>
+<span class='key'>@param</span> [in] <span class='arg'>a_info</span>: A message, statement for printing in stderr. <br>
+<span class='key'>@sign</span>: <span class='bold'>void <span class='func'>call_warning</span> <span class='func'></span>(const char* <span class='arg'>a_info</span>)</span><br>
+</div>
+<br><div class='function'>
+<span class='key'>@brief</span>: This function shoud be called if any info is detected. <br>
+<span class='key'>@param</span> [in] <span class='arg'>a_info</span>: A message, statement for printing in stderr. <br>
+<span class='key'>@sign</span>: <span class='bold'>void <span class='func'>call_info</span> <span class='func'></span>(const char* <span class='arg'>a_info</span>)</span><br>
+</div>
+<br><div class='function'>
+<span class='key'>@brief</span>: This function shoud be called if any info is detected. <br>
+<span class='key'>@param</span> [in] <span class='arg'>a_info</span>: A message (const), statement for printing in stderr. <br>
+<span class='key'>@param</span> [in] <span class='arg'>a_string</span>: A message (dynamic), statement for printing in stderr. <br>
+<span class='key'>@sign</span>: <span class='bold'>void <span class='func'>call_info</span> <span class='func'></span>(const char* <span class='arg'>a_info</span>, char *<span class='arg'>a_string</span>)</span><br>
+</div>
+<br><div class='function'>
+<span class='key'>@brief</span>: This function shoud be called if any info is detected. <br>
+<span class='key'>@param</span> [in] <span class='arg'>a_info</span>: A message (const), statement for printing in stderr. <br>
+<span class='key'>@param</span> [in] <span class='arg'>a_number</span>: A number for printing in stderr. <br>
+<span class='key'>@sign</span>: <span class='bold'>void <span class='func'>call_info</span> <span class='func'></span>(const char* <span class='arg'>a_info</span>, double <span class='arg'>a_number</span>)</span><br>
+</div>
+<br><div class='function'>
+<span class='key'>@brief</span>: This function shoud be called for marker printing. <br>
+<span class='key'>@param</span> [in] <span class='arg'>a_info</span>: A message, statement for printing in stderr. <br>
+<span class='key'>@sign</span>: <span class='bold'>void <span class='func'>print_marker</span> <span class='func'></span>(const char* <span class='arg'>a_info</span>)</span><br>
+</div>
+<br><div class='function'>
+<span class='key'>@brief</span>: The function prints a progress in the text mode. It can be useful for long calculation for monitoring its progress. <br>
+<span class='key'>@param</span> [in] <span class='arg'>a_curr</span>: The current position of a progress. <br>
+<span class='key'>@param</span> [in] <span class='arg'>a_len</span>: A length of the bar. <br>
+<span class='key'>@param</span> [in] <span class='arg'>a_info</span>: A printing label. <br>
+<span class='key'>@sign</span>: <span class='bold'>void <span class='func'>print_progress</span> <span class='func'></span>(int <span class='arg'>a_curr</span>, int <span class='arg'>a_len</span>, const char *<span class='arg'>a_info</span>)</span><br>
+</div>
+<br><div class='function'>
+<span class='key'>@brief</span>: This function returns random number with normal probability using Box-Muller transform (G. E. P. Box and Mervin E. Muller, A Note on the Generation of Random Normal Deviates, The Annals of Mathematical Statistics (1958), Vol. 29, No. 2). <br>
+<span class='key'>@param</span> [in] <span class='arg'>a_sigma</span>: Standard deviation. <br>
+<span class='key'>@return</span>: Random number. <br>
+<span class='key'>@sign</span>: <span class='bold'>double <span class='func'>rand_gauss</span> <span class='func'></span>(double <span class='arg'>a_sigma</span>)</span><br>
+</div>
+<br><div class='function'>
+<span class='key'>@brief</span>: This function returns factorial of the argument. <br>
+<span class='key'>@param</span> [in] <span class='arg'>a_number</span>: The number for which factorial is roj_calculated. <br>
+<span class='key'>@return</span>: Factorial value. <br>
+<span class='key'>@sign</span>: <span class='bold'>int <span class='func'>calc_factorial</span> <span class='func'></span>(int <span class='arg'>a_number</span>)</span><br>
+</div>
+<br><div class='function'>
+<span class='key'>@brief</span>: This function returns binominal coefficient of two arguments. <br>
+<span class='key'>@param</span> [in] <span class='arg'>a_kval</span>: A first argument. <br>
+<span class='key'>@param</span> [in] <span class='arg'>a_nval</span>: A second argument. <br>
+<span class='key'>@return</span>: Binominal coefficient. <br>
+<span class='key'>@sign</span>: <span class='bold'>double <span class='func'>calc_binominal</span> <span class='func'></span>(int <span class='arg'>a_kval</span>, int <span class='arg'>a_nval</span>)</span><br>
+</div>
+<br><div class='function'>
+<span class='key'>@brief</span>: This function returns Eulerian number of two arguments. <br>
+<span class='key'>@param</span> [in] <span class='arg'>a_kval</span>: A first argument. <br>
+<span class='key'>@param</span> [in] <span class='arg'>a_nval</span>: A second argument. <br>
+<span class='key'>@return</span>: Eulerian number. <br>
+<span class='key'>@sign</span>: <span class='bold'>double <span class='func'>calc_eulerian</span> <span class='func'></span>(int <span class='arg'>a_kval</span>, int <span class='arg'>a_nval</span>)</span><br>
+</div>
+<br><div class='function'>
+<span class='key'>@brief</span>: This function returns one coefficient of blackman-Harris window. <br>
+<span class='key'>@param</span> [in] <span class='arg'>a_nr</span>: An index of returned coefficient. <br>
+<span class='key'>@param</span> [in] <span class='arg'>a_len</span>: A window length (in coefficients). <br>
+<span class='key'>@param</span> [in] <span class='arg'>a_d_order</span>: An order of derivative. <br>
+<span class='key'>@return</span>: The coefficient value. <br>
+<span class='key'>@sign</span>: <span class='bold'>double <span class='func'>calc_blackman_harris</span> <span class='func'></span>(int <span class='arg'>a_nr</span>, int <span class='arg'>a_len</span>, int <span class='arg'>a_d_order</span>)</span><br>
+</div>
+<br><div class='function'>
+<span class='key'>@brief</span>: This routine is used for sorting and compares two double values. <br>
+<span class='key'>@param</span> [in] <span class='arg'>a_arg1</span>: A pointer to double value. <br>
+<span class='key'>@param</span> [in] <span class='arg'>a_arg2</span>: A pointer to double value. <br>
+<span class='key'>@return</span>: The result of the comarison which is compatible with the 'qsort' function. <br>
+<span class='key'>@sign</span>: <span class='bold'>int <span class='func'>value_comparer</span> <span class='func'></span>(const void * <span class='arg'>a_arg1</span>, const void * <span class='arg'>a_arg2</span>)</span><br>
+</div>
+<br><div class='function'>
+<span class='key'>@brief</span>: This function calculates the determinat of 4x4 matrix. <br>
+<span class='key'>@param</span> [in] <span class='arg'>a_matrix</span>: a given matrix. <br>
+<span class='key'>@return</span>: calculated determinant. <br>
+<span class='key'>@sign</span>: <span class='bold'>double <span class='func'>calc_4x4_det</span> <span class='func'></span>(double <span class='arg'>a_matrix</span>[4][4])</span><br>
+</div>
+<br>
+<a href='index.html'>
+<< go back to the main page
+</a>
+</body>
+</html>

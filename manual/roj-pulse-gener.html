@@ -1,0 +1,101 @@
+<html>
+<head>
+   <title>ccROJ</title>
+   <link rel='stylesheet' href='style.css'>
+</head>
+<body>
+<iframe src='head.html'>
+</iframe><br>
+<a href='index.html'><< go back to the main page</a>
+<br><br>
+<div class="file">
+<span class="key">@files</span>:<br>
+roj-pulse-gener.hh <br>
+roj-pulse-gener.cc <br>
+</div>
+<br><div class='class'>
+<span class='key'>@brief</span>: Definition of roj_pulse_generator class. <br>
+</div>
+<br><div class='struct'>
+<span class='key'>@brief</span>: This is a structure for roj_pulse_generator configuration. <br>
+<span class='bold'><span class='key'>@sign</span>: <span class='bold'> <span class='range'>struct</span> roj_pulse_config</span> <span class='arg'></span></span><br>
+<span class='bold'>  double <span class='arg'>transition</span></span><br>
+<span class='bold'>  double <span class='arg'>period</span></span><br>
+<span class='bold'>  double <span class='arg'>width</span></span><br>
+<span class='bold'>  double <span class='arg'>amplitude</span></span><br>
+<span class='bold'>  double <span class='arg'>delay</span></span><br>
+<span class='bold'>  double <span class='arg'>phase</span></span><br>
+<span class='bold'>  double <span class='arg'>frequency</span></span><br>
+<span class='bold'>  double <span class='arg'>bandwidth</span></span><br>
+</div>
+<br><div class='field'>
+<span class='key'>@brief</span>: This field allows to set the transition of the Tukey window, which is an envelope of the pulse (0 <= transition <= 1). <br>
+<span class='key'>@sign</span>: <span class='bold'>  double <span class='field'>m_transition</span></span><br>
+</div>
+<br><div class='field'>
+<span class='key'>@brief</span>: Time in which one pulse occurs. <br>
+<span class='key'>@sign</span>: <span class='bold'>  double <span class='field'>m_period</span></span><br>
+</div>
+<br><div class='field'>
+<span class='key'>@brief</span>: The width of a single pulse. <br>
+<span class='key'>@sign</span>: <span class='bold'>  double <span class='field'>m_width</span></span><br>
+</div>
+<br><div class='field'>
+<span class='key'>@brief</span>: The amplitude of a single pulse. <br>
+<span class='key'>@sign</span>: <span class='bold'>  double <span class='field'>m_amplitude</span></span><br>
+</div>
+<br><div class='field'>
+<span class='key'>@brief</span>: A shift in time of pulse series. <br>
+<span class='key'>@sign</span>: <span class='bold'>  double <span class='field'>m_delay</span></span><br>
+</div>
+<br><div class='field'>
+<span class='key'>@brief</span>: An initial phase of a single pulse. <br>
+<span class='key'>@sign</span>: <span class='bold'>  double <span class='field'>m_phase</span></span><br>
+</div>
+<br><div class='field'>
+<span class='key'>@brief</span>: The currier (frequency). <br>
+<span class='key'>@sign</span>: <span class='bold'>  double <span class='field'>m_frequency</span></span><br>
+</div>
+<br><div class='field'>
+<span class='key'>@brief</span>: The bandwidth of a single pulse. <br>
+<span class='key'>@sign</span>: <span class='bold'>  double <span class='field'>m_bandwidth</span></span><br>
+</div>
+</div>
+<br><div class='constructor'>
+<span class='key'>@brief</span>: This is a constructor of roj_pulse_generator which produces series of pulses which are tapering by Tukey window. <br>
+<span class='key'>@param</span> [in] <span class='arg'>a_conf</span>: A pointer to a configuration. <br>
+<span class='key'>@sign</span>: <span class='bold'><span class='range'>roj_pulse_generator</span> <span class='range'></span>:: <span class='func'>roj_pulse_generator</span> <span class='func'></span>()</span><br>
+</div>
+<br><div class='destructor'>
+<span class='key'>@brief</span>: The deconstructor is default. <br>
+</div>
+<br><div class='method'>
+<span class='key'>@brief</span>: This routine roj_calculates a signal (series of pulses) and adds it to a given argument. <br>
+<span class='key'>@param</span> [in,out] <span class='arg'>a_sig</span>: A signal for modification.  <br>
+<span class='key'>@return</span>: The added energy. <br>
+<span class='key'>@sign</span>: <span class='bold'>double <span class='range'>roj_pulse_generator</span> <span class='range'></span>:: <span class='func'>add_harmonic</span> <span class='func'></span>(roj_complex_signal* <span class='arg'>a_sig</span>)</span><br>
+</div>
+<br><div class='method'>
+<span class='key'>@brief</span>: This routine roj_calculates a signal (series of LFM pulses) and adds it to a given argument. <br>
+<span class='key'>@param</span> [in,out] <span class='arg'>a_sig</span>: A signal for modification.  <br>
+<span class='key'>@return</span>: The added energy. <br>
+<span class='key'>@sign</span>: <span class='bold'>double <span class='range'>roj_pulse_generator</span> <span class='range'></span>:: <span class='func'>add_lf<span class='field'>m_chirp</span></span> <span class='func'></span>(roj_complex_signal* <span class='arg'>a_sig</span>)</span><br>
+</div>
+<br><div class='method'>
+<span class='key'>@brief</span>: This routine roj_calculates a signal (series of HFM pulses) and adds it to a given argument. <br>
+<span class='key'>@param</span> [in,out] <span class='arg'>a_sig</span>: a signal for modification.  <br>
+<span class='key'>@return</span>: The added energy. <br>
+<span class='key'>@sign</span>: <span class='bold'>double <span class='range'>roj_pulse_generator</span> <span class='range'></span>:: <span class='func'>add_hf<span class='field'>m_chirp</span></span> <span class='func'></span>(roj_complex_signal* <span class='arg'>a_sig</span>)</span><br>
+</div>
+<br><div class='method'>
+<span class='key'>@brief</span>: This routine roj_calculates a random FSK signal and adds it to a given argument. <br>
+<span class='key'>@param</span> [in,out] <span class='arg'>a_sig</span>: A signal for modification.  <br>
+<span class='key'>@return</span>: The added energy. <br>
+<span class='key'>@sign</span>: <span class='bold'>double <span class='range'>roj_pulse_generator</span> <span class='range'></span>:: <span class='func'>add_rando<span class='field'>m_fsk</span></span> <span class='func'></span>(roj_complex_signal* <span class='arg'>a_sig</span>)</span><br>
+</div>
+<br>
+<a href='index.html'>
+<< go back to the main page
+</a>
+</body>
+</html>

@@ -1,0 +1,63 @@
+<html>
+<head>
+   <title>ccROJ</title>
+   <link rel='stylesheet' href='style.css'>
+</head>
+<body>
+<iframe src='head.html'>
+</iframe><br>
+<a href='index.html'><< go back to the main page</a>
+<br><br>
+<div class="file">
+<span class="key">@files</span>:<br>
+roj-fourier-spectr.hh <br>
+roj-fourier-spectr.cc <br>
+</div>
+<br><div class='class'>
+<span class='key'>@brief</span>: Definition of roj_fourier_spectrum class. <br>
+</div>
+<br><div class='field'>
+<span class='key'>@brief</span>: This field gives access to spectral lines. <br>
+<span class='key'>@sign</span>: <span class='bold'>  complex double* <span class='field'>m_spectrum</span></span><br>
+</div>
+</div>
+<br><div class='constructor'>
+<span class='key'>@brief</span>: This is a constructor of roj_fourier_spectrum based on signal object using the rectangular window.  <br>
+<span class='key'>@param</span> [in] <span class='arg'>a_signal</span>: A pointer to a signal which is transformed. <br>
+<span class='key'>@sign</span>: <span class='bold'><span class='range'>roj_fourier_spectrum</span> <span class='range'></span>:: <span class='func'>roj_fourier_spectrum</span> <span class='func'></span>(roj_complex_signal* <span class='arg'>a_signal</span>)</span><br>
+</div>
+<br><div class='destructor'>
+<span class='key'>@brief</span>: This is a spectrum deconstructor. It also release memory for lines.  <br>
+<span class='key'>@sign</span>: <span class='bold'><span class='range'>roj_fourier_spectrum</span> <span class='range'></span>:: ~<span class='func'>roj_fourier_spectrum</span> <span class='func'></span>()</span><br>
+</div>
+<br><div class='method'>
+<span class='key'>@brief</span>: This routine realizes the inverse Fourier transformation.  <br>
+<span class='key'>@return</span>: A pointer to an inverted signal. <br>
+<span class='key'>@sign</span>: <span class='bold'>roj_complex_signal* <span class='range'>roj_fourier_spectrum</span> <span class='range'></span>:: <span class='func'>get_signal</span> <span class='func'></span>()</span><br>
+</div>
+<br><div class='method'>
+<span class='key'>@brief</span>: This routine returns signal parameters as a structure. <br>
+<span class='key'>@return</span>: A pointer to the structure which contains the configuration. <br>
+<span class='key'>@sign</span>: <span class='bold'>roj_signal_config* <span class='range'>roj_fourier_spectrum</span> <span class='range'></span>:: <span class='func'>get_config</span> <span class='func'></span>()</span><br>
+</div>
+<br><div class='method'>
+<span class='key'>@brief</span>: This routine roj_calculates signal energy. <br>
+<span class='key'>@return</span>: Spectrum energy. <br>
+<span class='key'>@sign</span>: <span class='bold'>double <span class='range'>roj_fourier_spectrum</span> <span class='range'></span>:: <span class='func'>calc_energy</span> <span class='func'></span>()</span><br>
+</div>
+<br><div class='method'>
+<span class='key'>@brief</span>: This routine saves spectrum to a TXT file in polar form. <br>
+<span class='key'>@param</span> [in] <span class='arg'>a_fname</span>: Name of saved file. <br>
+<span class='key'>@sign</span>: <span class='bold'>void <span class='range'>roj_fourier_spectrum</span> <span class='range'></span>:: <span class='func'>save</span> <span class='func'></span>(char* <span class='arg'>a_fname</span>)</span><br>
+</div>
+<br><div class='method'>
+<span class='key'>@brief</span>: This routine returns complex group delay (complex delay spectrum). Its imaginary part constitutes the group delay. (HAVE TO BE TESTED)  <br>
+<span class='key'>@return</span>: A pointer to the structure which contains a new spectrum object. <br>
+<span class='key'>@sign</span>: <span class='bold'>roj_fourier_spectrum* <span class='range'>roj_fourier_spectrum</span> <span class='range'></span>:: <span class='func'>get_complex_group_delay</span> <span class='func'></span>()</span><br>
+</div>
+<br>
+<a href='index.html'>
+<< go back to the main page
+</a>
+</body>
+</html>
