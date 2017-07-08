@@ -27,7 +27,7 @@ check_main_dir:
 endif
 
 CCTFR_DIR := ..
-OBJS := $(CCTFR_DIR)/*.o
+OBJS := $(CCTFR_DIR)/libroj.a
 
 test-signal-recovery: check_main_dir test-signal-recovery.cc $(OBJS)
 	$(CC) $@.cc $(OBJS) $(CXXFLAGS) -o $@

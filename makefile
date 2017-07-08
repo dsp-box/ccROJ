@@ -11,7 +11,7 @@ SRCS=$(wildcard *.cc)
 HTMLS=$(SRCS:.cc=.html)
 OBJS=$(SRCS:.cc=.o)
 
-all: $(OBJS) test
+all: libroj.a test
 
 %.o: %.cc %.hh
 	$(CC) $(CCFLAGS) -c -o $@ $<
@@ -19,6 +19,21 @@ all: $(OBJS) test
 .PHONY: test *.o
 test: $(OBJS)
 	$(MAKE) -w -C testing
+
+libroj.a: $(OBJS)
+	ar rcs $@ $^
+
+INSTALL_DIR=/usr/local
+INSTALL_LIBDIR=$(INSTALL_DIR)/lib
+INSTALL_INCDIR=$(INSTALL_DIR)/include/roj
+install:
+	mkdir -p $(INSTALL_INCDIR)
+	cp *.hh *.h $(INSTALL_INCDIR)
+	cp libroj.a $(INSTALL_LIBDIR)
+
+uninstall:
+	${RM} -r $(INSTALL_INCDIR)
+	${RM} $(INSTALL_LIBDIR)/libroj.a
 
 VERSION := $(shell cat VERSION)
 zip: package
