@@ -39,7 +39,7 @@ roj_hough_transform :: ~roj_hough_transform (){
 
 /* ************************************************************************************************************************* */
 /**
- * @type: hiden
+ * @type: private
  * @brief: This routine allows to compute the Hough transform as roj_real_matrix. 
  *
  * @return: an energy of the Hough transform.
@@ -81,7 +81,7 @@ roj_real_matrix* roj_hough_transform :: reassign_energy(){
 
 /* ************************************************************************************************************************* */
 /**
- * @type: hide
+ * @type: private
  * @brief: This routine allows to compute a single point of the Hough transform. 
  *
  * @param [in] a_init_frequency:  

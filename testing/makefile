@@ -87,6 +87,9 @@ case-6:
 	../scripts/plot-tf-energy.gp data-s-energy-3.txt -50
 
 clean:	
-	${RM} $(TESTS) *~ \#* .\#* 
-purge: clean
+	${RM} $(TESTS) *~ \#* .\#*
+clear:
 	${RM} *.png *.txt mail2.wav pink.wav out.wav
+
+purge: clean clear
+

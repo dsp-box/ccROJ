@@ -58,21 +58,22 @@ _version:
 	sed -i $(REGEXP_2) manual/index.html
 	sed -i $(REGEXP_2) manual/head.html
 
-tag: commit
+tag:
+	git commit -a -m $(VERSION)
 	git tag -a $(VERSION) -m $(VERSION)
-
-commit:	
-	git commit -a -m "+"
 	git push
 
 lines:
-	wc -l *.py *.cc *.hh makefile testing/*.cc testing/makefile | tail -n1
 	wc -l *.cc *.hh makefile | tail -n1
+	wc -l *.py *.cc *.hh makefile testing/*.cc testing/makefile scripts/*.gp | tail -n1
 
 clean:	
 	${RM} ${OBJS} $(TESTS) *~ \#* .\#* *.o manual/*~
 	$(MAKE) -w -C testing clean
 
-purge: clean
+clear:
 	${RM} *.png *.txt *.zip
+	$(MAKE) -w -C testing clear
+
+purge: clean clear
 

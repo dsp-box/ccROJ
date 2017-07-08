@@ -17,7 +17,7 @@ roj-hough-transform.cc <br>
 <span class='key'>@brief</span>: Definition of roj_hough_transform class. <br>
 </div>
 <br><div class='alert'>
-<span class='key'>@brief</span>: under construction! <br>
+<span class='key'>@brief</span>: This module is not tested! <br>
 </div>
 <br><div class='field'>
 <span class='key'>@brief</span>: This public field gives access to resultant transform. <br>
@@ -35,19 +35,6 @@ roj-hough-transform.cc <br>
 <br><div class='destructor'>
 <span class='key'>@brief</span>: This is a spectrum deconstructor. It also release memory for lines.  <br>
 <span class='key'>@sign</span>: <span class='bold'><span class='range'>roj_hough_transform</span> <span class='range'></span>:: ~<span class='func'>roj_hough_transform</span> <span class='func'></span>()</span><br>
-</div>
-<br><div class='hiden'>
-<span class='key'>@brief</span>: This routine allows to compute the Hough transform as roj_real_matrix.  <br>
-<span class='key'>@return</span>: an energy of the Hough transform. <br>
-<span class='key'>@sign</span>: <span class='bold'>roj_real_matrix* <span class='range'>roj_hough_transform</span> <span class='range'></span>:: <span class='func'>reassign_energy</span>()</span><br>
-</div>
-<br><div class='hide'>
-<span class='key'>@brief</span>: This routine allows to compute a single point of the Hough transform.  <br>
-<span class='key'>@param</span> [in] <span class='arg'>a_init_frequency</span>:   <br>
-<span class='key'>@param</span> [in] <span class='arg'>a_chirp_rate</span>:  <br>
-<span class='key'>@param</span> [in] <span class='arg'>a_treshold</span>: a treshold which allows to ignore some energy points (default is 0.0)  <br>
-<span class='key'>@return</span>: an energy of the Hough transform. <br>
-<span class='key'>@sign</span>: <span class='bold'>double <span class='range'>roj_hough_transform</span> <span class='range'></span>:: <span class='func'>calc_single_point</span>(double <span class='arg'>a_init_frequency</span>, double <span class='arg'>a_chirp_rate</span>, double <span class='arg'>a_treshold</span>)</span><br>
 </div>
 <br><div class='method'>
 <span class='key'>@brief</span>: This routine allows to compute a chirp-rate for the maximal Hough energy using bi-section method.  <br>
