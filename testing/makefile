@@ -1,6 +1,8 @@
 # This makefile is a part of the ccROJ project.
 # See README for more informations.
 
+# tests can be compiled without installing the project
+
 CC := g++
 
 LIBS := -lm -lsndfile -lfftw3 -ansi

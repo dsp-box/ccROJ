@@ -83,7 +83,7 @@ lines:
 	wc -l *.py *.cc *.hh makefile testing/*.cc testing/makefile scripts/*.gp | tail -n1
 
 clean:	
-	${RM} ${OBJS} $(TESTS) *~ \#* .\#* *.o manual/*~
+	${RM} ${OBJS} libroj.a $(TESTS) *~ \#* .\#* *.o manual/*~
 	$(MAKE) -w -C testing clean
 
 clear:
