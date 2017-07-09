@@ -2,6 +2,7 @@
 # See README for more informations.
 
 CC := g++
+CP := cp
 
 LIBS := -lm -lsndfile -lfftw3 -ansi
 FLAGS := -pedantic -w -Wall -O2 # -g
@@ -28,8 +29,8 @@ INSTALL_LIBDIR=$(INSTALL_DIR)/lib
 INSTALL_INCDIR=$(INSTALL_DIR)/include/roj
 install:
 	mkdir -p $(INSTALL_INCDIR)
-	cp *.hh *.h $(INSTALL_INCDIR)
-	cp libroj.a $(INSTALL_LIBDIR)
+	${CP} *.hh *.h $(INSTALL_INCDIR)
+	${CP} libroj.a $(INSTALL_LIBDIR)
 
 uninstall:
 	${RM} -r $(INSTALL_INCDIR)
