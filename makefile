@@ -4,6 +4,8 @@
 CC := g++
 CP := cp
 
+ZIP := zip
+
 LIBS := -lm -lsndfile -lfftw3 -ansi
 FLAGS := -pedantic -w -Wall -O2 # -g
 CCFLAGS := $(FLAGS) $(LIBS)
@@ -43,13 +45,13 @@ package:
 	mkdir ccROJ-$(VERSION)/manual
 	mkdir ccROJ-$(VERSION)/testing
 	mkdir ccROJ-$(VERSION)/scripts
-	cp *.cc *hh *.py makefile ccROJ-$(VERSION)
-	cp README AUTHORS LICENSE VERSION MANIFEST ccROJ-$(VERSION)
-	cp testing/makefile ccROJ-$(VERSION)/testing
-	cp testing/*.wav ccROJ-$(VERSION)/testing
-	cp testing/*.cc ccROJ-$(VERSION)/testing
-	cp scripts/*.gp ccROJ-$(VERSION)/scripts
-	cp manual/* ccROJ-$(VERSION)/manual
+	${CP} *.cc *hh *.py makefile ccROJ-$(VERSION)
+	${CP} README AUTHORS LICENSE VERSION MANIFEST ccROJ-$(VERSION)
+	${CP} testing/makefile ccROJ-$(VERSION)/testing
+	${CP} testing/*.wav ccROJ-$(VERSION)/testing
+	${CP} testing/*.cc ccROJ-$(VERSION)/testing
+	${CP} scripts/*.gp ccROJ-$(VERSION)/scripts
+	${CP} manual/* ccROJ-$(VERSION)/manual
 	zip -mr ccROJ-$(VERSION).zip ccROJ-$(VERSION)
 
 DOC_GENER := ./doc-gener.py
@@ -57,10 +59,10 @@ DOC_GENER := ./doc-gener.py
 	$(DOC_GENER) $? > manual/$@ 
 
 doc: $(HTMLS)
-	cp scripts/plot-tf-energy.gp manual
-	cp scripts/plot-tf-image.gp manual
-	cp MANIFEST manual/manifest.txt
-	cp README manual/readme.txt
+	${CP} scripts/plot-tf-energy.gp manual
+	${CP} scripts/plot-tf-image.gp manual
+	${CP} MANIFEST manual/manifest.txt
+	${CP} README manual/readme.txt
 
 public: www
 www:
