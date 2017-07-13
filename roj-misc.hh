@@ -122,6 +122,10 @@ void call_info(const char*, double);
 void call_info(const char*, char*);
 void call_info(const char*);
 
+void verify_config(roj_signal_config);
+void verify_config(roj_array_config);
+void verify_config(roj_image_config);
+
 /* for calculations */
 double rand_gauss(double =1.0);
 double calc_binominal (int, int);

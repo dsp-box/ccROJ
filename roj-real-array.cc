@@ -10,16 +10,11 @@
 */
 roj_real_array :: roj_real_array (roj_array_config a_conf){
 
-  /* check args */
-  if (a_conf.length <= 0)
-    call_error("length <= 0");
-  if (a_conf.max<=a_conf.min)
-    call_error("max < min and delta < 0");
-
-  /* save arguments */
+  /* check and assign conf */
+  verify_config(a_conf);
   m_config = a_conf;
   
- /* allocate memory for samples */
+  /* allocate memory for samples */
   m_data = new double [m_config.length];
   int byte_size = m_config.length * sizeof(double);
   memset(m_data, 0x0, byte_size);
@@ -36,11 +31,9 @@ roj_real_array :: roj_real_array (roj_array_config a_conf){
 */
 roj_real_array :: roj_real_array (roj_real_array* a_arr){
 
-  /* check args */
+  /* check and assign conf */
   if(a_arr == NULL)
     call_error("arg is null");
-
-  /* copy configuration */
   m_config = a_arr->get_config();
   
   /* allocate memory for samples */
@@ -93,7 +86,8 @@ roj_real_array :: roj_real_array (char* a_fname){
   m_config.max= start + (count-1) * delta;
   m_config.length = count;
   m_config.min= start;
-  
+  verify_config(m_config);
+
   /* allocate memory for samples */
   m_data = new double [m_config.length];
   int byte_size = m_config.length * sizeof(double);
@@ -102,13 +96,8 @@ roj_real_array :: roj_real_array (char* a_fname){
   f_ptr = fopen(a_fname, "r");
   if(f_ptr==NULL)
     call_error("cannot read file (2)");
-
   fscanf(f_ptr, " # %lf %lf \n", &start, &delta);
-  /*
-    call_info("start: ", start);
-    call_info("delta: ", delta);
-  */
-
+  
   count=0;
   while(!feof(f_ptr)){
 
@@ -264,8 +253,6 @@ double roj_real_array :: get_delta (){
 * @return: The sum.
 */
 double roj_real_array :: get_sum (){
-  
-  /* get sum */
 
   double sum = 0.0;
   for(int n=0; n<m_config.length; n++)

@@ -122,6 +122,21 @@ roj-misc.cc <br>
 <span class='key'>@sign</span>: <span class='bold'>void <span class='func'>print_progress</span> <span class='func'></span>(int <span class='arg'>a_curr</span>, int <span class='arg'>a_len</span>, const char *<span class='arg'>a_info</span>)</span><br>
 </div>
 <br><div class='function'>
+<span class='key'>@brief</span>: This function verify the correctness of a signal config. It call error if not. <br>
+<span class='key'>@param</span> [in] <span class='arg'>a_conf</span>: configuration to check. <br>
+<span class='key'>@sign</span>: <span class='bold'>void <span class='func'>verify_config</span>(roj_signal_config <span class='arg'>a_conf</span>)</span><br>
+</div>
+<br><div class='function'>
+<span class='key'>@brief</span>: This function verify the correctness of an array config. It call error if not. <br>
+<span class='key'>@param</span> [in] <span class='arg'>a_conf</span>: configuration to check. <br>
+<span class='key'>@sign</span>: <span class='bold'>void <span class='func'>verify_config</span>(roj_array_config <span class='arg'>a_conf</span>)</span><br>
+</div>
+<br><div class='function'>
+<span class='key'>@brief</span>: This function verify the correctness of an image config. It call error if not. <br>
+<span class='key'>@param</span> [in] <span class='arg'>a_conf</span>: configuration to check. <br>
+<span class='key'>@sign</span>: <span class='bold'>void <span class='func'>verify_config</span>(roj_image_config <span class='arg'>a_conf</span>)</span><br>
+</div>
+<br><div class='function'>
 <span class='key'>@brief</span>: This function returns random number with normal probability using Box-Muller transform (G. E. P. Box and Mervin E. Muller, A Note on the Generation of Random Normal Deviates, The Annals of Mathematical Statistics (1958), Vol. 29, No. 2). <br>
 <span class='key'>@param</span> [in] <span class='arg'>a_sigma</span>: Standard deviation. <br>
 <span class='key'>@return</span>: Random number. <br>

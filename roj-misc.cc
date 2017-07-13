@@ -199,6 +199,43 @@ void print_progress (int a_curr, int a_len, const char *a_info){
 /* ************************************************************************************************************************* */
 /**
 * @type: function
+* @brief: This function verify the correctness of a signal config. It call error if not.
+*
+* @param [in] a_conf: configuration to check.
+*/
+void verify_config(roj_signal_config a_conf){
+
+  if (a_conf.length<1) call_error("signal length is not valid");
+  if (a_conf.rate<=0.0)  call_error("signal rate is not valid");
+}
+
+/**
+* @type: function
+* @brief: This function verify the correctness of an array config. It call error if not.
+*
+* @param [in] a_conf: configuration to check.
+*/
+void verify_config(roj_array_config a_conf){
+
+  if (a_conf.length<1) call_error("array length is not valid");
+  if (a_conf.min>=a_conf.max) call_error("array config is not valid");
+}
+
+/**
+* @type: function
+* @brief: This function verify the correctness of an image config. It call error if not.
+*
+* @param [in] a_conf: configuration to check.
+*/
+void verify_config(roj_image_config a_conf){
+  
+  verify_config(a_conf.frequency);
+  verify_config(a_conf.time);
+}
+
+/* ************************************************************************************************************************* */
+/**
+* @type: function
 * @brief: This function returns random number with normal probability using Box-Muller transform (G. E. P. Box and Mervin E. Muller, A Note on the Generation of Random Normal Deviates, The Annals of Mathematical Statistics (1958), Vol. 29, No. 2).
 *
 * @param [in] a_sigma: Standard deviation.

@@ -19,6 +19,9 @@ roj_hough_transform :: roj_hough_transform(roj_real_matrix* a_energy, roj_array_
   if(a_treshold<0.0)
     call_warning("a given treshold is negative");
 
+  verify_config(a_frequency_conf);
+  verify_config(a_chirprate_conf);
+
   m_frequency_conf = a_frequency_conf;
   m_chirprate_conf = a_chirprate_conf;
   m_treshold = a_treshold;
@@ -33,8 +36,8 @@ roj_hough_transform :: roj_hough_transform(roj_real_matrix* a_energy, roj_array_
  */
 roj_hough_transform :: ~roj_hough_transform (){
 
-  delete m_energy;
   delete m_transform;
+  delete m_energy;
 }
 
 /* ************************************************************************************************************************* */
@@ -126,7 +129,10 @@ double roj_hough_transform :: calc_single_point(double a_init_frequency, double 
  * @return: estimated chirp-rate.
  */
 double roj_hough_transform :: get_major_chirp_rate(double a_max_error){
-  
+
+  if (a_max_error<=0.0)
+    call_error("max error <= 0");
+
   int max_f = 0, max_c = 0;
   for(int f=0; f<m_frequency_conf.length; f++){
     for(int c=0; c<m_chirprate_conf.length; c++){
@@ -165,9 +171,6 @@ double roj_hough_transform :: get_major_chirp_rate(double a_max_error){
     double c_new = (c_min+c_max)/2;
     double de_new = calc_single_point(i_freq, c_new+dc, m_treshold) -  calc_single_point(i_freq, c_new-dc, m_treshold);
 
-    // printf("%f %f %f\t\t", c_min, c_new, c_max);
-    // printf("%g %g \n", de_min*de_new, de_new*de_max);
-    
     if(de_new*de_min<0){
       c_max = c_new;
       de_max = de_new;
