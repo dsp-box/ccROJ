@@ -1,3 +1,4 @@
+
 # This makefile is a part of the ccROJ project.
 # See README for more informations.
 
@@ -64,6 +65,7 @@ doc: $(HTMLS)
 	${CP} MANIFEST manual/manifest.txt
 	${CP} README manual/readme.txt
 
+# this is private server:
 public: www
 www:
 	scp manual/* git.eti.pg.gda.pl:/var/www/html/ccROJ/
@@ -74,7 +76,7 @@ version: _version doc
 _version: 
 	sed -i $(REGEXP_1) roj-misc.hh
 	sed -i $(REGEXP_2) manual/index.html
-	sed -i $(REGEXP_2) manual/head.html
+	sed -i $(REGEXP_2) manual/head.js
 
 tag:
 	git commit -a -m $(VERSION)

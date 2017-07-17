@@ -118,22 +118,13 @@ def print_head():
     print("<head>")
     print("   <title>ccROJ</title>")
     print("   <link rel='stylesheet' href='style.css'>")
+    print("   <script src='head.js'></script>")
     print("</head>")
     print("<body>")
-
-    print("<iframe src='head.html'>")
-    print("</iframe><br>")
-
-    print("<a href='index.html'><< go back to the main page</a>")
     print("<br><br>")
-
 
 def print_tail():
     print("<br>")
-    print("<a href='index.html'>")
-    print("<< go back to the main page")
-    print("</a>")
-
     print("</body>")
     print("</html>")
 

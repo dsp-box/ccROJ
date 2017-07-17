@@ -1,3 +1,8 @@
+/* 
+   This header is a part of the ccROJ project.
+   See README for more informations.
+*/
+
 #ifndef _roj_header_
 #define _roj_header_
 
