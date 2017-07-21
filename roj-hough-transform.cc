@@ -16,16 +16,17 @@ roj_hough_transform :: roj_hough_transform(roj_real_matrix* a_energy, roj_array_
   if (a_energy==NULL)
     call_error("arg is null");
 
-  if(a_treshold<0.0)
-    call_warning("a given treshold is negative");
-
   verify_config(a_frequency_conf);
   verify_config(a_chirprate_conf);
-
   m_frequency_conf = a_frequency_conf;
   m_chirprate_conf = a_chirprate_conf;
-  m_treshold = a_treshold;
-  
+
+  if(a_treshold<0.0)
+    call_error("treshold < 0");
+  if(a_treshold>=1.0)
+    call_error("treshold >= 1");
+  m_treshold = a_treshold * a_energy->get_max();
+    
   m_energy = new roj_real_matrix(a_energy);
   m_transform = reassign_energy(); 
 }
@@ -133,43 +134,43 @@ double roj_hough_transform :: get_major_chirp_rate(double a_max_error){
   if (a_max_error<=0.0)
     call_error("max error <= 0");
 
-  int max_f = 0, max_c = 0;
+  int index_max_f = 0, index_max_c = 0;
   for(int f=0; f<m_frequency_conf.length; f++){
     for(int c=0; c<m_chirprate_conf.length; c++){
 
-      if(m_transform->m_data[f][c] > m_transform->m_data[max_f][max_c]){
-	max_f = f;
-	max_c = c;
+      if(m_transform->m_data[f][c] > m_transform->m_data[index_max_f][index_max_c]){
+	index_max_f = f;
+	index_max_c = c;
       }
     }
   }
-
-  double i_freq = m_transform->get_time_by_index(max_f);
+  
+  double index_freq = m_transform->get_time_by_index(index_max_f);
   double c_min, c_max, de_min, de_max;
-  if (max_c==0){
-    c_min = m_transform->get_frequency_by_index(max_c);
-    c_max = m_transform->get_frequency_by_index(max_c+1);
+  if (index_max_c==0){
+    c_min = m_transform->get_frequency_by_index(index_max_c);
+    c_max = m_transform->get_frequency_by_index(index_max_c+1);
   }
   else{
-    if (max_c==m_chirprate_conf.length-1){
-      c_min = m_transform->get_frequency_by_index(max_c-1);
-      c_max = m_transform->get_frequency_by_index(max_c);
+    if (index_max_c==m_chirprate_conf.length-1){
+      c_min = m_transform->get_frequency_by_index(index_max_c-1);
+      c_max = m_transform->get_frequency_by_index(index_max_c);
 
     }
     else{
-      c_min = m_transform->get_frequency_by_index(max_c-1);
-      c_max = m_transform->get_frequency_by_index(max_c+1);
+      c_min = m_transform->get_frequency_by_index(index_max_c-1);
+      c_max = m_transform->get_frequency_by_index(index_max_c+1);
     }
   }
 
   double dc = a_max_error/64;
-  de_min = calc_single_point(i_freq, c_min+dc, m_treshold) - calc_single_point(i_freq, c_min-dc, m_treshold);
-  de_max = calc_single_point(i_freq, c_max+dc, m_treshold) - calc_single_point(i_freq, c_max-dc, m_treshold);
+  de_min = calc_single_point(index_freq, c_min+dc, m_treshold) - calc_single_point(index_freq, c_min-dc, m_treshold);
+  de_max = calc_single_point(index_freq, c_max+dc, m_treshold) - calc_single_point(index_freq, c_max-dc, m_treshold);
 
   while(c_max-c_min>a_max_error){
 
     double c_new = (c_min+c_max)/2;
-    double de_new = calc_single_point(i_freq, c_new+dc, m_treshold) -  calc_single_point(i_freq, c_new-dc, m_treshold);
+    double de_new = calc_single_point(index_freq, c_new+dc, m_treshold) -  calc_single_point(index_freq, c_new-dc, m_treshold);
 
     if(de_new*de_min<0){
       c_max = c_new;
@@ -180,7 +181,7 @@ double roj_hough_transform :: get_major_chirp_rate(double a_max_error){
       de_min = de_new;
     }
   }
-  
+
   return (c_min+c_max)/2;
 }
 
@@ -196,3 +197,42 @@ void roj_hough_transform :: save (char* a_fname){
   /* use roj_real_matrix method */
   m_transform->save(a_fname);
 }
+
+/* ************************************************************************************************************************* */
+/**
+ * @type: method
+ * @brief: This routine allows to compute a center of gravity. 
+ *
+ * @param [in] a_treshold: a treshold which allows to ignore some energy points (default is 0.0) 
+ *
+ * @return: estimated chirp-rate.
+ */
+double roj_hough_transform :: get_chirp_rate_gravity_center(double a_treshold){
+
+  if (a_treshold<0.0)
+    call_error("treshold < 0");
+  if (a_treshold>=1.0)
+    call_error("treshold >= 1");
+
+  double treshold = a_treshold * m_transform->get_max();
+  roj_image_config conf = m_transform->get_config();
+  
+  double p = 0.0;
+  double e = 0.0;
+    
+  for(int k=0; k<conf.frequency.length; k++){
+    double c = m_transform->get_frequency_by_index(k);    
+    
+    for(int n=0; n<conf.time.length; n++){
+
+      if(m_transform->m_data[n][k]<treshold)
+	continue;
+      
+      p += c * m_transform->m_data[n][k];
+      e += m_transform->m_data[n][k];
+    }
+  }
+
+  return p/e;
+}
+

@@ -27,7 +27,7 @@
 * @type: define
 * @brief: This is a const string, which defines the version number. Please do not change it manually. In order to change modify VERSION file and run 'make version'
 */
-#define ROJ_VERSION "0-40"
+#define ROJ_VERSION "0-41"
 
 /**
 * @type: define
