@@ -5,11 +5,17 @@
 /**
 * @type: constructor
 * @brief: This is a constructor of roj_noise_generator which is able to white and pink noise.
+*
+* @param [in] a_save_flag: allows to save last generated noise.
 */
-roj_noise_generator :: roj_noise_generator (){
+roj_noise_generator :: roj_noise_generator (bool a_save_flag){
 
   srand(time(NULL));
+
   m_pink_key = 0;
+
+  m_save_flag = a_save_flag;
+  m_noise = NULL;
 
   /* internal buffer */
   m_white_buffer = new unsigned int[PINK_ORDER];  
@@ -23,8 +29,28 @@ roj_noise_generator :: roj_noise_generator (){
 * @brief: This is a generator deconstructor.
 */
 roj_noise_generator :: ~roj_noise_generator (){
-  
+
+  if (m_noise)
+    delete m_noise;
   delete [] m_white_buffer;
+}
+
+/* ************************************************************************************************************************* */
+/**
+* @type: method
+* @brief: This function allows to get last generated noise.
+*
+* @return: A pointer to the noise object.
+*/
+roj_complex_signal* roj_noise_generator :: get_noise(){
+
+  if(!m_save_flag)
+    call_error("the save flag is down");
+
+  if (!m_noise) 
+    call_error("inner buffer is empty");
+
+  return new roj_complex_signal(m_noise);
 }
 
 /* ************************************************************************************************************************* */
@@ -54,7 +80,7 @@ double roj_noise_generator :: rand_pink (){
   }
 
   sum <<= 1;
-  /*  return (double)sum/(PINK_RANGE*1e6); */  
+  /* return (double)sum/(PINK_RANGE*1e6); */  
   return (double)sum/PINK_RANGE - 1.0;  
 }
 
@@ -76,14 +102,29 @@ double roj_noise_generator :: add_awgn_using_sigma (roj_complex_signal* a_sig, d
     call_error("sigma is not positive");
   
   roj_signal_config sig_conf = a_sig->get_config();
-    
   double awgn_energy = 0.0;
-  for(int n=0; n<sig_conf.length; n++){
     
-    double re = rand_gauss(a_sigma);
-    double im = rand_gauss(a_sigma);
-    a_sig->m_waveform[n] += re + 1I*im;
-    awgn_energy += pow(re, 2.0) + pow(im, 2.0);
+  if(m_save_flag){
+    if (m_noise) delete m_noise;    
+    m_noise = new roj_complex_signal(sig_conf);
+
+    for(int n=0; n<sig_conf.length; n++){
+    
+      double re = rand_gauss(a_sigma);
+      double im = rand_gauss(a_sigma);
+      a_sig->m_waveform[n] += re + 1I*im;
+      m_noise->m_waveform[n] = re + 1I*im;
+      awgn_energy += pow(re, 2.0) + pow(im, 2.0);
+    }
+  }
+  else{
+    for(int n=0; n<sig_conf.length; n++){
+    
+      double re = rand_gauss(a_sigma);
+      double im = rand_gauss(a_sigma);
+      a_sig->m_waveform[n] += re + 1I*im;
+      awgn_energy += pow(re, 2.0) + pow(im, 2.0);
+    }
   }
 
   return awgn_energy;
@@ -145,9 +186,7 @@ double roj_noise_generator :: add_awgn_at_exact_snr (roj_complex_signal* a_sig, 
   if(sig_energy<=0)
     call_error("energy is zero");
     
-  roj_complex_signal* noise_only = new roj_complex_signal(sig_conf);
-    
-  double awgn_energy = 0.0;
+  roj_complex_signal* noise_only = new roj_complex_signal(sig_conf);    
   for(int n=0; n<sig_conf.length; n++){
     
     double re = rand_gauss(awgn_sigma);
@@ -156,7 +195,7 @@ double roj_noise_generator :: add_awgn_at_exact_snr (roj_complex_signal* a_sig, 
   }
 
   /* SNR correction */
-  awgn_energy = noise_only->calc_energy();
+  double awgn_energy = noise_only->calc_energy();
   double factor = sqrt(sig_energy/awgn_energy) * sqrt(1.0 * pow(10.0, -a_snr/10.0));
   for(int n=0; n<sig_conf.length; n++)
     noise_only->m_waveform[n] *= factor;
@@ -164,7 +203,14 @@ double roj_noise_generator :: add_awgn_at_exact_snr (roj_complex_signal* a_sig, 
   awgn_energy = noise_only->calc_energy();
   *a_sig += noise_only;
 
-  delete noise_only;
+  if(m_save_flag){
+    if (m_noise) 
+      delete m_noise;
+    m_noise = noise_only;
+  }
+  else
+    delete noise_only;
+
   return awgn_energy;
 }
 
@@ -186,13 +232,27 @@ double roj_noise_generator :: add_pink_using_range (roj_complex_signal* a_sig, d
     call_error("range is not positive");
   
   roj_signal_config sig_conf = a_sig->get_config();
-    
   double pink_energy = 0.0;
-  for(int n=0; n<sig_conf.length; n++){
+
+  if(m_save_flag){
+    if (m_noise) delete m_noise;    
+    m_noise = new roj_complex_signal(sig_conf);
     
-    double re = a_range * rand_pink();
-    a_sig->m_waveform[n] += re;
-    pink_energy += pow(re, 2.0);
+    for(int n=0; n<sig_conf.length; n++){
+    
+      double re = a_range * rand_pink();
+      a_sig->m_waveform[n] += re;
+      m_noise->m_waveform[n] = re;
+      pink_energy += pow(re, 2.0);
+    }
+  }
+  else{
+    for(int n=0; n<sig_conf.length; n++){
+    
+      double re = a_range * rand_pink();
+      a_sig->m_waveform[n] += re;
+      pink_energy += pow(re, 2.0);
+    }
   }
 
   return pink_energy;
@@ -219,16 +279,11 @@ double roj_noise_generator :: add_pink_at_exact_snr (roj_complex_signal* a_sig, 
     call_error("energy is zero");
     
   roj_complex_signal* noise_only = new roj_complex_signal(sig_conf);
-    
-  double pink_energy = 0.0;
-  for(int n=0; n<sig_conf.length; n++){
-    
-    double re = rand_pink();
-    noise_only->m_waveform[n] = re;
-  }
-
+  for(int n=0; n<sig_conf.length; n++)
+    noise_only->m_waveform[n] = rand_pink();
+  
   /* SNR correction */
-  pink_energy = noise_only->calc_energy();
+  double pink_energy = noise_only->calc_energy();
   double factor = sqrt(sig_energy/pink_energy) * sqrt(1.0 * pow(10.0, -a_snr/10.0));
   for(int n=0; n<sig_conf.length; n++)
     noise_only->m_waveform[n] *= factor;
@@ -236,6 +291,13 @@ double roj_noise_generator :: add_pink_at_exact_snr (roj_complex_signal* a_sig, 
   pink_energy = noise_only->calc_energy();
   *a_sig += noise_only;
 
-  delete noise_only;
+  if(m_save_flag){
+    if (m_noise) 
+      delete m_noise;
+    m_noise = noise_only;
+  }
+  else
+    delete noise_only;
+
   return pink_energy;
 }

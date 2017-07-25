@@ -42,6 +42,7 @@ private:
   /* config methods */
   bool compare_config (roj_signal_config);
   roj_signal_config get_config();
+  double get_last_instant ();
 
   /* waveform manipulation */
   int copy(roj_complex_signal*, int =0);

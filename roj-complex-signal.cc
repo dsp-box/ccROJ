@@ -11,7 +11,7 @@
 roj_complex_signal :: roj_complex_signal (roj_real_array* a_real, roj_real_array* a_imag){
 
   if(a_real == NULL)
-    call_error("arg is null");
+    call_error("arg is null in roj_complex_signal(*arr, *arr)");
       
   roj_array_config conf = a_real->get_config();
   if(a_imag!=NULL)
@@ -37,7 +37,7 @@ roj_complex_signal :: roj_complex_signal (roj_real_array* a_real, roj_real_array
     for(int n=0; n<m_config.length; n++)
       m_waveform[n] = a_real->m_data[n] + 1J * a_imag->m_data[n];
 
-  call_info("number of copy samples: ", m_config.length);
+  call_info("copied samples: ", m_config.length);
 }
 
 /**
@@ -77,7 +77,7 @@ roj_complex_signal :: roj_complex_signal (roj_complex_signal* a_sig){
 
   /* check args */
   if(a_sig == NULL)
-    call_error("arg is null");
+    call_error("arg is null in roj_complex_signal(*sig)");
 
   /* copy and check config */
   m_config = a_sig->get_config();
@@ -91,7 +91,7 @@ roj_complex_signal :: roj_complex_signal (roj_complex_signal* a_sig){
   int byte_size = m_config.length * sizeof(complex double);
   memcpy(m_waveform, a_sig->m_waveform, byte_size);
 
-  call_info("number of copy samples: ", m_config.length);
+  call_info("copied samples: ", m_config.length);
 }
 
 /**
@@ -164,6 +164,17 @@ roj_complex_signal :: ~roj_complex_signal (){
 roj_signal_config roj_complex_signal :: get_config (){
 
   return m_config;
+}
+
+/**
+ * @type: method
+ * @brief: This routine computes an instant of last sample.
+ *
+ * @return: the instant of last sample.
+ */
+double roj_complex_signal :: get_last_instant (){
+
+  return m_config.start + (double)(m_config.length-1)/m_config.rate;
 }
 
 /**

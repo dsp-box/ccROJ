@@ -46,6 +46,8 @@ public:
   /* processing */
   complex double process(complex double);
   complex double get_output(unsigned int =1);
+
+  roj_complex_signal* process(roj_complex_signal*);
 };
 
 #endif

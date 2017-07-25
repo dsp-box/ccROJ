@@ -90,7 +90,28 @@ complex double roj_filter :: get_output(unsigned int a_shift){
   return m_output[(m_index+a_shift) % m_outlen];
 } 
 
+/* ************************************************************************************************************************* */
+/**
+ * @type: method
+ * @brief: This routine processes a single sample.
+ *
+ * @param [in] a_sig: A pointer to input signal.
+ *
+ * @return: A pointer to output signal.
+ */
+roj_complex_signal* roj_filter :: process(roj_complex_signal* a_sig){
 
+  /* args checking */
+  if(a_sig == NULL) call_error("sig is NULL");
+
+  roj_signal_config in_conf = a_sig->get_config();
+  roj_complex_signal* out = new roj_complex_signal(in_conf);
+
+  for(int n=0; n<in_conf.length; n++)
+    out->m_waveform[n] = process(a_sig->m_waveform[n]);
+
+  return out;
+}
 
 
 

@@ -30,13 +30,16 @@ private:
   unsigned int* m_white_buffer;
   int m_pink_key;
 
-  /* rnak single sample */
+  /* rnad single sample */
   double rand_pink();
+
+  bool m_save_flag;
+  roj_complex_signal *m_noise;
 
 public:
 
   /* construction */
-  roj_noise_generator();
+  roj_noise_generator(bool =false);
   ~roj_noise_generator();
 
   /* awgn methods */
@@ -47,6 +50,9 @@ public:
   /* pink noise methods */
   double add_pink_using_range(roj_complex_signal*, double);
   double add_pink_at_exact_snr(roj_complex_signal*, double);
+
+  /* other methods */
+  roj_complex_signal* get_noise();
 };
   
 #endif

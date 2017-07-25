@@ -16,11 +16,17 @@ roj-noise-gener.cc <br>
 </div>
 <br><div class='constructor'>
 <span class='key'>@brief</span>: This is a constructor of roj_noise_generator which is able to white and pink noise. <br>
-<span class='key'>@sign</span>: <span class='bold'><span class='range'>roj_noise_generator</span> <span class='range'></span>:: <span class='func'>roj_noise_generator</span> <span class='func'></span>()</span><br>
+<span class='key'>@param</span> [in] <span class='arg'>a_save_flag</span>: allows to save last generated noise. <br>
+<span class='key'>@sign</span>: <span class='bold'><span class='range'>roj_noise_generator</span> <span class='range'></span>:: <span class='func'>roj_noise_generator</span> <span class='func'></span>(bool <span class='arg'>a_save_flag</span>)</span><br>
 </div>
 <br><div class='destructor'>
 <span class='key'>@brief</span>: This is a generator deconstructor. <br>
 <span class='key'>@sign</span>: <span class='bold'><span class='range'>roj_noise_generator</span> <span class='range'></span>:: ~<span class='func'>roj_noise_generator</span> <span class='func'></span>()</span><br>
+</div>
+<br><div class='method'>
+<span class='key'>@brief</span>: This function allows to get last generated noise. <br>
+<span class='key'>@return</span>: A pointer to the noise object. <br>
+<span class='key'>@sign</span>: <span class='bold'>roj_complex_signal* <span class='range'>roj_noise_generator</span> <span class='range'></span>:: <span class='func'>get_noise</span>()</span><br>
 </div>
 <br><div class='method'>
 <span class='key'>@brief</span>: This function adds white noise using standard deviation (sigma) to a given signal. <br>
