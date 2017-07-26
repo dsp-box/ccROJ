@@ -25,21 +25,21 @@ public:
   
   /* time-frequency configuration */
   bool compare_config (roj_image_config);
-  bool compare_time_config (roj_image_config);
+  bool compare_x_config (roj_image_config);
   roj_image_config get_config ();
   bool check_config ();
   
   /* get time or frequency value */  
-  double get_time_by_index(int);
-  double get_frequency_by_index(int);
+  double get_x_by_index(int);
+  double get_y_by_index(int);
 
   /* get the nearest indexes */
-  int get_index_by_time(double);
-  int get_index_by_frequency(double);
+  int get_index_by_x(double);
+  int get_index_by_y(double);
 
   /* checking */
-  bool check_in_time_index (int);
-  bool check_in_frequency_index (int);
+  bool check_in_x_index (int);
+  bool check_in_y_index (int);
 };
 
 #endif

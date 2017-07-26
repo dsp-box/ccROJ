@@ -229,8 +229,8 @@ void verify_config(roj_array_config a_conf){
 */
 void verify_config(roj_image_config a_conf){
   
-  verify_config(a_conf.frequency);
-  verify_config(a_conf.time);
+  verify_config(a_conf.y);
+  verify_config(a_conf.x);
 }
 
 /* ************************************************************************************************************************* */

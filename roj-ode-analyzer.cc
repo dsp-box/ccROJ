@@ -157,13 +157,13 @@ roj_image_config roj_ode_analyzer :: get_image_config (){
   roj_signal_config sig_conf = m_filtered_signals[2][0]->get_config();
 
   roj_image_config img_conf;
-  img_conf.frequency.length = get_height();
-  img_conf.time.length = get_width();
+  img_conf.y.length = get_height();
+  img_conf.x.length = get_width();
 
-  img_conf.time.min = sig_conf.start;  
-  img_conf.time.max = sig_conf.start + (double)(sig_conf.length-1) / sig_conf.rate;  // !!!!!!!!!!
-  img_conf.frequency.min = m_bank_config.min;
-  img_conf.frequency.max = m_bank_config.max;
+  img_conf.x.min = sig_conf.start;  
+  img_conf.x.max = sig_conf.start + (double)(sig_conf.length-1) / sig_conf.rate;  // !!!!!!!!!!
+  img_conf.y.min = m_bank_config.min;
+  img_conf.y.max = m_bank_config.max;
 
   return img_conf;
 }
@@ -183,6 +183,7 @@ roj_real_matrix* roj_ode_analyzer :: create_empty_image(){
 
   roj_image_config img_conf = get_image_config ();  
   roj_real_matrix* output = new roj_real_matrix(img_conf);
+  
   return output;
 }
 
@@ -230,7 +231,7 @@ roj_real_matrix* roj_ode_analyzer :: get_spectral_energy(){
   /* check input signal */
   if(m_input_signal==NULL)
     call_error("signal is not loaded!");
-
+  
   /* filtering  (2 bank) */
   if(m_filtered_signals[2] == NULL)
     m_filtered_signals[2] = m_bank_array[2]->filtering(m_input_signal, m_hop);  

@@ -69,7 +69,7 @@ int main(void){
   double noise_energy = noise_gener_ptr->add_awgn_at_exact_snr(signal_ptr, snr);
 
   double true_snr = 10.0*log10(sig_energy/noise_energy); 
-  fprintf(stdout, "(info) true SNR is %.3f dB\n", true_snr);
+  call_info("true SNR is (dB): ", true_snr);
 
   /* array configuration is used in filter analyzer as well as in Fourier analyzer ************* */
 
@@ -78,8 +78,8 @@ int main(void){
   arr_conf.min = -10.0;
   arr_conf.max = 500.0;
   arr_conf.length = 1024;
-
-  /* #define  FFT_EXAMPLE /**/ /* <- uncomment this for FFT example */
+  
+  /* #define FFT_EXAMPLE /**/ /* <- comment this for FFT example */
 #ifndef FFT_EXAMPLE
 
   /* first variant of analysis (ODE) */
@@ -134,11 +134,11 @@ int main(void){
   /* signal is copied, 
      so they can be removed after used */
   delete signal_ptr;
-  
+
   /* get and save spectral energy */
   roj_real_matrix* s_energy = analyzer_ptr->get_spectral_energy();
   s_energy->save("data-s-energy.txt"); 
-
+  
   /* get and save instantaneous frequency */
   roj_real_matrix* i_freq = analyzer_ptr->get_instantaneous_frequency(0);
   /* i_freq->save("data-i-freq.txt"); */
@@ -183,7 +183,7 @@ int main(void){
   cr_profile_ptr->save("profile.txt");
 
   /* vertical marginal distribution of chirp rate */
-  roj_real_array* cr_marginal_ptr = c_rate->get_mean_over_frequency(s_energy);
+  roj_real_array* cr_marginal_ptr = c_rate->get_mean_over_y(s_energy);
   cr_marginal_ptr->save("marginal.txt");
   
   /* remove all imagines */

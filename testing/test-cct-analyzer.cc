@@ -71,7 +71,7 @@ int main(void){
   roj_median_filter *median_filter = new roj_median_filter(h_order, v_order);
   roj_real_matrix* c_rate_med = median_filter->smart_filtering(c_rate, hop_med, vop_med);
   
-  roj_real_array* cr_profile = c_rate_med->get_max_over_time(s_energy); /**/
+  roj_real_array* cr_profile = c_rate_med->get_max_over_x(s_energy); /**/
   cr_profile->save("data-cr-profile-0.txt"); 
 
   /* 2. in CR domain */
@@ -106,7 +106,7 @@ int main(void){
   roj_real_matrix* c_rate2 = tf_analyzer2->get_chirp_rate(2);
 
   /* roj_real_array* cr_profile2 = c_rate2->get_average_in_time(s_energy2); /**/
-  roj_real_array* cr_profile2 = c_rate2->get_max_over_time(s_energy2); /**/
+  roj_real_array* cr_profile2 = c_rate2->get_max_over_x(s_energy2); /**/
 
   /* median filtering */
   roj_real_array* cr_profile2_med = median_filter->smart_filtering(cr_profile2, hop_med);

@@ -4,9 +4,9 @@
 /* ************************************************************************************************************************* */
 /**
  * @type: method
- * @brief: This routine returns imag parameters as a structure.
+ * @brief: This routine returns a roj_imag configuration.
  *
- * @return: the structure which contains the configuration.
+ * @return: the structure which contains the configuration
  */
 roj_image_config roj_image :: get_config (){
   
@@ -17,38 +17,42 @@ roj_image_config roj_image :: get_config (){
  * @type: method
  * @brief: This routine checks configuration of the object.
  *
- * @return: True if object is correctly configured, false otherwise.
+ * @return: true if object is correctly configured, false otherwise
  */
 bool roj_image :: check_config (){
 
-  if(m_config.time.length<1){ 
+  if(m_config.x.length<1){ 
     call_warning("width<1");
     return false;
   }
-  if(m_config.frequency.length<1){ 
+  if(m_config.y.length<1){ 
     call_warning("height<1");
     return false;
   }
   
-  if(m_config.time.min >= m_config.time.max
-     and m_config.time.length>1){ 
+  if(m_config.x.min >= m_config.x.max
+     and m_config.x.length>1){ 
     call_warning("min t >= max t");
+    call_info("min t: ", m_config.x.min);
+    call_info("max t: ", m_config.x.max);
     return false;
   }
-  if(m_config.frequency.min>=m_config.frequency.max
-     and m_config.frequency.length>1){ 
+  if(m_config.y.min>=m_config.y.max
+     and m_config.y.length>1){ 
     call_warning("min f >= max f");
+    call_info("min f: ", m_config.y.min);
+    call_info("max f: ", m_config.y.max);
     return false;
   }
 
-  if (m_config.time.length==1){
+  if (m_config.x.length==1){
     call_warning("time length is 1");
-    m_config.time.max = m_config.time.min;
+    m_config.x.max = m_config.x.min;
   }
   
-  if (m_config.frequency.length==1){
+  if (m_config.y.length==1){
     call_warning("frequency length is 1");
-    m_config.frequency.max = m_config.frequency.min;
+    m_config.y.max = m_config.y.min;
   }
   
   return true;
@@ -59,25 +63,25 @@ bool roj_image :: check_config (){
  * @type: method
  * @brief: This routine compares the internal configuration to a given configuration.
  *
- * @param [in] a_conf: A pointer to the given configuration.
+ * @param [in] a_conf: a configuration.
  *
- * @return: True if configurations are equal, false oterwise.
+ * @return: true if configurations are equal, false oterwise.
  */
 bool roj_image :: compare_config (roj_image_config a_conf){
 
-  if(m_config.time.length!=a_conf.time.length)
+  if(m_config.x.length!=a_conf.x.length)
     return false;
-  if(m_config.frequency.length!=a_conf.frequency.length)
-    return false;
-  
-  if(m_config.time.min!=a_conf.time.min)
-    return false;
-  if(m_config.time.max!=a_conf.time.max)
+  if(m_config.y.length!=a_conf.y.length)
     return false;
   
-  if(m_config.frequency.min!=a_conf.frequency.min)
+  if(m_config.x.min!=a_conf.x.min)
+    return false;
+  if(m_config.x.max!=a_conf.x.max)
+    return false;
+  
+  if(m_config.y.min!=a_conf.y.min)
     return false;  
-  if(m_config.frequency.max!=a_conf.frequency.max)
+  if(m_config.y.max!=a_conf.y.max)
     return false;
 
   return true;
@@ -91,13 +95,13 @@ bool roj_image :: compare_config (roj_image_config a_conf){
  *
  * @return: True if configurations are equal, false oterwise.
  */
-bool roj_image :: compare_time_config (roj_image_config a_conf){
+bool roj_image :: compare_x_config (roj_image_config a_conf){
   
-  if(m_config.time.length!=a_conf.time.length)
+  if(m_config.x.length!=a_conf.x.length)
     return false;
-  if(m_config.time.min!=a_conf.time.min)
+  if(m_config.x.min!=a_conf.x.min)
     return false;  
-  if(m_config.time.max!=a_conf.time.max)
+  if(m_config.x.max!=a_conf.x.max)
     return false;
 
   return true;
@@ -106,110 +110,110 @@ bool roj_image :: compare_time_config (roj_image_config a_conf){
 /* ************************************************************************************************************************* */
 /**
  * @type: method
- * @brief: This routine returns time argument by an index.
+ * @brief: This routine returns x value corresponded to a given index.
  *
- * @param [in] a_index: A given index.
+ * @param [in] a_index: given index
  *
- * @return: The returned time.
+ * @return: x value
  */
-double roj_image :: get_time_by_index (int a_index){
+double roj_image :: get_x_by_index (int a_index){
   
-  if(m_config.time.length==1){
+  if(m_config.x.length==1){
     call_warning("time length is 1");
-    return m_config.time.min;
+    return m_config.x.min;
   }
   
-  double hop = (double)(m_config.time.max - m_config.time.min) / (m_config.time.length - 1);  
-  return m_config.time.min + a_index * hop;
+  double hop = (double)(m_config.x.max - m_config.x.min) / (m_config.x.length - 1);  
+  return m_config.x.min + a_index * hop;
 }
 
 /**
  * @type: method
- * @brief: This routine returns frequency argument by an index.
+ * @brief: This routine returns y value corresponded to a given index.
  *
- * @param [in] a_index: A given index.
+ * @param [in] a_index: given index
  *
- * @return: The returned time.
+ * @return: y value
  */
-double roj_image :: get_frequency_by_index (int a_index){
+double roj_image :: get_y_by_index (int a_index){
 
-  if(m_config.frequency.length==1){
+  if(m_config.y.length==1){
     call_warning("frequency length is 1");
-    return m_config.frequency.min;
+    return m_config.y.min;
   }
 
-  double hop = (double)(m_config.frequency.max - m_config.frequency.min) / (m_config.frequency.length - 1);
-  return m_config.frequency.min + a_index * hop;
+  double hop = (double)(m_config.y.max - m_config.y.min) / (m_config.y.length - 1);
+  return m_config.y.min + a_index * hop;
 }
 
 /* ************************************************************************************************************************* */
 /**
  * @type: method
- * @brief: This routine returns the nearest index for a given time argument.
+ * @brief: This routine returns the nearest index for a given x argument.
  *
- * @param [in] a_time: A given time argument.
+ * @param [in] a_time: given x argument
  *
- * @return: The nearest index.
+ * @return: the nearest index
  */
-int roj_image :: get_index_by_time (double a_time){
+int roj_image :: get_index_by_x (double a_time){
 
-  if(m_config.time.length==1){
+  if(m_config.x.length==1){
     call_warning("time length is 1");
     return 0;
   }
   
-  double hop = (double)(m_config.time.max - m_config.time.min) / (m_config.time.length - 1);
-  double tmp = (a_time - m_config.time.min);
+  double hop = (double)(m_config.x.max - m_config.x.min) / (m_config.x.length - 1);
+  double tmp = (a_time - m_config.x.min);
   return round(tmp/hop);
 }
 
 /**
  * @type: method
- * @brief: This routine returns the nearest index for a given frequency argument.
+ * @brief: This routine returns the nearest index for a given y argument.
  *
- * @param [in] a_freq: A given frequency argument.
+ * @param [in] a_freq: given y argument
  *
- * @return: The nearest index.
+ * @return: the nearest index
  */
-int roj_image :: get_index_by_frequency (double a_freq){
+int roj_image :: get_index_by_y (double a_freq){
 
-  if(m_config.frequency.length==1){
+  if(m_config.y.length==1){
     call_warning("frequency length is 1");
     return 0;
   }
 
-  double hop = (double)(m_config.frequency.max - m_config.frequency.min) / (m_config.frequency.length - 1);
-  double tmp = (a_freq - m_config.frequency.min);
+  double hop = (double)(m_config.y.max - m_config.y.min) / (m_config.y.length - 1);
+  double tmp = (a_freq - m_config.y.min);
   return round(tmp/hop);
 }
 
 /* ************************************************************************************************************************* */
 /**
 * @type: method
-* @brief: Checking time index.
+* @brief: Checking x index.
 *
-* @param [in] a_index: A given index.
+* @param [in] a_index: given index
 *
-* @return: True if index is valid, false otherwise.
+* @return: true if index is valid, false otherwise
 */
-bool roj_image :: check_in_time_index (int a_index){
+bool roj_image :: check_in_x_index (int a_index){
 
-  if(a_index>=m_config.time.length) return false;
+  if(a_index>=m_config.x.length) return false;
   if(a_index<0) return false;
   return true;
 }
 
 /**
 * @type: method
-* @brief: Checking frequency index.
+* @brief: Checking y index.
 *
-* @param [in] a_index: A given index.
+* @param [in] a_index: given index
 *
-* @return: True if index is valid, false otherwise.
+* @return: true if index is valid, false otherwise
 */
-bool roj_image :: check_in_frequency_index (int a_index){
+bool roj_image :: check_in_y_index (int a_index){
 
-  if(a_index>=m_config.frequency.length) return false;
+  if(a_index>=m_config.y.length) return false;
   if(a_index<0) return false;
   return true;
 }

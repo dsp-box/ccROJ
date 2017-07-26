@@ -181,9 +181,9 @@ roj_real_matrix* roj_median_filter :: smart_filtering (roj_real_matrix* a_matrix
     call_error("hop not positive");
 
   roj_image_config conf = a_matrix->get_config();
-  if(m_width*a_hop>conf.time.length)
+  if(m_width*a_hop>conf.x.length)
     call_error("image width is too short");
-  if(m_height*a_vop>conf.frequency.length)
+  if(m_height*a_vop>conf.y.length)
     call_error("image height is too short");
 
   roj_real_matrix* output = new roj_real_matrix(conf);
@@ -191,25 +191,25 @@ roj_real_matrix* roj_median_filter :: smart_filtering (roj_real_matrix* a_matrix
   int half = (m_width-1) / 2;
   int valf = (m_height-1) / 2;
 
-  print_progress(0, conf.time.length, "median");
+  print_progress(0, conf.x.length, "median");
   for(int h=0; h<a_hop; h++){
     for(int v=0; v<a_vop; v++){
       
-      for(int x=h; x<conf.time.length; x+=a_hop){
-	for(int y=v; y<conf.frequency.length; y+=a_vop){
+      for(int x=h; x<conf.x.length; x+=a_hop){
+	for(int y=v; y<conf.y.length; y+=a_vop){
 	  clean_buffer_flags();
 
 	  for(int n=-half;n<=half; n++){
 
 	    int hindex = x+n*a_hop;
 	    if (hindex < 0) continue;
-	    if (hindex >= conf.time.length) continue;
+	    if (hindex >= conf.x.length) continue;
 
 	    for(int k=-valf;k<=valf; k++){
 	
 	      int vindex = y+k*a_vop;
 	      if (vindex < 0) continue;
-	      if (vindex >= conf.frequency.length) continue;
+	      if (vindex >= conf.y.length) continue;
 	      
 	      add_segment(a_matrix->m_data[hindex][vindex], hindex, vindex);
 	    }     
@@ -220,7 +220,7 @@ roj_real_matrix* roj_median_filter :: smart_filtering (roj_real_matrix* a_matrix
 	  output->m_data[x][y] = get_median_value();
 	}
 
-	print_progress((v+h*a_vop)*conf.time.length+x+1, a_vop*a_hop*conf.time.length, "median");
+	print_progress((v+h*a_vop)*conf.x.length+x+1, a_vop*a_hop*conf.x.length, "median");
       }
       
     }

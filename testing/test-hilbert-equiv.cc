@@ -69,10 +69,10 @@ int main(void){
 
   /* zoom */
   roj_image_config img_conf = s_energy->get_config();
-  img_conf.frequency.length = 400;
-  img_conf.frequency.min = 1000;
-  img_conf.frequency.max = 1100;
-  img_conf.time.length = 900;
+  img_conf.y.length = 400;
+  img_conf.y.min = 1000;
+  img_conf.y.max = 1100;
+  img_conf.x.length = 900;
   
   roj_real_matrix* r_energy = new roj_real_matrix(img_conf);
   roj_time_frequency_reassign(s_delay, i_freq, s_energy, r_energy);

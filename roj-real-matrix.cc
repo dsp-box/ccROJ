@@ -18,10 +18,10 @@ roj_real_matrix :: roj_real_matrix (roj_image_config a_conf){
     call_error("matrix configuration is failed");
 
   /* allocate memory for data */
-  m_data = new double*[m_config.time.length];
-  int byte_size = m_config.frequency.length * sizeof(double);
-  for(int n=0; n<m_config.time.length; n++){
-    m_data[n] = new double[m_config.frequency.length];    
+  m_data = new double*[m_config.x.length];
+  int byte_size = m_config.y.length * sizeof(double);
+  for(int n=0; n<m_config.x.length; n++){
+    m_data[n] = new double[m_config.y.length];    
     memset(m_data[n], 0x0, byte_size);
   }
 }
@@ -46,10 +46,10 @@ roj_real_matrix :: roj_real_matrix (roj_real_matrix* a_matrix){
   m_config = conf;
   
   /* allocate memory for data */
-  m_data = new double*[m_config.time.length];
-  int byte_size = m_config.frequency.length * sizeof(double);
-  for(int n=0; n<m_config.time.length; n++){
-    m_data[n] = new double[m_config.frequency.length];    
+  m_data = new double*[m_config.x.length];
+  int byte_size = m_config.y.length * sizeof(double);
+  for(int n=0; n<m_config.x.length; n++){
+    m_data[n] = new double[m_config.y.length];    
     memcpy(m_data[n], a_matrix->m_data[n], byte_size);
   }
 }
@@ -60,7 +60,7 @@ roj_real_matrix :: roj_real_matrix (roj_real_matrix* a_matrix){
  */
 roj_real_matrix :: ~roj_real_matrix (){  
 
-  for(int n=0;n<m_config.time.length;n++)
+  for(int n=0;n<m_config.x.length;n++)
     delete [] m_data[n];    
   delete [] m_data;
 }
@@ -72,8 +72,8 @@ roj_real_matrix :: ~roj_real_matrix (){
  */
 void roj_real_matrix :: clear (){
   
-  int byte_size = m_config.frequency.length * sizeof(double);
-  for(int n=0; n<m_config.time.length; n++)
+  int byte_size = m_config.y.length * sizeof(double);
+  for(int n=0; n<m_config.x.length; n++)
     memset(m_data[n], 0x0, byte_size);
 }
 
@@ -85,8 +85,8 @@ void roj_real_matrix :: clear (){
  */
 void roj_real_matrix :: abs (){
 
-  for(int n=0; n<m_config.time.length; n++)
-    for(int k=0; k<m_config.frequency.length; k++)
+  for(int n=0; n<m_config.x.length; n++)
+    for(int k=0; k<m_config.y.length; k++)
       
       if(m_data[n][k]<0)
 	m_data[n][k] *= -1;
@@ -99,8 +99,8 @@ void roj_real_matrix :: abs (){
  */
 void roj_real_matrix :: remove_nan (){
 
-  for(int n=0; n<m_config.time.length; n++)
-    for(int k=0; k<m_config.frequency.length; k++){
+  for(int n=0; n<m_config.x.length; n++)
+    for(int k=0; k<m_config.y.length; k++){
       
       if(isnan(m_data[n][k]))
 	m_data[n][k] = 1E300;
@@ -119,8 +119,8 @@ void roj_real_matrix :: remove_nan (){
 double roj_real_matrix :: get_sum (){
   
   double sum = 0.0;
-  for(int n=0; n<m_config.time.length; n++)
-    for(int k=0; k<m_config.frequency.length; k++)
+  for(int n=0; n<m_config.x.length; n++)
+    for(int k=0; k<m_config.y.length; k++)
       sum += m_data[n][k];
 
   return sum;
@@ -135,8 +135,8 @@ double roj_real_matrix :: get_sum (){
 double roj_real_matrix :: get_max (){
   
   double max = m_data[0][0];
-  for(int n=0; n<m_config.time.length; n++)
-    for(int k=0; k<m_config.frequency.length; k++)
+  for(int n=0; n<m_config.x.length; n++)
+    for(int k=0; k<m_config.y.length; k++)
       if (max<m_data[n][k])
 	max = m_data[n][k];
 
@@ -146,31 +146,31 @@ double roj_real_matrix :: get_max (){
 /* ************************************************************************************************************************* */
 /**
  * @type: method
- * @brief: This routine roj_calculates a marginal distribution in the time domain which represents mean value also a wighted mean.
+ * @brief: This routine roj_calculates a marginal distribution in the x domain which represents mean value also a wighted mean.
  *
- * @param [in] a_energy (default NULL): A distribution used for weighting.
+ * @param [in] a_energy (default NULL): a distribution used for weighting
  *
- * @return: A pointer to the array which contains the marginal distribution.
+ * @return: a pointer to the array which contains the marginal distribution
  */
-roj_real_array* roj_real_matrix :: get_mean_over_time (roj_real_matrix* a_energy){
+roj_real_array* roj_real_matrix :: get_mean_over_x (roj_real_matrix* a_energy){
 
   /* config returned distribution */
   roj_array_config conf;
-  conf.length = m_config.time.length;
-  conf.min = m_config.time.min;
-  conf.max = m_config.time.max;
+  conf.length = m_config.x.length;
+  conf.min = m_config.x.min;
+  conf.max = m_config.x.max;
 
   /* allocate returned distribution */
   roj_real_array *array = new roj_real_array(conf);
 
   /* calc distribution if energy is not given */
   if(a_energy == NULL){
-    for(int n=0; n<m_config.time.length; n++){
-      for(int k=0; k<m_config.frequency.length; k++)
+    for(int n=0; n<m_config.x.length; n++){
+      for(int k=0; k<m_config.y.length; k++)
 	array->m_data[n] += m_data[n][k];
-      array->m_data[n] /= m_config.frequency.length;
+      array->m_data[n] /= m_config.y.length;
       
-      print_progress(n+1, m_config.time.length, "marg");
+      print_progress(n+1, m_config.x.length, "marg");
     }
   }
 
@@ -181,18 +181,18 @@ roj_real_array* roj_real_matrix :: get_mean_over_time (roj_real_matrix* a_energy
     if (!compare_config(energy_conf))
       call_error("matrixes are not compact");
     
-    for(int n=0; n<m_config.time.length; n++){
-      for(int k=0; k<m_config.frequency.length; k++)
+    for(int n=0; n<m_config.x.length; n++){
+      for(int k=0; k<m_config.y.length; k++)
 	array->m_data[n] += m_data[n][k] * a_energy->m_data[n][k];
       
-      print_progress(n+1, m_config.time.length, "marg");
+      print_progress(n+1, m_config.x.length, "marg");
     }
 
     /* div by energy */
-    roj_real_array* energy = a_energy->get_mean_over_time();
-    for(int n=0; n<m_config.time.length; n++){
+    roj_real_array* energy = a_energy->get_mean_over_x();
+    for(int n=0; n<m_config.x.length; n++){
       array->m_data[n] /= energy->m_data[n];
-      array->m_data[n] /= m_config.frequency.length;
+      array->m_data[n] /= m_config.y.length;
     }
     delete energy;
   }
@@ -203,31 +203,31 @@ roj_real_array* roj_real_matrix :: get_mean_over_time (roj_real_matrix* a_energy
 
 /*
  * @type: method
- * @brief: This routine roj_calculates a marginal distribution in the frequency domain which represents mean value also a wighted mean.
+ * @brief: This routine roj_calculates a marginal distribution in the y domain which represents mean value also a wighted mean.
  *
- * @param [in] a_energy (default NULL): A distribution used for weighting.
+ * @param [in] a_energy (default NULL): a distribution used for weighting
  *
- * @return: A pointer to the array which contains the marginal distribution.
+ * @return: a pointer to the array which contains the marginal distribution
  */
-roj_real_array* roj_real_matrix :: get_mean_over_frequency (roj_real_matrix* a_energy){
+roj_real_array* roj_real_matrix :: get_mean_over_y (roj_real_matrix* a_energy){
 
   /* config returned distribution */
   roj_array_config conf;
-  conf.length = m_config.frequency.length;
-  conf.min = m_config.frequency.min;
-  conf.max = m_config.frequency.max;
+  conf.length = m_config.y.length;
+  conf.min = m_config.y.min;
+  conf.max = m_config.y.max;
 
   /* allocate returned distribution */
   roj_real_array *array = new roj_real_array(conf);
 
   /* calc distribution if energy is not given */
   if(a_energy == NULL){
-    for(int k=0; k<m_config.frequency.length; k++){
-      for(int n=0; n<m_config.time.length; n++)
+    for(int k=0; k<m_config.y.length; k++){
+      for(int n=0; n<m_config.x.length; n++)
 	array->m_data[k] += m_data[n][k];
-      array->m_data[k] /= m_config.time.length;
+      array->m_data[k] /= m_config.x.length;
 
-      print_progress(k+1, m_config.frequency.length, "marg");
+      print_progress(k+1, m_config.y.length, "marg");
     }
   }
 
@@ -238,18 +238,18 @@ roj_real_array* roj_real_matrix :: get_mean_over_frequency (roj_real_matrix* a_e
     if (!compare_config(energy_conf))
       call_error("matrixes are not compact");
     
-    for(int k=0; k<m_config.frequency.length; k++){
-      for(int n=0; n<m_config.time.length; n++)
+    for(int k=0; k<m_config.y.length; k++){
+      for(int n=0; n<m_config.x.length; n++)
 	array->m_data[k] += m_data[n][k] * a_energy->m_data[n][k];
       
-      print_progress(k+1, m_config.frequency.length, "marg");
+      print_progress(k+1, m_config.y.length, "marg");
     }
 
     /* div by energy */
-    roj_real_array* energy = a_energy->get_mean_over_frequency();
-    for(int k=0; k<m_config.frequency.length; k++){
+    roj_real_array* energy = a_energy->get_mean_over_y();
+    for(int k=0; k<m_config.y.length; k++){
       array->m_data[k] /= energy->m_data[k];
-      array->m_data[k] /= m_config.time.length;
+      array->m_data[k] /= m_config.x.length;
     }
     delete energy;
   }
@@ -267,7 +267,7 @@ roj_real_array* roj_real_matrix :: get_mean_over_frequency (roj_real_matrix* a_e
  *
  * @return: A pointer to the array which contains the marginal distribution.
  */
-roj_real_array* roj_real_matrix :: get_max_over_time (roj_real_matrix* a_energy){
+roj_real_array* roj_real_matrix :: get_max_over_x (roj_real_matrix* a_energy){
 
   /* check arg */
   if(a_energy == NULL)
@@ -279,23 +279,23 @@ roj_real_array* roj_real_matrix :: get_max_over_time (roj_real_matrix* a_energy)
 
   /* config returned distribution */
   roj_array_config conf;
-  conf.length = m_config.time.length;
-  conf.min = m_config.time.min;
-  conf.max = m_config.time.max;
+  conf.length = m_config.x.length;
+  conf.min = m_config.x.min;
+  conf.max = m_config.x.max;
 
   /* allocate returned distribution */
   roj_real_array *array = new roj_real_array(conf);
   
-  for(int n=0; n<m_config.time.length; n++){
+  for(int n=0; n<m_config.x.length; n++){
     double tmp = 0.0;
-    for(int k=0; k<m_config.frequency.length; k++){
+    for(int k=0; k<m_config.y.length; k++){
       if(tmp<a_energy->m_data[n][k]){
 	tmp=a_energy->m_data[n][k];
 	array->m_data[n] = m_data[n][k];
       }
     }
     
-    print_progress(n+1, m_config.time.length, "marg");
+    print_progress(n+1, m_config.x.length, "marg");
   }
   
   print_progress(0, 0, "marg");
@@ -310,7 +310,7 @@ roj_real_array* roj_real_matrix :: get_max_over_time (roj_real_matrix* a_energy)
  *
  * @return: A pointer to the array which contains the marginal distribution.
  */
-roj_real_array* roj_real_matrix :: get_max_over_frequency (roj_real_matrix* a_energy){
+roj_real_array* roj_real_matrix :: get_max_over_y (roj_real_matrix* a_energy){
 
   /* check arg */
   if(a_energy == NULL)
@@ -322,23 +322,23 @@ roj_real_array* roj_real_matrix :: get_max_over_frequency (roj_real_matrix* a_en
 
   /* config returned distribution */
   roj_array_config conf;
-  conf.length = m_config.frequency.length;
-  conf.min = m_config.frequency.min;
-  conf.max = m_config.frequency.max;
+  conf.length = m_config.y.length;
+  conf.min = m_config.y.min;
+  conf.max = m_config.y.max;
 
   /* allocate returned distribution */
   roj_real_array *array = new roj_real_array(conf);
   
-  for(int k=0; k<m_config.frequency.length; k++){
+  for(int k=0; k<m_config.y.length; k++){
     double tmp = 0.0;
-    for(int n=0; n<m_config.time.length; n++){
+    for(int n=0; n<m_config.x.length; n++){
       if(tmp<a_energy->m_data[n][k]){
 	tmp=a_energy->m_data[n][k];
 	array->m_data[k] = m_data[n][k];
       }
     }
     
-    print_progress(k+1, m_config.frequency.length, "marg");
+    print_progress(k+1, m_config.y.length, "marg");
   }
   
   print_progress(0, 0, "marg");
@@ -355,7 +355,7 @@ roj_real_array* roj_real_matrix :: get_max_over_frequency (roj_real_matrix* a_en
  *
  * @return: A pointer to the array which contains the marginal distribution.
  */
-roj_real_array* roj_real_matrix :: get_dominant_over_time (roj_real_matrix* a_energy, roj_array_config a_conf){
+roj_real_array* roj_real_matrix :: get_dominant_over_x (roj_real_matrix* a_energy, roj_array_config a_conf){
 
   /* check arg */
   if(a_energy == NULL)
@@ -366,18 +366,18 @@ roj_real_array* roj_real_matrix :: get_dominant_over_time (roj_real_matrix* a_en
 
   /* config returned distribution */
   roj_array_config out_conf;
-  out_conf.length = m_config.time.length;
-  out_conf.min = m_config.time.min;
-  out_conf.max = m_config.time.max;
+  out_conf.length = m_config.x.length;
+  out_conf.min = m_config.x.min;
+  out_conf.max = m_config.x.max;
   roj_real_array *output = new roj_real_array(out_conf);
 
   /* tmp buffer */
   roj_real_array *buffer = new roj_real_array(a_conf);
   
-  for(int n=0; n<m_config.time.length; n++){
+  for(int n=0; n<m_config.x.length; n++){
     buffer->clear();
     
-    for(int k=0; k<m_config.frequency.length; k++){
+    for(int k=0; k<m_config.y.length; k++){
 
       int index = (m_data[n][k] - a_conf.min) /  buffer->get_delta();
       if(index>=a_conf.length) continue;
@@ -389,7 +389,7 @@ roj_real_array* roj_real_matrix :: get_dominant_over_time (roj_real_matrix* a_en
     int index = buffer->get_index_of_max();
     output->m_data[n] = buffer->get_arg_by_index(index);
 
-    print_progress(n+1, m_config.time.length, "marg");
+    print_progress(n+1, m_config.x.length, "marg");
   }
 
   print_progress(0, 0, "marg");
@@ -407,7 +407,7 @@ roj_real_array* roj_real_matrix :: get_dominant_over_time (roj_real_matrix* a_en
  *
  * @return: A pointer to the array which contains the marginal distribution.
  */
-roj_real_array* roj_real_matrix :: get_dominant_over_time (roj_real_matrix* a_energy, roj_real_matrix* a_sdelay, roj_array_config a_conf){
+roj_real_array* roj_real_matrix :: get_dominant_over_x (roj_real_matrix* a_energy, roj_real_matrix* a_sdelay, roj_array_config a_conf){
 
   /* check arg */
   if(a_energy == NULL)
@@ -422,24 +422,24 @@ roj_real_array* roj_real_matrix :: get_dominant_over_time (roj_real_matrix* a_en
 
   /* config returned distribution */
   roj_array_config out_conf;
-  out_conf.length = m_config.time.length;
-  out_conf.min = m_config.time.min;
-  out_conf.max = m_config.time.max;
+  out_conf.length = m_config.x.length;
+  out_conf.min = m_config.x.min;
+  out_conf.max = m_config.x.max;
   roj_real_array *output = new roj_real_array(out_conf);
 
   /* tmp buffer */
-  roj_real_array **buffer = new roj_real_array*[m_config.time.length]; 
-  for(int n=0; n<m_config.time.length; n++)
+  roj_real_array **buffer = new roj_real_array*[m_config.x.length]; 
+  for(int n=0; n<m_config.x.length; n++)
     buffer[n] = new roj_real_array(a_conf);
 
-  for(int n=0; n<m_config.time.length; n++){
-    for(int k=0; k<m_config.frequency.length; k++){
+  for(int n=0; n<m_config.x.length; n++){
+    for(int k=0; k<m_config.y.length; k++){
 
-      double time = get_time_by_index(n);
+      double time = get_x_by_index(n);
       time += a_sdelay->m_data[n][k];
 
-      int t_index = get_index_by_time(time);
-      if (t_index>=m_config.time.length) continue;
+      int t_index = get_index_by_x(time);
+      if (t_index>=m_config.x.length) continue;
       if (t_index<0) continue;
 
       int index = (m_data[n][k] - a_conf.min) /  buffer[n]->get_delta();
@@ -449,16 +449,16 @@ roj_real_array* roj_real_matrix :: get_dominant_over_time (roj_real_matrix* a_en
       buffer[t_index]->m_data[index] += a_energy->m_data[n][k];
     }
         
-    print_progress(n+1, m_config.time.length, "marg");
+    print_progress(n+1, m_config.x.length, "marg");
   }
 
-  for(int n=0; n<m_config.time.length; n++){
+  for(int n=0; n<m_config.x.length; n++){
     int index = buffer[n]->get_index_of_max();
     output->m_data[n] = buffer[n]->get_arg_by_index(index);
   }
   
   print_progress(0, 0, "marg");
-  for(int n=0; n<m_config.time.length; n++)
+  for(int n=0; n<m_config.x.length; n++)
     delete buffer[n];
   delete buffer;
   return output;
@@ -480,23 +480,23 @@ void roj_real_matrix :: save (char* a_fname){
     call_error("cannot save");
 
   /* write start and stop */
-  fprintf(fds, "#TIME_MIN=%e\n", m_config.time.min);
-  fprintf(fds, "#TIME_MAX=%e\n", m_config.time.max);
-  fprintf(fds, "#FREQ_MIN=%e\n", m_config.frequency.min);
-  fprintf(fds, "#FREQ_MAX=%e\n", m_config.frequency.max);
+  fprintf(fds, "#TIME_MIN=%e\n", m_config.x.min);
+  fprintf(fds, "#TIME_MAX=%e\n", m_config.x.max);
+  fprintf(fds, "#FREQ_MIN=%e\n", m_config.y.min);
+  fprintf(fds, "#FREQ_MAX=%e\n", m_config.y.max);
 
   /* init variables for finding min and max */
   double min_val = m_data[0][0];
   double max_val = m_data[0][0];
 
-  double hop_time = (m_config.time.max - m_config.time.min) / (m_config.time.length - 1);
-  double hop_freq = (m_config.frequency.max - m_config.frequency.min) / (m_config.frequency.length - 1);
+  double hop_time = (m_config.x.max - m_config.x.min) / (m_config.x.length - 1);
+  double hop_freq = (m_config.y.max - m_config.y.min) / (m_config.y.length - 1);
   
   /* save data to file */
-  for(int n=0; n<m_config.time.length; n++){
-    double time = m_config.time.min + n * hop_time;
-    for(int k=0; k<m_config.frequency.length; k++){
-      double freq = m_config.frequency.min + k * hop_freq;
+  for(int n=0; n<m_config.x.length; n++){
+    double time = m_config.x.min + n * hop_time;
+    for(int k=0; k<m_config.y.length; k++){
+      double freq = m_config.y.min + k * hop_freq;
 
       fprintf(fds, "%e\t", time);
       fprintf(fds, "%e\t", freq);
@@ -511,7 +511,7 @@ void roj_real_matrix :: save (char* a_fname){
 
     /* add empty line */
     fprintf(fds, "\n");
-    print_progress(n+1, m_config.time.length, "save");
+    print_progress(n+1, m_config.x.length, "save");
   }
   print_progress(0, 0, "save");
 
@@ -537,39 +537,39 @@ void roj_real_matrix :: save (char* a_fname){
 roj_real_matrix* roj_real_matrix :: cropping (roj_image_config a_conf){
 
   /* check args */
-  int min_tindex = get_index_by_time(a_conf.time.min);
-  if(min_tindex>=m_config.time.length) call_error("min time is wrong!");
+  int min_tindex = get_index_by_x(a_conf.x.min);
+  if(min_tindex>=m_config.x.length) call_error("min time is wrong!");
   if(min_tindex<0) call_error("min time is wrong!");
-  int max_tindex = get_index_by_time(a_conf.time.max);
-  if(max_tindex>=m_config.time.length) call_error("max time is wrong!");
+  int max_tindex = get_index_by_x(a_conf.x.max);
+  if(max_tindex>=m_config.x.length) call_error("max time is wrong!");
   if(max_tindex<0) call_error("max time is wrong!");
 
   if(min_tindex >= max_tindex)
     call_error("min / max time is wrong!");
   int new_width = max_tindex-min_tindex+1;
-  double telta = m_config.time.max - m_config.time.min;
-  telta /= m_config.time.length-1;
+  double telta = m_config.x.max - m_config.x.min;
+  telta /= m_config.x.length-1;
   
-  int min_findex = get_index_by_frequency(a_conf.frequency.min);
-  if(min_findex>=m_config.frequency.length) call_error("min frequency is wrong!");
+  int min_findex = get_index_by_y(a_conf.y.min);
+  if(min_findex>=m_config.y.length) call_error("min frequency is wrong!");
   if(min_findex<0) call_error("min frequency is wrong!");
-  int max_findex = get_index_by_frequency(a_conf.frequency.max);
-  if(max_findex>=m_config.frequency.length) call_error("max frequency is wrong!");
+  int max_findex = get_index_by_y(a_conf.y.max);
+  if(max_findex>=m_config.y.length) call_error("max frequency is wrong!");
   if(max_findex<0) call_error("max frequency is wrong!");
 
   if(min_findex >= max_findex)
     call_error("min / max frequency is wrong!");
   int new_height = max_findex-min_findex+1;
-  double felta = m_config.frequency.max - m_config.frequency.min;
-  felta /= m_config.frequency.length-1;
+  double felta = m_config.y.max - m_config.y.min;
+  felta /= m_config.y.length-1;
 
   roj_image_config img_conf;
-  img_conf.time.length = new_width;
-  img_conf.frequency.length = new_height;
-  img_conf.time.min = m_config.time.min + min_tindex * telta;
-  img_conf.time.max = m_config.time.min + max_tindex * telta; 
-  img_conf.frequency.min = m_config.frequency.min + min_findex * felta;
-  img_conf.frequency.max = m_config.frequency.min + max_findex * felta;
+  img_conf.x.length = new_width;
+  img_conf.y.length = new_height;
+  img_conf.x.min = m_config.x.min + min_tindex * telta;
+  img_conf.x.max = m_config.x.min + max_tindex * telta; 
+  img_conf.y.min = m_config.y.min + min_findex * felta;
+  img_conf.y.max = m_config.y.min + max_findex * felta;
 
   roj_real_matrix* out_matrix = new roj_real_matrix(img_conf);
   int byte_size = new_height * sizeof(double); 
@@ -588,8 +588,8 @@ roj_real_matrix* roj_real_matrix :: cropping (roj_image_config a_conf){
  */
 void roj_real_matrix :: operator = (double a_number){
   
-  for(int n=0; n<m_config.time.length; n++)
-    for(int k=0; k<m_config.frequency.length; k++)
+  for(int n=0; n<m_config.x.length; n++)
+    for(int k=0; k<m_config.y.length; k++)
       m_data[n][k] = a_number;    
 }
 
@@ -601,8 +601,8 @@ void roj_real_matrix :: operator = (double a_number){
  */
 void roj_real_matrix :: operator *= (double a_factor){
   
-  for(int n=0; n<m_config.time.length; n++)
-    for(int k=0; k<m_config.frequency.length; k++)
+  for(int n=0; n<m_config.x.length; n++)
+    for(int k=0; k<m_config.y.length; k++)
       m_data[n][k] *= a_factor;    
 }
 
@@ -614,8 +614,8 @@ void roj_real_matrix :: operator *= (double a_factor){
  */
 void roj_real_matrix :: operator /= (double a_div){
   
-  for(int n=0; n<m_config.time.length; n++)
-    for(int k=0; k<m_config.frequency.length; k++)
+  for(int n=0; n<m_config.x.length; n++)
+    for(int k=0; k<m_config.y.length; k++)
       m_data[n][k] /= a_div;    
 }
 
@@ -627,8 +627,8 @@ void roj_real_matrix :: operator /= (double a_div){
  */
 void roj_real_matrix :: operator += (double a_component){
   
-  for(int n=0; n<m_config.time.length; n++)
-    for(int k=0; k<m_config.frequency.length; k++)
+  for(int n=0; n<m_config.x.length; n++)
+    for(int k=0; k<m_config.y.length; k++)
       m_data[n][k] += a_component;    
 }
 
@@ -640,8 +640,8 @@ void roj_real_matrix :: operator += (double a_component){
  */
 void roj_real_matrix :: operator -= (double a_number){
   
-  for(int n=0; n<m_config.time.length; n++)
-    for(int k=0; k<m_config.frequency.length; k++)
+  for(int n=0; n<m_config.x.length; n++)
+    for(int k=0; k<m_config.y.length; k++)
       m_data[n][k] -= a_number;    
 }
 
@@ -657,8 +657,8 @@ void roj_real_matrix :: operator *= (roj_real_matrix *a_matrix){
   if (!a_matrix->compare_config(m_config))
     call_error("images are not compact");
 
-  for(int n=0; n<m_config.time.length; n++)
-    for(int k=0; k<m_config.frequency.length; k++)
+  for(int n=0; n<m_config.x.length; n++)
+    for(int k=0; k<m_config.y.length; k++)
       m_data[n][k] *= a_matrix->m_data[n][k];    
 }
 
@@ -673,7 +673,7 @@ void roj_real_matrix :: operator += (roj_real_matrix *a_matrix){
   if (!a_matrix->compare_config(m_config))
     call_error("images are not compact");
 
-  for(int n=0; n<m_config.time.length; n++)
-    for(int k=0; k<m_config.frequency.length; k++)
+  for(int n=0; n<m_config.x.length; n++)
+    for(int k=0; k<m_config.y.length; k++)
       m_data[n][k] += a_matrix->m_data[n][k];    
 }

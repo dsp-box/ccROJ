@@ -30,25 +30,25 @@ roj_real_matrix* roj_time_frequency_reassign (roj_real_matrix* a_sdelay, roj_rea
   roj_image_config out_conf = output->get_config();
     
   /* reassignment */
-  for(int n=0; n<conf.time.length; n++){
-    for(int k=0; k<conf.frequency.length; k++){
+  for(int n=0; n<conf.x.length; n++){
+    for(int k=0; k<conf.y.length; k++){
       
       double i_freq = a_ifreq->m_data[n][k];
-      double c_time = a_senergy->get_time_by_index(n);
+      double c_time = a_senergy->get_x_by_index(n);
       c_time += a_sdelay->m_data[n][k];
 
-      int t_index = output->get_index_by_time(c_time);
-      if (t_index>=out_conf.time.length) continue;
+      int t_index = output->get_index_by_x(c_time);
+      if (t_index>=out_conf.x.length) continue;
       if (t_index<0) continue;
 
-      int f_index = output->get_index_by_frequency(i_freq);
-      if (f_index>=out_conf.frequency.length) continue;
+      int f_index = output->get_index_by_y(i_freq);
+      if (f_index>=out_conf.y.length) continue;
       if (f_index<0) continue;
 
       output->m_data[t_index][f_index] += a_senergy->m_data[n][k];
     }
 
-    print_progress(n+1, conf.time.length, "reass");
+    print_progress(n+1, conf.x.length, "reass");
   }
   
   print_progress(0, 0, "reass");    
@@ -80,24 +80,24 @@ roj_real_matrix* roj_frequency_reassign (roj_real_matrix* a_ifreq, roj_real_matr
   if(a_output==NULL)
     output = new roj_real_matrix(conf);
   else
-    if (!a_output->compare_time_config(conf))
+    if (!a_output->compare_x_config(conf))
       call_error("images are not compact in time");
   
   roj_image_config out_conf = output->get_config();
 
   /* reassignment */
-  for(int n=0; n<conf.time.length; n++){
-    for(int k=0; k<conf.frequency.length; k++){
+  for(int n=0; n<conf.x.length; n++){
+    for(int k=0; k<conf.y.length; k++){
       
       double i_freq = a_ifreq->m_data[n][k];
-      int f_index = output->get_index_by_frequency(i_freq);
-      if (f_index>=out_conf.frequency.length) continue;
+      int f_index = output->get_index_by_y(i_freq);
+      if (f_index>=out_conf.y.length) continue;
       if (f_index<0) continue;
 
       output->m_data[n][f_index] += a_senergy->m_data[n][k];
     }
 
-    print_progress(n+1, conf.time.length, "reass");
+    print_progress(n+1, conf.x.length, "reass");
   }
 
   print_progress(0, 0, "reass");    
@@ -124,20 +124,20 @@ roj_real_matrix* roj_calculate_profile_over_time (roj_real_matrix* a_values, roj
   if (!a_energy->compare_config(conf)) call_error("images are not compact");
 
   roj_image_config n_conf;
-  n_conf.time =  conf.time; 
-  n_conf.frequency.length = a_arr_conf.length;
-  n_conf.frequency.min = a_arr_conf.min;
-  n_conf.frequency.max = a_arr_conf.max;
+  n_conf.x =  conf.x; 
+  n_conf.y.length = a_arr_conf.length;
+  n_conf.y.min = a_arr_conf.min;
+  n_conf.y.max = a_arr_conf.max;
 
   roj_real_matrix* output = new roj_real_matrix(n_conf); 
-  double delta = (double)(n_conf.frequency.max - n_conf.frequency.min) / (n_conf.frequency.length - 1);
+  double delta = (double)(n_conf.y.max - n_conf.y.min) / (n_conf.y.length - 1);
 
   /* reassignment */
-  for(int n=0; n<conf.time.length; n++){
-    for(int k=0; k<conf.frequency.length; k++){
+  for(int n=0; n<conf.x.length; n++){
+    for(int k=0; k<conf.y.length; k++){
 
-      int index = round((a_values->m_data[n][k] - n_conf.frequency.min) / delta);
-      if (index>=n_conf.frequency.length) continue;
+      int index = round((a_values->m_data[n][k] - n_conf.y.min) / delta);
+      if (index>=n_conf.y.length) continue;
       if (index<0) continue;
 
       output->m_data[n][k] += a_energy->m_data[n][k];
@@ -184,8 +184,8 @@ roj_real_array* roj_calculate_profile (roj_real_matrix* a_values, roj_real_matri
     call_error("images are not compact");
     
   /* fill profile */
-  for(int n=0; n<conf.time.length; n++)
-    for(int k=0; k<conf.frequency.length; k++)
+  for(int n=0; n<conf.x.length; n++)
+    for(int k=0; k<conf.y.length; k++)
       add_sample_to_profile(a_values->m_data[n][k], a_energy->m_data[n][k], a_arr);
 
   /* return profile as roj_real_array */
@@ -246,8 +246,8 @@ roj_real_array* roj_calculate_histogram (roj_real_matrix* a_values, roj_real_arr
   roj_image_config conf = a_values->get_config();
       
   /* fill histogram */
-  for(int n=0; n<conf.time.length; n++)
-    for(int k=0; k<conf.frequency.length; k++)      
+  for(int n=0; n<conf.x.length; n++)
+    for(int k=0; k<conf.y.length; k++)      
       add_sample_to_histogram(a_values->m_data[n][k], a_arr);
 
   /* return histogram as roj_real_array */

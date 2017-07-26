@@ -33,7 +33,7 @@ public:
   
   /**
    * @type: field
-   * @brief: This public pointer gives access to time-frequency data.
+   * @brief: This public pointer gives access to xy data.
    */
   double **m_data;
 
@@ -54,16 +54,16 @@ public:
   double get_max();
   
   /* get marginal average distributions */ 
-  roj_real_array* get_mean_over_time(roj_real_matrix* =NULL);
-  roj_real_array* get_mean_over_frequency(roj_real_matrix* =NULL);
+  roj_real_array* get_mean_over_x(roj_real_matrix* =NULL);
+  roj_real_array* get_mean_over_y(roj_real_matrix* =NULL);
 
   /* get marginal maximum distributions */ 
-  roj_real_array* get_max_over_time(roj_real_matrix*);
-  roj_real_array* get_max_over_frequency(roj_real_matrix*);
+  roj_real_array* get_max_over_x(roj_real_matrix*);
+  roj_real_array* get_max_over_y(roj_real_matrix*);
 
   /* get marginal dominant distributions */ 
-  roj_real_array* get_dominant_over_time(roj_real_matrix*, roj_array_config);
-  roj_real_array* get_dominant_over_time(roj_real_matrix*, roj_real_matrix*, roj_array_config);
+  roj_real_array* get_dominant_over_x(roj_real_matrix*, roj_array_config);
+  roj_real_array* get_dominant_over_x(roj_real_matrix*, roj_real_matrix*, roj_array_config);
 
   /* operators */
   void operator /= (double);

@@ -14,15 +14,15 @@ roj_real_matrix* roj_calculate_time_compacting (roj_real_matrix* a_sdelay){
 
   /* get config */
   roj_image_config conf = a_sdelay->get_config();
-  double t_delta = (conf.time.max - conf.time.min)  / (conf.time.length - 1);
+  double t_delta = (conf.x.max - conf.x.min)  / (conf.x.length - 1);
   double t_2delta = 2 * t_delta;
     
   /* allocate output */  
   roj_real_matrix* output = new roj_real_matrix(conf);  
 
   /* squeezing calculation */
-  for(int n=1; n<conf.time.length-1; n++){
-    for(int k=0; k<conf.frequency.length; k++){
+  for(int n=1; n<conf.x.length-1; n++){
+    for(int k=0; k<conf.y.length; k++){
       
       double dt1 = abs(t_delta + a_sdelay->m_data[n+1][k] - a_sdelay->m_data[n][k]);
       double dt2 = abs(t_delta + a_sdelay->m_data[n][k] - a_sdelay->m_data[n-1][k]);
@@ -31,13 +31,13 @@ roj_real_matrix* roj_calculate_time_compacting (roj_real_matrix* a_sdelay){
   }
 
   /* borders */
-  for(int k=0; k<conf.frequency.length; k++){
+  for(int k=0; k<conf.y.length; k++){
 
     double dt = abs(t_delta + a_sdelay->m_data[1][k] - a_sdelay->m_data[0][k]);
     output->m_data[0][k] = dt / t_delta;
 
-    dt = abs(t_delta + a_sdelay->m_data[conf.time.length-1][k] - a_sdelay->m_data[conf.time.length-2][k]);
-    output->m_data[conf.time.length-1][k] = dt / t_delta;
+    dt = abs(t_delta + a_sdelay->m_data[conf.x.length-1][k] - a_sdelay->m_data[conf.x.length-2][k]);
+    output->m_data[conf.x.length-1][k] = dt / t_delta;
   }
 
   return output;
@@ -55,15 +55,15 @@ roj_real_matrix* roj_calculate_frequency_compacting (roj_real_matrix* a_ifreq){
 
   /* get config */
   roj_image_config conf = a_ifreq->get_config();
-  double f_delta = (conf.frequency.max - conf.frequency.min)  / (conf.frequency.length - 1);
+  double f_delta = (conf.y.max - conf.y.min)  / (conf.y.length - 1);
   double f_2delta = 2 * f_delta;
     
   /* allocate output if necessary*/  
   roj_real_matrix* output = new roj_real_matrix(conf);  
 
   /* squeezing calculation */
-  for(int n=0; n<conf.time.length; n++){
-    for(int k=1; k<conf.frequency.length-1; k++){
+  for(int n=0; n<conf.x.length; n++){
+    for(int k=1; k<conf.y.length-1; k++){
       
       double df1 = abs(a_ifreq->m_data[n][k+1] - a_ifreq->m_data[n][k]);
       double df2 = abs(a_ifreq->m_data[n][k] - a_ifreq->m_data[n][k-1]);
@@ -72,13 +72,13 @@ roj_real_matrix* roj_calculate_frequency_compacting (roj_real_matrix* a_ifreq){
   }
 
   /* borders */
-  for(int n=0; n<conf.time.length; n++){
+  for(int n=0; n<conf.x.length; n++){
 
     double df = abs(a_ifreq->m_data[n][1] - a_ifreq->m_data[n][0]);
     output->m_data[n][0] = df / f_delta;
 
-    df = abs(a_ifreq->m_data[n][conf.frequency.length-1] - a_ifreq->m_data[n][conf.frequency.length-2]);
-    output->m_data[n][conf.frequency.length-1] = df / f_delta;
+    df = abs(a_ifreq->m_data[n][conf.y.length-1] - a_ifreq->m_data[n][conf.y.length-2]);
+    output->m_data[n][conf.y.length-1] = df / f_delta;
   }
 
   return output;
@@ -110,8 +110,8 @@ int roj_combine_matrix (bool (*a_func)(double, double), roj_real_matrix* a_multi
     call_error("matrixes are not compact (a_metrics)");
   
   int counter = 0;
-  for(int n=0; n<config.time.length; n++)
-    for(int k=0; k<config.frequency.length; k++){
+  for(int n=0; n<config.x.length; n++)
+    for(int k=0; k<config.y.length; k++){
       
       if((*a_func)(a_metrics->m_data[n][k], a_multi_metrics->m_data[n][k])){
 	
@@ -193,23 +193,23 @@ void roj_save (char *a_fname, roj_real_matrix* a_matrix_1, roj_real_matrix* a_ma
     call_error("cannot save");
 
   /* write start and stop */
-  fprintf(fds, "#TIME_MIN=%e\n", config.time.min);
-  fprintf(fds, "#TIME_MAX=%e\n", config.time.max);
-  fprintf(fds, "#FREQ_MIN=%e\n", config.frequency.min);
-  fprintf(fds, "#FREQ_MAX=%e\n", config.frequency.max);
+  fprintf(fds, "#TIME_MIN=%e\n", config.x.min);
+  fprintf(fds, "#TIME_MAX=%e\n", config.x.max);
+  fprintf(fds, "#FREQ_MIN=%e\n", config.y.min);
+  fprintf(fds, "#FREQ_MAX=%e\n", config.y.max);
 
   /* init variables for finding min and max */
   double min_val = a_matrix_1->m_data[0][0];
   double max_val = a_matrix_1->m_data[0][0];
 
-  double hop_time = (config.time.max - config.time.min) / (config.time.length - 1);
-  double hop_freq = (config.frequency.max - config.frequency.min) / (config.frequency.length - 1);
+  double hop_time = (config.x.max - config.x.min) / (config.x.length - 1);
+  double hop_freq = (config.y.max - config.y.min) / (config.y.length - 1);
   
   /* save data to file */
-  for(int n=0; n<config.time.length; n++){
-    double time = config.time.min + n * hop_time;
-    for(int k=0; k<config.frequency.length; k++){
-      double freq = config.frequency.min + k * hop_freq;
+  for(int n=0; n<config.x.length; n++){
+    double time = config.x.min + n * hop_time;
+    for(int k=0; k<config.y.length; k++){
+      double freq = config.y.min + k * hop_freq;
 
       fprintf(fds, "%e\t", time);
       fprintf(fds, "%e\t", freq);
@@ -225,7 +225,7 @@ void roj_save (char *a_fname, roj_real_matrix* a_matrix_1, roj_real_matrix* a_ma
 
     /* add empty line */
     fprintf(fds, "\n");
-    print_progress(n+1, config.time.length, "save");
+    print_progress(n+1, config.x.length, "save");
   }
   print_progress(0, 0, "save");
   

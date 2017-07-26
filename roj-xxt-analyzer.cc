@@ -226,13 +226,13 @@ roj_image_config roj_xxt_analyzer :: get_image_config (){
   int win_width = m_window_gen->get_length();
   
   roj_image_config img_conf;
-  img_conf.frequency.length = get_height();
-  img_conf.time.length = get_width();
+  img_conf.y.length = get_height();
+  img_conf.x.length = get_width();
   
-  img_conf.time.min = sig_conf.start + (double)win_width * 0.5 / sig_conf.rate;  
-  img_conf.time.max = img_conf.time.min + (double)((get_width()-1)*m_hop) / sig_conf.rate; 
-  img_conf.frequency.min = m_bank_config.min;
-  img_conf.frequency.max = m_bank_config.max;
+  img_conf.x.min = sig_conf.start + (double)win_width * 0.5 / sig_conf.rate;  
+  img_conf.x.max = img_conf.x.min + (double)((get_width()-1)*m_hop) / sig_conf.rate; 
+  img_conf.y.min = m_bank_config.min;
+  img_conf.y.max = m_bank_config.max;
   
   return img_conf;
 }
