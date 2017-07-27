@@ -238,3 +238,48 @@ void roj_save (char *a_fname, roj_real_matrix* a_matrix_1, roj_real_matrix* a_ma
   call_info("save file: ", a_fname);
 #endif
 }
+
+/* ************************************************************************************************************************* */
+/**
+* @type: function
+* @brief:  
+*
+* @param [in] a_matrix: 
+*
+* @return: 
+*/
+roj_pair roj_calculate_interpolated_argmax (roj_real_matrix* a_matrix){
+
+  /* get config */
+  roj_image_config conf = a_matrix->get_config();
+
+  int kmax=0, nmax=0;
+  double max = a_matrix->m_data[0][0]
+    + a_matrix->m_data[0][1]
+    + a_matrix->m_data[1][0]
+    + a_matrix->m_data[1][1];
+  for(int n=0; n<conf.x.length-1; n++){
+    for(int k=0; k<conf.y.length-1; k++){
+
+      double tmp = a_matrix->m_data[n][k]
+	+ a_matrix->m_data[n][k+1]
+	+ a_matrix->m_data[n+1][k]
+	+ a_matrix->m_data[n+1][k+1];
+
+      if (max < tmp){
+	max = tmp;
+	kmax = k;
+	nmax = n;
+      }      
+    }
+  }
+
+  double kfrac = kmax + (a_matrix->m_data[nmax][kmax]+a_matrix->m_data[nmax][kmax+1]) / max;
+  double nfrac = nmax + (a_matrix->m_data[nmax][kmax]+a_matrix->m_data[nmax+1][kmax]) / max;
+
+  roj_pair out;
+  out.x = nfrac * (a_matrix->get_x_by_index(1) - a_matrix->get_x_by_index(0));
+  out.y = kfrac * (a_matrix->get_y_by_index(1) - a_matrix->get_y_by_index(0));
+    
+  return out;
+}

@@ -77,6 +77,16 @@
 
 /**
 * @type: struct
+* @brief: This struct is used by some roj functions.
+*/
+struct roj_pair{
+
+  double x;
+  double y;
+};
+
+/**
+* @type: struct
 * @brief: This is a structure for roj_complex_signal configuration (as well as roj_fourier_spectrum and others).
 */
 struct roj_signal_config{

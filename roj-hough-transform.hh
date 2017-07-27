@@ -42,12 +42,6 @@ public:
   roj_hough_transform(roj_real_matrix*, roj_array_config, roj_array_config, double =0.0);
   ~roj_hough_transform();
   
-  /* public methods */
-  double get_chirp_rate_gravity_center(double =0.0);
-  double get_major_chirp_rate(double);
-  
-  void save (char*);
-  
   /**
    * @type: field
    * @brief: This public field gives access to resultant transform.

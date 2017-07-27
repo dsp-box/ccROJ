@@ -35,4 +35,7 @@ int roj_maximize_matrix (roj_real_matrix*, roj_real_matrix*, roj_real_matrix*, r
 /* save */
 void roj_save (char *, roj_real_matrix*, roj_real_matrix*);
 
+/* argmax */
+roj_pair roj_calculate_interpolated_argmax (roj_real_matrix*);
+
 #endif
