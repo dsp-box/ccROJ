@@ -105,6 +105,8 @@ roj_real_matrix* roj_hough_transform :: reassign_energy(roj_real_matrix* a_energ
 	double init_frequency = frequency - chirp_rate * time;
 	
 	int k = output->get_index_by_x(init_frequency);
+	// printf("%d %d %g\n", k, c, a_energy->m_data[t][f]);
+	
 	if(output->check_in_x_index(k))
 	  output->m_data[k][c] += a_energy->m_data[t][f];
       }
@@ -130,9 +132,6 @@ roj_real_matrix* roj_hough_transform :: reassign_energy(roj_real_matrix* a_sdela
   output_conf.x = m_frequency_conf;
   output_conf.y = m_chirprate_conf;
   roj_real_matrix* output = new roj_real_matrix(output_conf);
-
-  /**/
-
 
   roj_image_config energy_conf = a_energy->get_config();
 
@@ -165,7 +164,6 @@ roj_real_matrix* roj_hough_transform :: reassign_energy(roj_real_matrix* a_sdela
 
     print_progress(t+1, energy_conf.x.length, "hough");
   }  
-  /**/
   
   print_progress(0, 0, "hough");
   return output;

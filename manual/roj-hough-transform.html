@@ -30,6 +30,16 @@ roj-hough-transform.cc <br>
 <span class='key'>@param</span> [in] <span class='arg'>a_treshold</span>: a treshold which allows to accelerate computing (default is 0.0)  <br>
 <span class='key'>@sign</span>: <span class='bold'><span class='range'>roj_hough_transform</span> <span class='range'></span>:: <span class='func'>roj_hough_transform</span>(roj_real_matrix* <span class='arg'>a_energy</span>, roj_array_config <span class='arg'>a_frequency_conf</span>, roj_array_config <span class='arg'>a_chirprate_conf</span>, double <span class='arg'>a_treshold</span>)</span><br>
 </div>
+<br><div class='constructor'>
+<span class='key'>@brief</span>: This is a constructor of roj_hough_transform based on Fourier spectrum.  <br>
+<span class='key'>@param</span> [in] <span class='arg'>a_sdelay</span>:  <br>
+<span class='key'>@param</span> [in] <span class='arg'>a_ifreq</span>:  <br>
+<span class='key'>@param</span> [in] <span class='arg'>a_energy</span>: an energy distribution for transformation. <br>
+<span class='key'>@param</span> [in] <span class='arg'>a_frequency_conf</span>:   <br>
+<span class='key'>@param</span> [in] <span class='arg'>a_chirprate_conf</span>:  <br>
+<span class='key'>@param</span> [in] <span class='arg'>a_treshold</span>: a treshold which allows to accelerate computing (default is 0.0)  <br>
+<span class='key'>@sign</span>: <span class='bold'><span class='range'>roj_hough_transform</span> <span class='range'></span>:: <span class='func'>roj_hough_transform</span>(roj_real_matrix* <span class='arg'>a_sdelay</span>, roj_real_matrix* <span class='arg'>a_ifreq</span>, roj_real_matrix* <span class='arg'>a_energy</span>, roj_array_config <span class='arg'>a_frequency_conf</span>, roj_array_config <span class='arg'>a_chirprate_conf</span>, double <span class='arg'>a_treshold</span>)</span><br>
+</div>
 <br><div class='destructor'>
 <span class='key'>@brief</span>: This is a spectrum deconstructor. It also release memory for lines.  <br>
 <span class='key'>@sign</span>: <span class='bold'><span class='range'>roj_hough_transform</span> <span class='range'></span>:: ~<span class='func'>roj_hough_transform</span> <span class='func'></span>()</span><br>

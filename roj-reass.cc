@@ -19,8 +19,10 @@ roj_real_matrix* roj_time_frequency_reassign (roj_real_matrix* a_sdelay, roj_rea
   roj_image_config conf = a_senergy->get_config();
 
   /* check args cohesion */
-  if (!a_sdelay->compare_config(conf)) call_error("images are not compact");
-  if (!a_ifreq->compare_config(conf))  call_error("images are not compact");
+  if (!a_sdelay->compare_config(conf))
+    call_error("images are not compact");
+  if (!a_ifreq->compare_config(conf))
+    call_error("images are not compact");
 
   /* allocate output if necessary*/  
   roj_real_matrix* output = a_output;
@@ -31,10 +33,11 @@ roj_real_matrix* roj_time_frequency_reassign (roj_real_matrix* a_sdelay, roj_rea
     
   /* reassignment */
   for(int n=0; n<conf.x.length; n++){
+    double c_time = a_senergy->get_x_by_index(n);
+      
     for(int k=0; k<conf.y.length; k++){
       
       double i_freq = a_ifreq->m_data[n][k];
-      double c_time = a_senergy->get_x_by_index(n);
       c_time += a_sdelay->m_data[n][k];
 
       int t_index = output->get_index_by_x(c_time);
