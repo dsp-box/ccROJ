@@ -538,14 +538,23 @@ roj_real_matrix* roj_real_matrix :: cropping (roj_image_config a_conf){
 
   /* check args */
   int min_tindex = get_index_by_x(a_conf.x.min);
-  if(min_tindex>=m_config.x.length) call_error("min time is wrong!");
-  if(min_tindex<0) call_error("min time is wrong!");
+  if(min_tindex<0 or min_tindex>=m_config.x.length){
+    fprintf(stderr, "min t index: %d\n", min_tindex);
+    fprintf(stderr, "should be < %d\n", m_config.x.length);
+    call_error("min time is wrong!");
+  }
   int max_tindex = get_index_by_x(a_conf.x.max);
-  if(max_tindex>=m_config.x.length) call_error("max time is wrong!");
-  if(max_tindex<0) call_error("max time is wrong!");
-
-  if(min_tindex >= max_tindex)
+  if(max_tindex<0 or max_tindex>=m_config.x.length){
+    fprintf(stderr, "max t index: %d\n", max_tindex);
+    fprintf(stderr, "should be < %d\n", m_config.x.length);
+    call_error("max time is wrong!");
+  }
+  if(min_tindex >= max_tindex){
+    fprintf(stderr, "min t index: %d\n", min_tindex);
+    fprintf(stderr, "max t index: %d\n", max_tindex);
     call_error("min / max time is wrong!");
+  }
+
   int new_width = max_tindex-min_tindex+1;
   double telta = m_config.x.max - m_config.x.min;
   telta /= m_config.x.length-1;

@@ -242,9 +242,9 @@ void roj_save (char *a_fname, roj_real_matrix* a_matrix_1, roj_real_matrix* a_ma
 /* ************************************************************************************************************************* */
 /**
 * @type: function
-* @brief:  
+* @brief: looking for arguments of the maximum
 *
-* @param [in] a_matrix: 
+* @param [in] a_matrix: pointer to analyzed matrix
 *
 * @return: 
 */
@@ -278,8 +278,54 @@ roj_pair roj_calculate_interpolated_argmax (roj_real_matrix* a_matrix){
   double nfrac = nmax + (a_matrix->m_data[nmax][kmax]+a_matrix->m_data[nmax+1][kmax]) / max;
 
   roj_pair out;
-  out.x = nfrac * (a_matrix->get_x_by_index(1) - a_matrix->get_x_by_index(0));
-  out.y = kfrac * (a_matrix->get_y_by_index(1) - a_matrix->get_y_by_index(0));
+  out.x = nfrac * (a_matrix->get_x_by_index(1) - a_matrix->get_x_by_index(0)) + a_matrix->get_x_by_index(0);
+  out.y = kfrac * (a_matrix->get_y_by_index(1) - a_matrix->get_y_by_index(0)) + a_matrix->get_y_by_index(0);
     
+  return out;
+}
+
+/* ************************************************************************************************************************* */
+/**
+* @type: function
+* @brief: calculation of linear regression by minimizing least square error
+*
+* @param [in] a_vector: data for regression
+*
+* @return: out which is roj_pair that y = out.x * x + out.y
+*/
+roj_pair roj_linear_regression(roj_real_array* a_vector){
+
+  if (a_vector==NULL)
+    call_error("arg is null");
+
+  roj_array_config conf = a_vector->get_config();
+  roj_pair out;
+
+  double sumx = 0.0;
+  double sumx2 = 0.0;
+  double sumxy = 0.0;
+  double sumy = 0.0;
+  double sumy2 = 0.0;
+
+  for(int n=0; n<conf.length; n++){
+    double x = a_vector->get_arg_by_index (n);
+    double y = a_vector->m_data[n];
+
+    sumx += x;
+    sumy += y;
+    sumxy += x*y;
+    sumx2 += x*x;
+    sumy2 += y*y;
+  }
+  
+  double d = conf.length * sumx2 - sumx*sumx;
+  if (d==0){
+    out.x = 0;
+    out.y = 0;
+    return out;
+  }
+
+  out.x = (conf.length * sumxy - sumx * sumy) / d;
+  out.y = (sumy * sumx2 - sumx * sumxy) / d;
   return out;
 }
