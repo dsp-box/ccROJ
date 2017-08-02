@@ -537,18 +537,21 @@ void roj_real_matrix :: save (char* a_fname){
 roj_real_matrix* roj_real_matrix :: cropping (roj_image_config a_conf){
 
   /* check args */
+  
   int min_tindex = get_index_by_x(a_conf.x.min);
   if(min_tindex<0 or min_tindex>=m_config.x.length){
     fprintf(stderr, "min t index: %d\n", min_tindex);
     fprintf(stderr, "should be < %d\n", m_config.x.length);
     call_error("min time is wrong!");
   }
+
   int max_tindex = get_index_by_x(a_conf.x.max);
   if(max_tindex<0 or max_tindex>=m_config.x.length){
     fprintf(stderr, "max t index: %d\n", max_tindex);
     fprintf(stderr, "should be < %d\n", m_config.x.length);
     call_error("max time is wrong!");
   }
+
   if(min_tindex >= max_tindex){
     fprintf(stderr, "min t index: %d\n", min_tindex);
     fprintf(stderr, "max t index: %d\n", max_tindex);
@@ -560,14 +563,25 @@ roj_real_matrix* roj_real_matrix :: cropping (roj_image_config a_conf){
   telta /= m_config.x.length-1;
   
   int min_findex = get_index_by_y(a_conf.y.min);
-  if(min_findex>=m_config.y.length) call_error("min frequency is wrong!");
-  if(min_findex<0) call_error("min frequency is wrong!");
+  if(min_findex<0 or min_findex>=m_config.y.length){
+    fprintf(stderr, "min f index: %d\n", min_findex);
+    fprintf(stderr, "should be < %d\n", m_config.y.length);
+    call_error("min frequency is wrong!");
+  }
+  
   int max_findex = get_index_by_y(a_conf.y.max);
-  if(max_findex>=m_config.y.length) call_error("max frequency is wrong!");
-  if(max_findex<0) call_error("max frequency is wrong!");
-
-  if(min_findex >= max_findex)
+  if(max_findex<0 or max_findex>=m_config.y.length){
+    fprintf(stderr, "max f index: %d\n", max_findex);
+    fprintf(stderr, "should be < %d\n", m_config.y.length);
+    call_error("max frequency is wrong!");
+  }
+  
+  if(min_findex >= max_findex){
+    fprintf(stderr, "min f index: %d\n", min_findex);
+    fprintf(stderr, "max f index: %d\n", max_findex);
     call_error("min / max frequency is wrong!");
+  }
+  
   int new_height = max_findex-min_findex+1;
   double felta = m_config.y.max - m_config.y.min;
   felta /= m_config.y.length-1;

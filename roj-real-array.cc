@@ -161,7 +161,7 @@ void roj_real_array :: clear (){
 * @type: method
 * @brief: This routine returns array parameters as a structure.
 *
-* @return: A pointer to the structure which contains the configuration.
+* @return: the structure which contains the configuration.
 */
 roj_array_config roj_real_array :: get_config (){
     
@@ -172,7 +172,7 @@ roj_array_config roj_real_array :: get_config (){
 * @type: method
 * @brief: This routine compares the internal configuration to a given configuration.
 *
-* @param [in] a_conf: A pointer to the given configuration.
+* @param [in] a_conf: the given configuration.
 *
 * @return: True if configurations are equal, false oterwise.
 */
@@ -186,6 +186,56 @@ bool roj_real_array :: compare_config (roj_array_config a_conf){
     return false;
 
   return true;
+}
+
+/**
+ * @type: method
+ * @brief: This routine cut a piece from the base array.
+ *
+ * @param [in] a_head: 
+ *
+ * @return: new array config.
+ */
+roj_array_config roj_real_array :: cut_head(int a_head){
+  
+  if (a_head<0 or a_head>=m_config.length)
+    call_error("arg is wrong");
+
+  double d = get_delta();
+  m_config.length -= a_head;
+  m_config.min += a_head * d;
+
+  double *new_data = new double[m_config.length];
+  memcpy(new_data, &m_data[a_head], m_config.length*sizeof(double));
+  delete [] m_data;
+  m_data = new_data;
+
+  return m_config;
+}
+
+/**
+ * @type: method
+ * @brief: This routine cut a piece from the base array.
+ *
+ * @param [in] a_tail: 
+ *
+ * @return: new array config.
+ */
+roj_array_config roj_real_array :: cut_tail(int a_tail){
+    
+  if (a_tail<0 or a_tail>=m_config.length)
+    call_error("arg is wrong");
+
+  double d = get_delta();
+  m_config.length -= a_tail;
+  m_config.max -= a_tail * d;
+
+  double *new_data = new double[m_config.length];
+  memcpy(new_data, m_data, m_config.length*sizeof(double));
+  delete [] m_data;
+  m_data = new_data;
+
+  return m_config;
 }
 
 /* ************************************************************************************************************************* */

@@ -37,6 +37,7 @@ void roj_save (char *, roj_real_matrix*, roj_real_matrix*);
 
 /* analysis */
 roj_pair roj_calculate_interpolated_argmax (roj_real_matrix*);
+roj_pair roj_linear_regression(roj_real_array* , roj_real_array*);
 roj_pair roj_linear_regression(roj_real_array*);
 
 #endif

@@ -329,3 +329,53 @@ roj_pair roj_linear_regression(roj_real_array* a_vector){
   out.y = (sumy * sumx2 - sumx * sumxy) / d;
   return out;
 }
+
+/**
+* @type: function
+* @brief: calculation of linear regression by minimizing least square error
+*
+* @param [in] a_x: x data for regression
+* @param [in] a_y: y data for regression
+*
+* @return: out which is roj_pair that y = out.x * x + out.y
+*/
+roj_pair roj_linear_regression(roj_real_array* a_x, roj_real_array* a_y){
+
+  if (a_x==NULL)
+    call_error("arg is null");
+  if (a_y==NULL)
+    call_error("arg is null");
+
+  roj_array_config conf = a_x->get_config();
+  if(!a_y->compare_config(conf))
+    call_error("args have diff configuration");
+  
+  roj_pair out;
+  double sumx = 0.0;
+  double sumx2 = 0.0;
+  double sumxy = 0.0;
+  double sumy = 0.0;
+  double sumy2 = 0.0;
+
+  for(int n=0; n<conf.length; n++){
+    double x = a_x->m_data[n];
+    double y = a_y->m_data[n];
+
+    sumx += x;
+    sumy += y;
+    sumxy += x*y;
+    sumx2 += x*x;
+    sumy2 += y*y;
+  }
+  
+  double d = conf.length * sumx2 - sumx*sumx;
+  if (d==0){
+    out.x = 0;
+    out.y = 0;
+    return out;
+  }
+
+  out.x = (conf.length * sumxy - sumx * sumy) / d;
+  out.y = (sumy * sumx2 - sumx * sumxy) / d;
+  return out;
+}

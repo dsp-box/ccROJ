@@ -40,7 +40,10 @@ public:
 
   /* clear data */
   void clear();
-
+  roj_array_config cut_head(int);
+  roj_array_config cut_tail(int);
+ 
+  
   /* counter manipulation */  
   void increment_counter(); 
   int return_counter(); 
