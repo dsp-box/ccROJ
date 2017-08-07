@@ -1,6 +1,11 @@
-
-# This makefile is a part of the ccROJ project.
-# See README for more informations.
+# *************************************************** *
+# This file is a part of ccROJ project                *
+# distributed under GNU General Public License v3.0.  *
+# Please visit the webpage: github.com/dsp-box/ccROJ  *
+# for more information.                               *
+#                                Krzysztof Czarnecki  *
+#                       czarnecki.krzysiek@gmail.com  *
+# *************************************************** */
 
 CC := g++
 CP := cp
@@ -74,6 +79,7 @@ REGEXP_1 := "s/define ROJ_VERSION \"[0-9]-[0-9][0-9]\"/define ROJ_VERSION \"$(sh
 REGEXP_2 := "s@(version [0-9]-[0-9][0-9])@(version $(shell cat VERSION))@g"
 version: _version doc  
 _version: 
+	sed -i $(REGEXP_2) *.hh *.cc
 	sed -i $(REGEXP_1) roj-misc.hh
 	sed -i $(REGEXP_2) manual/index.html
 	sed -i $(REGEXP_2) manual/head.js

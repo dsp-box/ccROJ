@@ -1,7 +1,12 @@
-/* this is a part of ccROJ project: 
-   example of loading wav file as signal object 
-   and of time-frequency reassignment. */
-  
+/* *************************************************** *
+ * This file is a part of ccROJ project (version 0-43) *
+ * distributed under GNU General Public License v3.0.  *
+ * Please visit the webpage: github.com/dsp-box/ccROJ  *
+ * for more information.                               *
+ *                                Krzysztof Czarnecki  *
+ *                       czarnecki.krzysiek@gmail.com  *
+ * *************************************************** */
+
 /* external headers */
 #include <stdlib.h>
 #include <stdio.h>

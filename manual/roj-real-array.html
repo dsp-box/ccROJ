@@ -53,14 +53,26 @@ roj-real-array.cc <br>
 </div>
 <br><div class='method'>
 <span class='key'>@brief</span>: This routine returns array parameters as a structure. <br>
-<span class='key'>@return</span>: A pointer to the structure which contains the configuration. <br>
+<span class='key'>@return</span>: the structure which contains the configuration. <br>
 <span class='key'>@sign</span>: <span class='bold'>roj_array_config <span class='range'>roj_real_array</span> <span class='range'></span>:: <span class='func'>get_config</span> <span class='func'></span>()</span><br>
 </div>
 <br><div class='method'>
 <span class='key'>@brief</span>: This routine compares the internal configuration to a given configuration. <br>
-<span class='key'>@param</span> [in] <span class='arg'>a_conf</span>: A pointer to the given configuration. <br>
+<span class='key'>@param</span> [in] <span class='arg'>a_conf</span>: the given configuration. <br>
 <span class='key'>@return</span>: True if configurations are equal, false oterwise. <br>
 <span class='key'>@sign</span>: <span class='bold'>bool <span class='range'>roj_real_array</span> <span class='range'></span>:: <span class='func'>compare_config</span> <span class='func'></span>(roj_array_config <span class='arg'>a_conf</span>)</span><br>
+</div>
+<br><div class='method'>
+<span class='key'>@brief</span>: This routine cut a piece from the base array. <br>
+<span class='key'>@param</span> [in] <span class='arg'>a_head</span>:  <br>
+<span class='key'>@return</span>: new array config. <br>
+<span class='key'>@sign</span>: <span class='bold'>roj_array_config <span class='range'>roj_real_array</span> <span class='range'></span>:: <span class='func'>cut_head</span>(int <span class='arg'>a_head</span>)</span><br>
+</div>
+<br><div class='method'>
+<span class='key'>@brief</span>: This routine cut a piece from the base array. <br>
+<span class='key'>@param</span> [in] <span class='arg'>a_tail</span>:  <br>
+<span class='key'>@return</span>: new array config. <br>
+<span class='key'>@sign</span>: <span class='bold'>roj_array_config <span class='range'>roj_real_array</span> <span class='range'></span>:: <span class='func'>cut_tail</span>(int <span class='arg'>a_tail</span>)</span><br>
 </div>
 <br><div class='method'>
 <span class='key'>@brief</span>: This routine returns arguments by its index. <br>

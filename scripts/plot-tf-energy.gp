@@ -1,9 +1,13 @@
 #!/usr/bin/gnuplot -c
 
-# This is a suplementary gnuplot script.
-# It is an element of the ccROJ project.
-# Please see README for more information
-# about the ccROJ project.
+# *************************************************** *
+# This file is a part of ccROJ project                *
+# distributed under GNU General Public License v3.0.  *
+# Please visit the webpage: github.com/dsp-box/ccROJ  *
+# for more information.                               *
+#                                Krzysztof Czarnecki  *
+#                       czarnecki.krzysiek@gmail.com  *
+# *************************************************** */
 
 # usage: ./plot-ft-energy.gp filename.txt -40
 

@@ -1,7 +1,11 @@
-/* 
-   This header is a part of the ccROJ project.
-   See README for more informations.
-*/
+/* *************************************************** *
+ * This file is a part of ccROJ project (version 0-43) *
+ * distributed under GNU General Public License v3.0.  *
+ * Please visit the webpage: github.com/dsp-box/ccROJ  *
+ * for more information.                               *
+ *                                Krzysztof Czarnecki  *
+ *                       czarnecki.krzysiek@gmail.com  *
+ * *************************************************** */
 
 #ifndef _roj_header_
 #define _roj_header_

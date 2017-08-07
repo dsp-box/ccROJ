@@ -1,7 +1,15 @@
-#ifndef _roj_external_header_
-#define _roj_external_header_
+/* *************************************************** *
+ * This file is a part of ccROJ project (version 0-43) *
+ * distributed under GNU General Public License v3.0.  *
+ * Please visit the webpage: github.com/dsp-box/ccROJ  *
+ * for more information.                               *
+ *                                Krzysztof Czarnecki  *
+ *                       czarnecki.krzysiek@gmail.com  *
+ * *************************************************** */
 
-/* all external headers */
+#ifndef _roj_external_headers_
+#define _roj_external_headers_
+
 #include <stdlib.h>
 #include <stdio.h>
 

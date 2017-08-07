@@ -1,7 +1,11 @@
-# This makefile is a part of the ccROJ project.
-# See README for more informations.
-
-# tests can be compiled without installing the project
+# *************************************************** *
+# This file is a part of ccROJ project                *
+# distributed under GNU General Public License v3.0.  *
+# Please visit the webpage: github.com/dsp-box/ccROJ  *
+# for more information.                               *
+#                                Krzysztof Czarnecki  *
+#                       czarnecki.krzysiek@gmail.com  *
+# *************************************************** */
 
 CC := g++
 

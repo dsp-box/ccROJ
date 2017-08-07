@@ -1,3 +1,12 @@
+/* *************************************************** *
+ * This file is a part of ccROJ project (version 0-43) *
+ * distributed under GNU General Public License v3.0.  *
+ * Please visit the webpage: github.com/dsp-box/ccROJ  *
+ * for more information.                               *
+ *                                Krzysztof Czarnecki  *
+ *                       czarnecki.krzysiek@gmail.com  *
+ * *************************************************** */
+
 #ifndef _roj_misc_
 #define _roj_misc_
 
@@ -27,7 +36,7 @@
 * @type: define
 * @brief: This is a const string, which defines the version number. Please do not change it manually. In order to change modify VERSION file and run 'make version'
 */
-#define ROJ_VERSION "0-42"
+#define ROJ_VERSION "0-43"
 
 /**
 * @type: define
