@@ -24,7 +24,7 @@ roj-misc.cc <br>
 </div>
 <br><div class='define'>
 <span class='key'>@brief</span>: This is a const string, which defines the version number. Please do not change it manually. In order to change modify VERSION file and run 'make version' <br>
-<span class='key'>@sign</span>: <span class='bold'><span class='func'>define</span> ROJ_VERSION "0-43" </span><br>
+<span class='key'>@sign</span>: <span class='bold'><span class='func'>define</span> ROJ_VERSION "0-44" </span><br>
 </div>
 <br><div class='define'>
 <span class='key'>@brief</span>: This is the alias to 2 pi value. <br>
@@ -82,110 +82,110 @@ roj-misc.cc <br>
 </div>
 <br><div class='function'>
 <span class='key'>@brief</span>: The routine checks that a given version is the same as the current version. <br>
-<span class='key'>@param</span> [in] <span class='arg'>a_major</span>: A major part of the version. <br>
-<span class='key'>@param</span> [in] <span class='arg'>a_minor</span>: A minor part of the version <br>
-<span class='key'>@sign</span>: <span class='bold'>void <span class='func'>require_roj_version</span> <span class='func'></span>(int <span class='arg'>a_major</span>, int <span class='arg'>a_minor</span>)</span><br>
+<span class='key'>@param</span> [in]<span class='arg'> a_major</span>: A major part of the version. <br>
+<span class='key'>@param</span> [in]<span class='arg'> a_minor</span>: A minor part of the version <br>
+<span class='key'>@sign</span>: <span class='bold'>void <span class='func'>require_roj_version</span> <span class='func'></span>(int<span class='arg'> a_major</span>, int<span class='arg'> a_minor</span>)</span><br>
 </div>
 <br><div class='function'>
 <span class='key'>@brief</span>: This function shoud be called if an error is detected. <br>
-<span class='key'>@param</span> [in] <span class='arg'>a_info</span>: A message, statement for printing in stderr. <br>
-<span class='key'>@sign</span>: <span class='bold'>void <span class='func'>call_error</span> <span class='func'></span>(const char* <span class='arg'>a_info</span>)</span><br>
+<span class='key'>@param</span> [in]<span class='arg'> a_info</span>: A message, statement for printing in stderr. <br>
+<span class='key'>@sign</span>: <span class='bold'>void <span class='func'>call_error</span> <span class='func'></span>(const char*<span class='arg'> a_info</span>)</span><br>
 </div>
 <br><div class='function'>
 <span class='key'>@brief</span>: This function shoud be called if a warning is detected. <br>
-<span class='key'>@param</span> [in] <span class='arg'>a_info</span>: A message, statement for printing in stderr. <br>
-<span class='key'>@sign</span>: <span class='bold'>void <span class='func'>call_warning</span> <span class='func'></span>(const char* <span class='arg'>a_info</span>)</span><br>
+<span class='key'>@param</span> [in]<span class='arg'> a_info</span>: A message, statement for printing in stderr. <br>
+<span class='key'>@sign</span>: <span class='bold'>void <span class='func'>call_warning</span> <span class='func'></span>(const char*<span class='arg'> a_info</span>)</span><br>
 </div>
 <br><div class='function'>
 <span class='key'>@brief</span>: This function shoud be called if any info is detected. <br>
-<span class='key'>@param</span> [in] <span class='arg'>a_info</span>: A message, statement for printing in stderr. <br>
-<span class='key'>@sign</span>: <span class='bold'>void <span class='func'>call_info</span> <span class='func'></span>(const char* <span class='arg'>a_info</span>)</span><br>
+<span class='key'>@param</span> [in]<span class='arg'> a_info</span>: A message, statement for printing in stderr. <br>
+<span class='key'>@sign</span>: <span class='bold'>void <span class='func'>call_info</span> <span class='func'></span>(const char*<span class='arg'> a_info</span>)</span><br>
 </div>
 <br><div class='function'>
 <span class='key'>@brief</span>: This function shoud be called if any info is detected. <br>
-<span class='key'>@param</span> [in] <span class='arg'>a_info</span>: A message (const), statement for printing in stderr. <br>
-<span class='key'>@param</span> [in] <span class='arg'>a_string</span>: A message (dynamic), statement for printing in stderr. <br>
-<span class='key'>@sign</span>: <span class='bold'>void <span class='func'>call_info</span> <span class='func'></span>(const char* <span class='arg'>a_info</span>, char *<span class='arg'>a_string</span>)</span><br>
+<span class='key'>@param</span> [in]<span class='arg'> a_info</span>: A message (const), statement for printing in stderr. <br>
+<span class='key'>@param</span> [in]<span class='arg'> a_string</span>: A message (dynamic), statement for printing in stderr. <br>
+<span class='key'>@sign</span>: <span class='bold'>void <span class='func'>call_info</span> <span class='func'></span>(const char*<span class='arg'> a_info</span>, char *a_string)</span><br>
 </div>
 <br><div class='function'>
 <span class='key'>@brief</span>: This function shoud be called if any info is detected. <br>
-<span class='key'>@param</span> [in] <span class='arg'>a_info</span>: A message (const), statement for printing in stderr. <br>
-<span class='key'>@param</span> [in] <span class='arg'>a_number</span>: A number for printing in stderr. <br>
-<span class='key'>@sign</span>: <span class='bold'>void <span class='func'>call_info</span> <span class='func'></span>(const char* <span class='arg'>a_info</span>, double <span class='arg'>a_number</span>)</span><br>
+<span class='key'>@param</span> [in]<span class='arg'> a_info</span>: A message (const), statement for printing in stderr. <br>
+<span class='key'>@param</span> [in]<span class='arg'> a_number</span>: A number for printing in stderr. <br>
+<span class='key'>@sign</span>: <span class='bold'>void <span class='func'>call_info</span> <span class='func'></span>(const char*<span class='arg'> a_info</span>, double<span class='arg'> a_number</span>)</span><br>
 </div>
 <br><div class='function'>
 <span class='key'>@brief</span>: This function shoud be called for marker printing. <br>
-<span class='key'>@param</span> [in] <span class='arg'>a_info</span>: A message, statement for printing in stderr. <br>
-<span class='key'>@sign</span>: <span class='bold'>void <span class='func'>print_marker</span> <span class='func'></span>(const char* <span class='arg'>a_info</span>)</span><br>
+<span class='key'>@param</span> [in]<span class='arg'> a_info</span>: A message, statement for printing in stderr. <br>
+<span class='key'>@sign</span>: <span class='bold'>void <span class='func'>print_marker</span> <span class='func'></span>(const char*<span class='arg'> a_info</span>)</span><br>
 </div>
 <br><div class='function'>
 <span class='key'>@brief</span>: The function prints a progress in the text mode. It can be useful for long calculation for monitoring its progress. <br>
-<span class='key'>@param</span> [in] <span class='arg'>a_curr</span>: The current position of a progress. <br>
-<span class='key'>@param</span> [in] <span class='arg'>a_len</span>: A length of the bar. <br>
-<span class='key'>@param</span> [in] <span class='arg'>a_info</span>: A printing label. <br>
-<span class='key'>@sign</span>: <span class='bold'>void <span class='func'>print_progress</span> <span class='func'></span>(int <span class='arg'>a_curr</span>, int <span class='arg'>a_len</span>, const char *<span class='arg'>a_info</span>)</span><br>
+<span class='key'>@param</span> [in]<span class='arg'> a_curr</span>: The current position of a progress. <br>
+<span class='key'>@param</span> [in]<span class='arg'> a_len</span>: A length of the bar. <br>
+<span class='key'>@param</span> [in]<span class='arg'> a_info</span>: A printing label. <br>
+<span class='key'>@sign</span>: <span class='bold'>void <span class='func'>print_progress</span> <span class='func'></span>(int<span class='arg'> a_curr</span>, int<span class='arg'> a_len</span>, const char *a_info)</span><br>
 </div>
 <br><div class='function'>
 <span class='key'>@brief</span>: This function verify the correctness of a signal config. It call error if not. <br>
-<span class='key'>@param</span> [in] <span class='arg'>a_conf</span>: configuration to check. <br>
-<span class='key'>@sign</span>: <span class='bold'>void <span class='func'>verify_config</span>(roj_signal_config <span class='arg'>a_conf</span>)</span><br>
+<span class='key'>@param</span> [in]<span class='arg'> a_conf</span>: configuration to check. <br>
+<span class='key'>@sign</span>: <span class='bold'>void <span class='func'>verify_config</span>(roj_signal_config<span class='arg'> a_conf</span>)</span><br>
 </div>
 <br><div class='function'>
 <span class='key'>@brief</span>: This function verify the correctness of an array config. It call error if not. <br>
-<span class='key'>@param</span> [in] <span class='arg'>a_conf</span>: configuration to check. <br>
-<span class='key'>@sign</span>: <span class='bold'>void <span class='func'>verify_config</span>(roj_array_config <span class='arg'>a_conf</span>)</span><br>
+<span class='key'>@param</span> [in]<span class='arg'> a_conf</span>: configuration to check. <br>
+<span class='key'>@sign</span>: <span class='bold'>void <span class='func'>verify_config</span>(roj_array_config<span class='arg'> a_conf</span>)</span><br>
 </div>
 <br><div class='function'>
 <span class='key'>@brief</span>: This function verify the correctness of an image config. It call error if not. <br>
-<span class='key'>@param</span> [in] <span class='arg'>a_conf</span>: configuration to check. <br>
-<span class='key'>@sign</span>: <span class='bold'>void <span class='func'>verify_config</span>(roj_image_config <span class='arg'>a_conf</span>)</span><br>
+<span class='key'>@param</span> [in]<span class='arg'> a_conf</span>: configuration to check. <br>
+<span class='key'>@sign</span>: <span class='bold'>void <span class='func'>verify_config</span>(roj_image_config<span class='arg'> a_conf</span>)</span><br>
 </div>
 <br><div class='function'>
 <span class='key'>@brief</span>: This function returns random number with normal probability using Box-Muller transform (G. E. P. Box and Mervin E. Muller, A Note on the Generation of Random Normal Deviates, The Annals of Mathematical Statistics (1958), Vol. 29, No. 2). <br>
-<span class='key'>@param</span> [in] <span class='arg'>a_sigma</span>: Standard deviation. <br>
+<span class='key'>@param</span> [in]<span class='arg'> a_sigma</span>: Standard deviation. <br>
 <span class='key'>@return</span>: Random number. <br>
-<span class='key'>@sign</span>: <span class='bold'>double <span class='func'>rand_gauss</span> <span class='func'></span>(double <span class='arg'>a_sigma</span>)</span><br>
+<span class='key'>@sign</span>: <span class='bold'>double <span class='func'>rand_gauss</span> <span class='func'></span>(double<span class='arg'> a_sigma</span>)</span><br>
 </div>
 <br><div class='function'>
 <span class='key'>@brief</span>: This function returns factorial of the argument. <br>
-<span class='key'>@param</span> [in] <span class='arg'>a_number</span>: The number for which factorial is roj_calculated. <br>
+<span class='key'>@param</span> [in]<span class='arg'> a_number</span>: The number for which factorial is roj_calculated. <br>
 <span class='key'>@return</span>: Factorial value. <br>
-<span class='key'>@sign</span>: <span class='bold'>int <span class='func'>calc_factorial</span> <span class='func'></span>(int <span class='arg'>a_number</span>)</span><br>
+<span class='key'>@sign</span>: <span class='bold'>int <span class='func'>calc_factorial</span> <span class='func'></span>(int<span class='arg'> a_number</span>)</span><br>
 </div>
 <br><div class='function'>
 <span class='key'>@brief</span>: This function returns binominal coefficient of two arguments. <br>
-<span class='key'>@param</span> [in] <span class='arg'>a_kval</span>: A first argument. <br>
-<span class='key'>@param</span> [in] <span class='arg'>a_nval</span>: A second argument. <br>
+<span class='key'>@param</span> [in]<span class='arg'> a_kval</span>: A first argument. <br>
+<span class='key'>@param</span> [in]<span class='arg'> a_nval</span>: A second argument. <br>
 <span class='key'>@return</span>: Binominal coefficient. <br>
-<span class='key'>@sign</span>: <span class='bold'>double <span class='func'>calc_binominal</span> <span class='func'></span>(int <span class='arg'>a_kval</span>, int <span class='arg'>a_nval</span>)</span><br>
+<span class='key'>@sign</span>: <span class='bold'>double <span class='func'>calc_binominal</span> <span class='func'></span>(int<span class='arg'> a_kval</span>, int<span class='arg'> a_nval</span>)</span><br>
 </div>
 <br><div class='function'>
 <span class='key'>@brief</span>: This function returns Eulerian number of two arguments. <br>
-<span class='key'>@param</span> [in] <span class='arg'>a_kval</span>: A first argument. <br>
-<span class='key'>@param</span> [in] <span class='arg'>a_nval</span>: A second argument. <br>
+<span class='key'>@param</span> [in]<span class='arg'> a_kval</span>: A first argument. <br>
+<span class='key'>@param</span> [in]<span class='arg'> a_nval</span>: A second argument. <br>
 <span class='key'>@return</span>: Eulerian number. <br>
-<span class='key'>@sign</span>: <span class='bold'>double <span class='func'>calc_eulerian</span> <span class='func'></span>(int <span class='arg'>a_kval</span>, int <span class='arg'>a_nval</span>)</span><br>
+<span class='key'>@sign</span>: <span class='bold'>double <span class='func'>calc_eulerian</span> <span class='func'></span>(int<span class='arg'> a_kval</span>, int<span class='arg'> a_nval</span>)</span><br>
 </div>
 <br><div class='function'>
 <span class='key'>@brief</span>: This function returns one coefficient of blackman-Harris window. <br>
-<span class='key'>@param</span> [in] <span class='arg'>a_nr</span>: An index of returned coefficient. <br>
-<span class='key'>@param</span> [in] <span class='arg'>a_len</span>: A window length (in coefficients). <br>
-<span class='key'>@param</span> [in] <span class='arg'>a_d_order</span>: An order of derivative. <br>
+<span class='key'>@param</span> [in]<span class='arg'> a_nr</span>: An index of returned coefficient. <br>
+<span class='key'>@param</span> [in]<span class='arg'> a_len</span>: A window length (in coefficients). <br>
+<span class='key'>@param</span> [in]<span class='arg'> a_d_order</span>: An order of derivative. <br>
 <span class='key'>@return</span>: The coefficient value. <br>
-<span class='key'>@sign</span>: <span class='bold'>double <span class='func'>calc_blackman_harris</span> <span class='func'></span>(int <span class='arg'>a_nr</span>, int <span class='arg'>a_len</span>, int <span class='arg'>a_d_order</span>)</span><br>
+<span class='key'>@sign</span>: <span class='bold'>double <span class='func'>calc_blackman_harris</span> <span class='func'></span>(int<span class='arg'> a_nr</span>, int<span class='arg'> a_len</span>, int<span class='arg'> a_d_order</span>)</span><br>
 </div>
 <br><div class='function'>
 <span class='key'>@brief</span>: This routine is used for sorting and compares two double values. <br>
-<span class='key'>@param</span> [in] <span class='arg'>a_arg1</span>: A pointer to double value. <br>
-<span class='key'>@param</span> [in] <span class='arg'>a_arg2</span>: A pointer to double value. <br>
+<span class='key'>@param</span> [in]<span class='arg'> a_arg1</span>: A pointer to double value. <br>
+<span class='key'>@param</span> [in]<span class='arg'> a_arg2</span>: A pointer to double value. <br>
 <span class='key'>@return</span>: The result of the comarison which is compatible with the 'qsort' function. <br>
-<span class='key'>@sign</span>: <span class='bold'>int <span class='func'>value_comparer</span> <span class='func'></span>(const void * <span class='arg'>a_arg1</span>, const void * <span class='arg'>a_arg2</span>)</span><br>
+<span class='key'>@sign</span>: <span class='bold'>int <span class='func'>value_comparer</span> <span class='func'></span>(const void *<span class='arg'> a_arg1</span>, const void *<span class='arg'> a_arg2</span>)</span><br>
 </div>
 <br><div class='function'>
 <span class='key'>@brief</span>: This function calculates the determinat of 4x4 matrix. <br>
-<span class='key'>@param</span> [in] <span class='arg'>a_matrix</span>: a given matrix. <br>
+<span class='key'>@param</span> [in]<span class='arg'> a_matrix</span>: a given matrix. <br>
 <span class='key'>@return</span>: calculated determinant. <br>
-<span class='key'>@sign</span>: <span class='bold'>double <span class='func'>calc_4x4_det</span> <span class='func'></span>(double <span class='arg'>a_matrix</span>[4][4])</span><br>
+<span class='key'>@sign</span>: <span class='bold'>double <span class='func'>calc_4x4_det</span> <span class='func'></span>(double<span class='arg'> a_matrix</span>[4][4])</span><br>
 </div>
 <br>
 </body>

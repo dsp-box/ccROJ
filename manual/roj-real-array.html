@@ -16,23 +16,23 @@ roj-real-array.cc <br>
 </div>
 <br><div class='field'>
 <span class='key'>@brief</span>: This public pointer gives access to array elements. <br>
-<span class='key'>@sign</span>: <span class='bold'>  double* <span class='field'>m_data</span></span><br>
+<span class='key'>@sign</span>: <span class='bold'>  double*<span class='field'> m_data</span></span><br>
 </div>
 </div>
 <br><div class='constructor'>
 <span class='key'>@brief</span>: This is a constructor of roj_real_array based on a configuration. A new array will be empty, however memory will be allocated.  <br>
-<span class='key'>@param</span> [in] <span class='arg'>a_conf</span>: Configuration for a new array object. <br>
-<span class='key'>@sign</span>: <span class='bold'><span class='range'>roj_real_array</span> <span class='range'></span>:: <span class='func'>roj_real_array</span> <span class='func'></span>(roj_array_config <span class='arg'>a_conf</span>)</span><br>
+<span class='key'>@param</span> [in]<span class='arg'> a_conf</span>: Configuration for a new array object. <br>
+<span class='key'>@sign</span>: <span class='bold'><span class='range'>roj_real_array</span> <span class='range'></span>:: <span class='func'>roj_real_array</span> <span class='func'></span>(roj_array_config<span class='arg'> a_conf</span>)</span><br>
 </div>
 <br><div class='constructor'>
 <span class='key'>@brief</span>: This is a copy constructor of roj_real_array.  <br>
-<span class='key'>@param</span> [in] <span class='arg'>a_arr</span>: A pointer to object which have to be copied. <br>
-<span class='key'>@sign</span>: <span class='bold'><span class='range'>roj_real_array</span> <span class='range'></span>:: <span class='func'>roj_real_array</span> <span class='func'></span>(roj_real_array* <span class='arg'>a_arr</span>)</span><br>
+<span class='key'>@param</span> [in]<span class='arg'> a_arr</span>: A pointer to object which have to be copied. <br>
+<span class='key'>@sign</span>: <span class='bold'><span class='range'>roj_real_array</span> <span class='range'></span>:: <span class='func'>roj_real_array</span> <span class='func'></span>(roj_real_array*<span class='arg'> a_arr</span>)</span><br>
 </div>
 <br><div class='constructor'>
 <span class='key'>@brief</span>: This is a constructor of roj_real_array based on a a TXT file. A new array will be filled by data from the given file.  <br>
-<span class='key'>@param</span> [in] <span class='arg'>a_fname</span>: Filename conained data for the array. <br>
-<span class='key'>@sign</span>: <span class='bold'><span class='range'>roj_real_array</span> <span class='range'></span>:: <span class='func'>roj_real_array</span> <span class='func'></span>(char* <span class='arg'>a_fname</span>)</span><br>
+<span class='key'>@param</span> [in]<span class='arg'> a_fname</span>: Filename conained data for the array. <br>
+<span class='key'>@sign</span>: <span class='bold'><span class='range'>roj_real_array</span> <span class='range'></span>:: <span class='func'>roj_real_array</span> <span class='func'></span>(char*<span class='arg'> a_fname</span>)</span><br>
 </div>
 <br><div class='destructor'>
 <span class='key'>@brief</span>: This is an array deconstructor. It also release memory for samples.  <br>
@@ -58,39 +58,39 @@ roj-real-array.cc <br>
 </div>
 <br><div class='method'>
 <span class='key'>@brief</span>: This routine compares the internal configuration to a given configuration. <br>
-<span class='key'>@param</span> [in] <span class='arg'>a_conf</span>: the given configuration. <br>
+<span class='key'>@param</span> [in]<span class='arg'> a_conf</span>: the given configuration. <br>
 <span class='key'>@return</span>: True if configurations are equal, false oterwise. <br>
-<span class='key'>@sign</span>: <span class='bold'>bool <span class='range'>roj_real_array</span> <span class='range'></span>:: <span class='func'>compare_config</span> <span class='func'></span>(roj_array_config <span class='arg'>a_conf</span>)</span><br>
+<span class='key'>@sign</span>: <span class='bold'>bool <span class='range'>roj_real_array</span> <span class='range'></span>:: <span class='func'>compare_config</span> <span class='func'></span>(roj_array_config<span class='arg'> a_conf</span>)</span><br>
 </div>
 <br><div class='method'>
 <span class='key'>@brief</span>: This routine cut a piece from the base array. <br>
-<span class='key'>@param</span> [in] <span class='arg'>a_head</span>:  <br>
+<span class='key'>@param</span> [in]<span class='arg'> a_head</span>:  <br>
 <span class='key'>@return</span>: new array config. <br>
-<span class='key'>@sign</span>: <span class='bold'>roj_array_config <span class='range'>roj_real_array</span> <span class='range'></span>:: <span class='func'>cut_head</span>(int <span class='arg'>a_head</span>)</span><br>
+<span class='key'>@sign</span>: <span class='bold'>roj_array_config <span class='range'>roj_real_array</span> <span class='range'></span>:: <span class='func'>cut_head</span>(int<span class='arg'> a_head</span>)</span><br>
 </div>
 <br><div class='method'>
 <span class='key'>@brief</span>: This routine cut a piece from the base array. <br>
-<span class='key'>@param</span> [in] <span class='arg'>a_tail</span>:  <br>
+<span class='key'>@param</span> [in]<span class='arg'> a_tail</span>:  <br>
 <span class='key'>@return</span>: new array config. <br>
-<span class='key'>@sign</span>: <span class='bold'>roj_array_config <span class='range'>roj_real_array</span> <span class='range'></span>:: <span class='func'>cut_tail</span>(int <span class='arg'>a_tail</span>)</span><br>
+<span class='key'>@sign</span>: <span class='bold'>roj_array_config <span class='range'>roj_real_array</span> <span class='range'></span>:: <span class='func'>cut_tail</span>(int<span class='arg'> a_tail</span>)</span><br>
 </div>
 <br><div class='method'>
 <span class='key'>@brief</span>: This routine returns arguments by its index. <br>
-<span class='key'>@param</span> [in] <span class='arg'>a_index</span>: A given index. <br>
+<span class='key'>@param</span> [in]<span class='arg'> a_index</span>: A given index. <br>
 <span class='key'>@return</span>: The returned argument. <br>
-<span class='key'>@sign</span>: <span class='bold'>double <span class='range'>roj_real_array</span> <span class='range'></span>:: <span class='func'>get_arg_by_index</span> <span class='func'></span>(int <span class='arg'>a_index</span>)</span><br>
+<span class='key'>@sign</span>: <span class='bold'>double <span class='range'>roj_real_array</span> <span class='range'></span>:: <span class='func'>get_arg_by_index</span> <span class='func'></span>(int<span class='arg'> a_index</span>)</span><br>
 </div>
 <br><div class='method'>
 <span class='key'>@brief</span>: This routine returns the nearest index for a given argument. <br>
-<span class='key'>@param</span> [in] <span class='arg'>a_arg</span>: A given argument. <br>
+<span class='key'>@param</span> [in]<span class='arg'> a_arg</span>: A given argument. <br>
 <span class='key'>@return</span>: The nearest index. <br>
-<span class='key'>@sign</span>: <span class='bold'>int <span class='range'>roj_real_array</span> <span class='range'></span>:: <span class='func'>get_index_by_arg</span> <span class='func'></span>(double <span class='arg'>a_arg</span>)</span><br>
+<span class='key'>@sign</span>: <span class='bold'>int <span class='range'>roj_real_array</span> <span class='range'></span>:: <span class='func'>get_index_by_arg</span> <span class='func'></span>(double<span class='arg'> a_arg</span>)</span><br>
 </div>
 <br><div class='method'>
 <span class='key'>@brief</span>: Checking index. <br>
-<span class='key'>@param</span> [in] <span class='arg'>a_index</span>: A given index. <br>
+<span class='key'>@param</span> [in]<span class='arg'> a_index</span>: A given index. <br>
 <span class='key'>@return</span>: True if index is valid, false otherwise. <br>
-<span class='key'>@sign</span>: <span class='bold'>bool <span class='range'>roj_real_array</span> <span class='range'></span>:: <span class='func'>check_in_index</span> <span class='func'></span>(int <span class='arg'>a_index</span>)</span><br>
+<span class='key'>@sign</span>: <span class='bold'>bool <span class='range'>roj_real_array</span> <span class='range'></span>:: <span class='func'>check_in_index</span> <span class='func'></span>(int<span class='arg'> a_index</span>)</span><br>
 </div>
 <br><div class='method'>
 <span class='key'>@brief</span>: This routine roj_calculates and returns space between elements. <br>
@@ -114,33 +114,33 @@ roj-real-array.cc <br>
 </div>
 <br><div class='method'>
 <span class='key'>@brief</span>: This routine saves array to a TXT file. <br>
-<span class='key'>@param</span> [in] <span class='arg'>a_fname</span>: Name of saved file. <br>
-<span class='key'>@sign</span>: <span class='bold'>void <span class='range'>roj_real_array</span> <span class='range'></span>:: <span class='func'>save</span> <span class='func'></span>(char* <span class='arg'>a_fname</span>)</span><br>
+<span class='key'>@param</span> [in]<span class='arg'> a_fname</span>: Name of saved file. <br>
+<span class='key'>@sign</span>: <span class='bold'>void <span class='range'>roj_real_array</span> <span class='range'></span>:: <span class='func'>save</span> <span class='func'></span>(char*<span class='arg'> a_fname</span>)</span><br>
 </div>
 <br><div class='operator'>
 <span class='key'>@brief</span>: Overloading of '=' operator. <br>
-<span class='key'>@param</span> [in] <span class='arg'>a_number</span>: A number which is used for assignment. <br>
-<span class='key'>@sign</span>: <span class='bold'>void <span class='range'>roj_real_array</span> <span class='range'></span>:: operator =<span class='func'></span> <span class='func'></span>(double <span class='arg'>a_number</span>)</span><br>
+<span class='key'>@param</span> [in]<span class='arg'> a_number</span>: A number which is used for assignment. <br>
+<span class='key'>@sign</span>: <span class='bold'>void <span class='range'>roj_real_array</span> <span class='range'></span>:: operator =<span class='func'></span> <span class='func'></span>(double<span class='arg'> a_number</span>)</span><br>
 </div>
 <br><div class='operator'>
 <span class='key'>@brief</span>: Overloading of '*=' operator. <br>
-<span class='key'>@param</span> [in] <span class='arg'>a_factor</span>: A factor which is used for multiplication. <br>
-<span class='key'>@sign</span>: <span class='bold'>void <span class='range'>roj_real_array</span> <span class='range'></span>:: operator *=<span class='func'></span> <span class='func'></span>(double <span class='arg'>a_factor</span>)</span><br>
+<span class='key'>@param</span> [in]<span class='arg'> a_factor</span>: A factor which is used for multiplication. <br>
+<span class='key'>@sign</span>: <span class='bold'>void <span class='range'>roj_real_array</span> <span class='range'></span>:: operator *=<span class='func'></span> <span class='func'></span>(double<span class='arg'> a_factor</span>)</span><br>
 </div>
 <br><div class='operator'>
 <span class='key'>@brief</span>: Overloading of '/=' operator. <br>
-<span class='key'>@param</span> [in] <span class='arg'>a_div</span>: A number which is used for division. <br>
-<span class='key'>@sign</span>: <span class='bold'>void <span class='range'>roj_real_array</span> <span class='range'></span>:: operator /=<span class='func'></span> <span class='func'></span>(double <span class='arg'>a_div</span>)</span><br>
+<span class='key'>@param</span> [in]<span class='arg'> a_div</span>: A number which is used for division. <br>
+<span class='key'>@sign</span>: <span class='bold'>void <span class='range'>roj_real_array</span> <span class='range'></span>:: operator /=<span class='func'></span> <span class='func'></span>(double<span class='arg'> a_div</span>)</span><br>
 </div>
 <br><div class='operator'>
 <span class='key'>@brief</span>: Overloading of '+=' operator. <br>
-<span class='key'>@param</span> [in] <span class='arg'>a_component</span>: A component which is used for adding. <br>
-<span class='key'>@sign</span>: <span class='bold'>void <span class='range'>roj_real_array</span> <span class='range'></span>:: operator +=<span class='func'></span> <span class='func'></span>(double <span class='arg'>a_component</span>)</span><br>
+<span class='key'>@param</span> [in]<span class='arg'> a_component</span>: A component which is used for adding. <br>
+<span class='key'>@sign</span>: <span class='bold'>void <span class='range'>roj_real_array</span> <span class='range'></span>:: operator +=<span class='func'></span> <span class='func'></span>(double<span class='arg'> a_component</span>)</span><br>
 </div>
 <br><div class='operator'>
 <span class='key'>@brief</span>: Overloading of '-=' operator. <br>
-<span class='key'>@param</span> [in] <span class='arg'>a_number</span>: A number which is used for subtraction. <br>
-<span class='key'>@sign</span>: <span class='bold'>void <span class='range'>roj_real_array</span> <span class='range'></span>:: operator -=<span class='func'></span> <span class='func'></span>(double <span class='arg'>a_number</span>)</span><br>
+<span class='key'>@param</span> [in]<span class='arg'> a_number</span>: A number which is used for subtraction. <br>
+<span class='key'>@sign</span>: <span class='bold'>void <span class='range'>roj_real_array</span> <span class='range'></span>:: operator -=<span class='func'></span> <span class='func'></span>(double<span class='arg'> a_number</span>)</span><br>
 </div>
 <br>
 </body>

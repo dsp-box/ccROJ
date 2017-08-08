@@ -16,8 +16,8 @@ roj-window-gener.cc <br>
 </div>
 <br><div class='constructor'>
 <span class='key'>@brief</span>: This is a constructor of roj_window_generator. <br>
-<span class='key'>@param</span> [in] <span class='arg'>a_rate</span>: Sampling rate. <br>
-<span class='key'>@sign</span>: <span class='bold'><span class='range'>roj_window_generator</span> <span class='range'></span>:: <span class='func'>roj_window_generator</span> <span class='func'></span>(double <span class='arg'>a_rate</span>)</span><br>
+<span class='key'>@param</span> [in]<span class='arg'> a_rate</span>: Sampling rate. <br>
+<span class='key'>@sign</span>: <span class='bold'><span class='range'>roj_window_generator</span> <span class='range'></span>:: <span class='func'>roj_window_generator</span> <span class='func'></span>(double<span class='arg'> a_rate</span>)</span><br>
 </div>
 <br><div class='destructor'>
 <span class='key'>@brief</span>: The deconstructor is default. <br>
@@ -29,13 +29,13 @@ roj-window-gener.cc <br>
 </div>
 <br><div class='method'>
 <span class='key'>@brief</span>: Type setter. Checking is during generation. <br>
-<span class='key'>@param</span> [in] <span class='arg'>a_code</span>: A code of type. <br>
-<span class='key'>@sign</span>: <span class='bold'>void <span class='range'>roj_window_generator</span> <span class='range'></span>:: <span class='func'>set_type</span> <span class='func'></span>(char <span class='arg'>a_code</span>)</span><br>
+<span class='key'>@param</span> [in]<span class='arg'> a_code</span>: A code of type. <br>
+<span class='key'>@sign</span>: <span class='bold'>void <span class='range'>roj_window_generator</span> <span class='range'></span>:: <span class='func'>set_type</span> <span class='func'></span>(char<span class='arg'> a_code</span>)</span><br>
 </div>
 <br><div class='method'>
 <span class='key'>@brief</span>: Order setter, filter length. <br>
-<span class='key'>@param</span> [in] <span class='arg'>a_order</span>: Window length. <br>
-<span class='key'>@sign</span>: <span class='bold'>void <span class='range'>roj_window_generator</span> <span class='range'></span>:: <span class='func'>set_length</span> <span class='func'></span>(int <span class='arg'>a_length</span>)</span><br>
+<span class='key'>@param</span> [in]<span class='arg'> a_order</span>: Window length. <br>
+<span class='key'>@sign</span>: <span class='bold'>void <span class='range'>roj_window_generator</span> <span class='range'></span>:: <span class='func'>set_length</span> <span class='func'></span>(int<span class='arg'> a_length</span>)</span><br>
 </div>
 <br><div class='method'>
 <span class='key'>@brief</span>: This routine returns window length in samples. <br>
@@ -54,23 +54,23 @@ roj-window-gener.cc <br>
 </div>
 <br><div class='method'>
 <span class='key'>@brief</span>: This routine updates window chirp-rate in Hz/s. <br>
-<span class='key'>@param</span> [in] <span class='arg'>a_crate</span>: window chirp-rate. <br>
+<span class='key'>@param</span> [in]<span class='arg'> a_crate</span>: window chirp-rate. <br>
 <span class='key'>@return</span>: Window chirp-rate. <br>
-<span class='key'>@sign</span>: <span class='bold'>void <span class='range'>roj_window_generator</span> <span class='range'></span>:: <span class='func'>set_chirp_rate</span> <span class='func'></span>(double <span class='arg'>a_crate</span>)</span><br>
+<span class='key'>@sign</span>: <span class='bold'>void <span class='range'>roj_window_generator</span> <span class='range'></span>:: <span class='func'>set_chirp_rate</span> <span class='func'></span>(double<span class='arg'> a_crate</span>)</span><br>
 </div>
 <br><div class='method'>
 <span class='key'>@brief</span>: This function returns window as roj_complex_signal. <br>
-<span class='key'>@param</span> [in] <span class='arg'>a_d_order</span> (default 0): An order of of window derivative with respect to time. <br>
-<span class='key'>@param</span> [in] <span class='arg'>a_t_order</span> (default 0): An order of power of timeramp which is multiplied by the window waveform. <br>
+<span class='key'>@param</span> [in]<span class='arg'> a_d_order</span> (default 0): An order of of window derivative with respect to time. <br>
+<span class='key'>@param</span> [in]<span class='arg'> a_t_order</span> (default 0): An order of power of timeramp which is multiplied by the window waveform. <br>
 <span class='key'>@return</span>: A pointer to the window object (roj_complex_signal object). <br>
-<span class='key'>@sign</span>: <span class='bold'>roj_complex_signal* <span class='range'>roj_window_generator</span> <span class='range'></span>:: <span class='func'>get_window</span> <span class='func'></span>(int <span class='arg'>a_d_order</span>, int <span class='arg'>a_t_order</span>)</span><br>
+<span class='key'>@sign</span>: <span class='bold'>roj_complex_signal* <span class='range'>roj_window_generator</span> <span class='range'></span>:: <span class='func'>get_window</span> <span class='func'></span>(int<span class='arg'> a_d_order</span>, int<span class='arg'> a_t_order</span>)</span><br>
 </div>
 <br><div class='method'>
 <span class='key'>@brief</span>: This function returns window gain. <br>
-<span class='key'>@param</span> [in] <span class='arg'>a_d_order</span> (default 0): An order of of window derivative with respect to time. <br>
-<span class='key'>@param</span> [in] <span class='arg'>a_t_order</span> (default 0): An order of power of timeramp which is multiplied by the window waveform. <br>
+<span class='key'>@param</span> [in]<span class='arg'> a_d_order</span> (default 0): An order of of window derivative with respect to time. <br>
+<span class='key'>@param</span> [in]<span class='arg'> a_t_order</span> (default 0): An order of power of timeramp which is multiplied by the window waveform. <br>
 <span class='key'>@return</span>: The window gain. <br>
-<span class='key'>@sign</span>: <span class='bold'>double <span class='range'>roj_window_generator</span> <span class='range'></span>:: <span class='func'>calc_gain</span> <span class='func'></span>(int <span class='arg'>a_d_order</span>, int <span class='arg'>a_t_order</span>)</span><br>
+<span class='key'>@sign</span>: <span class='bold'>double <span class='range'>roj_window_generator</span> <span class='range'></span>:: <span class='func'>calc_gain</span> <span class='func'></span>(int<span class='arg'> a_d_order</span>, int<span class='arg'> a_t_order</span>)</span><br>
 </div>
 <br>
 </body>

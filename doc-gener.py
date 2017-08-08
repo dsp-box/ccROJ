@@ -68,8 +68,8 @@ class line_generator:
 
             line = line.replace("\n", " ")
             if self.flags["sign"] or self.flags["block"] or self.flags["struct"]:
-                line = re.sub("(a_[a-zA-Z0-9_]*)", "<span class='arg'>\\1</span>", line)
-                line = re.sub("(m_[a-zA-Z0-9_]*)", "<span class='field'>\\1</span>", line)
+                line = re.sub("(\sa_[a-zA-Z0-9_]*)", "<span class='arg'>\\1</span>", line)
+                line = re.sub("(\sm_[a-zA-Z0-9_]*)", "<span class='field'>\\1</span>", line)
 
                 yield line
                 self.flags["close2"] = self.flags["close"]

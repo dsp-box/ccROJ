@@ -16,33 +16,33 @@ roj-complex-signal.cc <br>
 </div>
 <br><div class='field'>
 <span class='key'>@brief</span>: This public field gives access to signal samples. <br>
-<span class='key'>@sign</span>: <span class='bold'>  complex double* <span class='field'>m_waveform</span></span><br>
+<span class='key'>@sign</span>: <span class='bold'>  complex double*<span class='field'> m_waveform</span></span><br>
 </div>
 </div>
 <br><div class='constructor'>
 <span class='key'>@brief</span>: This is a constructor of roj_complex_signal based on arrays. A new signal will be filled by samples.   <br>
-<span class='key'>@param</span> [in] <span class='arg'>a_real</span>: An array which constitutes the real part for the resultant signal. <br>
-<span class='key'>@param</span> [in] <span class='arg'>a_imag</span> (default NULL): An array which constitutes the imag part for the resultant signal. <br>
-<span class='key'>@sign</span>: <span class='bold'><span class='range'>roj_complex_signal</span> <span class='range'></span>:: <span class='func'>roj_complex_signal</span> <span class='func'></span>(roj_real_array* <span class='arg'>a_real</span>, roj_real_array* <span class='arg'>a_imag</span>)</span><br>
+<span class='key'>@param</span> [in]<span class='arg'> a_real</span>: An array which constitutes the real part for the resultant signal. <br>
+<span class='key'>@param</span> [in]<span class='arg'> a_imag</span> (default NULL): An array which constitutes the imag part for the resultant signal. <br>
+<span class='key'>@sign</span>: <span class='bold'><span class='range'>roj_complex_signal</span> <span class='range'></span>:: <span class='func'>roj_complex_signal</span> <span class='func'></span>(roj_real_array*<span class='arg'> a_real</span>, roj_real_array*<span class='arg'> a_imag</span>)</span><br>
 </div>
 <br><div class='constructor'>
 <span class='key'>@brief</span>: This is a constructor of roj_complex_signal based on configuration. A new signal will be empty, however memory will be allocated.  <br>
-<span class='key'>@param</span> [in] <span class='arg'>a_conf</span>: Configuration for a new signal object. <br>
+<span class='key'>@param</span> [in]<span class='arg'> a_conf</span>: Configuration for a new signal object. <br>
 <span class='key'>@return</span>: Resultant signal object. <br>
-<span class='key'>@sign</span>: <span class='bold'><span class='range'>roj_complex_signal</span> <span class='range'></span>:: <span class='func'>roj_complex_signal</span> <span class='func'></span>(roj_signal_config <span class='arg'>a_conf</span>)</span><br>
+<span class='key'>@sign</span>: <span class='bold'><span class='range'>roj_complex_signal</span> <span class='range'></span>:: <span class='func'>roj_complex_signal</span> <span class='func'></span>(roj_signal_config<span class='arg'> a_conf</span>)</span><br>
 </div>
 <br><div class='constructor'>
 <span class='key'>@brief</span>: This is a copy constructor of roj_complex_signal.  <br>
-<span class='key'>@param</span> [in] <span class='arg'>a_sig</span>: Pointer to a signal object which will be copied. <br>
+<span class='key'>@param</span> [in]<span class='arg'> a_sig</span>: Pointer to a signal object which will be copied. <br>
 <span class='key'>@return</span>: Resultant signal object. <br>
-<span class='key'>@sign</span>: <span class='bold'><span class='range'>roj_complex_signal</span> <span class='range'></span>:: <span class='func'>roj_complex_signal</span> <span class='func'></span>(roj_complex_signal* <span class='arg'>a_sig</span>)</span><br>
+<span class='key'>@sign</span>: <span class='bold'><span class='range'>roj_complex_signal</span> <span class='range'></span>:: <span class='func'>roj_complex_signal</span> <span class='func'></span>(roj_complex_signal*<span class='arg'> a_sig</span>)</span><br>
 </div>
 <br><div class='constructor'>
 <span class='key'>@brief</span>: This is a constructor of roj_complex_signal based on WAV file. A new signal will be filled.  <br>
-<span class='key'>@param</span> [in] <span class='arg'>a_wav_filename</span>: A name of WAV file. <br>
-<span class='key'>@param</span> [in] <span class='arg'>a_channel_number</span> (default 0): A channel number. <br>
+<span class='key'>@param</span> [in]<span class='arg'> a_wav_filename</span>: A name of WAV file. <br>
+<span class='key'>@param</span> [in]<span class='arg'> a_channel_number</span> (default 0): A channel number. <br>
 <span class='key'>@return</span>: Resultant signal object. <br>
-<span class='key'>@sign</span>: <span class='bold'><span class='range'>roj_complex_signal</span> <span class='range'></span>:: <span class='func'>roj_complex_signal</span> <span class='func'></span>(char* <span class='arg'>a_wav_filename</span>, int <span class='arg'>a_channel_number</span>)</span><br>
+<span class='key'>@sign</span>: <span class='bold'><span class='range'>roj_complex_signal</span> <span class='range'></span>:: <span class='func'>roj_complex_signal</span> <span class='func'></span>(char*<span class='arg'> a_wav_filename</span>, int<span class='arg'> a_channel_number</span>)</span><br>
 </div>
 <br><div class='destructor'>
 <span class='key'>@brief</span>: This is a signal deconstructor. It also release memory for samples.  <br>
@@ -60,9 +60,9 @@ roj-complex-signal.cc <br>
 </div>
 <br><div class='method'>
 <span class='key'>@brief</span>: This routine compares the internal configuration to a given configuration. <br>
-<span class='key'>@param</span> [in] <span class='arg'>a_conf</span>: A pointer to the given configuration. <br>
+<span class='key'>@param</span> [in]<span class='arg'> a_conf</span>: A pointer to the given configuration. <br>
 <span class='key'>@return</span>: True if configurations are equal, false oterwise. <br>
-<span class='key'>@sign</span>: <span class='bold'>bool <span class='range'>roj_complex_signal</span> <span class='range'></span>:: <span class='func'>compare_config</span> <span class='func'></span>(roj_signal_config <span class='arg'>a_conf</span>)</span><br>
+<span class='key'>@sign</span>: <span class='bold'>bool <span class='range'>roj_complex_signal</span> <span class='range'></span>:: <span class='func'>compare_config</span> <span class='func'></span>(roj_signal_config<span class='arg'> a_conf</span>)</span><br>
 </div>
 <br><div class='method'>
 <span class='key'>@brief</span>: This routine checks the real part. <br>
@@ -89,15 +89,15 @@ roj-complex-signal.cc <br>
 </div>
 <br><div class='method'>
 <span class='key'>@brief</span>: This routine copies samples from other signal object. <br>
-<span class='key'>@param</span> [in] <span class='arg'>a_sig</span>: An object from which samples are copied. <br>
-<span class='key'>@param</span> [in] <span class='arg'>a_index</span> (default 0): An index in a buffer of other object from samples are copied. <br>
+<span class='key'>@param</span> [in]<span class='arg'> a_sig</span>: An object from which samples are copied. <br>
+<span class='key'>@param</span> [in]<span class='arg'> a_index</span> (default 0): An index in a buffer of other object from samples are copied. <br>
 <span class='key'>@return</span>: A number of copied samples. <br>
-<span class='key'>@sign</span>: <span class='bold'>int <span class='range'>roj_complex_signal</span> <span class='range'></span>:: <span class='func'>copy</span> <span class='func'></span>(roj_complex_signal* <span class='arg'>a_sig</span>, int <span class='arg'>a_index</span>)</span><br>
+<span class='key'>@sign</span>: <span class='bold'>int <span class='range'>roj_complex_signal</span> <span class='range'></span>:: <span class='func'>copy</span> <span class='func'></span>(roj_complex_signal*<span class='arg'> a_sig</span>, int<span class='arg'> a_index</span>)</span><br>
 </div>
 <br><div class='method'>
 <span class='key'>@brief</span>: This routine performs a simple modulation. <br>
-<span class='key'>@param</span> [in] <span class='arg'>a_shift</span>: Frequecy shift. <br>
-<span class='key'>@sign</span>: <span class='bold'>void <span class='range'>roj_complex_signal</span> <span class='range'></span>:: <span class='func'>modulate</span> <span class='func'></span>(double <span class='arg'>a_shift</span>)</span><br>
+<span class='key'>@param</span> [in]<span class='arg'> a_shift</span>: Frequecy shift. <br>
+<span class='key'>@sign</span>: <span class='bold'>void <span class='range'>roj_complex_signal</span> <span class='range'></span>:: <span class='func'>modulate</span> <span class='func'></span>(double<span class='arg'> a_shift</span>)</span><br>
 </div>
 <br><div class='method'>
 <span class='key'>@brief</span>: This routine performs reverse of samples. <br>
@@ -135,54 +135,54 @@ roj-complex-signal.cc <br>
 </div>
 <br><div class='method'>
 <span class='key'>@brief</span>: This routine saves signal to a TXT file. <br>
-<span class='key'>@param</span> [in] <span class='arg'>a_fname</span>: Name of saved file. <br>
-<span class='key'>@sign</span>: <span class='bold'>void <span class='range'>roj_complex_signal</span> <span class='range'></span>:: <span class='func'>save</span> <span class='func'></span>(char * <span class='arg'>a_fname</span>)</span><br>
+<span class='key'>@param</span> [in]<span class='arg'> a_fname</span>: Name of saved file. <br>
+<span class='key'>@sign</span>: <span class='bold'>void <span class='range'>roj_complex_signal</span> <span class='range'></span>:: <span class='func'>save</span> <span class='func'></span>(char *<span class='arg'> a_fname</span>)</span><br>
 </div>
 <br><div class='method'>
 <span class='key'>@brief</span>: This routine converts and saves signal to a WAV file. <br>
-<span class='key'>@param</span> [in] <span class='arg'>a_fname</span>: Name of saved file. <br>
-<span class='key'>@sign</span>: <span class='bold'>void <span class='range'>roj_complex_signal</span> <span class='range'></span>:: <span class='func'>save_wav</span> <span class='func'></span>(char * <span class='arg'>a_fname</span>)</span><br>
+<span class='key'>@param</span> [in]<span class='arg'> a_fname</span>: Name of saved file. <br>
+<span class='key'>@sign</span>: <span class='bold'>void <span class='range'>roj_complex_signal</span> <span class='range'></span>:: <span class='func'>save_wav</span> <span class='func'></span>(char *<span class='arg'> a_fname</span>)</span><br>
 </div>
 <br><div class='method'>
 <span class='key'>@brief</span>: This routine cuts waveform. <br>
-<span class='key'>@param</span> [in] <span class='arg'>a_new_start</span>: new start instant. <br>
-<span class='key'>@param</span> [in] <span class='arg'>a_new_stop</span>: new stop instant. <br>
+<span class='key'>@param</span> [in]<span class='arg'> a_new_start</span>: new start instant. <br>
+<span class='key'>@param</span> [in]<span class='arg'> a_new_stop</span>: new stop instant. <br>
 <span class='key'>@return</span>: A new number of preserved samples. <br>
-<span class='key'>@sign</span>: <span class='bold'>unsigned int <span class='range'>roj_complex_signal</span> <span class='range'></span>:: <span class='func'>cut</span> <span class='func'></span>(double <span class='arg'>a_new_start</span>, double <span class='arg'>a_new_stop</span>)</span><br>
+<span class='key'>@sign</span>: <span class='bold'>unsigned int <span class='range'>roj_complex_signal</span> <span class='range'></span>:: <span class='func'>cut</span> <span class='func'></span>(double<span class='arg'> a_new_start</span>, double<span class='arg'> a_new_stop</span>)</span><br>
 </div>
 <br><div class='method'>
 <span class='key'>@brief</span>: This routine attaches silence at the beginning. <br>
-<span class='key'>@param</span> [in] <span class='arg'>a_duration</span>: duration (in seconds) of attached silence. <br>
+<span class='key'>@param</span> [in]<span class='arg'> a_duration</span>: duration (in seconds) of attached silence. <br>
 <span class='key'>@return</span>: A number of new waveform samples. <br>
-<span class='key'>@sign</span>: <span class='bold'>unsigned int <span class='range'>roj_complex_signal</span> <span class='range'></span>:: <span class='func'>append_zero_head</span> <span class='func'></span>(double <span class='arg'>a_duration</span>)</span><br>
+<span class='key'>@sign</span>: <span class='bold'>unsigned int <span class='range'>roj_complex_signal</span> <span class='range'></span>:: <span class='func'>append_zero_head</span> <span class='func'></span>(double<span class='arg'> a_duration</span>)</span><br>
 </div>
 <br><div class='method'>
 <span class='key'>@brief</span>: This routine attaches silence at the end. <br>
-<span class='key'>@param</span> [in] <span class='arg'>a_duration</span>: duration (in seconds) of attached silence. <br>
+<span class='key'>@param</span> [in]<span class='arg'> a_duration</span>: duration (in seconds) of attached silence. <br>
 <span class='key'>@return</span>: A number of new waveform samples. <br>
-<span class='key'>@sign</span>: <span class='bold'>unsigned int <span class='range'>roj_complex_signal</span> <span class='range'></span>:: <span class='func'>append_zero_tail</span> <span class='func'></span>(double <span class='arg'>a_duration</span>)</span><br>
+<span class='key'>@sign</span>: <span class='bold'>unsigned int <span class='range'>roj_complex_signal</span> <span class='range'></span>:: <span class='func'>append_zero_tail</span> <span class='func'></span>(double<span class='arg'> a_duration</span>)</span><br>
 </div>
 <br><div class='method'>
 <span class='key'>@brief</span>: This routine attaches samples. <br>
-<span class='key'>@param</span> [in] <span class='arg'>a_duration</span>: duration (in seconds) of attached signal. <br>
+<span class='key'>@param</span> [in]<span class='arg'> a_duration</span>: duration (in seconds) of attached signal. <br>
 <span class='key'>@return</span>: A number of new waveform samples. <br>
-<span class='key'>@sign</span>: <span class='bold'>unsigned int <span class='range'>roj_complex_signal</span> <span class='range'></span>:: <span class='func'>append_cos_head</span> <span class='func'></span>(double <span class='arg'>a_duration</span>)</span><br>
+<span class='key'>@sign</span>: <span class='bold'>unsigned int <span class='range'>roj_complex_signal</span> <span class='range'></span>:: <span class='func'>append_cos_head</span> <span class='func'></span>(double<span class='arg'> a_duration</span>)</span><br>
 </div>
 <br><div class='method'>
 <span class='key'>@brief</span>: This routine attaches samples. <br>
-<span class='key'>@param</span> [in] <span class='arg'>a_duration</span>: duration (in seconds) of attached signal. <br>
+<span class='key'>@param</span> [in]<span class='arg'> a_duration</span>: duration (in seconds) of attached signal. <br>
 <span class='key'>@return</span>: A number of new waveform samples. <br>
-<span class='key'>@sign</span>: <span class='bold'>unsigned int <span class='range'>roj_complex_signal</span> <span class='range'></span>:: <span class='func'>append_cos_tail</span> <span class='func'></span>(double <span class='arg'>a_duration</span>)</span><br>
+<span class='key'>@sign</span>: <span class='bold'>unsigned int <span class='range'>roj_complex_signal</span> <span class='range'></span>:: <span class='func'>append_cos_tail</span> <span class='func'></span>(double<span class='arg'> a_duration</span>)</span><br>
 </div>
 <br><div class='operator'>
 <span class='key'>@brief</span>: Overloading of '+=' operator. <br>
-<span class='key'>@param</span> [in] <span class='arg'>a_sig</span>: A pointer to a signal which is added. <br>
-<span class='key'>@sign</span>: <span class='bold'>void <span class='range'>roj_complex_signal</span> <span class='range'></span>:: operator +=<span class='func'></span> <span class='func'></span>(roj_complex_signal* <span class='arg'>a_sig</span>)</span><br>
+<span class='key'>@param</span> [in]<span class='arg'> a_sig</span>: A pointer to a signal which is added. <br>
+<span class='key'>@sign</span>: <span class='bold'>void <span class='range'>roj_complex_signal</span> <span class='range'></span>:: operator +=<span class='func'></span> <span class='func'></span>(roj_complex_signal*<span class='arg'> a_sig</span>)</span><br>
 </div>
 <br><div class='operator'>
 <span class='key'>@brief</span>: Overloading of '-=' operator. <br>
-<span class='key'>@param</span> [in] <span class='arg'>a_sig</span>: A pointer to a signal which is subtracted. <br>
-<span class='key'>@sign</span>: <span class='bold'>void <span class='range'>roj_complex_signal</span> <span class='range'></span>:: operator -=<span class='func'></span> <span class='func'></span>(roj_complex_signal* <span class='arg'>a_sig</span>)</span><br>
+<span class='key'>@param</span> [in]<span class='arg'> a_sig</span>: A pointer to a signal which is subtracted. <br>
+<span class='key'>@sign</span>: <span class='bold'>void <span class='range'>roj_complex_signal</span> <span class='range'></span>:: operator -=<span class='func'></span> <span class='func'></span>(roj_complex_signal*<span class='arg'> a_sig</span>)</span><br>
 </div>
 <br>
 </body>
