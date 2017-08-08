@@ -20,7 +20,9 @@ TESTS := \
 	test-hilbert-equiv \
 	test-fft-analyzer \
 	test-ode-analyzer \
-	test-cct-analyzer 
+	test-cct-analyzer \
+	test-lfm-chirps 
+
 
 all: $(TESTS) 
 
@@ -49,6 +51,8 @@ test-ode-analyzer: check_main_dir test-ode-analyzer.cc $(OBJS)
 	$(CC) $@.cc $(OBJS) $(CXXFLAGS) -o $@
 test-cct-analyzer: check_main_dir test-cct-analyzer.cc $(OBJS)
 	$(CC) $@.cc $(OBJS) $(CXXFLAGS) -o $@
+test-lfm-chirps: check_main_dir test-lfm-chirps.cc $(OBJS)
+	$(CC) $@.cc $(OBJS) $(CXXFLAGS) -o $@
 
 run: test
 test: all
@@ -61,32 +65,32 @@ test: all
 	./test-cct-analyzer
 
 # user cases:
-case-1:
+case-0:
 	./test-complex-signal
 	echo "plot 'ifreq.txt' u 1:3 wit lines;  pause 3" | gnuplot
 
-case-2:
+case-1:
 	./test-ode-analyzer
 	../scripts/plot-tf-image.gp data-c-rate.txt 200 1200 "chirp-rate (Hz/s)"
 	../scripts/plot-tf-energy.gp data-s-energy.txt -60
 	../scripts/plot-tf-energy.gp data-r-energy.txt -60
 
-case-3:
+case-2:
 	./test-hilbert-equiv
 	../scripts/plot-tf-energy.gp data-s-energy.txt -40
 	../scripts/plot-tf-energy.gp data-r-energy.txt -50
 
-case-4:
+case-3:
 	./test-fourier-spectr
 	mplayer pink.wav # please check a level of your speaker
 
-case-5:
+case-4:
 	./test-fft-analyzer
 	../scripts/plot-tf-energy.gp data-s-energy.txt -40
 	../scripts/plot-tf-energy.gp data-r-energy.txt -50
 	mplayer out.wav	 # please check a level of your speaker
 
-case-6:
+case-5:
 	./test-cct-analyzer
 	../scripts/plot-tf-energy.gp data-s-energy-1.txt -50
 	../scripts/plot-tf-energy.gp data-s-energy-2.txt -50

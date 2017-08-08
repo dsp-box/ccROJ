@@ -13,8 +13,6 @@
 /**
 * @type: constructor
 * @brief: This is a constructor of roj_pulse_generator which produces series of pulses which are tapering by Tukey window.
-*
-* @param [in] a_conf: A pointer to a configuration.
 */
 roj_pulse_generator :: roj_pulse_generator (){
 
