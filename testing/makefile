@@ -65,6 +65,7 @@ test: all
 	./test-cct-analyzer
 
 # user cases:
+# please be sure that gnuplot and mlayer is installed on your computer
 case-0:
 	./test-complex-signal
 	echo "plot 'ifreq.txt' u 1:3 wit lines;  pause 3" | gnuplot
@@ -96,10 +97,16 @@ case-5:
 	../scripts/plot-tf-energy.gp data-s-energy-2.txt -50
 	../scripts/plot-tf-energy.gp data-s-energy-3.txt -50
 
+case-6:
+	./test-lfm-chirps
+	../scripts/plot-tf-energy.gp data-s-energy.txt -40
+	../scripts/plot-tf-image.gp data-c-rate.txt -1800 1800 "chirp-rate (Hz/s)"
+	mplayer lfm.wav	 # please check a level of your speaker
+
 clean:	
 	${RM} $(TESTS) *~ \#* .\#*
 clear:
-	${RM} *.png *.txt mail2.wav pink.wav out.wav
+	${RM} *.png *.txt mail2.wav pink.wav out.wav lfm.wav
 
 purge: clean clear
 

@@ -28,12 +28,14 @@ int main(void){
 
   roj_pulse_generator pulse_gen; 
   pulse_gen.m_period = 666.0;
+  pulse_gen.m_transition=0.0;
   pulse_gen.m_width = 1.0;
   pulse_gen.m_delay = 0.5;
 
   pulse_gen.m_frequency = 500;
   pulse_gen.m_bandwidth = 1000;
   pulse_gen.add_lfm_chirp (&in_sig);
+
   in_sig.save_wav("lfm.wav");
 
   pulse_gen.m_frequency = 0;
@@ -43,13 +45,11 @@ int main(void){
   pulse_gen.m_frequency = -500;
   pulse_gen.m_bandwidth = -1000;
   pulse_gen.add_lfm_chirp (&in_sig);
+
    
   /* array configuration is used in Fourier analyzer */
   roj_array_config arr_conf;
-  arr_conf.length = 2*1024;
-
-  //arr_conf.max = 2000;
-  //arr_conf.min = 0;
+  arr_conf.length = 4*1024;
 
   arr_conf.max = 1000;
   arr_conf.min = -1000;
@@ -57,11 +57,11 @@ int main(void){
   /* finite window definition */
   roj_window_generator win_gen = roj_window_generator(sig_conf.rate);
   win_gen.set_chirp_rate(0.0);
-  win_gen.set_length(200);
+  win_gen.set_length(100);
   win_gen.set_type(0);
    
   /* create TF Fourier analyzer */
-  roj_fft_analyzer tf_analyzer = roj_fft_analyzer(arr_conf, &win_gen); /**/
+  roj_fft_analyzer tf_analyzer = roj_fft_analyzer(arr_conf, &win_gen);
      
   /* set analyzed signal */
   tf_analyzer.set_signal(&in_sig, 1);

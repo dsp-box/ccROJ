@@ -9,7 +9,14 @@
 #                email: czarnecki.krzysiek@gmail.com  *
 # *************************************************** */
 
-# usage: ./plot-ft-energy.gp filename.txt -40
+if (ARGC < 2){
+
+    print "(error) usage: ./plot-ft-energy.gp filename treshold"
+    print "(error) filename: file with data to plot"
+    print "(error) treshold: the lowest value in dBc"
+    print "(error) example: ./plot-ft-energy.gp abc.txt -40"
+    exit
+}
 
 # LaTeX font:
 set fontpath "/usr/share/matplotlib/mpl-data/fonts/ttf/cmr10.ttf"
@@ -21,7 +28,7 @@ set output ARG1.".png"
 # set term postscript eps enhanced color font "cmr10, 14" size 9.5cm,7.0cm
 # set output ARG1.".eps"
 
-# you can convert it to png:
+# you can convert it to png by:
 # convert -density 300 img-energy.eps -resize 800x600  -flatten -colorspace RGB img-energy.png
 
 # ##########################################################################
@@ -49,8 +56,8 @@ set cbrange[ARG2:0]
 # set y axis to the logarithmic scale:
 # set log y
 
-set xlabel "time (s)" offset 0,0.4
-set ylabel "frequency (kHz)" offset 1.5,0
+set xlabel "time (s)" 
+set ylabel "frequency (kHz)"
 
 ##########################################################################
 

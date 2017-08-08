@@ -18,7 +18,7 @@ roj_pulse_generator :: roj_pulse_generator (){
 
   srand(time(NULL));
 
-  m_transition = 0.5;
+  m_transition = 0.0;
   m_frequency = 0.0;
   m_bandwidth = 0.0;  
   m_amplitude = 1.0;

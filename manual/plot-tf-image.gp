@@ -9,7 +9,17 @@
 #                email: czarnecki.krzysiek@gmail.com  *
 # *************************************************** */
 
-# usage: ./plot-ft-energy.gp filename.txt -100 100 "chirp rate (Hz/s)" 
+if (ARGC < 4){
+
+    print "(error) usage: ./plot-ft-energy.gp filename min max label"
+    print "(error) filename: file with data to plot"
+    print "(error) min: the lowest value in the scale"
+    print "(error) max: the greatest value in the scale"
+    print "(error) label: label of z (cb) axis"
+    print "(error) example: ./plot-ft-energy.gp abc.txt -100 100 'chirp-rate (Hz/s)'"
+    exit
+}
+# 
 
 # LaTeX font:
 set fontpath "/usr/share/matplotlib/mpl-data/fonts/ttf/cmr10.ttf"
@@ -37,9 +47,9 @@ set yrange[FREQ_MIN/1000:FREQ_MAX/1000]
 set xrange[TIME_MIN:TIME_MAX]
 set cbrange[ARG2:ARG3]
 
-set ylabel "frequency (kHz)" offset -0.5,0
-set xlabel "time (s)" offset 0,0.4
-set cblabel ARG4 offset 0.9,0
+set ylabel "frequency (kHz)" 
+set xlabel "time (s)" 
+set cblabel ARG4 
 
 # ##########################################################################
 
@@ -51,8 +61,8 @@ set palette defined(    \
     3.3  0.9  0.8  0.0, \
     3.9  0.3  1.0  0.0, \
     4.0  0.0  1.0  0.0, \
-    4.1  0.0  1.0  0.4, \
-    4.7  0.0  0.5  1.0, \
+    4.15  0.0  1.0  0.4, \
+    4.8  0.0  0.5  1.0, \
     5.5  0.0  0.2  1.0, \
     7.5  0.0  0.1  0.8, \
     8.0  1.0  1.0  1.0  \
