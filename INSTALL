@@ -1,0 +1,21 @@
+You can install ccROJ on GNU/Linux (GNU/Debian is tested) platform as root by:
+
+make install
+
+This operation will copy roj.a file to /usr/local/lib/ and all headers to /usr/local/include/roj/
+Then you can include ccROJ to any of your C++ projects by:
+
+#include <roj/rYou can install ccROJ on GNU/Linux (GNU/Debian is tested) platform as root by:
+
+make install
+
+This operation will copy roj.a file to /usr/local/lib/ and all headers to /usr/local/include/roj/
+Then you can include ccROJ to any of your C++ projects by:
+
+#include <roj/roj.h>
+
+Please remember to add:
+
+-lroj
+
+during compilation process. 
