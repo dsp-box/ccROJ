@@ -18,4 +18,4 @@ Please remember to add:
 
 -lroj
 
-during compilation process. 
+during compilation process (e.g. to your makefile). 
