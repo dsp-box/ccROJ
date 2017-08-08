@@ -3,8 +3,8 @@
  * distributed under GNU General Public License v3.0.  *
  * Please visit the webpage: github.com/dsp-box/ccROJ  *
  * for more information.                               *
- *                                Krzysztof Czarnecki  *
- *                       czarnecki.krzysiek@gmail.com  *
+ *                       contact: Krzysztof Czarnecki  *
+ *                email: czarnecki.krzysiek@gmail.com  *
  * *************************************************** */
 
 /* external headers */
