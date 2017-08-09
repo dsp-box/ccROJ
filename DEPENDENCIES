@@ -1,0 +1,16 @@
+You need the following external headers for compiling ccROJ:
+
+stdlib.h
+stdio.h
+string.h
+complex.h
+time.h
+math.h
+
+fftw3.h
+sndfile.h
+
+You need the following additional application for use cases:
+
+Gnuplot
+Mplayer
