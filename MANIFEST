@@ -1,6 +1,9 @@
 MANIFEST of ccROJ project
 
-We provide the ccROJ framework, which is a C++ software implementation of our scientific work. We share our results including code on the free licence. We hope that this project will be useful for scientists and engineers as well as other interested people in their work and "just for fun". The mathematical foundations concerning this project are introduced in our following publications:
+We provide the ccROJ framework, which is a C++ software implementation of our scientific work. 
+We share our results including code on the free licence. We hope that this project will be useful
+for scientists and engineers as well as other interested people in their work and "just for fun".
+The mathematical foundations concerning this project are introduced in our following publications:
 
 [1] D. Fourer, F. Auger, K. Czarnecki, S. Meignen, P. Flandrin,
     "Chirp rate and instantaneous frequency estimation: application to recursive vertical synchrosqueezing",
