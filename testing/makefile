@@ -178,7 +178,9 @@ case-6:
 		--xlabel "time (s)" \
 		--yfactor 0.001 \
 		--zfactor 0.001 \
-	        --min -1800 --max 1800
+	        --min -1800 --max 1800 \
+		--xmin 0 --xmax 1 \
+		--format eps
 	mplayer lfm.wav	 # please check a level of your speaker
 
 clean:	

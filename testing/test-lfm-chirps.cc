@@ -20,9 +20,9 @@ int main(void){
 
   /* signal generation */
   roj_signal_config sig_conf;
-  sig_conf.start = 0.0;
+  sig_conf.start = -0.1;
   sig_conf.rate = 2000.0;
-  sig_conf.length = 2000;
+  sig_conf.length = 2400;
 
   roj_complex_signal in_sig = roj_complex_signal(sig_conf);
 

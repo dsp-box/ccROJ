@@ -51,12 +51,13 @@ package:
 	mkdir ccROJ-$(VERSION)/manual
 	mkdir ccROJ-$(VERSION)/testing
 	mkdir ccROJ-$(VERSION)/scripts
-	${CP} *.cc *hh *.py makefile ccROJ-$(VERSION)
+	${CP} *.cc *hh makefile ccROJ-$(VERSION)
 	${CP} README AUTHORS LICENSE VERSION MANIFEST ccROJ-$(VERSION)
+	${CP} INSTALL DEPENDENCIES CONTRIBUTING ccROJ-$(VERSION)
 	${CP} testing/makefile ccROJ-$(VERSION)/testing
 	${CP} testing/*.wav ccROJ-$(VERSION)/testing
 	${CP} testing/*.cc ccROJ-$(VERSION)/testing
-	${CP} scripts/*.gp ccROJ-$(VERSION)/scripts
+	${CP} scripts/*.py ccROJ-$(VERSION)/scripts
 	${CP} manual/* ccROJ-$(VERSION)/manual
 	zip -mr ccROJ-$(VERSION).zip ccROJ-$(VERSION)
 
@@ -90,7 +91,7 @@ tag:
 
 lines:
 	wc -l *.cc *.hh makefile | tail -n1
-	wc -l *.py *.cc *.hh makefile testing/*.cc testing/makefile scripts/*.py | tail -n1
+	wc -l *.cc *.hh makefile testing/*.cc testing/makefile scripts/*.py | tail -n1
 
 clean:	
 	${RM} ${OBJS} libroj.a $(TESTS) *~ \#* .\#* *.o manual/*~

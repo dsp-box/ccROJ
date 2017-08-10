@@ -25,6 +25,17 @@ def print_help(keys):
     print("image-plot.py\n\nhas possible the following options:")
     for k in keys:
         print("--", "\b"+re.sub("=", " arg", k))
+        
+    print("\nexample:")
+    print("    ./image-plot.py \\")
+    print("         --infile data-c-rate.txt \\")
+    print("         --zlabel 'chirp-rate (Hz/s)' \\")	
+    print("         --ylabel 'frequency (kHz)' \\")
+    print("         --xlabel 'time (s)' \\")
+    print("         --yfactor 0.001 \\")		
+    print("         --format png \\")
+    print("         --min 200 \\")
+    print("         --max 1200 \\")
     sys.exit(0)
 
 # *************************************************** */
@@ -74,6 +85,8 @@ keys.append("format=")
 
 # minimal and maximal values
 keys.extend(["min=", "max="])
+keys.extend(["xmin=", "xmax="])
+keys.extend(["ymin=", "ymax="])
 
 # switch on logarithmic mode
 keys.append("log")
@@ -83,6 +96,9 @@ keys.extend(["xlabel=", "ylabel=", "zlabel="])
 
 # factors
 keys.extend(["xfactor=", "yfactor=", "zfactor="])
+
+# extra
+keys.append("extra=")
 
 # help
 keys.append("help")
@@ -97,6 +113,11 @@ arg_min = None
 arg_max = None
 arg_log = False
 
+arg_xmin = None
+arg_xmax = None
+arg_ymin = None
+arg_ymax = None
+
 arg_xlabel = "X"
 arg_ylabel = "Y"
 arg_zlabel = "Z"
@@ -104,6 +125,8 @@ arg_zlabel = "Z"
 arg_xfactor = 1
 arg_yfactor = 1
 arg_zfactor = 1
+
+arg_extra = ""
 
 opts, args = getopt(sys.argv[1:], "", keys)
 for opt,arg in opts:
@@ -114,6 +137,13 @@ for opt,arg in opts:
     if opt == "--max": arg_max = float(arg)
     if opt == "--log": arg_log = True
     if opt == "--help": print_help(keys)
+
+    if opt == "--extra": arg_extra = arg
+
+    if opt == "--xmin": arg_xmin = float(arg)
+    if opt == "--xmax": arg_xmax = float(arg)
+    if opt == "--ymin": arg_ymin = float(arg)
+    if opt == "--ymax": arg_ymax = float(arg)
 
     if opt == "--xlabel": arg_xlabel = arg
     if opt == "--ylabel": arg_ylabel = arg
@@ -127,8 +157,14 @@ for opt,arg in opts:
 # check command line
 
 write_to_gnuplot("set fontpath '/usr/share/matplotlib/mpl-data/fonts/ttf/cmr10.ttf'")
-if arg_format == "png": write_to_gnuplot("set term pngcairo dashed size 1600,900 font 'cmr10, 32'")
-elif arg_format == "eps": write_to_gnuplot("set term postscript eps enhanced color font 'cmr10, 14' size 9.5cm,7.0cm")
+if arg_format == "png":
+    write_to_gnuplot("set term pngcairo dashed size 1600,900 font 'cmr10, 32'")
+elif arg_format == "eps":
+    write_to_gnuplot("set term postscript eps enhanced color font 'cmr10, 14' size 9.5cm,7.0cm")
+
+    # you can convert eps to png by:
+    # convert -density 300 img-energy.eps -resize 800x600  -flatten -colorspace RGB img-energy.png
+
 else: assert False
 
 assert arg_infile != None
@@ -164,16 +200,32 @@ write_to_gnuplot("unset grid")
 # *************************************************** */
 # ranges
 
-line = getline(arg_infile, 1)
-xmin = float(re.findall("(?<=X_MIN=).*", line)[0])
-line = getline(arg_infile, 2)
-xmax = float(re.findall("(?<=X_MAX=).*", line)[0])
+if arg_xmin != None:
+    xmin = arg_xmin
+else:
+    line = getline(arg_infile, 1)
+    xmin = float(re.findall("(?<=X_MIN=).*", line)[0])
+
+if arg_xmax != None:
+    xmax = arg_xmax
+else:
+    line = getline(arg_infile, 2)
+    xmax = float(re.findall("(?<=X_MAX=).*", line)[0])
+
 write_to_gnuplot("set xrange [%g : %g]" % (xmin*arg_xfactor, xmax*arg_xfactor))
 
-line = getline(arg_infile, 3)
-ymin = float(re.findall("(?<=Y_MIN=).*", line)[0])
-line = getline(arg_infile, 4)
-ymax = float(re.findall("(?<=Y_MAX=).*", line)[0])
+if arg_ymin != None:
+    ymin = arg_ymin
+else:
+    line = getline(arg_infile, 3)
+    ymin = float(re.findall("(?<=Y_MIN=).*", line)[0])
+
+if arg_ymax != None:
+    ymax = arg_ymax
+else:
+    line = getline(arg_infile, 4)
+    ymax = float(re.findall("(?<=Y_MAX=).*", line)[0])
+
 write_to_gnuplot("set yrange [%g : %g]" % (ymin*arg_yfactor, ymax*arg_yfactor))
 
 write_to_gnuplot("set cbrange [%g : %g]" % (arg_min*arg_zfactor, arg_max*arg_zfactor))
@@ -210,6 +262,12 @@ else:
 write_to_gnuplot("set xlabel '%s'" % arg_xlabel)
 write_to_gnuplot("set ylabel '%s' offset -1,0" % arg_ylabel)
 write_to_gnuplot("set cblabel '%s' offset 1,0" % arg_zlabel)
+
+# *************************************************** */
+# extra
+
+if arg_extra:
+    write_to_gnuplot(arg_extra)
 
 # *************************************************** */
 # ploting
