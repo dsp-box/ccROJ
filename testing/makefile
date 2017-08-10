@@ -65,21 +65,55 @@ test: all
 	./test-cct-analyzer
 
 # user cases:
-# please be sure that gnuplot and mlayer is installed on your computer
+# please be sure that Gnuplot, Python and Mlayer is installed on your computer
+
+IMAGE_PLOTER := ../scripts/draw-image.py
+
 case-0:
 	./test-complex-signal
 	echo "plot 'ifreq.txt' u 1:3 wit lines;  pause 3" | gnuplot
 
 case-1:
 	./test-ode-analyzer
-	../scripts/plot-tf-image.gp data-c-rate.txt 200 1200 "chirp-rate (Hz/s)"
-	../scripts/plot-tf-energy.gp data-s-energy.txt -60
-	../scripts/plot-tf-energy.gp data-r-energy.txt -60
+	$(IMAGE_PLOTER) \
+		--infile data-c-rate.txt \
+		--zlabel "chirp-rate (Hz/s)" \
+		--ylabel "frequency (kHz)" \
+		--xlabel "time (s)" \
+		--yfactor 0.001 \
+	        --min 200 --max 1200
+	$(IMAGE_PLOTER) \
+		--infile data-s-energy.txt \
+		--ylabel "frequency (kHz)" \
+		--zlabel "energy (dBc)" \
+		--xlabel "time (s)" \
+		--yfactor 0.001 \
+		--min -60 --log
+	$(IMAGE_PLOTER) \
+		--infile data-r-energy.txt \
+		--ylabel "frequency (kHz)" \
+		--zlabel "energy (dBc)" \
+		--xlabel "time (s)" \
+		--yfactor 0.001 \
+		--min -70 --log
+	echo "plot 'profile.txt' u 1:2 wit lines;  pause 3" | gnuplot
 
 case-2:
 	./test-hilbert-equiv
-	../scripts/plot-tf-energy.gp data-s-energy.txt -40
-	../scripts/plot-tf-energy.gp data-r-energy.txt -50
+	$(IMAGE_PLOTER) \
+		--infile data-s-energy.txt \
+		--ylabel "frequency (kHz)" \
+		--zlabel "energy (dBc)" \
+		--xlabel "time (s)" \
+		--yfactor 0.001 \
+		--min -40 --log
+	$(IMAGE_PLOTER) \
+		--infile data-r-energy.txt \
+		--ylabel "frequency (kHz)" \
+		--zlabel "energy (dBc)" \
+		--xlabel "time (s)" \
+		--yfactor 0.001 \
+		--min -50 --log
 
 case-3:
 	./test-fourier-spectr
@@ -87,20 +121,63 @@ case-3:
 
 case-4:
 	./test-fft-analyzer
-	../scripts/plot-tf-energy.gp data-s-energy.txt -40
-	../scripts/plot-tf-energy.gp data-r-energy.txt -50
+	$(IMAGE_PLOTER) \
+		--infile data-s-energy.txt \
+		--ylabel "frequency (kHz)" \
+		--zlabel "energy (dBc)" \
+		--xlabel "time (s)" \
+		--yfactor 0.001 \
+		--min -40 --log
+	$(IMAGE_PLOTER) \
+		--infile data-r-energy.txt \
+		--ylabel "frequency (kHz)" \
+		--zlabel "energy (dBc)" \
+		--xlabel "time (s)" \
+		--yfactor 0.001 \
+		--min -50 --log
 	mplayer out.wav	 # please check a level of your speaker
 
 case-5:
 	./test-cct-analyzer
-	../scripts/plot-tf-energy.gp data-s-energy-1.txt -50
-	../scripts/plot-tf-energy.gp data-s-energy-2.txt -50
-	../scripts/plot-tf-energy.gp data-s-energy-3.txt -50
+	$(IMAGE_PLOTER) \
+		--infile data-s-energy-1.txt \
+		--ylabel "frequency (kHz)" \
+		--zlabel "energy (dBc)" \
+		--xlabel "time (s)" \
+		--yfactor 0.001 \
+		--min -50 --log
+	$(IMAGE_PLOTER) \
+		--infile data-s-energy-2.txt \
+		--ylabel "frequency (kHz)" \
+		--zlabel "energy (dBc)" \
+		--xlabel "time (s)" \
+		--yfactor 0.001 \
+		--min -50 --log
+	$(IMAGE_PLOTER) \
+		--infile data-s-energy-3.txt \
+		--ylabel "frequency (kHz)" \
+		--zlabel "energy (dBc)" \
+		--xlabel "time (s)" \
+		--yfactor 0.001 \
+		--min -50 --log
 
 case-6:
 	./test-lfm-chirps
-	../scripts/plot-tf-energy.gp data-s-energy.txt -40
-	../scripts/plot-tf-image.gp data-c-rate.txt -1800 1800 "chirp-rate (Hz/s)"
+	$(IMAGE_PLOTER) \
+		--infile data-s-energy.txt \
+		--ylabel "frequency (kHz)" \
+		--zlabel "energy (dBc)" \
+		--xlabel "time (s)" \
+		--yfactor 0.001 \
+		--min -40 --log
+
+	$(IMAGE_PLOTER) \
+		--infile data-c-rate.txt \
+		--zlabel "chirp-rate (Hz/s)" \
+		--ylabel "frequency (kHz)" \
+		--xlabel "time (s)" \
+		--yfactor 0.001 \
+	        --min -1800 --max 1800
 	mplayer lfm.wav	 # please check a level of your speaker
 
 clean:	

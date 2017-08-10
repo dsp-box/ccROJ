@@ -41,12 +41,12 @@ roj_real_matrix* roj_time_frequency_reassign (roj_real_matrix* a_sdelay, roj_rea
     
   /* reassignment */
   for(int n=0; n<conf.x.length; n++){
-    double c_time = a_senergy->get_x_by_index(n);
+    double time = a_senergy->get_x_by_index(n);
       
     for(int k=0; k<conf.y.length; k++){
       
       double i_freq = a_ifreq->m_data[n][k];
-      c_time += a_sdelay->m_data[n][k];
+      double c_time = time + a_sdelay->m_data[n][k];
 
       int t_index = output->get_index_by_x(c_time);
       if (t_index>=out_conf.x.length) continue;

@@ -60,7 +60,7 @@ package:
 	${CP} manual/* ccROJ-$(VERSION)/manual
 	zip -mr ccROJ-$(VERSION).zip ccROJ-$(VERSION)
 
-DOC_GENER := ./doc-gener.py
+DOC_GENER := ./scripts/doc-gener.py
 %.html: %.hh %.cc 
 	$(DOC_GENER) $? > manual/$@ 
 
@@ -70,7 +70,7 @@ doc: $(HTMLS)
 	${CP} MANIFEST manual/manifest.txt
 	${CP} README manual/readme.txt
 
-# this is private server:
+# this is private server (temporary):
 public: www
 www:
 	scp manual/* git.eti.pg.gda.pl:/var/www/html/ccROJ/

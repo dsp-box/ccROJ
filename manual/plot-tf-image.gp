@@ -22,9 +22,15 @@ if (ARGC < 4){
 # 
 
 # LaTeX font:
-set fontpath "/usr/share/matplotlib/mpl-data/fonts/ttf/cmr10.ttf"
-set term pngcairo dashed size 1600,900 font "cmr10, 32"
-set output ARG1.".png"
+# set fontpath "/usr/share/matplotlib/mpl-data/fonts/ttf/cmr10.ttf"
+# set term pngcairo dashed size 1600,900 font "cmr10, 32"
+# set output ARG1.".png"
+
+# this section is for eps format:
+set fontpath "/usr/share/matplotlib/mpl-data/fonts/ttf/cmr10.tt"
+set term postscript eps enhanced color font "cmr10, 14" size 9.5cm,7.0cm
+set output ARG1.".eps"
+
 
 # ##########################################################################
 

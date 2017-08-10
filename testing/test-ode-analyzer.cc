@@ -69,7 +69,7 @@ int main(void){
   
   /* add awgn also by using the generator */
   roj_noise_generator* noise_gener_ptr = new roj_noise_generator();
-  double snr = 60.0;
+  double snr = 40.0;
   
   double sig_energy = signal_ptr->calc_energy();
   double noise_energy = noise_gener_ptr->add_awgn_at_exact_snr(signal_ptr, snr);

@@ -10,7 +10,19 @@ math.h
 fftw3.h
 sndfile.h
 
-You need the following additional application for use cases:
+You need the following additional application for the full Makefile usage:
+
+Ar
+Wc
+G++
+Zip
+Sed
+Git
+Bash
+Make
+Python
+
+additional for use cases:
 
 Gnuplot
 Mplayer
