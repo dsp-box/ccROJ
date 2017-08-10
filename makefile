@@ -91,7 +91,7 @@ tag:
 
 lines:
 	wc -l *.cc *.hh makefile | tail -n1
-	wc -l *.py *.cc *.hh makefile testing/*.cc testing/makefile scripts/*.gp | tail -n1
+	wc -l *.py *.cc *.hh makefile testing/*.cc testing/makefile scripts/*.gp scripts/*.py | tail -n1
 
 clean:	
 	${RM} ${OBJS} libroj.a $(TESTS) *~ \#* .\#* *.o manual/*~

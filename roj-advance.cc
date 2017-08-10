@@ -201,10 +201,10 @@ void roj_save (char *a_fname, roj_real_matrix* a_matrix_1, roj_real_matrix* a_ma
     call_error("cannot save");
 
   /* write start and stop */
-  fprintf(fds, "#TIME_MIN=%e\n", config.x.min);
-  fprintf(fds, "#TIME_MAX=%e\n", config.x.max);
-  fprintf(fds, "#FREQ_MIN=%e\n", config.y.min);
-  fprintf(fds, "#FREQ_MAX=%e\n", config.y.max);
+  fprintf(fds, "#X_MIN=%e\n", config.x.min);
+  fprintf(fds, "#X_MAX=%e\n", config.x.max);
+  fprintf(fds, "#Y_MIN=%e\n", config.y.min);
+  fprintf(fds, "#Y_MAX=%e\n", config.y.max);
 
   /* init variables for finding min and max */
   double min_val = a_matrix_1->m_data[0][0];
@@ -238,8 +238,8 @@ void roj_save (char *a_fname, roj_real_matrix* a_matrix_1, roj_real_matrix* a_ma
   print_progress(0, 0, "save");
   
   /* save min and max to file */
-  fprintf(fds, "#VAL_MIN=%e\n", min_val);
-  fprintf(fds, "#VAL_MAX=%e\n", max_val);
+  fprintf(fds, "#Z_MIN=%e\n", min_val);
+  fprintf(fds, "#Z_MAX=%e\n", max_val);
   fclose(fds);
 
 #ifdef ROJ_DEBUG_ON

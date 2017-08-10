@@ -9,9 +9,14 @@
 #                email: czarnecki.krzysiek@gmail.com  *
 # *************************************************** */
 
+# *************************************************** */
+# import
+
 import sys, re
 
+# *************************************************** */
 # parser definition
+
 class line_generator:
 
     def __init__(self, file_list):
@@ -118,6 +123,8 @@ class line_generator:
         else: self.flags["close"] = False
 
     
+# *************************************************** */
+# some additional functions
 
 def print_line(line):
     print(line + "<br>")
@@ -145,7 +152,7 @@ def print_files(file_list):
         print(i, "<br>")    
     print("</div>")
 
-###################################################################
+# *************************************************** */
 # generate
 
 print_head()
