@@ -173,10 +173,11 @@ case-6:
 
 	$(IMAGE_PLOTER) \
 		--infile data-c-rate.txt \
-		--zlabel "chirp-rate (Hz/s)" \
+		--zlabel "chirp-rate (kHz/s)" \
 		--ylabel "frequency (kHz)" \
 		--xlabel "time (s)" \
 		--yfactor 0.001 \
+		--zfactor 0.001 \
 	        --min -1800 --max 1800
 	mplayer lfm.wav	 # please check a level of your speaker
 

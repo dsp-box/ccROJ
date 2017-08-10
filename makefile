@@ -65,8 +65,7 @@ DOC_GENER := ./scripts/doc-gener.py
 	$(DOC_GENER) $? > manual/$@ 
 
 doc: $(HTMLS)
-	${CP} scripts/plot-tf-energy.gp manual
-	${CP} scripts/plot-tf-image.gp manual
+	${CP} scripts/draw-image.py manual
 	${CP} MANIFEST manual/manifest.txt
 	${CP} README manual/readme.txt
 
@@ -91,7 +90,7 @@ tag:
 
 lines:
 	wc -l *.cc *.hh makefile | tail -n1
-	wc -l *.py *.cc *.hh makefile testing/*.cc testing/makefile scripts/*.gp scripts/*.py | tail -n1
+	wc -l *.py *.cc *.hh makefile testing/*.cc testing/makefile scripts/*.py | tail -n1
 
 clean:	
 	${RM} ${OBJS} libroj.a $(TESTS) *~ \#* .\#* *.o manual/*~
