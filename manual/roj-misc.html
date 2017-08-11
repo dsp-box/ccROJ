@@ -81,10 +81,16 @@ roj-misc.cc <br>
 <span class='key'>@sign</span>: <span class='bold'>void <span class='func'>print_roj_info</span> <span class='func'></span>()</span><br>
 </div>
 <br><div class='function'>
-<span class='key'>@brief</span>: The routine checks that a given version is the same as the current version. <br>
+<span class='key'>@brief</span>: The routine checks that a given version is the same as the current (installed) version. <br>
 <span class='key'>@param</span> [in]<span class='arg'> a_major</span>: A major part of the version. <br>
 <span class='key'>@param</span> [in]<span class='arg'> a_minor</span>: A minor part of the version <br>
 <span class='key'>@sign</span>: <span class='bold'>void <span class='func'>require_roj_version</span> <span class='func'></span>(int<span class='arg'> a_major</span>, int<span class='arg'> a_minor</span>)</span><br>
+</div>
+<br><div class='function'>
+<span class='key'>@brief</span>: The routine checks that the current (installed) version is the same or newer than a given version. <br>
+<span class='key'>@param</span> [in]<span class='arg'> a_major</span>: A major part of the version. <br>
+<span class='key'>@param</span> [in]<span class='arg'> a_minor</span>: A minor part of the version <br>
+<span class='key'>@sign</span>: <span class='bold'>void <span class='func'>require_equal_or_newer_roj_version</span> <span class='func'></span>(int<span class='arg'> a_major</span>, int<span class='arg'> a_minor</span>)</span><br>
 </div>
 <br><div class='function'>
 <span class='key'>@brief</span>: This function shoud be called if an error is detected. <br>

@@ -36,7 +36,7 @@ void print_roj_info (){
 
 /**
 * @type: function
-* @brief: The routine checks that a given version is the same as the current version.
+* @brief: The routine checks that a given version is the same as the current (installed) version.
 *
 * @param [in] a_major: A major part of the version.
 * @param [in] a_minor: A minor part of the version
@@ -49,6 +49,26 @@ void require_roj_version (int a_major, int a_minor){
   sscanf(ROJ_VERSION, " %d-%d ", &major, &minor);
   
   if (major!=a_major or minor!=a_minor)
+    call_error("wrong ccROJ version");  
+}
+
+/**
+* @type: function
+* @brief: The routine checks that the current (installed) version is the same or newer than a given version.
+*
+* @param [in] a_major: A major part of the version.
+* @param [in] a_minor: A minor part of the version
+*/
+void require_equal_or_newer_roj_version (int a_major, int a_minor){
+  
+  int major = -1;
+  int minor = -1;
+
+  sscanf(ROJ_VERSION, " %d-%d ", &major, &minor);
+  
+  if (major<a_major)
+    call_error("wrong ccROJ version");  
+  if (minor<a_minor)
     call_error("wrong ccROJ version");  
 }
 

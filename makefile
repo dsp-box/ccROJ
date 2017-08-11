@@ -36,11 +36,15 @@ INSTALL_DIR=/usr/local
 INSTALL_LIBDIR=$(INSTALL_DIR)/lib
 INSTALL_INCDIR=$(INSTALL_DIR)/include/roj
 install:
+	su root -c "make install-as-root"
+install-as-root:
 	mkdir -p $(INSTALL_INCDIR)
 	${CP} *.hh *.h $(INSTALL_INCDIR)
 	${CP} libroj.a $(INSTALL_LIBDIR)
 
 uninstall:
+	su root -c "make uninstall-as-root"
+uninstall-as-root:
 	${RM} -r $(INSTALL_INCDIR)
 	${RM} $(INSTALL_LIBDIR)/libroj.a
 

@@ -131,7 +131,10 @@ struct roj_image_config{
 
 /* for diagnostic */
 void print_roj_info();
+
 void require_roj_version (int, int);
+void require_equal_or_newer_roj_version (int, int);
+
 void print_progress(int, int, const char *);
 void print_marker (const char* ="I am here!");
 
