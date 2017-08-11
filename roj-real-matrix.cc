@@ -22,8 +22,10 @@ roj_real_matrix :: roj_real_matrix (roj_image_config a_conf){
   m_config = a_conf;
 
   /* check args */
-  if (!check_config ())
+  if (!check_config ()){
+    call_warning("in roj_real_matrix :: roj_real_matrix");
     call_error("matrix configuration is failed");
+  }
 
   /* allocate memory for data */
   m_data = new double*[m_config.x.length];
@@ -43,11 +45,16 @@ roj_real_matrix :: roj_real_matrix (roj_image_config a_conf){
 roj_real_matrix :: roj_real_matrix (roj_real_matrix* a_matrix){
 
   /* check args */
-  if(a_matrix==NULL) call_error("conf is null");
+  if(a_matrix==NULL){
+    call_warning("in roj_real_matrix :: roj_real_matrix");
+    call_error("conf is null");
+  }
 
   /* check args */
-  if (!a_matrix->check_config ())
+  if (!a_matrix->check_config ()){
+    call_warning("in roj_real_matrix :: roj_real_matrix");
     call_error("matrix configuration is failed");
+  }
 
   /* copy config data */
   roj_image_config conf = a_matrix->get_config();
@@ -186,9 +193,11 @@ roj_real_array* roj_real_matrix :: get_mean_over_x (roj_real_matrix* a_energy){
   else{
     
     roj_image_config energy_conf = a_energy->get_config();
-    if (!compare_config(energy_conf))
+    if (!compare_config(energy_conf)){
+      call_warning("in roj_real_matrix :: get_mean_over_x");
       call_error("matrixes are not compact");
-    
+    }
+
     for(int n=0; n<m_config.x.length; n++){
       for(int k=0; k<m_config.y.length; k++)
 	array->m_data[n] += m_data[n][k] * a_energy->m_data[n][k];
@@ -243,9 +252,11 @@ roj_real_array* roj_real_matrix :: get_mean_over_y (roj_real_matrix* a_energy){
   else{
     
     roj_image_config energy_conf = a_energy->get_config();
-    if (!compare_config(energy_conf))
+    if (!compare_config(energy_conf)){
+      call_warning("in roj_real_matrix :: get_mean_over_y");
       call_error("matrixes are not compact");
-    
+    }
+
     for(int k=0; k<m_config.y.length; k++){
       for(int n=0; n<m_config.x.length; n++)
 	array->m_data[k] += m_data[n][k] * a_energy->m_data[n][k];
@@ -278,12 +289,16 @@ roj_real_array* roj_real_matrix :: get_mean_over_y (roj_real_matrix* a_energy){
 roj_real_array* roj_real_matrix :: get_max_over_x (roj_real_matrix* a_energy){
 
   /* check arg */
-  if(a_energy == NULL)
+  if(a_energy == NULL){
+    call_warning("in roj_real_matrix :: get_max_over_x");
     call_error("arg is null");
+  }
 
   roj_image_config energy_conf = a_energy->get_config();
-  if (!compare_config(energy_conf))
+  if (!compare_config(energy_conf)){
+    call_warning("in roj_real_matrix :: get_max_over_x");
     call_error("matrixes are not compact");
+  }
 
   /* config returned distribution */
   roj_array_config conf;
@@ -321,12 +336,16 @@ roj_real_array* roj_real_matrix :: get_max_over_x (roj_real_matrix* a_energy){
 roj_real_array* roj_real_matrix :: get_max_over_y (roj_real_matrix* a_energy){
 
   /* check arg */
-  if(a_energy == NULL)
+  if(a_energy == NULL){
+    call_warning("in roj_real_matrix :: get_max_over_y");
     call_error("arg is null");
+  }
 
   roj_image_config energy_conf = a_energy->get_config();
-  if (!compare_config(energy_conf))
+  if (!compare_config(energy_conf)){
+    call_warning("in roj_real_matrix :: get_max_over_y");
     call_error("matrixes are not compact");
+  }
 
   /* config returned distribution */
   roj_array_config conf;
@@ -366,11 +385,15 @@ roj_real_array* roj_real_matrix :: get_max_over_y (roj_real_matrix* a_energy){
 roj_real_array* roj_real_matrix :: get_dominant_over_x (roj_real_matrix* a_energy, roj_array_config a_conf){
 
   /* check arg */
-  if(a_energy == NULL)
+  if(a_energy == NULL){
+    call_warning("in roj_real_matrix :: get_dominant_over_x");
     call_error("arg is null");
+  }
 
-  if (!a_energy->compare_config(m_config))
+  if (!a_energy->compare_config(m_config)){
+    call_warning("in roj_real_matrix :: get_dominant_over_x");    
     call_error("matrixes are not compact");
+  }
 
   /* config returned distribution */
   roj_array_config out_conf;
@@ -418,15 +441,25 @@ roj_real_array* roj_real_matrix :: get_dominant_over_x (roj_real_matrix* a_energ
 roj_real_array* roj_real_matrix :: get_dominant_over_x (roj_real_matrix* a_energy, roj_real_matrix* a_sdelay, roj_array_config a_conf){
 
   /* check arg */
-  if(a_energy == NULL)
+  if(a_energy == NULL){
+    call_warning("in roj_real_matrix :: get_dominant_over_x");    
     call_error("arg is null");
-  if(a_sdelay == NULL)
-    call_error("arg is null");
+  }
 
-  if (!a_energy->compare_config(m_config))
+  if(a_sdelay == NULL){
+    call_warning("in roj_real_matrix :: get_dominant_over_x");    
+    call_error("arg is null");
+  }
+
+  if (!a_energy->compare_config(m_config)){
+    call_warning("in roj_real_matrix :: get_dominant_over_x");    
     call_error("matrixes are not compact");
-  if (!a_sdelay->compare_config(m_config))
+  }
+
+  if (!a_sdelay->compare_config(m_config)){
+    call_warning("in roj_real_matrix :: get_dominant_over_x");    
     call_error("matrixes are not compact");
+  }
 
   /* config returned distribution */
   roj_array_config out_conf;
@@ -484,8 +517,10 @@ void roj_real_matrix :: save (char* a_fname){
   
   /* open file to write */
   FILE *fds = fopen(a_fname, "w");
-  if (fds==NULL)
+  if (fds==NULL){
+    call_warning("in roj_real_matrix :: save");    
     call_error("cannot save");
+  }
 
   /* write start and stop */
   fprintf(fds, "#X_MIN=%e\n", m_config.x.min);
@@ -548,21 +583,18 @@ roj_real_matrix* roj_real_matrix :: cropping (roj_image_config a_conf){
   
   int min_tindex = get_index_by_x(a_conf.x.min);
   if(min_tindex<0 or min_tindex>=m_config.x.length){
-    fprintf(stderr, "min t index: %d\n", min_tindex);
-    fprintf(stderr, "should be < %d\n", m_config.x.length);
+    call_warning("in roj_real_matrix :: cropping");    
     call_error("min time is wrong!");
   }
 
   int max_tindex = get_index_by_x(a_conf.x.max);
   if(max_tindex<0 or max_tindex>=m_config.x.length){
-    fprintf(stderr, "max t index: %d\n", max_tindex);
-    fprintf(stderr, "should be < %d\n", m_config.x.length);
+    call_warning("in roj_real_matrix :: cropping");    
     call_error("max time is wrong!");
   }
 
   if(min_tindex >= max_tindex){
-    fprintf(stderr, "min t index: %d\n", min_tindex);
-    fprintf(stderr, "max t index: %d\n", max_tindex);
+    call_warning("in roj_real_matrix :: cropping");    
     call_error("min / max time is wrong!");
   }
 
@@ -572,21 +604,18 @@ roj_real_matrix* roj_real_matrix :: cropping (roj_image_config a_conf){
   
   int min_findex = get_index_by_y(a_conf.y.min);
   if(min_findex<0 or min_findex>=m_config.y.length){
-    fprintf(stderr, "min f index: %d\n", min_findex);
-    fprintf(stderr, "should be < %d\n", m_config.y.length);
+    call_warning("in roj_real_matrix :: cropping");    
     call_error("min frequency is wrong!");
   }
   
   int max_findex = get_index_by_y(a_conf.y.max);
   if(max_findex<0 or max_findex>=m_config.y.length){
-    fprintf(stderr, "max f index: %d\n", max_findex);
-    fprintf(stderr, "should be < %d\n", m_config.y.length);
+    call_warning("in roj_real_matrix :: cropping");    
     call_error("max frequency is wrong!");
   }
   
   if(min_findex >= max_findex){
-    fprintf(stderr, "min f index: %d\n", min_findex);
-    fprintf(stderr, "max f index: %d\n", max_findex);
+    call_warning("in roj_real_matrix :: cropping");    
     call_error("min / max frequency is wrong!");
   }
   
@@ -685,8 +714,10 @@ void roj_real_matrix :: operator -= (double a_number){
  */
 void roj_real_matrix :: operator *= (roj_real_matrix *a_matrix){
   
-  if (!a_matrix->compare_config(m_config))
+  if (!a_matrix->compare_config(m_config)){
+    call_warning("in roj_real_matrix :: operator *=");    
     call_error("images are not compact");
+  }
 
   for(int n=0; n<m_config.x.length; n++)
     for(int k=0; k<m_config.y.length; k++)
@@ -701,8 +732,10 @@ void roj_real_matrix :: operator *= (roj_real_matrix *a_matrix){
  */
 void roj_real_matrix :: operator += (roj_real_matrix *a_matrix){
   
-  if (!a_matrix->compare_config(m_config))
+  if (!a_matrix->compare_config(m_config)){
+    call_warning("in roj_real_matrix :: operator +=");        
     call_error("images are not compact");
+  }
 
   for(int n=0; n<m_config.x.length; n++)
     for(int k=0; k<m_config.y.length; k++)

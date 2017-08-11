@@ -19,19 +19,28 @@
  */
 roj_complex_signal :: roj_complex_signal (roj_real_array* a_real, roj_real_array* a_imag){
 
-  if(a_real == NULL)
+  if(a_real == NULL){
+    call_warning("in roj_complex_signal :: roj_complex_signal");
     call_error("arg is null in roj_complex_signal(*arr, *arr)");
-      
+  }
+
   roj_array_config conf = a_real->get_config();
   if(a_imag!=NULL)
-    if(!a_imag->compare_config(conf))
+    if(!a_imag->compare_config(conf)){
+      call_warning("in roj_complex_signal :: roj_complex_signal");
       call_error("confs are diffrent");
+    }
 
   /* check args */
-  if (conf.length <= 0)
+  if (conf.length <= 0){
+    call_warning("in roj_complex_signal :: roj_complex_signal");
     call_error("length <= 0");
-  if (conf.max<=conf.min)
+  }
+
+  if (conf.max<=conf.min){
+    call_warning("in roj_complex_signal :: roj_complex_signal");
     call_error("max < min");
+  }
 
   m_config.length = conf.length;
   m_config.rate = (double)(conf.length-1)/(conf.max-conf.min);
@@ -60,10 +69,15 @@ roj_complex_signal :: roj_complex_signal (roj_real_array* a_real, roj_real_array
 roj_complex_signal :: roj_complex_signal (roj_signal_config a_conf){
 
   /* check args */
-  if (a_conf.length <= 0)
+  if (a_conf.length <= 0){
+    call_warning("in roj_complex_signal :: roj_complex_signal");
     call_error("length <= 0");
-  if (a_conf.rate<0)
+  }
+
+  if (a_conf.rate<0){
+    call_warning("in roj_complex_signal :: roj_complex_signal");
     call_error("rate < 0");
+  }
 
   /* save arguments */
   m_config = a_conf;
@@ -85,16 +99,23 @@ roj_complex_signal :: roj_complex_signal (roj_signal_config a_conf){
 roj_complex_signal :: roj_complex_signal (roj_complex_signal* a_sig){
 
   /* check args */
-  if(a_sig == NULL)
+  if(a_sig == NULL){
+    call_warning("in roj_complex_signal :: roj_complex_signal");
     call_error("arg is null in roj_complex_signal(*sig)");
+  }
 
   /* copy and check config */
   m_config = a_sig->get_config();
-  if (m_config.length <= 0)
+  if (m_config.length <= 0){
+    call_warning("in roj_complex_signal :: roj_complex_signal");
     call_error("length <= 0");
-  if (m_config.rate<0)
+  }
+
+  if (m_config.rate<0){
+    call_warning("in roj_complex_signal :: roj_complex_signal");
     call_error("rate < 0");
-  
+  }
+
   /* allocate memory and copy samples */
   m_waveform = new complex double [m_config.length];
   int byte_size = m_config.length * sizeof(complex double);
@@ -116,22 +137,31 @@ roj_complex_signal :: roj_complex_signal (char* a_wav_filename, int a_channel_nu
 
   /* check file extention */
   int len = strlen(a_wav_filename);
-  if (len<5)
+  if (len<5){
+    call_warning("in roj_complex_signal :: roj_complex_signal");
     call_error("not see as wav file");
+  }
+
   if (strcmp(&a_wav_filename[len-4], ".wav") and
-      strcmp(&a_wav_filename[len-4], ".WAV"))
+      strcmp(&a_wav_filename[len-4], ".WAV")){
+    call_warning("in roj_complex_signal :: roj_complex_signal");
     call_error("not see as wav file");
-    
+  }
+
   /* open snd file */
   SF_INFO info;
   SNDFILE *sndfile = sf_open(a_wav_filename, SFM_READ, &info);
-  if (sndfile == NULL)
+  if (sndfile == NULL){
+    call_warning("in roj_complex_signal :: roj_complex_signal");
     call_error((char *)sf_strerror(sndfile));
+  }
 
   /* check channels number */
-  if(a_channel_number>=info.channels or a_channel_number<0)
+  if(a_channel_number>=info.channels or a_channel_number<0){
+    call_warning("in roj_complex_signal :: roj_complex_signal");
     call_error("wrong channel number");
-    
+  }
+
   /* load samples */
   double *buffer = new double[info.channels*info.frames];
   int loaded = sf_readf_double(sndfile, buffer, info.frames);
@@ -289,8 +319,10 @@ int roj_complex_signal :: copy (roj_complex_signal* a_sig, int a_index){
 
   roj_signal_config conf = a_sig->get_config();
   
-  if(a_index<0 or a_index>=conf.length)
+  if(a_index<0 or a_index>=conf.length){
+    call_warning("in roj_complex_signal :: copy");
     call_error("index has wrong value");
+  }
 
   int min_length = m_config.length;
   if (m_config.length>conf.length-a_index)
@@ -516,8 +548,10 @@ void roj_complex_signal :: save (char * a_fname){
 
   /* open file to write */
   FILE *fds = fopen(a_fname, "w");
-  if (fds==NULL)
+  if (fds==NULL){
+    call_warning("in roj_complex_signal :: save");
     call_error("cannot save");
+  }
 
   /* write start and stop */
   double stop = m_config.start + (double)(m_config.length-1) / m_config.rate;
@@ -549,11 +583,16 @@ void roj_complex_signal :: save_wav (char * a_fname){
 
   /* check file extention */
   int len = strlen(a_fname);
-  if (len<5)
+  if (len<5){
+    call_warning("in roj_complex_signal :: save_wav");
     call_error("not see as wav file");
+  }
+
   if (strcmp(&a_fname[len-4], ".wav") and
-      strcmp(&a_fname[len-4], ".WAV"))
+      strcmp(&a_fname[len-4], ".WAV")){
+    call_warning("in roj_complex_signal :: save_wav");
     call_error("not see as wav extention");
+  }
 
   /* set configuration */
   SF_INFO info;
@@ -566,8 +605,10 @@ void roj_complex_signal :: save_wav (char * a_fname){
 
   /* open snd file */
   SNDFILE *sndfile = sf_open(a_fname, SFM_WRITE, &info);
-  if (sndfile == NULL)
+  if (sndfile == NULL){
+    call_warning("in roj_complex_signal :: save_wav");
     call_error((char *)sf_strerror(sndfile));
+  }
 
   /* save samples */
   double *buffer = new double[info.channels*m_config.length];
@@ -608,8 +649,11 @@ void roj_complex_signal :: save_wav (char * a_fname){
 unsigned int roj_complex_signal :: cut (double a_new_start, double a_new_stop){
 
   /* checking arguments */
-  if (a_new_start>=a_new_stop)
+  if (a_new_start>=a_new_stop){
+    call_warning("in roj_complex_signal :: cut");
     call_error("start should be smalles than stop");
+  }
+
   if (a_new_start<m_config.start){
     call_warning("given start is smaller than current start");
     a_new_start=m_config.start;
@@ -625,10 +669,15 @@ unsigned int roj_complex_signal :: cut (double a_new_start, double a_new_stop){
   /* new shorter waveform allocation */  
   int new_length = (a_new_stop-a_new_start) * m_config.rate;
   int new_initial = (a_new_start - m_config.start) * m_config.rate;
-  if(new_length+new_initial>m_config.length)
+  if(new_length+new_initial>m_config.length){
+    call_warning("in roj_complex_signal :: cut");
     call_error("new length + new start is too long ");
-  if (new_length<3)
+  }
+
+  if (new_length<3){
+    call_warning("in roj_complex_signal :: cut");
     call_error("new length is too short ");
+  }
   complex double* new_waveform = new complex double [new_length];
  
   /* copying of samples */
@@ -654,9 +703,10 @@ unsigned int roj_complex_signal :: cut (double a_new_start, double a_new_stop){
  */
 unsigned int roj_complex_signal :: append_zero_head (double a_duration){
 
-  if(a_duration<=0)
+  if(a_duration<=0){
+    call_warning("in roj_complex_signal :: append_zero_head");
     call_error("duration <= 0");
-  
+  }  
   unsigned int number = a_duration*m_config.rate;
   
   if(number*m_config.rate != a_duration)
@@ -685,9 +735,10 @@ unsigned int roj_complex_signal :: append_zero_head (double a_duration){
  */
 unsigned int roj_complex_signal :: append_zero_tail (double a_duration){
 
-  if(a_duration<=0)
+  if(a_duration<=0){
+    call_warning("in roj_complex_signal :: append_zero_tail");
     call_error("duration <= 0");
-
+  }
   unsigned int number = a_duration*m_config.rate;
 
   if(number*m_config.rate != a_duration)
@@ -761,9 +812,11 @@ unsigned int roj_complex_signal :: append_cos_tail (double a_duration){
 void roj_complex_signal :: operator += (roj_complex_signal* a_sig){
   
   roj_signal_config conf = a_sig->get_config();  
-  if (!compare_config(conf))
+  if (!compare_config(conf)){
+    call_warning("in roj_complex_signal :: operator +=");
     call_error("signals are not compact");
-  
+  }
+
   for(int n=0; n<m_config.length; n++){
     
     m_waveform[n] += a_sig->m_waveform[n];
@@ -779,9 +832,11 @@ void roj_complex_signal :: operator += (roj_complex_signal* a_sig){
 void roj_complex_signal :: operator -= (roj_complex_signal* a_sig){
   
   roj_signal_config conf = a_sig->get_config();  
-  if (!compare_config(conf))
+  if (!compare_config(conf)){
+    call_warning("in roj_complex_signal :: operator -=");
     call_error("signals are not compact");
-  
+  }
+
   for(int n=0; n<m_config.length; n++){
     
     m_waveform[n] -= a_sig->m_waveform[n];

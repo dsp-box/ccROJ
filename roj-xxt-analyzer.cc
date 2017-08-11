@@ -20,7 +20,7 @@
 roj_xxt_analyzer :: roj_xxt_analyzer (roj_array_config a_bank_conf, roj_window_generator* a_window_gen){
 
   if(a_window_gen==NULL){
-    fprintf(stderr, "%s in roj_xxt_analyzer :: roj_xxt_analyzer\n", ROJ_DEBUG_PROMPT);
+    call_warning("in roj_xxt_analyzer :: roj_xxt_analyzer");
     call_error("arg is null");
   }
 
@@ -32,28 +32,27 @@ roj_xxt_analyzer :: roj_xxt_analyzer (roj_array_config a_bank_conf, roj_window_g
   }
 
   if(a_bank_conf.min>=a_bank_conf.max){
-    fprintf(stderr, "%s in roj_xxt_analyzer :: roj_xxt_analyzer\n", ROJ_DEBUG_PROMPT);
-    fprintf(stderr, "%s min is %g and max is %g\n", ROJ_DEBUG_PROMPT, a_bank_conf.min, a_bank_conf.max);
+    call_warning("in roj_xxt_analyzer :: roj_xxt_analyzer");
     call_error("min >= max");
   }
 
   if(a_bank_conf.max > a_window_gen->get_rate()/2){
-    fprintf(stderr, "%s in roj_xxt_analyzer :: roj_xxt_analyzer\n", ROJ_DEBUG_PROMPT);
+    call_warning("in roj_xxt_analyzer :: roj_xxt_analyzer");
     call_error("max > rate/2");
   }
   if(a_bank_conf.min < -a_window_gen->get_rate()/2){
-    fprintf(stderr, "%s in roj_xxt_analyzer :: roj_xxt_analyzer\n", ROJ_DEBUG_PROMPT);
+    call_warning("in roj_xxt_analyzer :: roj_xxt_analyzer");
     call_error("min < -rate/2");
   }
 
   
   if(a_bank_conf.length<1){
-    fprintf(stderr, "%s in roj_xxt_analyzer :: roj_xxt_analyzer\n", ROJ_DEBUG_PROMPT);
+    call_warning("in roj_xxt_analyzer :: roj_xxt_analyzer");
     call_error("length < 1");
   }
 
   if(a_window_gen->get_length()>a_bank_conf.length){
-    fprintf(stderr, "%s in roj_xxt_analyzer :: roj_xxt_analyzer\n", ROJ_DEBUG_PROMPT);
+    call_warning("in roj_xxt_analyzer :: roj_xxt_analyzer");
     call_error("win length > fft length");
   }
 
@@ -145,12 +144,12 @@ void roj_xxt_analyzer :: set_signal (roj_complex_signal* a_sig, int a_hop){
   m_height = (m_bank_config.max - m_bank_config.min) / delta;
   
   if(conf.rate!=m_window_gen->get_rate()){
-    fprintf(stderr, "%s in roj_xxt_analyzer :: set_signal\n", ROJ_DEBUG_PROMPT);
+    call_warning("in roj_xxt_analyzer :: set_signal");
     call_error("signal and window sampling rates are different");
   }
   
   if((conf.length-m_hop)<m_window_gen->get_length()){
-    fprintf(stderr, "%s in roj_xxt_analyzer :: set_signal\n", ROJ_DEBUG_PROMPT);
+    call_warning("in roj_xxt_analyzer :: set_signal");
     call_error("signal is too short or window is too long");
   }
 }
@@ -165,7 +164,7 @@ void roj_xxt_analyzer :: set_signal (roj_complex_signal* a_sig, int a_hop){
 unsigned int roj_xxt_analyzer :: get_width (){
   
   if(m_input_signal==NULL){
-    fprintf(stderr, "%s in roj_xxt_analyzer :: get_width\n", ROJ_DEBUG_PROMPT);
+    call_warning("in roj_xxt_analyzer :: get_width");
     call_error("signal is not loaded!");
   }
   
@@ -181,7 +180,7 @@ unsigned int roj_xxt_analyzer :: get_width (){
 unsigned int roj_xxt_analyzer :: get_height (){
   
   if(m_input_signal==NULL){
-    fprintf(stderr, "%s in roj_xxt_analyzer :: get_height\n", ROJ_DEBUG_PROMPT);
+    call_warning("in roj_xxt_analyzer :: get_height");
     call_error("signal is not loaded!");
   }
   
@@ -226,7 +225,7 @@ roj_image_config roj_xxt_analyzer :: get_image_config (){
   /* if signal is not loaded, 
      time range is unknown */
   if(m_input_signal==NULL){
-    fprintf(stderr, "%s in roj_xxt_analyzer :: get_matrix_config\n", ROJ_DEBUG_PROMPT);
+    call_warning("in roj_xxt_analyzer :: get_image_config");
     call_error("signal is not loaded!");
   }
   
@@ -256,7 +255,7 @@ roj_stft_transform* roj_xxt_analyzer :: get_stft_transform (){
 
   /* check input signal */
   if(m_input_signal==NULL){
-    fprintf(stderr, "%s in roj_xxt_analyzer :: get_stft_transform\n", ROJ_DEBUG_PROMPT);
+    call_warning("in roj_xxt_analyzer :: get_stft_transform");
     call_error("signal is not loaded!");
   }
 
@@ -314,7 +313,7 @@ roj_real_matrix* roj_xxt_analyzer :: get_instantaneous_frequency_by_1_estimator 
 
   /* check input signal */
   if(m_input_signal==NULL){
-    fprintf(stderr, "%s in roj_xxt_analyzer :: get_instantaneous_frequency_by_1_estimator\n", ROJ_DEBUG_PROMPT);
+    call_warning("in roj_xxt_analyzer :: get_instantaneous_frequency_by_1_estimator");
     call_error("signal is not loaded!");
   }
   
@@ -361,7 +360,7 @@ roj_real_matrix* roj_xxt_analyzer :: get_instantaneous_frequency_by_2_estimator 
 
   /* check input signal */
   if(m_input_signal==NULL){
-    fprintf(stderr, "%s in roj_xxt_analyzer :: get_instantaneous_frequency_by_2_estimator\n", ROJ_DEBUG_PROMPT);
+    call_warning("in roj_xxt_analyzer :: get_instantaneous_frequency_by_2_estimator");
     call_error("signal is not loaded!");
   }
   
@@ -410,8 +409,10 @@ roj_real_matrix* roj_xxt_analyzer :: get_instantaneous_frequency_by_2_estimator 
 roj_real_matrix* roj_xxt_analyzer :: get_spectral_delay (){
 
   /* check input signal */
-  if(m_input_signal==NULL)
+  if(m_input_signal==NULL){
+    call_warning("in roj_xxt_analyzer :: get_spectral_delay");
     call_error("signal is not loaded!");
+  }
 
   /* transforming  (2 and 3 slots) */
   if(m_fourier_spectra[CODE_WIN_T] == NULL)
@@ -453,7 +454,7 @@ roj_real_matrix* roj_xxt_analyzer :: get_chirp_rate_by_k_estimator (){
 
   /* check input signal */
   if(m_input_signal==NULL){
-    fprintf(stderr, "%s in roj_xxt_analyzer :: get_chirp_rate_by_k_estimator\n", ROJ_DEBUG_PROMPT);
+    call_warning("in roj_xxt_analyzer :: get_chirp_rate_by_k_estimator");
     call_error("signal is not loaded!");
   }
   
@@ -503,7 +504,7 @@ roj_real_matrix* roj_xxt_analyzer :: get_chirp_rate_by_d_estimator (){
   
   /* check input signal */
   if(m_input_signal==NULL){
-    fprintf(stderr, "%s in roj_xxt_analyzer :: get_chirp_rate_by_d_estimator\n", ROJ_DEBUG_PROMPT);
+    call_warning("in roj_xxt_analyzer :: get_chirp_rate_by_d_estimator");
     call_error("signal is not loaded!");
   }
   
@@ -559,7 +560,7 @@ roj_real_matrix* roj_xxt_analyzer :: get_chirp_rate_by_f_estimator (){
 
   /* check input signal */
   if(m_input_signal==NULL){
-    fprintf(stderr, "%s in roj_xxt_analyzer :: get_chirp_rate_by_f_estimator\n", ROJ_DEBUG_PROMPT);
+    call_warning("in roj_xxt_analyzer :: get_chirp_rate_by_f_estimator");
     call_error("signal is not loaded!");
   }
   
@@ -618,7 +619,7 @@ roj_real_matrix* roj_xxt_analyzer :: get_dof_density (){
 
   /* check input signal */
   if(m_input_signal==NULL){
-    fprintf(stderr, "%s in roj_xxt_analyzer :: get_dof_density\n", ROJ_DEBUG_PROMPT);
+    call_warning("in roj_xxt_analyzer :: get_dof_density");
     call_error("signal is not loaded!");
   }
   

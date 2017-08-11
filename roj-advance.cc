@@ -97,26 +97,48 @@ roj_real_matrix* roj_calculate_frequency_compacting (roj_real_matrix* a_ifreq){
 int roj_combine_matrix (bool (*a_func)(double, double), roj_real_matrix* a_multi_values, roj_real_matrix* a_multi_metrics, roj_real_matrix* a_values, roj_real_matrix* a_metrics){
 
   /* check arg */
-  if(a_func == NULL)
+  if(a_func == NULL){
+    call_warning("in roj_combine_matrix");
     call_error("arg is null");
-  if(a_multi_values == NULL)
+  }
+
+  if(a_multi_values == NULL){
+    call_warning("in roj_combine_matrix");
     call_error("arg is null");
-  if(a_multi_metrics == NULL)
+  }
+
+  if(a_multi_metrics == NULL){
+    call_warning("in roj_combine_matrix");
     call_error("arg is null");
-  if(a_values == NULL)
+  }
+
+  if(a_values == NULL){
+    call_warning("in roj_combine_matrix");
     call_error("arg is null");
-  if(a_metrics == NULL)
+  }
+
+  if(a_metrics == NULL){
+    call_warning("in roj_combine_matrix");
     call_error("arg is null");
-  
+  }
+
   roj_image_config config =  a_multi_values->get_config();
   
-  if (!a_multi_metrics->compare_config(config))
+  if (!a_multi_metrics->compare_config(config)){
+    call_warning("in roj_combine_matrix");
     call_error("matrixes are not compact (a_multi)");
-  if (!a_values->compare_config(config))
+  }
+
+  if (!a_values->compare_config(config)){
+    call_warning("in roj_combine_matrix");
     call_error("matrixes are not compact (a_values)");
-  if (!a_values->compare_config(config))
+  }
+
+  if (!a_values->compare_config(config)){
+    call_warning("in roj_combine_matrix");
     call_error("matrixes are not compact (a_metrics)");
-  
+  }
+
   int counter = 0;
   for(int n=0; n<config.x.length; n++)
     for(int k=0; k<config.y.length; k++){
@@ -192,13 +214,17 @@ void roj_save (char *a_fname, roj_real_matrix* a_matrix_1, roj_real_matrix* a_ma
 
   roj_image_config config =  a_matrix_1->get_config();
   
-  if (!a_matrix_2->compare_config(config))
+  if (!a_matrix_2->compare_config(config)){
+    call_warning("in roj_save");
     call_error("matrixes are not compact");
+  }
 
   /* open file to write */
   FILE *fds = fopen(a_fname, "w");
-  if (fds==NULL)
+  if (fds==NULL){
+    call_warning("in roj_save");
     call_error("cannot save");
+  }
 
   /* write start and stop */
   fprintf(fds, "#X_MIN=%e\n", config.x.min);
@@ -303,8 +329,10 @@ roj_pair roj_calculate_interpolated_argmax (roj_real_matrix* a_matrix){
 */
 roj_pair roj_linear_regression(roj_real_array* a_vector){
 
-  if (a_vector==NULL)
+  if (a_vector==NULL){
+    call_warning("in roj_linear_regression");
     call_error("arg is null");
+  }
 
   roj_array_config conf = a_vector->get_config();
   roj_pair out;
@@ -349,15 +377,22 @@ roj_pair roj_linear_regression(roj_real_array* a_vector){
 */
 roj_pair roj_linear_regression(roj_real_array* a_x, roj_real_array* a_y){
 
-  if (a_x==NULL)
+  if (a_x==NULL){
+    call_warning("in roj_linear_regression");
     call_error("arg is null");
-  if (a_y==NULL)
+  }
+
+  if (a_y==NULL){
+    call_warning("in roj_linear_regression");
     call_error("arg is null");
+  }
 
   roj_array_config conf = a_x->get_config();
-  if(!a_y->compare_config(conf))
+  if(!a_y->compare_config(conf)){
+    call_warning("in roj_linear_regression");
     call_error("args have diff configuration");
-  
+  }
+
   roj_pair out;
   double sumx = 0.0;
   double sumx2 = 0.0;

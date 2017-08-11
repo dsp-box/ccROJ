@@ -20,12 +20,16 @@
 roj_filter :: roj_filter(unsigned int a_order, unsigned int a_outlen){
 
   /* arg parse */
-  if(a_order<1)
+  if(a_order<1){
+    call_warning("in roj_filter :: roj_filter");
     call_error("order < 1");
+  }
   m_order = a_order;
 
-  if(a_outlen<1)
+  if(a_outlen<1){
+    call_warning("in roj_filter :: roj_filter");
     call_error("outlen too small");
+  }
   m_outlen = a_outlen;
   m_index = 0;
   
@@ -110,7 +114,10 @@ complex double roj_filter :: get_output(unsigned int a_shift){
 roj_complex_signal* roj_filter :: process(roj_complex_signal* a_sig){
 
   /* args checking */
-  if(a_sig == NULL) call_error("sig is NULL");
+  if(a_sig == NULL){
+    call_warning("in roj_filter :: process");
+    call_error("sig is NULL");
+  }
 
   roj_signal_config in_conf = a_sig->get_config();
   roj_complex_signal* out = new roj_complex_signal(in_conf);

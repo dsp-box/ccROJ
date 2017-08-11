@@ -16,6 +16,7 @@
 */
 void print_roj_info (){
 
+#ifdef ROJ_DEBUG_ON
 #ifdef ROJ_COLOR_TEXT 
   fprintf(stderr, "\033[1;35m");
 #endif
@@ -31,6 +32,7 @@ void print_roj_info (){
   fprintf(stderr, "\033[0m\n");
 #else
   fprintf(stderr, "\n");
+#endif
 #endif
 }
 

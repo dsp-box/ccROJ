@@ -21,21 +21,27 @@
  */
 roj_hough_transform :: roj_hough_transform(roj_real_matrix* a_energy, roj_array_config a_frequency_conf, roj_array_config a_chirprate_conf, double a_treshold){
 
-  if (a_energy==NULL)
+  if (a_energy==NULL){
+    call_warning("in roj_hough_transform :: roj_hough_transform");
     call_error("arg is null");
+  }
 
   verify_config(a_frequency_conf);
   verify_config(a_chirprate_conf);
   m_frequency_conf = a_frequency_conf;
   m_chirprate_conf = a_chirprate_conf;
 
-  if(a_treshold<0.0)
+  if(a_treshold<0.0){
+    call_warning("in roj_hough_transform :: roj_hough_transform");
     call_error("treshold < 0");
-  if(a_treshold>=1.0)
+  }
+
+  if(a_treshold>=1.0){
+    call_warning("in roj_hough_transform :: roj_hough_transform");
     call_error("treshold >= 1");
+  }
+
   m_treshold = a_treshold * a_energy->get_max();
-    
-  //  m_energy = new roj_real_matrix(a_energy);
   m_transform = reassign_energy(a_energy); 
 }
 
@@ -52,24 +58,37 @@ roj_hough_transform :: roj_hough_transform(roj_real_matrix* a_energy, roj_array_
  */
 roj_hough_transform :: roj_hough_transform(roj_real_matrix* a_sdelay, roj_real_matrix* a_ifreq, roj_real_matrix* a_energy, roj_array_config a_frequency_conf, roj_array_config a_chirprate_conf, double a_treshold){
 
-  if (a_sdelay==NULL)
+  if (a_sdelay==NULL){
+    call_warning("in roj_hough_transform :: roj_hough_transform");
     call_error("arg is null");
-  if (a_ifreq==NULL)
+  }
+
+  if (a_ifreq==NULL){
+    call_warning("in roj_hough_transform :: roj_hough_transform");
     call_error("arg is null");
-  if (a_energy==NULL)
+  }
+
+  if (a_energy==NULL){
+    call_warning("in roj_hough_transform :: roj_hough_transform");
     call_error("arg is null");
+  }
 
   verify_config(a_frequency_conf);
   verify_config(a_chirprate_conf);
   m_frequency_conf = a_frequency_conf;
   m_chirprate_conf = a_chirprate_conf;
 
-  if(a_treshold<0.0)
+  if(a_treshold<0.0){
+    call_warning("in roj_hough_transform :: roj_hough_transform");
     call_error("treshold < 0");
-  if(a_treshold>=1.0)
+  }
+
+  if(a_treshold>=1.0){
+    call_warning("in roj_hough_transform :: roj_hough_transform");
     call_error("treshold >= 1");
-  m_treshold = a_treshold * a_energy->get_max();
-    
+  }
+
+  m_treshold = a_treshold * a_energy->get_max();    
   m_transform = reassign_energy(a_sdelay, a_ifreq, a_energy); 
 }
 
@@ -143,11 +162,16 @@ roj_real_matrix* roj_hough_transform :: reassign_energy(roj_real_matrix* a_sdela
 
   roj_image_config energy_conf = a_energy->get_config();
 
-  if (!a_sdelay->compare_config(energy_conf))
+  if (!a_sdelay->compare_config(energy_conf)){
+    call_warning("in roj_hough_transform :: reassign_energy");    
     call_error("images are not compact");
-  if (!a_ifreq->compare_config(energy_conf))
+  }
+
+  if (!a_ifreq->compare_config(energy_conf)){
+    call_warning("in roj_hough_transform :: reassign_energy");    
     call_error("images are not compact");
-  
+  }
+
   for(int t=0; t<energy_conf.x.length; t++){
 
     double time = a_energy->get_x_by_index(t);

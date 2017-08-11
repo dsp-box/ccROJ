@@ -20,16 +20,22 @@
 roj_ode_analyzer :: roj_ode_analyzer(roj_array_config a_bank_conf, roj_filter_generator* a_filter_gen){
 
   /* check args */
-  if(a_filter_gen==NULL)
+  if(a_filter_gen==NULL){
+    call_warning("in roj_ode_analyzer :: roj_ode_analyzer");
     call_error("arg is null");
+  }
 
   /* check and set frequencies */
-  if(a_bank_conf.min>=a_bank_conf.max and a_bank_conf.length>1)
+  if(a_bank_conf.min>=a_bank_conf.max and a_bank_conf.length>1){
+    call_warning("in roj_ode_analyzer :: roj_ode_analyzer");
     call_error("init frequency is grater than final");
-  
+  }
+
   /* parse other parameters */
-  if(a_bank_conf.length<1)
+  if(a_bank_conf.length<1){
+    call_warning("in roj_ode_analyzer :: roj_ode_analyzer");
     call_error("filter number is negative or zero");
+  }
 
   /* copy config data */
   m_bank_config = a_bank_conf;
@@ -91,9 +97,12 @@ void roj_ode_analyzer :: set_signal(roj_complex_signal* a_sig, int a_hop){
   roj_analyzer :: set_signal(a_sig, a_hop);
   roj_signal_config conf = m_input_signal->get_config();
 
-  if(conf.rate!=m_filter_gen->get_rate())
+  if(conf.rate!=m_filter_gen->get_rate()){
+    call_warning("in roj_ode_analyzer :: set_signal");
     call_error("signal and filter sampling rates are different");
+  }
 }
+
 
 /* ************************************************************************************************************************* */
 /**
@@ -106,8 +115,10 @@ void roj_ode_analyzer :: set_signal(roj_complex_signal* a_sig, int a_hop){
  */
 double roj_ode_analyzer :: get_frequency(unsigned int a_index){
   
-  if(a_index >= m_bank_config.length )
+  if(a_index >= m_bank_config.length ){
+    call_warning("in roj_ode_analyzer :: get_frequency");
     call_error("a given index is too large");
+  }
 
   return  m_bank_array[0]->get_frequency(a_index);
 }
@@ -121,8 +132,10 @@ double roj_ode_analyzer :: get_frequency(unsigned int a_index){
  */
 unsigned int roj_ode_analyzer :: get_width(){
   
-  if(m_input_signal==NULL)
+  if(m_input_signal==NULL){
+    call_warning("in roj_ode_analyzer :: get_width");
     call_error("signal is not loaded!");
+  }
 
   /* filtering */
   if(m_filtered_signals[2] == NULL)
@@ -155,8 +168,10 @@ roj_image_config roj_ode_analyzer :: get_image_config (){
 
   /* if signal is not loaded, 
      time range is unknown */
-  if(m_input_signal==NULL)
+  if(m_input_signal==NULL){
+    call_warning("in roj_ode_analyzer :: get_image_config");
     call_error("signal is not loaded!");
+  }
   
   /* filtering  (2 bank) */
   if(m_filtered_signals[2] == NULL)
@@ -186,8 +201,10 @@ roj_real_matrix* roj_ode_analyzer :: create_empty_image(){
 
   /* if signal is not loaded, 
      we do not know time range */
-  if(m_input_signal==NULL)
+  if(m_input_signal==NULL){
+    call_warning("in roj_ode_analyzer :: create_empty_image");
     call_error("signal is not loaded!");
+  }
 
   roj_image_config img_conf = get_image_config ();  
   roj_real_matrix* output = new roj_real_matrix(img_conf);
@@ -205,8 +222,10 @@ roj_real_matrix* roj_ode_analyzer :: create_empty_image(){
 roj_stft_transform* roj_ode_analyzer :: get_transform_as_stft (){
 
   /* check input signal */
-  if(m_input_signal==NULL)
+  if(m_input_signal==NULL){
+    call_warning("in roj_ode_analyzer :: get_transform_as_stft");
     call_error("signal is not loaded!");
+  }
 
   /* filtering  (2 bank) */
   if(m_filtered_signals[2] == NULL)
@@ -237,9 +256,11 @@ roj_stft_transform* roj_ode_analyzer :: get_transform_as_stft (){
 roj_real_matrix* roj_ode_analyzer :: get_spectral_energy(){
 
   /* check input signal */
-  if(m_input_signal==NULL)
+  if(m_input_signal==NULL){
+    call_warning("in roj_ode_analyzer :: get_spectral_energy");
     call_error("signal is not loaded!");
-  
+  }
+
   /* filtering  (2 bank) */
   if(m_filtered_signals[2] == NULL)
     m_filtered_signals[2] = m_bank_array[2]->filtering(m_input_signal, m_hop);  
@@ -269,8 +290,10 @@ roj_real_matrix* roj_ode_analyzer :: get_spectral_energy(){
 roj_real_matrix* roj_ode_analyzer :: get_instantaneous_frequency_by_1_estimator(){
 
   /* check input signal */
-  if(m_input_signal==NULL)
+  if(m_input_signal==NULL){
+    call_warning("in roj_ode_analyzer :: get_instantaneous_frequency_by_1_estimator");
     call_error("signal is not loaded!");
+  }
 
   /* filtering  (1 and 2 banks) */
   for(int n=1; n<3; n++)
@@ -316,8 +339,10 @@ roj_real_matrix* roj_ode_analyzer :: get_instantaneous_frequency_by_1_estimator(
 roj_real_matrix* roj_ode_analyzer :: get_instantaneous_frequency_by_2_estimator(){
 
   /* check input signal */
-  if(m_input_signal==NULL)
+  if(m_input_signal==NULL){
+    call_warning("in roj_ode_analyzer :: get_instantaneous_frequency_by_2_estimator");
     call_error("signal is not loaded!");
+  }
 
   /* filtering  (1, 2, and 3 banks) */
   for(int n=1; n<4; n++)
@@ -366,8 +391,10 @@ roj_real_matrix* roj_ode_analyzer :: get_instantaneous_frequency_by_2_estimator(
 roj_real_matrix* roj_ode_analyzer :: get_spectral_delay(){
 
   /* check input signal */
-  if(m_input_signal==NULL)
+  if(m_input_signal==NULL){
+    call_warning("in roj_ode_analyzer :: get_spectral_delay");
     call_error("signal is not loaded!");
+  }
 
   /* filtering  (2 and 3 banks) */
   for(int n=2; n<4; n++)
@@ -405,8 +432,10 @@ roj_real_matrix* roj_ode_analyzer :: get_spectral_delay(){
 roj_real_matrix* roj_ode_analyzer :: get_chirp_rate_by_k_estimator(){
 
   /* check input signal */
-  if(m_input_signal==NULL)
+  if(m_input_signal==NULL){
+    call_warning("in roj_ode_analyzer :: get_chirp_rate_by_k_estimator");
     call_error("signal is not loaded!");
+  }
 
   /* filtering  (1 and 3 banks) */
   for(int n=1; n<4; n++)
@@ -456,8 +485,10 @@ roj_real_matrix* roj_ode_analyzer :: get_chirp_rate_by_k_estimator(){
 roj_real_matrix* roj_ode_analyzer :: get_chirp_rate_by_d_estimator(){
 
   /* check input signal */
-  if(m_input_signal==NULL)
+  if(m_input_signal==NULL){
+    call_warning("in roj_ode_analyzer :: get_chirp_rate_by_d_estimator");
     call_error("signal is not loaded!");
+  }
 
   /* filtering  (0 and 3 banks) */
   for(int n=0; n<4; n++)
@@ -518,8 +549,10 @@ roj_real_matrix* roj_ode_analyzer :: get_chirp_rate_by_f_estimator(){
   /* f is from Francois */
 
   /* check input signal */
-  if(m_input_signal==NULL)
+  if(m_input_signal==NULL){
+    call_warning("in roj_ode_analyzer :: get_chirp_rate_by_f_estimator");
     call_error("signal is not loaded!");
+  }
 
   /* filtering  (0 and 3 banks) */
   for(int n=1; n<5; n++)

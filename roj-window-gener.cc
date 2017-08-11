@@ -18,8 +18,10 @@
 */
 roj_window_generator :: roj_window_generator (double a_rate){
   
-  if(a_rate<=0)
+  if(a_rate<=0){
+    call_warning("in roj_window_generator :: roj_window_generator");    
     call_error("rate <= 0");
+  }
   m_rate = a_rate;
   
   /* defaults */
@@ -66,8 +68,10 @@ void roj_window_generator :: set_type (char a_code){
 */
 void roj_window_generator :: set_length (int a_length){
 
-  if(a_length<=0)
+  if(a_length<=0){
+    call_warning("in roj_window_generator :: set_length");    
     call_error("a_length <= 0");
+  }
   m_length = a_length;
 }
 
@@ -96,8 +100,10 @@ double roj_window_generator :: calc_duration (){
   if (m_type==ROJ_BH_WINDOW) 
     return ((double)m_length) / m_rate;
   
-  else
+  else{
+    call_warning("in roj_window_generator :: calc_duration");    
     call_error("have to be implemented");
+  }
 }
 
 /* ************************************************************************************************************************* */
@@ -156,11 +162,15 @@ roj_complex_signal* roj_window_generator :: get_empty_window (){
 */
 roj_complex_signal* roj_window_generator :: get_window (int a_d_order, int a_t_order){
 
-  if(a_t_order<0)
+  if(a_t_order<0){
+    call_warning("in roj_window_generator :: get_window ");    
     call_error("time order < 0");
+  }
 
-  if(a_d_order<0)
+  if(a_d_order<0){
+    call_warning("in roj_window_generator :: get_window ");    
     call_error("derivative order < 0");
+  }
 
   roj_complex_signal* win = NULL;
   switch(m_type){
@@ -176,10 +186,12 @@ roj_complex_signal* roj_window_generator :: get_window (int a_d_order, int a_t_o
       win = get_blackman_harris_d2win();
       break;
     default:
+      call_warning("in roj_window_generator :: get_window ");    
       call_error("derivative for this order for this window type is not defined");
     }
     break;
   default:
+    call_warning("in roj_window_generator :: get_window ");    
     call_error("unknown window type");
   }
   

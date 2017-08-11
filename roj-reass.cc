@@ -27,10 +27,15 @@ roj_real_matrix* roj_time_frequency_reassign (roj_real_matrix* a_sdelay, roj_rea
   roj_image_config conf = a_senergy->get_config();
 
   /* check args cohesion */
-  if (!a_sdelay->compare_config(conf))
+  if (!a_sdelay->compare_config(conf)){
+    call_warning("in roj_time_frequency_reassign");
     call_error("images are not compact");
-  if (!a_ifreq->compare_config(conf))
+  }
+
+  if (!a_ifreq->compare_config(conf)){
+    call_warning("in roj_time_frequency_reassign");
     call_error("images are not compact");
+  }
 
   /* allocate output if necessary*/  
   roj_real_matrix* output = a_output;
@@ -83,17 +88,21 @@ roj_real_matrix* roj_frequency_reassign (roj_real_matrix* a_ifreq, roj_real_matr
   roj_image_config conf = a_senergy->get_config();
 
   /* check args cohesion */
-  if (!a_ifreq->compare_config(conf))
+  if (!a_ifreq->compare_config(conf)){
+    call_warning("in roj_frequency_reassign");
     call_error("images are not compact");
+  }
 
   /* allocate output if necessary*/  
   roj_real_matrix* output = a_output;
   if(a_output==NULL)
     output = new roj_real_matrix(conf);
   else
-    if (!a_output->compare_x_config(conf))
+    if (!a_output->compare_x_config(conf)){
+      call_warning("in roj_frequency_reassign");
       call_error("images are not compact in time");
-  
+    }
+
   roj_image_config out_conf = output->get_config();
 
   /* reassignment */
@@ -132,7 +141,10 @@ roj_real_matrix* roj_calculate_profile_over_time (roj_real_matrix* a_values, roj
   roj_image_config conf = a_values->get_config();
 
   /* check args cohesion */
-  if (!a_energy->compare_config(conf)) call_error("images are not compact");
+  if (!a_energy->compare_config(conf)){
+    call_warning("in roj_calculate_profile_over_time");
+    call_error("images are not compact");
+  }
 
   roj_image_config n_conf;
   n_conf.x =  conf.x; 
@@ -191,9 +203,11 @@ roj_real_array* roj_calculate_profile (roj_real_matrix* a_values, roj_real_matri
   roj_image_config conf = a_energy->get_config();
 
   /* check args cohesion */
-  if(!a_values->compare_config(conf))
+  if(!a_values->compare_config(conf)){
+    call_warning("in roj_calculate_profile");
     call_error("images are not compact");
-    
+  }
+
   /* fill profile */
   for(int n=0; n<conf.x.length; n++)
     for(int k=0; k<conf.y.length; k++)

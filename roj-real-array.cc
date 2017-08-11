@@ -40,8 +40,10 @@ roj_real_array :: roj_real_array (roj_array_config a_conf){
 roj_real_array :: roj_real_array (roj_real_array* a_arr){
 
   /* check and assign conf */
-  if(a_arr == NULL)
+  if(a_arr == NULL){
+    call_warning("in roj_real_array :: roj_real_array");
     call_error("arg is null");
+  }
   m_config = a_arr->get_config();
   
   /* allocate memory for samples */
@@ -61,25 +63,36 @@ roj_real_array :: roj_real_array (roj_real_array* a_arr){
 roj_real_array :: roj_real_array (char* a_fname){
 
   /* check arg */
-  if(a_fname == NULL)
+  if(a_fname == NULL){
+    call_warning("in roj_real_array :: roj_real_array");
     call_error("arg is null");
+  }
 
   int len = strlen(a_fname);
-  if (len<5)
+  if (len<5){
+    call_warning("in roj_real_array :: roj_real_array");
     call_error("not see as txt file");
+  }
+
   if (strcmp(&a_fname[len-4], ".txt") and
-      strcmp(&a_fname[len-4], ".TXT"))
+      strcmp(&a_fname[len-4], ".TXT")){
+    call_warning("in roj_real_array :: roj_real_array");
     call_error("not see as txt file");
+  }
 
   FILE *f_ptr = fopen(a_fname, "r");
-  if(f_ptr==NULL)
+  if(f_ptr==NULL){
+    call_warning("in roj_real_array :: roj_real_array");
     call_error("cannot read file");
+  }
 
   double start, delta;
   fscanf(f_ptr, " # %lf %lf \n", &start, &delta);
 
-  if(delta<=0)
+  if(delta<=0){
+    call_warning("in roj_real_array :: roj_real_array");
     call_error("delta<=0");
+  }
 
   double tmp;
   int count = 0;
@@ -102,8 +115,11 @@ roj_real_array :: roj_real_array (char* a_fname){
   memset(m_data, 0x0, byte_size);
 
   f_ptr = fopen(a_fname, "r");
-  if(f_ptr==NULL)
+  if(f_ptr==NULL){
+    call_warning("in roj_real_array :: roj_real_array");
     call_error("cannot read file (2)");
+  }
+
   fscanf(f_ptr, " # %lf %lf \n", &start, &delta);
   
   count=0;
@@ -206,8 +222,10 @@ bool roj_real_array :: compare_config (roj_array_config a_conf){
  */
 roj_array_config roj_real_array :: cut_head(int a_head){
   
-  if (a_head<0 or a_head>=m_config.length)
+  if (a_head<0 or a_head>=m_config.length){
+    call_warning("in roj_real_array :: cut_head");
     call_error("arg is wrong");
+  }
 
   double d = get_delta();
   m_config.length -= a_head;
@@ -231,8 +249,10 @@ roj_array_config roj_real_array :: cut_head(int a_head){
  */
 roj_array_config roj_real_array :: cut_tail(int a_tail){
     
-  if (a_tail<0 or a_tail>=m_config.length)
+  if (a_tail<0 or a_tail>=m_config.length){
+    call_warning("in roj_real_array :: cut_tail");
     call_error("arg is wrong");
+  }
 
   double d = get_delta();
   m_config.length -= a_tail;
@@ -368,8 +388,10 @@ void roj_real_array :: save (char* a_fname){
   
   /* open file to write */
   FILE *fds = fopen(a_fname, "w");
-  if (fds==NULL)
+  if (fds==NULL){
+    call_warning("in roj_real_array :: save");
     call_error("cannot save");
+  }
 
   /* write start and stop */
   fprintf(fds, "#LENGTH=%d\n", m_config.length);

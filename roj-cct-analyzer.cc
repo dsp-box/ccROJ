@@ -45,11 +45,15 @@ roj_cct_analyzer :: ~roj_cct_analyzer (){
  */
 void roj_cct_analyzer :: set_chirp_rate (roj_real_array* a_crate){
   
-  if(a_crate == NULL)
+  if(a_crate == NULL){
+    call_warning("in roj_cct_analyzer :: set_chirp_rate");
     call_error("arg is null");
+  }
 
-  if(m_chirprate != NULL)
+  if(m_chirprate != NULL){
+    call_warning("in roj_cct_analyzer :: set_chirp_rate");
     call_error("only one chirprate can be set");
+  }
 
   roj_array_config conf = a_crate->get_config();
   m_chirprate = new roj_real_array(conf);
@@ -70,9 +74,11 @@ void roj_cct_analyzer :: set_chirp_rate (roj_real_array* a_crate){
 complex double ** roj_cct_analyzer :: transforming (int a_d_order, int a_t_order){
 
   /* check to chirprate is set */
-  if(m_chirprate==NULL)
+  if(m_chirprate==NULL){
+    call_warning("in roj_cct_analyzer :: transforming");
     call_error("chirp-rate is not set");
-  
+  }
+
   /* allocate memory for stft */
   complex double** stft = allocate_stft();
 
@@ -104,7 +110,6 @@ complex double ** roj_cct_analyzer :: transforming (int a_d_order, int a_t_order
     if (cr_index>=arr_conf.length){
       cr_index = arr_conf.length-1;
       if (nline_flag2 and cr_index>=arr_conf.length+1){
-	fprintf(stderr,"\n");
 	nline_flag2 = false;
 	call_warning("extrapolation in chirprate");
       }
@@ -112,7 +117,6 @@ complex double ** roj_cct_analyzer :: transforming (int a_d_order, int a_t_order
     if (cr_index<0){
       cr_index =0;
       if(nline_flag1 and cr_index<-1){
-	fprintf(stderr,"\n");
 	nline_flag1 = false;
 	call_warning("extrapolation in chirprate");
       }

@@ -35,12 +35,16 @@ int segment_comparer (const void * a_arg1, const void * a_arg2){
 */
 roj_median_filter :: roj_median_filter (int a_width, int a_height){
   
-  if(a_width<=0)
+  if(a_width<=0){
+    call_warning("in roj_median_filter :: roj_median_filter");
     call_error("length <= 0");
+  }
   m_width = 2 * a_width + 1;
   
-  if(a_height<1) 
+  if(a_height<1){
+    call_warning("in roj_median_filter :: roj_median_filter");
     call_error("height <= 0");
+  }
   m_height = 2 * a_height + 1;
   
   m_counter = 0;
@@ -72,14 +76,18 @@ roj_median_filter :: ~roj_median_filter (){
 */
 roj_real_array* roj_median_filter :: filtering (roj_real_array* a_arr, int a_hop){
   
-  if(a_hop<=0)
+  if(a_hop<=0){
+    call_warning("in roj_median_filter :: filtering");
     call_error("hop not positive");
+  }
   
   double *buffer = new double[m_width];
 
   roj_array_config conf = a_arr->get_config();
-  if(m_width>conf.length)
+  if(m_width>conf.length){
+    call_warning("in roj_median_filter :: filtering");
     call_error("array is too short");
+  }
 
   roj_array_config out_conf;
   out_conf.length = conf.length/a_hop;
@@ -135,12 +143,16 @@ roj_real_array* roj_median_filter :: filtering (roj_real_array* a_arr, int a_hop
 */
 roj_real_array* roj_median_filter :: smart_filtering (roj_real_array* a_arr, int a_hop){
   
-  if(a_hop<=0)
+  if(a_hop<=0){
+    call_warning("in roj_median_filter :: smart_filtering");
     call_error("hop not positive");
+  }
 
   roj_array_config conf = a_arr->get_config();
-  if(m_width*a_hop>conf.length)
+  if(m_width*a_hop>conf.length){
+    call_warning("in roj_median_filter :: smart_filtering");
     call_error("array is too short");
+  }
 
   roj_real_array* output = new roj_real_array(conf);
 
@@ -183,16 +195,26 @@ roj_real_array* roj_median_filter :: smart_filtering (roj_real_array* a_arr, int
 */
 roj_real_matrix* roj_median_filter :: smart_filtering (roj_real_matrix* a_matrix, int a_hop, int a_vop){
 
-  if(a_hop<=0)
+  if(a_hop<=0){
+    call_warning("in roj_median_filter :: smart_filtering");
     call_error("hop not positive");
-  if(a_vop<=0)
+  }
+
+  if(a_vop<=0){
+    call_warning("in roj_median_filter :: smart_filtering");
     call_error("hop not positive");
+  }
 
   roj_image_config conf = a_matrix->get_config();
-  if(m_width*a_hop>conf.x.length)
+  if(m_width*a_hop>conf.x.length){
+    call_warning("in roj_median_filter :: smart_filtering");
     call_error("image width is too short");
-  if(m_height*a_vop>conf.y.length)
+  }
+
+  if(m_height*a_vop>conf.y.length){
+    call_warning("in roj_median_filter :: smart_filtering");
     call_error("image height is too short");
+  }
 
   roj_real_matrix* output = new roj_real_matrix(conf);
 
@@ -336,9 +358,11 @@ void roj_median_filter :: add_segment (double a_value, int a_xcoor, int a_ycoor)
     }
   }
   
-  if(m_counter>=m_length)
+  if(m_counter>=m_length){
+    call_warning("in roj_median_filter :: add_segment");
     call_error("segment buffer is full");
-  
+  }
+
   roj_median_segment* segment = new roj_median_segment;
   segment->val = a_value;
   segment->flag = true;

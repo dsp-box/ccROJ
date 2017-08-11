@@ -33,8 +33,10 @@ roj_stft_transform :: roj_stft_transform (roj_image_config a_conf, roj_complex_s
   m_config = a_conf;
 
   /* check args */
-  if (!check_config ())
+  if (!check_config ()){
+    call_warning("in roj_stft_transform :: roj_stft_transform");
     call_error("matrix configuration is failed");
+  }
 
   /* allocate memory */
   m_spectrum = new complex double* [m_config.x.length];
@@ -69,8 +71,10 @@ roj_stft_transform :: ~roj_stft_transform (){
 */
 roj_complex_signal* roj_stft_transform :: get_signal (){
   
-  if (m_window==NULL)
+  if (m_window==NULL){
+    call_warning("in roj_stft_transform :: get_signal");
     call_error("window is not set, signal cannot be recovered");
+  }
 
   roj_signal_config sig_config;
   sig_config.rate = (double)(m_config.x.length - 1) / (m_config.x.max - m_config.x.min);

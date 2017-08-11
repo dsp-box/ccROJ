@@ -45,8 +45,10 @@ roj_pulse_generator :: roj_pulse_generator (){
 */
 double roj_pulse_generator :: get_tukey (double a_base_time){
   
-  if(m_transition<0 or m_transition>1)
+  if(m_transition<0 or m_transition>1){
+    call_warning("in roj_pulse_generator :: get_tukey");    
     call_error("transition should be in <0, 1> range");
+  }
 
   if (m_transition==0)
     return 1.0;
@@ -128,9 +130,11 @@ complex double roj_pulse_generator :: get_harmonic (double a_time){
 */
 double roj_pulse_generator :: add_harmonic (roj_complex_signal* a_sig){
 
-  if(a_sig==NULL)
+  if(a_sig==NULL){
+    call_warning("in roj_pulse_generator :: add_harmonic");    
     call_error("signal is null");
-  
+  }
+
   roj_signal_config sig_conf = a_sig->get_config();
 
   /* fullfill waveform */
@@ -185,9 +189,11 @@ complex double roj_pulse_generator :: get_lfm_chirp (double a_time){
 */
 double roj_pulse_generator :: add_lfm_chirp (roj_complex_signal* a_sig){
 
-  if(a_sig==NULL)
+  if(a_sig==NULL){
+    call_warning("in roj_pulse_generator :: add_lfm_chirp");    
     call_error("signal is null");
-  
+  }
+
   roj_signal_config sig_conf = a_sig->get_config();
 
   /* fullfill waveform */
@@ -247,9 +253,11 @@ complex double roj_pulse_generator :: get_hfm_chirp (double a_time){
 */
 double roj_pulse_generator :: add_hfm_chirp (roj_complex_signal* a_sig){
 
-  if(a_sig==NULL)
+  if(a_sig==NULL){
+    call_warning("in roj_pulse_generator :: add_hfm_chirp");    
     call_error("signal is null");
-  
+  }
+
   roj_signal_config sig_conf = a_sig->get_config();
 
   /* fullfill waveform */
@@ -276,9 +284,11 @@ double roj_pulse_generator :: add_hfm_chirp (roj_complex_signal* a_sig){
 */
 double roj_pulse_generator :: add_random_fsk (roj_complex_signal* a_sig){
 
-  if(a_sig==NULL)
+  if(a_sig==NULL){
+    call_warning("in roj_pulse_generator :: add_random_fsk");    
     call_error("signal is null");
-  
+  }
+
   roj_signal_config sig_conf = a_sig->get_config();
   bool pulse_flag = false;
 

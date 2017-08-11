@@ -21,14 +21,18 @@
 */
 roj_complex_signal* roj_convolve_signals (roj_complex_signal* a_sig_1, roj_complex_signal* a_sig_2){
 
-  if(a_sig_1==NULL or a_sig_2==NULL)
+  if(a_sig_1==NULL or a_sig_2==NULL){
+    call_warning("in roj_convolve_signals");
     call_error("arg is NULL");
-  
+  }
+
   roj_signal_config config_1 = a_sig_1->get_config();
   roj_signal_config config_2 = a_sig_2->get_config();
 
-  if(config_1.rate != config_2.rate)
+  if(config_1.rate != config_2.rate){
+    call_warning("in roj_convolve_signals");
     call_error("rates are different");
+  }
 
   roj_signal_config config_out;
   config_out.rate = config_1.rate;
@@ -67,9 +71,10 @@ roj_complex_signal* roj_convolve_signals (roj_complex_signal* a_sig_1, roj_compl
 */
 roj_complex_signal* roj_correlate_signals (roj_complex_signal* a_sig_1, roj_complex_signal* a_sig_2){
 
-  if(a_sig_1==NULL or a_sig_2==NULL)
+  if(a_sig_1==NULL or a_sig_2==NULL){
+    call_warning("in roj_correlate_signals");
     call_error("arg is NULL");
-
+  }
 
   roj_complex_signal* tmp_signal = new roj_complex_signal(a_sig_2);
   tmp_signal->conjugate();

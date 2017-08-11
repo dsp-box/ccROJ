@@ -20,16 +20,22 @@
 roj_filter_bank :: roj_filter_bank (roj_array_config a_bank_conf, roj_filter_generator* a_filter_gen){
 
   /* check args */
-  if(a_filter_gen==NULL)
+  if(a_filter_gen==NULL){
+    call_warning("in roj_filter_bank :: roj_filter_bank");
     call_error("arg is null");
-  
+  }
+
   /* check and set frequencies */
-  if(a_bank_conf.min>=a_bank_conf.max and a_bank_conf.length>1)
+  if(a_bank_conf.min>=a_bank_conf.max and a_bank_conf.length>1){
+    call_warning("in roj_filter_bank :: roj_filter_bank");
     call_error("init frequency is grater than final");
+  }
 
   /* m_filter_array contains m_filter_number filters */
-  if(a_bank_conf.length<1)
+  if(a_bank_conf.length<1){
+    call_warning("in roj_filter_bank :: roj_filter_bank");
     call_error("filter number is negative or one");
+  }
 
   /* copy config data */
   m_config = a_bank_conf;
@@ -85,8 +91,10 @@ roj_array_config roj_filter_bank :: get_config (){
  */
 roj_filter* roj_filter_bank :: get_filter (int a_index){
 
-  if(a_index<0 or a_index>=m_config.length)
+  if(a_index<0 or a_index>=m_config.length){
+    call_warning("in roj_filter_bank :: get_filter");
     call_error("wrong index");
+  }
   
   roj_filter* filter = m_filter_array[a_index];
   return filter;
@@ -135,12 +143,21 @@ void roj_filter_bank :: filtering (complex double a_sample){
 roj_complex_signal** roj_filter_bank :: filtering (roj_complex_signal* a_sig, int a_hop){
 
   /* args checking */
-  if(a_hop<1) call_error("hop<1");
-  if(a_sig == NULL) call_error("sig is NULL");
+  if(a_hop<1){
+    call_warning("in roj_filter_bank :: filtering");
+    call_error("hop<1");
+  }
+
+  if(a_sig == NULL){
+    call_warning("in roj_filter_bank :: filtering");
+    call_error("sig is NULL");
+  }
 
   roj_signal_config in_conf = a_sig->get_config();
-  if(in_conf.rate != m_filter_gen->get_rate())
+  if(in_conf.rate != m_filter_gen->get_rate()){
+    call_warning("in roj_filter_bank :: filtering");    
     call_error("rates are not equal");
+  }
 
   roj_signal_config out_conf;
   out_conf.rate = in_conf.rate / a_hop;

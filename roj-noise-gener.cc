@@ -52,11 +52,15 @@ roj_noise_generator :: ~roj_noise_generator (){
 */
 roj_complex_signal* roj_noise_generator :: get_noise(){
 
-  if(!m_save_flag)
+  if(!m_save_flag){
+    call_warning("in roj_noise_generator :: get_noise");    
     call_error("the save flag is down");
+  }
 
-  if (!m_noise) 
+  if (!m_noise){
+    call_warning("in roj_noise_generator :: get_noise");     
     call_error("inner buffer is empty");
+  }
 
   return new roj_complex_signal(m_noise);
 }
@@ -104,11 +108,16 @@ double roj_noise_generator :: rand_pink (){
 */
 double roj_noise_generator :: add_awgn_using_sigma (roj_complex_signal* a_sig, double a_sigma){
 
-  if(a_sig==NULL)
+  if(a_sig==NULL){
+    call_warning("in roj_noise_generator :: add_awgn_using_sigma");    
     call_error("signal is null");
-  if(a_sigma<=0)
+  }
+
+  if(a_sigma<=0){
+    call_warning("in roj_noise_generator :: add_awgn_using_sigma");    
     call_error("sigma is not positive");
-  
+  }
+
   roj_signal_config sig_conf = a_sig->get_config();
   double awgn_energy = 0.0;
     
@@ -149,17 +158,21 @@ double roj_noise_generator :: add_awgn_using_sigma (roj_complex_signal* a_sig, d
 */
 double roj_noise_generator :: add_awgn_using_snr (roj_complex_signal* a_sig, double a_snr){
 
-  if(a_sig==NULL)
+  if(a_sig==NULL){
+    call_warning("in roj_noise_generator :: add_awgn_using_snr");    
     call_error("signal is null");
-  
+  }
+
   roj_signal_config sig_conf = a_sig->get_config();
 
   double sig_energy = a_sig->calc_energy();
   double sig_power = sig_energy / (2 * sig_conf.length);
   double awgn_sigma = sqrt(sig_power * pow(10.0, -a_snr/10.0));
   
-  if(sig_energy<=0)
+  if(sig_energy<=0){
+    call_warning("in roj_noise_generator :: add_awgn_using_snr");    
     call_error("energy is zero");
+  }
 
   double awgn_energy = add_awgn_using_sigma(a_sig, awgn_sigma);
   
@@ -182,18 +195,22 @@ double roj_noise_generator :: add_awgn_at_exact_snr (roj_complex_signal* a_sig, 
 
   /* generate noise and add it to a given argument */
 
-  if(a_sig==NULL)
+  if(a_sig==NULL){
+    call_warning("in roj_noise_generator :: add_awgn_at_exact_snr");    
     call_error("signal is null");
-  
+  }
+
   roj_signal_config sig_conf = a_sig->get_config();
 
   double sig_energy = a_sig->calc_energy();
   double sig_power = sig_energy / (2 * sig_conf.length);
   double awgn_sigma = sqrt(sig_power * pow(10.0, -a_snr/10.0));
   
-  if(sig_energy<=0)
+  if(sig_energy<=0){
+    call_warning("in roj_noise_generator :: add_awgn_at_exact_snr");    
     call_error("energy is zero");
-    
+  }
+
   roj_complex_signal* noise_only = new roj_complex_signal(sig_conf);    
   for(int n=0; n<sig_conf.length; n++){
     
@@ -234,11 +251,16 @@ double roj_noise_generator :: add_awgn_at_exact_snr (roj_complex_signal* a_sig, 
 */
 double roj_noise_generator :: add_pink_using_range (roj_complex_signal* a_sig, double a_range){
 
-  if(a_sig==NULL)
+  if(a_sig==NULL){
+    call_warning("in roj_noise_generator :: add_pink_using_range");    
     call_error("signal is null");
-  if(a_range<=0)
+  }
+
+  if(a_range<=0){
+    call_warning("in roj_noise_generator :: add_pink_using_range");    
     call_error("range is not positive");
-  
+  }
+
   roj_signal_config sig_conf = a_sig->get_config();
   double pink_energy = 0.0;
 
@@ -277,15 +299,19 @@ double roj_noise_generator :: add_pink_using_range (roj_complex_signal* a_sig, d
 */
 double roj_noise_generator :: add_pink_at_exact_snr (roj_complex_signal* a_sig, double a_snr){
 
-  if(a_sig==NULL)
+  if(a_sig==NULL){
+    call_warning("in roj_noise_generator :: add_pink_at_exact_snr");    
     call_error("signal is null");
-  
+  }
+
   roj_signal_config sig_conf = a_sig->get_config();
 
   double sig_energy = a_sig->calc_energy();
-  if(sig_energy<=0)
+  if(sig_energy<=0){
+    call_warning("in roj_noise_generator :: add_pink_at_exact_snr");    
     call_error("energy is zero");
-    
+  }
+
   roj_complex_signal* noise_only = new roj_complex_signal(sig_conf);
   for(int n=0; n<sig_conf.length; n++)
     noise_only->m_waveform[n] = rand_pink();
