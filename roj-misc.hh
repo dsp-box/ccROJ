@@ -1,5 +1,5 @@
 /* *************************************************** *
- * This file is a part of ccROJ project (version 0-44) *
+ * This file is a part of ccROJ project (version 0-45) *
  * distributed under GNU General Public License v3.0.  *
  * Please visit the webpage: github.com/dsp-box/ccROJ  *
  * for more information.                               *
@@ -24,19 +24,19 @@
 * @type: define
 * @brief: This is a flag, which switch on debug printing. Comment this line if you do not want to print the debug communicates.
 */
-#define ROJ_DEBUG_ON
+// #define ROJ_DEBUG_ON
 
 /**
 * @type: define
 * @brief: This is a flag, which switch on a progress. Comment this line if you do not want to print the progress.
 */
-#define ROJ_PROGRESS_ON
+// define ROJ_PROGRESS_ON
 
 /**
 * @type: define
 * @brief: This is a const string, which defines the version number. Please do not change it manually. In order to change modify VERSION file and run 'make version'
 */
-#define ROJ_VERSION "0-44"
+#define ROJ_VERSION "0-45"
 
 /**
 * @type: define
