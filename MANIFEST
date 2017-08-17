@@ -1,5 +1,7 @@
 MANIFEST of ccROJ project
 
+The name of the ccROJ project is in honor of dr. Mirosław Rojewski (Gdansk University of Technology).
+
 We provide the ccROJ framework, which is a C++ software implementation of our scientific work. 
 We share our results including code on the free licence. We hope that this project will be useful
 for scientists and engineers as well as other interested people in their work and "just for fun".
@@ -16,5 +18,3 @@ The mathematical foundations concerning this project are introduced in our follo
 [3] D. Fourer, F. Auger, P. Flandrin,
     "Recursive versions of the Levenberg-Marquardt reassigned spectrogram and of the synchrosqueezed STFT",
     Proc. IEEE 41st International Conference on Acoustics, Speech and Signal Processing (ICASSP) 2016, Shanghai, China.
-
-The name of the ccROJ project is in honor of dr. Mirosław Rojewski (Gdansk University of Technology).

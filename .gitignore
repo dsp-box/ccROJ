@@ -4,4 +4,11 @@
 *.zip
 *.txt
 *.png
-
+testing/test-cct-analyzer
+testing/test-complex-signal
+testing/test-fft-analyzer
+testing/test-fourier-spectr
+testing/test-hilbert-equiv
+testing/test-lfm-chirps
+testing/test-ode-analyzer
+testing/test-signal-recovery
