@@ -4,6 +4,7 @@
 *.zip
 *.txt
 *.png
+
 testing/test-cct-analyzer
 testing/test-complex-signal
 testing/test-fft-analyzer
