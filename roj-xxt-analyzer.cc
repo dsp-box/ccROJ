@@ -494,6 +494,61 @@ roj_real_matrix* roj_xxt_analyzer :: get_chirp_rate_by_k_estimator (){
   return output;
 }
 
+/* ************************************************************************************************************************* */
+/**
+* @type: method
+* @brief: This is an estimator of chirp-rate.
+*
+* @return: A pointer to obtained distribution.
+*/
+roj_real_matrix* roj_xxt_analyzer :: get_chirp_rate_by_k1_estimator (){
+
+  /* check input signal */
+  if(m_input_signal==NULL){
+    call_warning("in roj_xxt_analyzer :: get_chirp_rate_by_k1_estimator");
+    call_error("signal is not loaded!");
+  }
+  
+    /* transforming  (1, 2, 3, and 4 slots) */
+  if(m_fourier_spectra[CODE_WIN_T] == NULL)
+    m_fourier_spectra[CODE_WIN_T] = transforming(0, 1);
+  if(m_fourier_spectra[CODE_WIN_T2] == NULL)
+    m_fourier_spectra[CODE_WIN_T2] = transforming(0, 2);
+  if(m_fourier_spectra[CODE_WIN_D] == NULL)
+    m_fourier_spectra[CODE_WIN_D] = transforming(1, 0);
+  if(m_fourier_spectra[CODE_WIN_D2] == NULL)
+    m_fourier_spectra[CODE_WIN_D2] = transforming(2, 0);
+  
+  /* make empty output object */
+  roj_real_matrix* output = create_empty_image();
+  
+  /* calc chirp rate estimate */
+  for(int k=0; k<get_height(); k++){
+
+      for(int n=0; n<get_width(); n++){
+
+	complex double yD = m_fourier_spectra[CODE_WIN_D][n][k]; 
+	complex double yD2 = m_fourier_spectra[CODE_WIN_D2][n][k];
+	
+	complex double yT = m_fourier_spectra[CODE_WIN_T][n][k]; 
+	complex double yT2 = m_fourier_spectra[CODE_WIN_T2][n][k]; 
+
+	if(cabs(yD)==0 or cabs(yT)==0)
+	  output->m_data[n][k] = 1E300;
+	else{
+	  double nominative = creal(yD2/yD) / TWO_PI; 
+	  double denominative = cimag(yT2/yT); 
+	  output->m_data[n][k] = nominative / denominative;
+	}
+      }
+    
+    print_progress(k+1, get_height(), "c-rate");
+  }
+
+  print_progress(0, 0, "c-rate");
+  return output;
+}
+
 /**
 * @type: method
 * @brief: This is an estimator of chirp-rate.

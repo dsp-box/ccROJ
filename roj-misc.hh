@@ -24,13 +24,13 @@
 * @type: define
 * @brief: This is a flag, which switch on debug printing. Comment this line if you do not want to print the debug communicates.
 */
-// #define ROJ_DEBUG_ON
+#define ROJ_DEBUG_ON
 
 /**
 * @type: define
 * @brief: This is a flag, which switch on a progress. Comment this line if you do not want to print the progress.
 */
-// define ROJ_PROGRESS_ON
+#define ROJ_PROGRESS_ON
 
 /**
 * @type: define

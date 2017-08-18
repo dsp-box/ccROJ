@@ -89,6 +89,8 @@ public:
   roj_real_matrix* get_instantaneous_frequency_by_2_estimator ();
   
   roj_real_matrix* get_chirp_rate_by_k_estimator ();
+  roj_real_matrix* get_chirp_rate_by_k1_estimator ();
+
   roj_real_matrix* get_chirp_rate_by_d_estimator ();
   roj_real_matrix* get_chirp_rate_by_f_estimator ();
 };

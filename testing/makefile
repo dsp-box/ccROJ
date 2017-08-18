@@ -180,7 +180,7 @@ case-6:
 		--zfactor 0.001 \
 	        --min -1800 --max 1800 \
 		--xmin 0 --xmax 1 \
-		--format eps
+		--format png
 	mplayer lfm.wav	 # please check a level of your speaker
 
 clean:	

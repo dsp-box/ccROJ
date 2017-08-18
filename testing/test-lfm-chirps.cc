@@ -56,7 +56,7 @@ int main(void){
    
   /* finite window definition */
   roj_window_generator win_gen = roj_window_generator(sig_conf.rate);
-  win_gen.set_chirp_rate(0.0);
+  win_gen.set_chirp_rate(0);
   win_gen.set_length(100);
   win_gen.set_type(0);
    
@@ -72,6 +72,10 @@ int main(void){
   
   /* get and save chirp rate */
   roj_real_matrix* c_rate = tf_analyzer.get_chirp_rate(2);
+  /*
+    roj_real_matrix* c_rate = tf_analyzer.get_chirp_rate_by_k_estimator();
+    roj_real_matrix* c_rate = tf_analyzer.get_chirp_rate_by_k1_estimator();
+  */
   c_rate->save("data-c-rate.txt"); 
      
   /* cleanning */

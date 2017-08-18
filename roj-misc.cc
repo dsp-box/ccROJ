@@ -351,37 +351,14 @@ double calc_blackman_harris (int a_nr, int a_len, int a_d_order){
 
   if(a_d_order<0)
     call_error("not defined order in window calculation");
-
-  switch(a_d_order){
-  case 0:
-    return
-      WIN_BH_0
-      + WIN_BH_1 * cos(1.0*TWO_PI*(double)a_nr/a_len)
-      + WIN_BH_2 * cos(2.0*TWO_PI*(double)a_nr/a_len)
-      + WIN_BH_3 * cos(3.0*TWO_PI*(double)a_nr/a_len)
-      + WIN_BH_4 * cos(4.0*TWO_PI*(double)a_nr/a_len);  
-    
-  case 1:
-    return
-      - 1.0*TWO_PI * WIN_BH_1 * sin(1.0*TWO_PI * (double)a_nr/a_len)
-      - 2.0*TWO_PI * WIN_BH_2 * sin(2.0*TWO_PI * (double)a_nr/a_len)
-      - 3.0*TWO_PI * WIN_BH_3 * sin(3.0*TWO_PI * (double)a_nr/a_len)
-      - 4.0*TWO_PI * WIN_BH_4 * sin(4.0*TWO_PI * (double)a_nr/a_len); 
-
-  case 2:
-    return
-      - pow(1.0*TWO_PI, 2.0) * WIN_BH_1 * cos(1.0*TWO_PI * (double)a_nr/a_len)
-      - pow(2.0*TWO_PI, 2.0) * WIN_BH_2 * cos(2.0*TWO_PI * (double)a_nr/a_len)
-      - pow(3.0*TWO_PI, 2.0) * WIN_BH_3 * cos(3.0*TWO_PI * (double)a_nr/a_len)
-      - pow(4.0*TWO_PI, 2.0) * WIN_BH_4 * cos(4.0*TWO_PI * (double)a_nr/a_len);   
-
-  default: /* not tested for a_d_order > 2 */
-    return
-        pow(1.0*TWO_PI, a_d_order) * WIN_BH_1 * cos(1.0*TWO_PI * (double)a_nr/a_len + 0.5*M_PI*a_d_order)
-      + pow(2.0*TWO_PI, a_d_order) * WIN_BH_2 * cos(2.0*TWO_PI * (double)a_nr/a_len + 0.5*M_PI*a_d_order)
-      + pow(3.0*TWO_PI, a_d_order) * WIN_BH_3 * cos(3.0*TWO_PI * (double)a_nr/a_len + 0.5*M_PI*a_d_order)
-      + pow(4.0*TWO_PI, a_d_order) * WIN_BH_4 * cos(4.0*TWO_PI * (double)a_nr/a_len + 0.5*M_PI*a_d_order);  
-  }  
+  
+  /* not tested for a_d_order > 2 */
+  return
+    WIN_BH_0 * (a_d_order ? 0 : 1)
+    + pow(1.0*TWO_PI, a_d_order) * WIN_BH_1 * cos(1.0*TWO_PI * (double)a_nr/a_len + 0.5*M_PI*a_d_order)
+    + pow(2.0*TWO_PI, a_d_order) * WIN_BH_2 * cos(2.0*TWO_PI * (double)a_nr/a_len + 0.5*M_PI*a_d_order)
+    + pow(3.0*TWO_PI, a_d_order) * WIN_BH_3 * cos(3.0*TWO_PI * (double)a_nr/a_len + 0.5*M_PI*a_d_order)
+    + pow(4.0*TWO_PI, a_d_order) * WIN_BH_4 * cos(4.0*TWO_PI * (double)a_nr/a_len + 0.5*M_PI*a_d_order);      
 }
 
 /* ************************************************************************************************************************* */
