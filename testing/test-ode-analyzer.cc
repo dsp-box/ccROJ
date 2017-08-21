@@ -39,7 +39,7 @@ int main(void){
   roj_pulse_generator* pulse_gener_ptr = new roj_pulse_generator();
 
   /* configuration */
-  pulse_gener_ptr->m_transition = 0.5;
+  pulse_gener_ptr->m_transition = 0;
   pulse_gener_ptr->m_period = 0.5;
   pulse_gener_ptr->m_delay = 0.35;
   pulse_gener_ptr->m_width = 0.3;
@@ -69,7 +69,7 @@ int main(void){
   
   /* add awgn also by using the generator */
   roj_noise_generator* noise_gener_ptr = new roj_noise_generator();
-  double snr = 40.0;
+  double snr = 50.0;
   
   double sig_energy = signal_ptr->calc_energy();
   double noise_energy = noise_gener_ptr->add_awgn_at_exact_snr(signal_ptr, snr);
@@ -96,7 +96,7 @@ int main(void){
   roj_filter_generator *filter_gen = new roj_filter_generator(rate);
 
   /* time spread which corresponds to effective duration of impulse response */
-  filter_gen->set_spread(0.01);
+  filter_gen->set_spread(0.006);
 
   /* ODE filter order */
   filter_gen->set_order(5);
@@ -154,7 +154,7 @@ int main(void){
   /* s_delay->save("data-s-delay.txt"); */
 
   /* get and save chirp rate */
-  roj_real_matrix* c_rate = analyzer_ptr->get_chirp_rate(2);
+  roj_real_matrix* c_rate = analyzer_ptr->get_chirp_rate(3);
   c_rate->save("data-c-rate.txt"); 
 
   /* analyzer is more needed */

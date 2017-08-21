@@ -344,7 +344,7 @@ roj_real_matrix* roj_ode_analyzer :: get_instantaneous_frequency_by_2_estimator(
     call_error("signal is not loaded!");
   }
 
-  /* filtering  (1, 2, and 3 banks) */
+  /* filtering  (1 - 3 banks) */
   for(int n=1; n<4; n++)
     if(m_filtered_signals[n] == NULL)
       m_filtered_signals[n] = m_bank_array[n]->filtering(m_input_signal, m_hop);  
@@ -437,7 +437,7 @@ roj_real_matrix* roj_ode_analyzer :: get_chirp_rate_by_k_estimator(){
     call_error("signal is not loaded!");
   }
 
-  /* filtering  (1 and 3 banks) */
+  /* filtering  (1 - 3 banks) */
   for(int n=1; n<4; n++)
     if(m_filtered_signals[n] == NULL)
       m_filtered_signals[n] = m_bank_array[n]->filtering(m_input_signal, m_hop);  
@@ -490,7 +490,7 @@ roj_real_matrix* roj_ode_analyzer :: get_chirp_rate_by_d_estimator(){
     call_error("signal is not loaded!");
   }
 
-  /* filtering  (0 and 3 banks) */
+  /* filtering  (0 - 3 banks) */
   for(int n=0; n<4; n++)
     if(m_filtered_signals[n] == NULL)
       m_filtered_signals[n] = m_bank_array[n]->filtering(m_input_signal, m_hop);  
@@ -554,7 +554,7 @@ roj_real_matrix* roj_ode_analyzer :: get_chirp_rate_by_f_estimator(){
     call_error("signal is not loaded!");
   }
 
-  /* filtering  (0 and 3 banks) */
+  /* filtering  (1 - 4 banks) */
   for(int n=1; n<5; n++)
     if(m_filtered_signals[n] == NULL)
       m_filtered_signals[n] = m_bank_array[n]->filtering(m_input_signal, m_hop);  
@@ -593,6 +593,66 @@ roj_real_matrix* roj_ode_analyzer :: get_chirp_rate_by_f_estimator(){
 	output->m_data[n][k] = -nominative / denominative;
     }
 
+    print_progress(k+1, m_bank_config.length, "c-rate");
+  }
+  
+  print_progress(0, 0, "c-rate");
+  return output;
+}
+
+
+/**
+ * @type: method
+ * @brief: This is an estimator of chirp-rate.
+ *
+ * @return: A pointer to obtained distribution.
+ */
+roj_real_matrix* roj_ode_analyzer :: get_chirp_rate_by_k1_estimator(){
+
+  /* check input signal */
+  if(m_input_signal==NULL){
+    call_warning("in roj_ode_analyzer :: get_chirp_rate_by_k1_estimator");
+    call_error("signal is not loaded!");
+  }
+
+  /* filtering  (0 - 4 banks) */
+  for(int n=0; n<5; n++)
+    if(m_filtered_signals[n] == NULL)
+      m_filtered_signals[n] = m_bank_array[n]->filtering(m_input_signal, m_hop);  
+
+  /* make empty output object */
+  roj_real_matrix* output = create_empty_image();
+
+  /* calc chirp rate estimate */
+  for(int k=0; k<get_height(); k++){
+    
+    /* TODO: include to filter bank */
+    double frequency = m_bank_array[2]->get_frequency(k);
+    complex double pole = I*TWO_PI * frequency -1.0/m_filter_gen->get_spread();
+
+    for(int n=0; n<get_width(); n++){
+      
+      /* TODO: include to filter bank */
+      complex double yT = m_filtered_signals[3][k]->m_waveform[n] * m_filter_gen->get_spread() * m_filter_gen->get_order();      
+      complex double yD = m_filtered_signals[1][k]->m_waveform[n] / m_filter_gen->get_spread();
+      yD += m_filtered_signals[2][k]->m_waveform[n] * pole;
+      
+      complex double yT2 = m_filter_gen->get_order() * (m_filter_gen->get_order() + 1) * m_filtered_signals[4][k]->m_waveform[n];
+      yT2 *= pow(m_filter_gen->get_spread(), 2.0);
+
+      complex double yD2 = m_filtered_signals[0][k]->m_waveform[n] / pow(m_filter_gen->get_spread(), 2.0);
+      yD2 += 2.0 * pole * m_filtered_signals[1][k]->m_waveform[n] / m_filter_gen->get_spread();
+      yD2 += cpow(pole, 2.0) * m_filtered_signals[2][k]->m_waveform[n];
+      
+      double nominative = creal (yD2/yD) / TWO_PI;
+      double denominative = cimag (yT2/yT);
+
+      if(cabs(yT)==0 or cabs(yD)==0 or cabs(yT2)==0)
+	output->m_data[n][k] = 1E300;
+      else
+	output->m_data[n][k] = nominative / denominative;
+    }
+    
     print_progress(k+1, m_bank_config.length, "c-rate");
   }
   

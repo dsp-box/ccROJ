@@ -533,7 +533,7 @@ roj_real_matrix* roj_xxt_analyzer :: get_chirp_rate_by_k1_estimator (){
 	complex double yT = m_fourier_spectra[CODE_WIN_T][n][k]; 
 	complex double yT2 = m_fourier_spectra[CODE_WIN_T2][n][k]; 
 
-	if(cabs(yD)==0 or cabs(yT)==0)
+	if(cabs(yD)==0 or cabs(yT)==0 or cabs(yT2)==0)
 	  output->m_data[n][k] = 1E300;
 	else{
 	  double nominative = creal(yD2/yD) / TWO_PI; 
