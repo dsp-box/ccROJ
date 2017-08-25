@@ -235,7 +235,7 @@ void print_progress (int a_curr, int a_len, const char *a_info){
 */
 void verify_config(roj_signal_config a_conf){
 
-  if (a_conf.length<1) call_error("signal length is not valid");
+  if (a_conf.length<2) call_error("signal length is not valid");
   if (a_conf.rate<=0.0)  call_error("signal rate is not valid");
 }
 
@@ -247,7 +247,7 @@ void verify_config(roj_signal_config a_conf){
 */
 void verify_config(roj_array_config a_conf){
 
-  if (a_conf.length<1) call_error("array length is not valid");
+  if (a_conf.length<2) call_error("array length is not valid");
   if (a_conf.min>=a_conf.max) call_error("array config is not valid");
 }
 
@@ -383,6 +383,51 @@ int value_comparer (const void * a_arg1, const void * a_arg2){
     return 0;
   
   return 1;
+}
+
+/* ************************************************************************************************************************* */
+/**
+* @type: function
+* @brief: This routine is used to convet roj_array_config to roj_signal_config.
+*
+* @param [in] a_conf: configure to convert.
+*
+* @return: output configuration.
+*/
+roj_signal_config convert_config (roj_array_config a_conf){
+
+  verify_config(a_conf);
+
+  roj_signal_config out_conf;
+  out_conf.length = a_conf.length;
+  out_conf.start = a_conf.min;
+  
+  double delta = (a_conf.max-a_conf.min) / (a_conf.length-1);
+  out_conf.rate = 1.0 / delta;
+
+  return out_conf;
+}
+
+/**
+* @type: function
+* @brief: This routine is used to convet roj_signal_config to  roj_array_config.
+*
+* @param [in] a_conf: configure to convert.
+*
+* @return: output configuration.
+*/
+roj_array_config convert_config (roj_signal_config a_conf){
+
+  verify_config(a_conf);
+
+  roj_array_config out_conf;
+  out_conf.length = a_conf.length;
+  out_conf.min = a_conf.start;
+  
+  double delta = 1.0 / a_conf.rate;
+  out_conf.max = out_conf.min + (a_conf.length-1) * delta;
+
+  return out_conf;
 }
 
 /* ************************************************************************************************************************* */

@@ -148,6 +148,10 @@ void verify_config(roj_signal_config);
 void verify_config(roj_array_config);
 void verify_config(roj_image_config);
 
+/* config convert */
+roj_signal_config convert_config (roj_array_config);
+roj_array_config convert_config (roj_signal_config);
+
 /* for calculations */
 double rand_gauss(double =1.0);
 double calc_binominal (int, int);

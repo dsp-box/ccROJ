@@ -68,6 +68,8 @@ public:
   /* filtering */
   roj_real_array* filtering(roj_real_array*, int =1);
   roj_real_array* smart_filtering(roj_real_array*, int =1);
+
+  roj_complex_signal* smart_filtering(roj_complex_signal*, int =1);
   roj_real_matrix* smart_filtering(roj_real_matrix*, int =1, int =1);
 
   /* reset internal buffers */

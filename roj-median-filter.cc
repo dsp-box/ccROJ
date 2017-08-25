@@ -76,6 +76,11 @@ roj_median_filter :: ~roj_median_filter (){
 */
 roj_real_array* roj_median_filter :: filtering (roj_real_array* a_arr, int a_hop){
   
+  if(a_arr == NULL){
+    call_warning("in roj_median_filter :: filtering");
+    call_error("arg is NULL");
+  }
+
   if(a_hop<=0){
     call_warning("in roj_median_filter :: filtering");
     call_error("hop not positive");
@@ -143,6 +148,11 @@ roj_real_array* roj_median_filter :: filtering (roj_real_array* a_arr, int a_hop
 */
 roj_real_array* roj_median_filter :: smart_filtering (roj_real_array* a_arr, int a_hop){
   
+  if(a_arr == NULL){
+    call_warning("in roj_median_filter :: smart_filtering");
+    call_error("arg is NULL");
+  }
+
   if(a_hop<=0){
     call_warning("in roj_median_filter :: smart_filtering");
     call_error("hop not positive");
@@ -183,6 +193,60 @@ roj_real_array* roj_median_filter :: smart_filtering (roj_real_array* a_arr, int
   return output;
 }
 
+/* ************************************************************************************************************************* */
+/**
+* @type: method
+* @brief: This routine performs a smart median filtering for a signal whose type is roj_complex_signal.
+*
+* @param [in] a_sig: A given signal for filtering.
+* @param [in] a_hop: A hop size between steps of filtering.
+*
+* @return: The filtered output signal.
+*/
+roj_complex_signal* roj_median_filter :: smart_filtering (roj_complex_signal* a_sig, int a_hop){
+
+  if(a_sig == NULL){
+    call_warning("in roj_median_filter :: smart_filtering");
+    call_error("arg is NULL");
+  }
+
+  if(a_hop<=0){
+    call_warning("in roj_median_filter :: smart_filtering");
+    call_error("hop not positive");
+  }
+
+  roj_signal_config sig_conf = a_sig->get_config();
+  roj_array_config arr_conf = convert_config(sig_conf);
+
+  roj_real_array *re_orr;
+  if(a_sig->check_real()){
+    roj_real_array *re_arr = new roj_real_array(arr_conf);
+    for (int n=0; n<arr_conf.length; n++)
+      re_arr->m_data[n] = creal(a_sig->m_waveform[n]);
+    
+    re_orr = smart_filtering (re_arr, a_hop);
+  }
+  else
+    re_orr = new roj_real_array(arr_conf);
+  
+
+  roj_real_array *im_orr = NULL;
+  if(a_sig->check_imag()){
+    roj_real_array *im_arr = new roj_real_array(arr_conf);
+    for (int n=0; n<arr_conf.length; n++)
+      im_arr->m_data[n] = cimag(a_sig->m_waveform[n]);
+    roj_real_array *im_orr = smart_filtering (im_arr, a_hop);
+  }
+
+  roj_complex_signal* out_signal = new roj_complex_signal(re_orr, im_orr);
+
+  delete re_orr;
+  if (im_orr)
+    delete im_orr;
+
+  return out_signal;
+}
+
 /**
 * @type: method
 * @brief: This routine performs a smart median filtering for an image whose type is roj_real_matrix.
@@ -194,6 +258,11 @@ roj_real_array* roj_median_filter :: smart_filtering (roj_real_array* a_arr, int
 * @return: The filtered output image.
 */
 roj_real_matrix* roj_median_filter :: smart_filtering (roj_real_matrix* a_matrix, int a_hop, int a_vop){
+
+  if(a_matrix == NULL){
+    call_warning("in roj_median_filter :: smart_filtering");
+    call_error("arg is NULL");
+  }
 
   if(a_hop<=0){
     call_warning("in roj_median_filter :: smart_filtering");
