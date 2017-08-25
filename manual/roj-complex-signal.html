@@ -154,25 +154,13 @@ roj-complex-signal.cc <br>
 <span class='key'>@brief</span>: This routine attaches silence at the beginning. <br>
 <span class='key'>@param</span> [in]<span class='arg'> a_duration</span>: duration (in seconds) of attached silence. <br>
 <span class='key'>@return</span>: A number of new waveform samples. <br>
-<span class='key'>@sign</span>: <span class='bold'>unsigned int <span class='range'>roj_complex_signal</span> <span class='range'></span>:: <span class='func'>append_zero_head</span> <span class='func'></span>(double<span class='arg'> a_duration</span>)</span><br>
+<span class='key'>@sign</span>: <span class='bold'>unsigned int <span class='range'>roj_complex_signal</span> <span class='range'></span>:: <span class='func'>append_head</span> <span class='func'></span>(double<span class='arg'> a_duration</span>)</span><br>
 </div>
 <br><div class='method'>
 <span class='key'>@brief</span>: This routine attaches silence at the end. <br>
 <span class='key'>@param</span> [in]<span class='arg'> a_duration</span>: duration (in seconds) of attached silence. <br>
 <span class='key'>@return</span>: A number of new waveform samples. <br>
-<span class='key'>@sign</span>: <span class='bold'>unsigned int <span class='range'>roj_complex_signal</span> <span class='range'></span>:: <span class='func'>append_zero_tail</span> <span class='func'></span>(double<span class='arg'> a_duration</span>)</span><br>
-</div>
-<br><div class='method'>
-<span class='key'>@brief</span>: This routine attaches samples. <br>
-<span class='key'>@param</span> [in]<span class='arg'> a_duration</span>: duration (in seconds) of attached signal. <br>
-<span class='key'>@return</span>: A number of new waveform samples. <br>
-<span class='key'>@sign</span>: <span class='bold'>unsigned int <span class='range'>roj_complex_signal</span> <span class='range'></span>:: <span class='func'>append_cos_head</span> <span class='func'></span>(double<span class='arg'> a_duration</span>)</span><br>
-</div>
-<br><div class='method'>
-<span class='key'>@brief</span>: This routine attaches samples. <br>
-<span class='key'>@param</span> [in]<span class='arg'> a_duration</span>: duration (in seconds) of attached signal. <br>
-<span class='key'>@return</span>: A number of new waveform samples. <br>
-<span class='key'>@sign</span>: <span class='bold'>unsigned int <span class='range'>roj_complex_signal</span> <span class='range'></span>:: <span class='func'>append_cos_tail</span> <span class='func'></span>(double<span class='arg'> a_duration</span>)</span><br>
+<span class='key'>@sign</span>: <span class='bold'>unsigned int <span class='range'>roj_complex_signal</span> <span class='range'></span>:: <span class='func'>append_tail</span> <span class='func'></span>(double<span class='arg'> a_duration</span>)</span><br>
 </div>
 <br><div class='operator'>
 <span class='key'>@brief</span>: Overloading of '+=' operator. <br>

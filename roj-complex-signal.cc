@@ -1,5 +1,5 @@
 /* *************************************************** *
- * This file is a part of ccROJ project (version 0-45) *
+ * This file is a part of ccROJ project (version 0-46) *
  * distributed under GNU General Public License v3.0.  *
  * Please visit the webpage: github.com/dsp-box/ccROJ  *
  * for more information.                               *
@@ -701,7 +701,7 @@ unsigned int roj_complex_signal :: cut (double a_new_start, double a_new_stop){
  *
  * @return: A number of new waveform samples.
  */
-unsigned int roj_complex_signal :: append_zero_head (double a_duration){
+unsigned int roj_complex_signal :: append_head (double a_duration){
 
   if(a_duration<=0){
     call_warning("in roj_complex_signal :: append_zero_head");
@@ -733,7 +733,7 @@ unsigned int roj_complex_signal :: append_zero_head (double a_duration){
  *
  * @return: A number of new waveform samples.
  */
-unsigned int roj_complex_signal :: append_zero_tail (double a_duration){
+unsigned int roj_complex_signal :: append_tail (double a_duration){
 
   if(a_duration<=0){
     call_warning("in roj_complex_signal :: append_zero_tail");
@@ -754,52 +754,6 @@ unsigned int roj_complex_signal :: append_zero_tail (double a_duration){
   m_config.length += number;
 
   return m_config.length;
-}
-
-/* ************************************************************************************************************************* */
-/**
- * @type: method
- * @brief: This routine attaches samples.
- *
- * @param [in] a_duration: duration (in seconds) of attached signal.
- *
- * @return: A number of new waveform samples.
- */
-unsigned int roj_complex_signal :: append_cos_head (double a_duration){
-
-  unsigned int number = a_duration*m_config.rate;
-  unsigned int outlen = append_zero_head (a_duration);
-
-  for(int n=number-1; n>=0; n--){
-    
-    double x = M_PI * (double) n / (number-1) - M_PI;
-    m_waveform[n] =  m_waveform[number] *  (0.5 * cos(x) + 0.5);
-  }
-
-  return outlen;
-}
-
-/**
- * @type: method
- * @brief: This routine attaches samples.
- *
- * @param [in] a_duration: duration (in seconds) of attached signal.
- *
- * @return: A number of new waveform samples.
- */
-unsigned int roj_complex_signal :: append_cos_tail (double a_duration){
-
-  unsigned int oldend = m_config.length;
-  unsigned int number = a_duration*m_config.rate;
-  unsigned int outlen = append_zero_tail (a_duration);
-
-  for(int n=oldend; n<outlen; n++){
-
-    double x = M_PI * (double) (n-oldend) / (number-1) - M_PI;
-    m_waveform[n] =  m_waveform[oldend-1] *  (-0.5 * cos(x) + 0.5);
-  }
-
-  return outlen;
 }
 
 /* ************************************************************************************************************************* */

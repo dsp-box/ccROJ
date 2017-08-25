@@ -1,5 +1,5 @@
 /* *************************************************** *
- * This file is a part of ccROJ project (version 0-45) *
+ * This file is a part of ccROJ project (version 0-46) *
  * distributed under GNU General Public License v3.0.  *
  * Please visit the webpage: github.com/dsp-box/ccROJ  *
  * for more information.                               *
@@ -32,8 +32,8 @@ int main(void){
   }
 
   in_signal->remove_imag();
-  in_signal->append_cos_head(0.1);
-  in_signal->append_cos_tail(0.3);
+  in_signal->append_head(0.1);
+  in_signal->append_tail(0.3);
 
   /* array configuration is used in Fourier analyzer */
   roj_array_config arr_conf;

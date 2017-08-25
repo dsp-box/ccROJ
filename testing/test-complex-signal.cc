@@ -1,5 +1,5 @@
 /* *************************************************** *
- * This file is a part of ccROJ project (version 0-45) *
+ * This file is a part of ccROJ project (version 0-46) *
  * distributed under GNU General Public License v3.0.  *
  * Please visit the webpage: github.com/dsp-box/ccROJ  *
  * for more information.                               *
@@ -30,8 +30,8 @@ int main(void){
   signal_from_wav->reverse();
   signal_from_wav->remove_const();
   signal_from_wav->cut(0.0, 0.7);
-  signal_from_wav->append_zero_tail(1.5);
-  signal_from_wav->append_zero_head(0.5);
+  signal_from_wav->append_tail(1.5);
+  signal_from_wav->append_head(0.5);
   signal_from_wav->save_wav("mail2.wav");
   double energy2 = signal_from_wav->calc_energy();
   call_info("energy:", energy2);

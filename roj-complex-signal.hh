@@ -1,5 +1,5 @@
 /* *************************************************** *
- * This file is a part of ccROJ project (version 0-45) *
+ * This file is a part of ccROJ project (version 0-46) *
  * distributed under GNU General Public License v3.0.  *
  * Please visit the webpage: github.com/dsp-box/ccROJ  *
  * for more information.                               *
@@ -60,10 +60,8 @@ private:
   void clear();
 
   /* waveform manipulation with change its length */
-  unsigned int append_zero_head(double);
-  unsigned int append_zero_tail(double);
-  unsigned int append_cos_head(double);
-  unsigned int append_cos_tail(double);
+  unsigned int append_head(double);
+  unsigned int append_tail(double);
   unsigned int cut(double, double);
 
   
