@@ -370,6 +370,46 @@ void roj_complex_signal :: reverse (){
 /* ************************************************************************************************************************* */
 /**
  * @type: method
+ * @brief: This routine performs decimation.
+ *
+ * @param [in] a_hop: decimation factor.
+ */
+void roj_complex_signal :: decimate (int a_hop){
+
+  if(a_hop<=1){
+    call_warning("in roj_complex_signal :: decimate");
+    call_error("a_hop <= 1");
+  }
+
+  if(2*a_hop>=m_config.length){
+    call_warning("in roj_complex_signal :: decimate");
+    call_error("a_hop too large");
+  }
+
+  /* allocate memory for samples */
+  int new_length = 1 + m_config.length / a_hop;
+  complex double *waveform = new complex double [new_length];
+  int byte_size = new_length * sizeof(complex double);
+  memset(waveform, 0x0, byte_size);
+
+  /* assign samples */
+  for(int n=0; n<m_config.length; n++){
+    if (n%a_hop == 0){
+
+      waveform[n/a_hop] = m_waveform[n];
+    }
+  }
+
+  /* swap */
+  delete [] m_waveform;
+  m_waveform = waveform;
+  m_config.length = new_length;
+  m_config.rate /= a_hop;
+}
+
+/* ************************************************************************************************************************* */
+/**
+ * @type: method
  * @brief: This routine calculates signal energy.
  *
  * @return: Signal energy.

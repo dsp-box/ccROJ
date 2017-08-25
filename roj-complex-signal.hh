@@ -56,6 +56,7 @@ private:
   /* waveform manipulation */
   int copy(roj_complex_signal*, int =0);
   void modulate(double);
+  void decimate(int);
   void reverse();
   void clear();
 
