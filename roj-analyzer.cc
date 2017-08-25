@@ -83,7 +83,7 @@ roj_real_matrix* roj_analyzer :: get_chirp_rate (int a_code){
   case CR_K_ESTIMATOR: return get_chirp_rate_by_k_estimator();
   case CR_D_ESTIMATOR: return get_chirp_rate_by_d_estimator();
   case CR_F_ESTIMATOR: return get_chirp_rate_by_f_estimator();
-  case CR_K1_ESTIMATOR: return get_chirp_rate_by_k1_estimator();
+  case CR_M_ESTIMATOR: return get_chirp_rate_by_m_estimator();
   default:
     call_error("not known code");
   }

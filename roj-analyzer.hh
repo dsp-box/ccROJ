@@ -59,9 +59,9 @@ struct roj_stft_transform;
 
 /**
 * @type: define
-* @brief: This const defines the code of chirp-rate K1 estimator.
+* @brief: This const defines the code of chirp-rate M estimator.
 */
-#define CR_K1_ESTIMATOR 3
+#define CR_M_ESTIMATOR 3
 
 /**
 * @type: define
@@ -111,7 +111,7 @@ public:
   roj_real_matrix* get_chirp_rate(int=0);
  
   virtual roj_real_matrix* get_chirp_rate_by_k_estimator() = 0;
-  virtual roj_real_matrix* get_chirp_rate_by_k1_estimator() = 0;
+  virtual roj_real_matrix* get_chirp_rate_by_m_estimator() = 0;
   virtual roj_real_matrix* get_chirp_rate_by_d_estimator() = 0;
   virtual roj_real_matrix* get_chirp_rate_by_f_estimator() = 0;
 };

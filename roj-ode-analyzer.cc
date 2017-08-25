@@ -607,11 +607,11 @@ roj_real_matrix* roj_ode_analyzer :: get_chirp_rate_by_f_estimator(){
  *
  * @return: A pointer to obtained distribution.
  */
-roj_real_matrix* roj_ode_analyzer :: get_chirp_rate_by_k1_estimator(){
+roj_real_matrix* roj_ode_analyzer :: get_chirp_rate_by_m_estimator(){
 
   /* check input signal */
   if(m_input_signal==NULL){
-    call_warning("in roj_ode_analyzer :: get_chirp_rate_by_k1_estimator");
+    call_warning("in roj_ode_analyzer :: get_chirp_rate_by_m_estimator");
     call_error("signal is not loaded!");
   }
 
