@@ -389,7 +389,6 @@ double roj_complex_signal :: calc_energy (){
   return energy;
 }
 
-
 /* ************************************************************************************************************************* */
 /**
  * @type: method
@@ -794,6 +793,35 @@ void roj_complex_signal :: operator -= (roj_complex_signal* a_sig){
   for(int n=0; n<m_config.length; n++){
     
     m_waveform[n] -= a_sig->m_waveform[n];
+  }  
+}
+
+/* ************************************************************************************************************************* */
+/**
+ * @type: operator
+ * @brief: Overloading of '*=' operator.
+ *
+ * @param [in] a_number: a number which is used in multiplication.
+ */
+void roj_complex_signal :: operator *= (complex double a_number){
+  
+  for(int n=0; n<m_config.length; n++){
+    
+    m_waveform[n] *= a_number;
+  }  
+}
+
+/**
+ * @type: operator
+ * @brief: Overloading of '/=' operator.
+ *
+ * @param [in] a_number: a number which is used in division.
+ */
+void roj_complex_signal :: operator /= (complex double a_number){
+  
+  for(int n=0; n<m_config.length; n++){
+    
+    m_waveform[n] /= a_number;
   }  
 }
 

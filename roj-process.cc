@@ -111,7 +111,7 @@ roj_complex_signal* roj_remove_const (roj_complex_signal* a_signal, int a_order_
   roj_signal_config conf = a_signal->get_config();
   roj_complex_signal* out_signal = new roj_complex_signal(conf);
 
-  for(int n=0; n<conf.length; n++)
+  for(int n=0; n<conf.length; n++){
     for(int r=-a_order_radius; r<=a_order_radius; r++){
       if (n+r>=conf.length) continue;
       if (n+r<0) continue; 
@@ -119,8 +119,10 @@ roj_complex_signal* roj_remove_const (roj_complex_signal* a_signal, int a_order_
       out_signal->m_waveform[n] += a_signal->m_waveform[n+r];
    }
 
-  for(int n=0; n<conf.length; n++)
     out_signal->m_waveform[n] = a_signal->m_waveform[n] - out_signal->m_waveform[n];
+    print_progress(n, conf.length, "dcrm");
+  }
+  print_progress(0, 0, "dcrm");
   
   return out_signal;
 }

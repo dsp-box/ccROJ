@@ -81,6 +81,7 @@ private:
   void conjugate();
 
   double calc_energy();
+
   bool check_real();
   bool check_imag();
   
@@ -93,6 +94,8 @@ private:
   /* operators */
   void operator += (roj_complex_signal*);
   void operator -= (roj_complex_signal*);
+  void operator *= (complex double);
+  void operator /= (complex double);
 };
 
 
