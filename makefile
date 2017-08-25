@@ -79,8 +79,8 @@ public: www
 www:
 	scp manual/* git.eti.pg.gda.pl:/var/www/html/ccROJ/
 
-REGEXP_1 := "s/define ROJ_VERSION \"[0-9]-[0-9]+\"/define ROJ_VERSION \"$(shell cat VERSION)\"/g"
-REGEXP_2 := "s@(version [0-9]-[0-9][0-9]+)@(version $(shell cat VERSION))@g"
+REGEXP_1 := "s/define ROJ_VERSION \"[0-9]-[0-9]\+\"/define ROJ_VERSION \"$(shell cat VERSION)\"/g"
+REGEXP_2 := "s@(version [0-9]-[0-9][0-9]\+)@(version $(shell cat VERSION))@g"
 version: _version doc  
 _version: 
 	sed -i $(REGEXP_1) roj-misc.hh

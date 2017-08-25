@@ -85,3 +85,42 @@ roj_complex_signal* roj_correlate_signals (roj_complex_signal* a_sig_1, roj_comp
   delete tmp_signal;
   return out_signal;
 }
+
+/* ************************************************************************************************************************* */
+/**
+ * @type: function
+ * @brief: This routine removes running constant value (local DC offset).
+ *
+ * @param [in] a_signal: a pointer to input signal.
+ * @param [in] a_order_radius: radius, order is equal to 1 + 2 radius.
+ *
+ * @return: a pointer to output signal
+ */
+roj_complex_signal* roj_remove_const (roj_complex_signal* a_signal, int a_order_radius){
+
+  if(a_signal==NULL){
+    call_warning("in roj_remove_const");
+    call_error("arg is NULL");
+  }
+  
+  if(a_order_radius<1){
+    call_warning("in roj_remove_const");
+    call_error("order is <= 1");
+  }
+
+  roj_signal_config conf = a_signal->get_config();
+  roj_complex_signal* out_signal = new roj_complex_signal(conf);
+
+  for(int n=0; n<conf.length; n++)
+    for(int r=-a_order_radius; r<=a_order_radius; r++){
+      if (n+r>=conf.length) continue;
+      if (n+r<0) continue; 
+
+      out_signal->m_waveform[n] += a_signal->m_waveform[n+r];
+   }
+
+  for(int n=0; n<conf.length; n++)
+    out_signal->m_waveform[n] = a_signal->m_waveform[n] - out_signal->m_waveform[n];
+  
+  return out_signal;
+}

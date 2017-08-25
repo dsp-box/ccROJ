@@ -418,7 +418,7 @@ complex double roj_complex_signal :: remove_const(){
  * @return: A pointer to the object roj_fourier_spectrum.
  */
 roj_fourier_spectrum* roj_complex_signal :: get_spectrum (){
-
+  
   return new roj_fourier_spectrum(this);
 }
 
