@@ -37,5 +37,6 @@ class roj_complex_signal;
 roj_complex_signal* roj_remove_const (roj_complex_signal*, int);
 roj_complex_signal* roj_convolve_signals (roj_complex_signal*, roj_complex_signal*);
 roj_complex_signal* roj_correlate_signals (roj_complex_signal*, roj_complex_signal*);
+roj_complex_signal* roj_short_time_correlation (roj_complex_signal*, roj_complex_signal*, int, int);
 
 #endif

@@ -130,3 +130,51 @@ roj_complex_signal* roj_remove_const (roj_complex_signal* a_signal, int a_order_
   
   return out_signal;
 }
+
+/* ************************************************************************************************************************* */
+/**
+ * @type: function
+ * @brief: This routine calculates short-time cross-correlation. [HAS TO BE TESTED]
+ *
+ * @param [in] a_arr_1: a pointer to input signal.
+ * @param [in] a_arr_2: a pointer to input signal.
+ * @param [in] a_width: window width.
+ * @param [in] a_hop: hopsize.
+ *
+ * @return: a pointer to output signal
+ */
+roj_real_array* roj_short_time_correlation (roj_real_array* a_arr_1, roj_real_array* a_arr_2, int a_width, int a_hop){
+  
+  if(a_arr_1==NULL or a_arr_2==NULL){
+    call_warning("in roj_short_time_correlation");
+    call_error("arg is NULL");
+  }
+  
+  if(a_width<2){
+    call_warning("in roj_short_time_correlation");
+    call_error("width < 2");
+  }
+
+  if(a_hop<1){
+    call_warning("in roj_short_time_correlation");
+    call_error("hop < 1");
+  }
+  
+  roj_array_config in_conf = a_arr_1->get_config();
+  if (!a_arr_2->compare_config (in_conf)){
+    call_warning("in roj_short_time_correlation");
+    call_error("configs are diff");
+  }
+
+  double delta = a_arr_1->get_delta ();
+  int new_length = 1 + (in_conf.length - a_width) / a_hop;
+
+  roj_array_config out_conf;
+  out_conf.length = new_length;
+  out_conf.min = in_conf.min + 0.5*delta*(a_width-1);
+  out_conf.max = out_conf.min + new_length * delta;
+
+  for(int n=0; n<new_length; n++) {
+    /* TO DO: Pearson correlation */
+  }
+}

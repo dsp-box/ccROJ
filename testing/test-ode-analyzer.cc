@@ -154,7 +154,7 @@ int main(void){
   /* s_delay->save("data-s-delay.txt"); */
 
   /* get and save chirp rate */
-  roj_real_matrix* c_rate = analyzer_ptr->get_chirp_rate(3);
+  roj_real_matrix* c_rate = analyzer_ptr->get_chirp_rate(2);
   c_rate->save("data-c-rate.txt"); 
 
   /* analyzer is more needed */
