@@ -26,12 +26,11 @@ int main(void){
   /* cut, reverse, and save */
   signal_from_wav->reverse();
   signal_from_wav->modulate (400);
-  signal_from_wav->remove_imag();
+  signal_from_wav->clear_imag();
   signal_from_wav->reverse();
-  signal_from_wav->remove_const();
   signal_from_wav->cut(0.0, 0.7);
-  signal_from_wav->append_tail(1.5);
-  signal_from_wav->append_head(0.5);
+  signal_from_wav->append(0.5, 1.5);
+  signal_from_wav->remove_const();
   signal_from_wav->save_wav("mail2.wav");
   double energy2 = signal_from_wav->calc_energy();
   call_info("energy:", energy2);

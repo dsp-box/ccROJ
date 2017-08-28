@@ -39,6 +39,9 @@ private:
   /* internal configuration */
   roj_signal_config m_config;
 
+  unsigned int append_head(double);
+  unsigned int append_tail(double);
+
  public:
 
   /* construction */
@@ -53,16 +56,24 @@ private:
   roj_signal_config get_config();
   double get_last_instant ();
 
+  bool check_real();
+  bool check_imag();
+  
+  /* clear */
+  void clear();
+  double clear_imag();
+  double clear_real();
+
   /* waveform manipulation */
   int copy(roj_complex_signal*, int =0);
+  void insert (int, complex double =0);
   void modulate(double);
   void decimate(int);
+  void conjugate();
   void reverse();
-  void clear();
 
   /* waveform manipulation with change its length */
-  unsigned int append_head(double);
-  unsigned int append_tail(double);
+  unsigned int append(double, double);
   unsigned int cut(double, double);
 
   
@@ -78,14 +89,8 @@ private:
 
   /* other useful methods */
   complex double remove_const();
-  double remove_imag();
-  void conjugate();
-
   double calc_energy();
 
-  bool check_real();
-  bool check_imag();
-  
   /**
    * @type: field
    * @brief: This public field gives access to signal samples.

@@ -207,17 +207,6 @@ roj_signal_config roj_complex_signal :: get_config (){
 
 /**
  * @type: method
- * @brief: This routine computes an instant of last sample.
- *
- * @return: the instant of last sample.
- */
-double roj_complex_signal :: get_last_instant (){
-
-  return m_config.start + (double)(m_config.length-1)/m_config.rate;
-}
-
-/**
- * @type: method
  * @brief: This routine compares the internal configuration to a given configuration.
  *
  * @param [in] a_conf: A pointer to the given configuration.
@@ -234,6 +223,17 @@ bool roj_complex_signal :: compare_config (roj_signal_config a_conf){
     return false;
 
   return true;
+}
+
+/**
+ * @type: method
+ * @brief: This routine computes an instant of last sample.
+ *
+ * @return: the instant of last sample.
+ */
+double roj_complex_signal :: get_last_instant (){
+
+  return m_config.start + (double)(m_config.length-1)/m_config.rate;
 }
 
 /* ************************************************************************************************************************* */
@@ -269,23 +269,6 @@ bool roj_complex_signal :: check_imag (){
 
 /**
  * @type: method
- * @brief: This routine removes the imag part.
- *
- * @return: sum of abs of removed part.
- */
-double roj_complex_signal :: remove_imag (){
-
-  double imag_sum = 0.0;
-  for(int n=0; n<m_config.length; n++){
-    imag_sum += cimag(m_waveform[n]) > 0 ? cimag(m_waveform[n]) : -cimag(m_waveform[n]);
-    m_waveform[n]=creal(m_waveform[n]);
-  }
-  
-  return imag_sum;
-}
-
-/**
- * @type: method
  * @brief: This routine calculates and substitutes the conjugation of each sample.
  */
 void roj_complex_signal :: conjugate (){
@@ -303,6 +286,40 @@ void roj_complex_signal :: clear (){
   
   int byte_size = m_config.length * sizeof(complex double);
   memset(m_waveform, 0x0, byte_size);
+}
+
+/**
+ * @type: method
+ * @brief: This routine removes the imag part.
+ *
+ * @return: sum of abs of removed part.
+ */
+double roj_complex_signal :: clear_imag (){
+
+  double imag_sum = 0.0;
+  for(int n=0; n<m_config.length; n++){
+    imag_sum += cimag(m_waveform[n]) > 0 ? cimag(m_waveform[n]) : -cimag(m_waveform[n]);
+    m_waveform[n]=creal(m_waveform[n]);
+  }
+  
+  return imag_sum;
+}
+
+/**
+ * @type: method
+ * @brief: This routine removes the real part.
+ *
+ * @return: sum of abs of removed part.
+ */
+double roj_complex_signal :: clear_real (){
+
+  double real_sum = 0.0;
+  for(int n=0; n<m_config.length; n++){
+    real_sum += creal(m_waveform[n]) > 0 ? creal(m_waveform[n]) : -creal(m_waveform[n]);
+    m_waveform[n ]=1I * cimag(m_waveform[n]);
+  }
+  
+  return real_sum;
 }
 
 /* ************************************************************************************************************************* */
@@ -405,6 +422,45 @@ void roj_complex_signal :: decimate (int a_hop){
   m_waveform = waveform;
   m_config.length = new_length;
   m_config.rate /= a_hop;
+}
+
+
+/* ************************************************************************************************************************* */
+/**
+ * @type: method
+ * @brief: This routine inserts a value between samples. [HAS TO BE TESTED]
+ *
+ * @param [in] a_number: number of inserted samples per a single signal sample.
+ * @param [in] a_value: value of inserted sample (0 is default)
+ */
+void roj_complex_signal :: insert (int a_number, complex double a_value){
+
+  if(a_number<=0){
+    call_warning("in roj_complex_signal :: decimate");
+    call_error("a_hop <= 0");
+  }
+
+  /* allocate memory for samples */
+  int new_length = m_config.length * (a_number+1);
+  complex double *waveform = new complex double [new_length];
+  int byte_size = new_length * sizeof(complex double);
+  memset(waveform, 0x0, byte_size);
+
+  /* insert samples */
+  for(int n=0; n<m_config.length; n++){
+    waveform[n*(a_number+1)] = m_waveform[n];
+
+    for(int k=0; k<a_number; k++){
+    
+      waveform[n*(a_number+1) + 1 + k] = a_value;
+    }
+  }
+
+  /* swap */
+  delete [] m_waveform;
+  m_waveform = waveform;
+  m_config.length = new_length;
+  m_config.rate *= a_number + 1;
 }
 
 /* ************************************************************************************************************************* */
@@ -734,6 +790,28 @@ unsigned int roj_complex_signal :: cut (double a_new_start, double a_new_stop){
 /* ************************************************************************************************************************* */
 /**
  * @type: method
+ * @brief: This routine attaches silence at the beginning and at the end.
+ *
+ * @param [in] a_head: duration (in seconds) of attached silence.
+ * @param [in] a_tail: duration (in seconds) of attached silence.
+ *
+ * @return: A number of new waveform samples.
+ */
+unsigned int roj_complex_signal :: append (double a_head, double a_tail){
+  
+  unsigned int appended_samples = 0;
+
+  if (a_head>0)
+    appended_samples += append_head (a_head);
+
+  if (a_tail>0)
+    appended_samples += append_tail (a_tail);
+
+  return appended_samples;
+}
+
+/**
+ * @type: private
  * @brief: This routine attaches silence at the beginning.
  *
  * @param [in] a_duration: duration (in seconds) of attached silence.
@@ -765,7 +843,7 @@ unsigned int roj_complex_signal :: append_head (double a_duration){
 }
 
 /**
- * @type: method
+ * @type: private
  * @brief: This routine attaches silence at the end.
  *
  * @param [in] a_duration: duration (in seconds) of attached silence.

@@ -31,9 +31,8 @@ int main(void){
     in_signal->m_waveform[n] = cexp(1I * arg);
   }
 
-  in_signal->remove_imag();
-  in_signal->append_head(0.1);
-  in_signal->append_tail(0.3);
+  in_signal->clear_imag();
+  in_signal->append(0.1, 0.3);
 
   /* array configuration is used in Fourier analyzer */
   roj_array_config arr_conf;
