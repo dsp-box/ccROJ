@@ -267,14 +267,39 @@ bool roj_complex_signal :: check_imag (){
   return false;
 }
 
+/* ************************************************************************************************************************* */
 /**
  * @type: method
- * @brief: This routine calculates and substitutes the conjugation of each sample.
+ * @brief: This routine gets the real part.
+ *
+ * @return: pointer to roj_real_array. [HAS TO BE TESTED]
  */
-void roj_complex_signal :: conjugate (){
+roj_real_array* roj_complex_signal :: get_real (){
 
+  roj_array_config arr_conf = convert_config (m_config);
+  roj_real_array *our_arr = new roj_real_array(arr_conf);
+   
   for(int n=0; n<m_config.length; n++)   
-    m_waveform[n] = creal(m_waveform[n])  -1I * cimag(m_waveform[n]);
+    our_arr->m_data[n] = creal(m_waveform[n]);
+
+  return our_arr;
+}
+
+/**
+ * @type: method
+ * @brief: This routine gets the imag part. [HAS TO BE TESTED]
+ *
+ * @return: pointer to roj_real_array.
+ */
+roj_real_array* roj_complex_signal :: get_imag (){
+
+  roj_array_config arr_conf = convert_config (m_config);
+  roj_real_array *our_arr = new roj_real_array(arr_conf);
+   
+  for(int n=0; n<m_config.length; n++)   
+    our_arr->m_data[n] = cimag(m_waveform[n]);
+
+  return our_arr;
 }
 
 /* ************************************************************************************************************************* */
@@ -351,6 +376,17 @@ int roj_complex_signal :: copy (roj_complex_signal* a_sig, int a_index){
   return min_length;
 }
  
+/* ************************************************************************************************************************* */
+/**
+ * @type: method
+ * @brief: This routine calculates and substitutes the conjugation of each sample.
+ */
+void roj_complex_signal :: conjugate (){
+
+  for(int n=0; n<m_config.length; n++)   
+    m_waveform[n] = creal(m_waveform[n])  -1I * cimag(m_waveform[n]);
+}
+
 /* ************************************************************************************************************************* */
 /**
  * @type: method
@@ -461,6 +497,148 @@ void roj_complex_signal :: insert (int a_number, complex double a_value){
   m_waveform = waveform;
   m_config.length = new_length;
   m_config.rate *= a_number + 1;
+}
+
+/* ************************************************************************************************************************* */
+/**
+ * @type: method
+ * @brief: This routine cuts waveform.
+ *
+ * @param [in] a_new_start: new start instant.
+ * @param [in] a_new_stop: new stop instant.
+ *
+ * @return: A new number of preserved samples.
+ */
+unsigned int roj_complex_signal :: cut (double a_new_start, double a_new_stop){
+
+  /* checking arguments */
+  if (a_new_start>=a_new_stop){
+    call_warning("in roj_complex_signal :: cut");
+    call_error("start should be smalles than stop");
+  }
+
+  if (a_new_start<m_config.start){
+    call_warning("given start is smaller than current start");
+    a_new_start=m_config.start;
+  }
+
+  /* checking arguments */
+  double max_time = m_config.start+(double)(m_config.length-1)/m_config.rate;
+  if (a_new_stop>max_time){
+    call_warning("given stop is larger than current stop");
+    a_new_stop=max_time;
+  }
+  
+  /* new shorter waveform allocation */  
+  int new_length = (a_new_stop-a_new_start) * m_config.rate;
+  int new_initial = (a_new_start - m_config.start) * m_config.rate;
+  if(new_length+new_initial>m_config.length){
+    call_warning("in roj_complex_signal :: cut");
+    call_error("new length + new start is too long ");
+  }
+
+  if (new_length<3){
+    call_warning("in roj_complex_signal :: cut");
+    call_error("new length is too short ");
+  }
+  complex double* new_waveform = new complex double [new_length];
+ 
+  /* copying of samples */
+  memcpy(new_waveform, &m_waveform[new_initial], sizeof(complex double) * new_length);
+  delete m_waveform;
+
+  /* actualization of configuration */
+  m_config.start = (double)new_initial/m_config.rate;
+  m_config.length = new_length;
+  m_waveform = new_waveform;
+  
+  return m_config.length;
+}
+
+/* ************************************************************************************************************************* */
+/**
+ * @type: method
+ * @brief: This routine attaches silence at the beginning and at the end.
+ *
+ * @param [in] a_head: duration (in seconds) of attached silence.
+ * @param [in] a_tail: duration (in seconds) of attached silence.
+ *
+ * @return: A number of new waveform samples.
+ */
+unsigned int roj_complex_signal :: append (double a_head, double a_tail){
+  
+  unsigned int appended_samples = 0;
+
+  if (a_head>0)
+    appended_samples += append_head (a_head);
+
+  if (a_tail>0)
+    appended_samples += append_tail (a_tail);
+
+  return appended_samples;
+}
+
+/**
+ * @type: private
+ * @brief: This routine attaches silence at the beginning.
+ *
+ * @param [in] a_duration: duration (in seconds) of attached silence.
+ *
+ * @return: A number of new waveform samples.
+ */
+unsigned int roj_complex_signal :: append_head (double a_duration){
+
+  if(a_duration<=0){
+    call_warning("in roj_complex_signal :: append_zero_head");
+    call_error("duration <= 0");
+  }  
+  unsigned int number = a_duration*m_config.rate;
+  
+  if(number*m_config.rate != a_duration)
+    call_warning("duration rate product is not integer");
+
+  complex double *waveform = new complex double [m_config.length + number];
+  memcpy(&waveform[number], m_waveform, m_config.length * sizeof(complex double));
+  memset(waveform, 0x0, number * sizeof(complex double));
+
+  delete [] m_waveform;
+
+  m_waveform = waveform;
+  m_config.length += number;
+  m_config.start -= (double)number/m_config.rate;
+
+  return m_config.length;
+}
+
+/**
+ * @type: private
+ * @brief: This routine attaches silence at the end.
+ *
+ * @param [in] a_duration: duration (in seconds) of attached silence.
+ *
+ * @return: A number of new waveform samples.
+ */
+unsigned int roj_complex_signal :: append_tail (double a_duration){
+
+  if(a_duration<=0){
+    call_warning("in roj_complex_signal :: append_zero_tail");
+    call_error("duration <= 0");
+  }
+  unsigned int number = a_duration*m_config.rate;
+
+  if(number*m_config.rate != a_duration)
+    call_warning("duration rate product is not integer");
+  
+  complex double *waveform = new complex double [m_config.length + number];
+  memcpy(waveform, m_waveform, m_config.length * sizeof(complex double));
+  memset(&waveform[m_config.length], 0x0, number * sizeof(complex double));
+
+  delete [] m_waveform;
+
+  m_waveform = waveform;
+  m_config.length += number;
+
+  return m_config.length;
 }
 
 /* ************************************************************************************************************************* */
@@ -729,148 +907,6 @@ void roj_complex_signal :: save_wav (char * a_fname){
 #ifdef ROJ_DEBUG_ON
   call_info("save file: ", a_fname);
 #endif
-}
-
-/* ************************************************************************************************************************* */
-/**
- * @type: method
- * @brief: This routine cuts waveform.
- *
- * @param [in] a_new_start: new start instant.
- * @param [in] a_new_stop: new stop instant.
- *
- * @return: A new number of preserved samples.
- */
-unsigned int roj_complex_signal :: cut (double a_new_start, double a_new_stop){
-
-  /* checking arguments */
-  if (a_new_start>=a_new_stop){
-    call_warning("in roj_complex_signal :: cut");
-    call_error("start should be smalles than stop");
-  }
-
-  if (a_new_start<m_config.start){
-    call_warning("given start is smaller than current start");
-    a_new_start=m_config.start;
-  }
-
-  /* checking arguments */
-  double max_time = m_config.start+(double)(m_config.length-1)/m_config.rate;
-  if (a_new_stop>max_time){
-    call_warning("given stop is larger than current stop");
-    a_new_stop=max_time;
-  }
-  
-  /* new shorter waveform allocation */  
-  int new_length = (a_new_stop-a_new_start) * m_config.rate;
-  int new_initial = (a_new_start - m_config.start) * m_config.rate;
-  if(new_length+new_initial>m_config.length){
-    call_warning("in roj_complex_signal :: cut");
-    call_error("new length + new start is too long ");
-  }
-
-  if (new_length<3){
-    call_warning("in roj_complex_signal :: cut");
-    call_error("new length is too short ");
-  }
-  complex double* new_waveform = new complex double [new_length];
- 
-  /* copying of samples */
-  memcpy(new_waveform, &m_waveform[new_initial], sizeof(complex double) * new_length);
-  delete m_waveform;
-
-  /* actualization of configuration */
-  m_config.start = (double)new_initial/m_config.rate;
-  m_config.length = new_length;
-  m_waveform = new_waveform;
-  
-  return m_config.length;
-}
-
-/* ************************************************************************************************************************* */
-/**
- * @type: method
- * @brief: This routine attaches silence at the beginning and at the end.
- *
- * @param [in] a_head: duration (in seconds) of attached silence.
- * @param [in] a_tail: duration (in seconds) of attached silence.
- *
- * @return: A number of new waveform samples.
- */
-unsigned int roj_complex_signal :: append (double a_head, double a_tail){
-  
-  unsigned int appended_samples = 0;
-
-  if (a_head>0)
-    appended_samples += append_head (a_head);
-
-  if (a_tail>0)
-    appended_samples += append_tail (a_tail);
-
-  return appended_samples;
-}
-
-/**
- * @type: private
- * @brief: This routine attaches silence at the beginning.
- *
- * @param [in] a_duration: duration (in seconds) of attached silence.
- *
- * @return: A number of new waveform samples.
- */
-unsigned int roj_complex_signal :: append_head (double a_duration){
-
-  if(a_duration<=0){
-    call_warning("in roj_complex_signal :: append_zero_head");
-    call_error("duration <= 0");
-  }  
-  unsigned int number = a_duration*m_config.rate;
-  
-  if(number*m_config.rate != a_duration)
-    call_warning("duration rate product is not integer");
-
-  complex double *waveform = new complex double [m_config.length + number];
-  memcpy(&waveform[number], m_waveform, m_config.length * sizeof(complex double));
-  memset(waveform, 0x0, number * sizeof(complex double));
-
-  delete [] m_waveform;
-
-  m_waveform = waveform;
-  m_config.length += number;
-  m_config.start -= (double)number/m_config.rate;
-
-  return m_config.length;
-}
-
-/**
- * @type: private
- * @brief: This routine attaches silence at the end.
- *
- * @param [in] a_duration: duration (in seconds) of attached silence.
- *
- * @return: A number of new waveform samples.
- */
-unsigned int roj_complex_signal :: append_tail (double a_duration){
-
-  if(a_duration<=0){
-    call_warning("in roj_complex_signal :: append_zero_tail");
-    call_error("duration <= 0");
-  }
-  unsigned int number = a_duration*m_config.rate;
-
-  if(number*m_config.rate != a_duration)
-    call_warning("duration rate product is not integer");
-  
-  complex double *waveform = new complex double [m_config.length + number];
-  memcpy(waveform, m_waveform, m_config.length * sizeof(complex double));
-  memset(&waveform[m_config.length], 0x0, number * sizeof(complex double));
-
-  delete [] m_waveform;
-
-  m_waveform = waveform;
-  m_config.length += number;
-
-  return m_config.length;
 }
 
 /* ************************************************************************************************************************* */

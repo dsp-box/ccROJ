@@ -59,6 +59,9 @@ private:
   bool check_real();
   bool check_imag();
   
+  roj_real_array* get_real ();
+  roj_real_array* get_imag ();
+
   /* clear */
   void clear();
   double clear_imag();

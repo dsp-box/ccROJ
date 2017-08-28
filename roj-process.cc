@@ -175,6 +175,8 @@ roj_real_array* roj_short_time_correlation (roj_real_array* a_arr_1, roj_real_ar
   out_conf.max = out_conf.min + new_length * delta;
 
   for(int n=0; n<new_length; n++) {
+
+    
     /* TO DO: Pearson correlation */
   }
 }
