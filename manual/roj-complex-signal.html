@@ -54,15 +54,15 @@ roj-complex-signal.cc <br>
 <span class='key'>@sign</span>: <span class='bold'>roj_signal_config <span class='range'>roj_complex_signal</span> <span class='range'></span>:: <span class='func'>get_config</span> <span class='func'></span>()</span><br>
 </div>
 <br><div class='method'>
-<span class='key'>@brief</span>: This routine computes an instant of last sample. <br>
-<span class='key'>@return</span>: the instant of last sample. <br>
-<span class='key'>@sign</span>: <span class='bold'>double <span class='range'>roj_complex_signal</span> <span class='range'></span>:: <span class='func'>get_last_instant</span> <span class='func'></span>()</span><br>
-</div>
-<br><div class='method'>
 <span class='key'>@brief</span>: This routine compares the internal configuration to a given configuration. <br>
 <span class='key'>@param</span> [in]<span class='arg'> a_conf</span>: A pointer to the given configuration. <br>
 <span class='key'>@return</span>: True if configurations are equal, false oterwise. <br>
 <span class='key'>@sign</span>: <span class='bold'>bool <span class='range'>roj_complex_signal</span> <span class='range'></span>:: <span class='func'>compare_config</span> <span class='func'></span>(roj_signal_config<span class='arg'> a_conf</span>)</span><br>
+</div>
+<br><div class='method'>
+<span class='key'>@brief</span>: This routine computes an instant of last sample. <br>
+<span class='key'>@return</span>: the instant of last sample. <br>
+<span class='key'>@sign</span>: <span class='bold'>double <span class='range'>roj_complex_signal</span> <span class='range'></span>:: <span class='func'>get_last_instant</span> <span class='func'></span>()</span><br>
 </div>
 <br><div class='method'>
 <span class='key'>@brief</span>: This routine checks the real part. <br>
@@ -75,17 +75,22 @@ roj-complex-signal.cc <br>
 <span class='key'>@sign</span>: <span class='bold'>bool <span class='range'>roj_complex_signal</span> <span class='range'></span>:: <span class='func'>check_imag</span> <span class='func'></span>()</span><br>
 </div>
 <br><div class='method'>
-<span class='key'>@brief</span>: This routine removes the imag part. <br>
-<span class='key'>@return</span>: sum of abs of removed part. <br>
-<span class='key'>@sign</span>: <span class='bold'>double <span class='range'>roj_complex_signal</span> <span class='range'></span>:: <span class='func'>remove_imag</span> <span class='func'></span>()</span><br>
-</div>
-<br><div class='method'>
 <span class='key'>@brief</span>: This routine calculates and substitutes the conjugation of each sample. <br>
 <span class='key'>@sign</span>: <span class='bold'>void <span class='range'>roj_complex_signal</span> <span class='range'></span>:: <span class='func'>conjugate</span> <span class='func'></span>()</span><br>
 </div>
 <br><div class='method'>
 <span class='key'>@brief</span>: This routine sets all samples as zeros. <br>
 <span class='key'>@sign</span>: <span class='bold'>void <span class='range'>roj_complex_signal</span> <span class='range'></span>:: <span class='func'>clear</span> <span class='func'></span>()</span><br>
+</div>
+<br><div class='method'>
+<span class='key'>@brief</span>: This routine removes the imag part. <br>
+<span class='key'>@return</span>: sum of abs of removed part. <br>
+<span class='key'>@sign</span>: <span class='bold'>double <span class='range'>roj_complex_signal</span> <span class='range'></span>:: <span class='func'>clear_imag</span> <span class='func'></span>()</span><br>
+</div>
+<br><div class='method'>
+<span class='key'>@brief</span>: This routine removes the real part. <br>
+<span class='key'>@return</span>: sum of abs of removed part. <br>
+<span class='key'>@sign</span>: <span class='bold'>double <span class='range'>roj_complex_signal</span> <span class='range'></span>:: <span class='func'>clear_real</span> <span class='func'></span>()</span><br>
 </div>
 <br><div class='method'>
 <span class='key'>@brief</span>: This routine copies samples from other signal object. <br>
@@ -107,6 +112,12 @@ roj-complex-signal.cc <br>
 <span class='key'>@brief</span>: This routine performs decimation. <br>
 <span class='key'>@param</span> [in]<span class='arg'> a_hop</span>: decimation factor. <br>
 <span class='key'>@sign</span>: <span class='bold'>void <span class='range'>roj_complex_signal</span> <span class='range'></span>:: <span class='func'>decimate</span> <span class='func'></span>(int<span class='arg'> a_hop</span>)</span><br>
+</div>
+<br><div class='method'>
+<span class='key'>@brief</span>: This routine inserts a value between samples. [HAS TO BE TESTED] <br>
+<span class='key'>@param</span> [in]<span class='arg'> a_number</span>: number of inserted samples per a single signal sample. <br>
+<span class='key'>@param</span> [in]<span class='arg'> a_value</span>: value of inserted sample (0 is default) <br>
+<span class='key'>@sign</span>: <span class='bold'>void <span class='range'>roj_complex_signal</span> <span class='range'></span>:: <span class='func'>insert</span> <span class='func'></span>(int<span class='arg'> a_number</span>, complex double<span class='arg'> a_value</span>)</span><br>
 </div>
 <br><div class='method'>
 <span class='key'>@brief</span>: This routine calculates signal energy. <br>
@@ -156,16 +167,11 @@ roj-complex-signal.cc <br>
 <span class='key'>@sign</span>: <span class='bold'>unsigned int <span class='range'>roj_complex_signal</span> <span class='range'></span>:: <span class='func'>cut</span> <span class='func'></span>(double<span class='arg'> a_new_start</span>, double<span class='arg'> a_new_stop</span>)</span><br>
 </div>
 <br><div class='method'>
-<span class='key'>@brief</span>: This routine attaches silence at the beginning. <br>
-<span class='key'>@param</span> [in]<span class='arg'> a_duration</span>: duration (in seconds) of attached silence. <br>
+<span class='key'>@brief</span>: This routine attaches silence at the beginning and at the end. <br>
+<span class='key'>@param</span> [in]<span class='arg'> a_head</span>: duration (in seconds) of attached silence. <br>
+<span class='key'>@param</span> [in]<span class='arg'> a_tail</span>: duration (in seconds) of attached silence. <br>
 <span class='key'>@return</span>: A number of new waveform samples. <br>
-<span class='key'>@sign</span>: <span class='bold'>unsigned int <span class='range'>roj_complex_signal</span> <span class='range'></span>:: <span class='func'>append_head</span> <span class='func'></span>(double<span class='arg'> a_duration</span>)</span><br>
-</div>
-<br><div class='method'>
-<span class='key'>@brief</span>: This routine attaches silence at the end. <br>
-<span class='key'>@param</span> [in]<span class='arg'> a_duration</span>: duration (in seconds) of attached silence. <br>
-<span class='key'>@return</span>: A number of new waveform samples. <br>
-<span class='key'>@sign</span>: <span class='bold'>unsigned int <span class='range'>roj_complex_signal</span> <span class='range'></span>:: <span class='func'>append_tail</span> <span class='func'></span>(double<span class='arg'> a_duration</span>)</span><br>
+<span class='key'>@sign</span>: <span class='bold'>unsigned int <span class='range'>roj_complex_signal</span> <span class='range'></span>:: <span class='func'>append</span> <span class='func'></span>(double<span class='arg'> a_head</span>, double<span class='arg'> a_tail</span>)</span><br>
 </div>
 <br><div class='operator'>
 <span class='key'>@brief</span>: Overloading of '+=' operator. <br>
