@@ -339,6 +339,34 @@ double roj_real_array :: get_sum (){
   return sum;
 }
 
+/**
+* @type: method
+* @brief: This routine roj_calculates and returns the mean of all elements.
+*
+* @return: The mean.
+*/
+double roj_real_array :: get_mean (){
+
+  double sum = get_sum();
+  return sum / m_config.length;
+}
+
+/**
+* @type: method
+* @brief: This routine roj_calculates and returns the variance of all elements.
+*
+* @return: The variance.
+*/
+double roj_real_array :: get_var (){
+
+  double sum = 0.0;
+  double mean = get_mean();
+  for(int n=0; n<m_config.length; n++)
+    sum += pow(m_data[n] - mean, 2.0);
+
+  return sum / m_config.length;
+}
+
 /* ************************************************************************************************************************* */
 /**
 * @type: method

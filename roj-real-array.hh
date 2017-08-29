@@ -45,7 +45,9 @@ public:
 
   /* get selected parameters */
   double get_delta(); 
+  double get_mean(); 
   double get_sum(); 
+  double get_var(); 
 
   /* clear data */
   void clear();

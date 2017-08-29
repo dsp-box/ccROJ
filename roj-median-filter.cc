@@ -217,25 +217,21 @@ roj_complex_signal* roj_median_filter :: smart_filtering (roj_complex_signal* a_
 
   roj_signal_config sig_conf = a_sig->get_config();
   roj_array_config arr_conf = convert_config(sig_conf);
-
-  roj_real_array *re_orr;
+  
+  roj_real_array *re_orr = NULL;
   if(a_sig->check_real()){
-    roj_real_array *re_arr = new roj_real_array(arr_conf);
-    for (int n=0; n<arr_conf.length; n++)
-      re_arr->m_data[n] = creal(a_sig->m_waveform[n]);
-    
+    roj_real_array *re_arr = a_sig->get_real();
     re_orr = smart_filtering (re_arr, a_hop);
+    delete re_arr;
   }
   else
     re_orr = new roj_real_array(arr_conf);
   
-
   roj_real_array *im_orr = NULL;
   if(a_sig->check_imag()){
-    roj_real_array *im_arr = new roj_real_array(arr_conf);
-    for (int n=0; n<arr_conf.length; n++)
-      im_arr->m_data[n] = cimag(a_sig->m_waveform[n]);
+    roj_real_array *im_arr = a_sig->get_imag();
     roj_real_array *im_orr = smart_filtering (im_arr, a_hop);
+    delete im_arr;
   }
 
   roj_complex_signal* out_signal = new roj_complex_signal(re_orr, im_orr);
