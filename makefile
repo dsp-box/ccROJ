@@ -89,9 +89,7 @@ _version:
 	sed -i $(REGEXP_2) manual/head.js
 
 tag:
-	git commit -a -m $(VERSION)
 	git tag -a $(VERSION) -m $(VERSION)
-	git push
 
 lines:
 	wc -l *.cc *.hh makefile | tail -n1
