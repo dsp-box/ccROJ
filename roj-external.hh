@@ -22,4 +22,7 @@
 #include <sndfile.h>
 #include <time.h>
 
+#include <vector>
+#include <map>
+
 #endif

@@ -80,11 +80,6 @@ roj_xxt_analyzer :: roj_xxt_analyzer (roj_array_config a_bank_conf, roj_window_g
   
   m_bank_config.min = new_f_min;
   m_bank_config.max = new_f_max;
-  
-  /* allocate slots */
-  m_fourier_spectra = new complex double**[6];
-  for(int s=0; s<6; s++)
-    m_fourier_spectra[s] = NULL;
 }
 
 /**
@@ -93,16 +88,20 @@ roj_xxt_analyzer :: roj_xxt_analyzer (roj_array_config a_bank_conf, roj_window_g
 */
 roj_xxt_analyzer :: ~roj_xxt_analyzer(){
 
-  for(int s=0; s<6; s++){    
-    if (m_fourier_spectra[s]!=NULL){
+  std::map<std::vector<int>, complex double **>::iterator i = m_fourier_spectra.begin();
 
-      for(int n=0;n<get_width();n++)
-	delete [] m_fourier_spectra[s][n];    
-      delete [] m_fourier_spectra[s];      
-    }  
-  }  
-  delete [] m_fourier_spectra;  
-  delete m_window_gen;
+  for ( ; i != m_fourier_spectra.end(); ++i){
+       
+    complex double ** matrix = m_fourier_spectra[i->first];
+       
+    for(int n=0;n<get_width();n++)
+      delete [] matrix[n];
+    delete [] matrix;
+    
+    m_fourier_spectra.erase (i);
+  }
+  
+   delete m_window_gen;
 }
 
 /* ************************************************************************************************************************* */
@@ -263,15 +262,14 @@ roj_stft_transform* roj_xxt_analyzer :: get_stft_transform (){
   roj_complex_signal* window = m_window_gen->get_window();
   roj_stft_transform* transform = new roj_stft_transform(config, window);
 
-  /* filtering  (2nd slot) */
-  if(m_fourier_spectra[CODE_WIN_ZERO] == NULL)
+  /* filtering  ({0,0} slot) */
+  if(m_fourier_spectra.count(CODE_WIN_ZERO) == 0)
     m_fourier_spectra[CODE_WIN_ZERO] = transforming(0, 0);
 
 #ifdef ROJ_DEBUG_ON
   double window_gain = m_window_gen->calc_gain();
   call_info("window gain: ", window_gain);
 #endif
-
 
   /* calc stft */
   int sign = -2 * (get_initial()%2) +1;
@@ -317,10 +315,12 @@ roj_real_matrix* roj_xxt_analyzer :: get_instantaneous_frequency_by_1_estimator 
     call_error("signal is not loaded!");
   }
   
-  /* transforming (1 and 2 slots) */
-  if(m_fourier_spectra[CODE_WIN_D] == NULL)
+  /* filtering  ({1,0} slot) */
+  if(m_fourier_spectra.count(CODE_WIN_D) == 0)
     m_fourier_spectra[CODE_WIN_D] = transforming(1, 0);
-  if(m_fourier_spectra[CODE_WIN_ZERO] == NULL)
+  
+  /* filtering  ({0,0} slot) */
+  if(m_fourier_spectra.count(CODE_WIN_ZERO) == 0)
     m_fourier_spectra[CODE_WIN_ZERO] = transforming(0, 0);
   
   /* make empty output object */
@@ -364,14 +364,17 @@ roj_real_matrix* roj_xxt_analyzer :: get_instantaneous_frequency_by_2_estimator 
     call_error("signal is not loaded!");
   }
   
-  /* transforming (3 slots) */
-  if(m_fourier_spectra[CODE_WIN_T] == NULL)
-    m_fourier_spectra[CODE_WIN_T] = transforming(0, 1);  
-  if(m_fourier_spectra[CODE_WIN_D] == NULL)
+  /* filtering ({0,1} slot) */
+  if(m_fourier_spectra.count(CODE_WIN_T) == 0)
+    m_fourier_spectra[CODE_WIN_T] = transforming(0, 1);
+  
+  /* filtering ({1,0} slot) */
+  if(m_fourier_spectra.count(CODE_WIN_D) == 0)
     m_fourier_spectra[CODE_WIN_D] = transforming(1, 0);
-  if(m_fourier_spectra[CODE_WIN_ZERO] == NULL)
+  
+  /* filtering  ({0,0} slot) */
+  if(m_fourier_spectra.count(CODE_WIN_ZERO) == 0)
     m_fourier_spectra[CODE_WIN_ZERO] = transforming(0, 0);
-
 
   /* make empty output object */
   roj_real_matrix* output = create_empty_image();
@@ -414,12 +417,14 @@ roj_real_matrix* roj_xxt_analyzer :: get_spectral_delay (){
     call_error("signal is not loaded!");
   }
 
-  /* transforming  (2 and 3 slots) */
-  if(m_fourier_spectra[CODE_WIN_T] == NULL)
+  /* filtering ({0,1} slot) */
+  if(m_fourier_spectra.count(CODE_WIN_T) == 0)
     m_fourier_spectra[CODE_WIN_T] = transforming(0, 1);
-  if(m_fourier_spectra[CODE_WIN_ZERO] == NULL)
-    m_fourier_spectra[CODE_WIN_ZERO] = transforming(0, 0);
 
+  /* filtering  ({0,0} slot) */
+  if(m_fourier_spectra.count(CODE_WIN_ZERO) == 0)
+    m_fourier_spectra[CODE_WIN_ZERO] = transforming(0, 0);
+  
   /* make empty output object */
   roj_real_matrix* output = create_empty_image();
   
@@ -458,12 +463,16 @@ roj_real_matrix* roj_xxt_analyzer :: get_chirp_rate_by_k_estimator (){
     call_error("signal is not loaded!");
   }
   
-    /* transforming  (1, 2, and 3 slots) */
-  if(m_fourier_spectra[CODE_WIN_T] == NULL)
+  /* filtering ({0,1} slot) */
+  if(m_fourier_spectra.count(CODE_WIN_T) == 0)
     m_fourier_spectra[CODE_WIN_T] = transforming(0, 1);
-  if(m_fourier_spectra[CODE_WIN_ZERO] == NULL)
+
+  /* filtering  ({0,0} slot) */
+  if(m_fourier_spectra.count(CODE_WIN_ZERO) == 0)
     m_fourier_spectra[CODE_WIN_ZERO] = transforming(0, 0);
-  if(m_fourier_spectra[CODE_WIN_D] == NULL)
+
+  /* filtering  ({1,0} slot) */
+  if(m_fourier_spectra.count(CODE_WIN_D) == 0)
     m_fourier_spectra[CODE_WIN_D] = transforming(1, 0);
   
   /* make empty output object */
@@ -508,15 +517,21 @@ roj_real_matrix* roj_xxt_analyzer :: get_chirp_rate_by_m_estimator (){
     call_warning("in roj_xxt_analyzer :: get_chirp_rate_by_m_estimator");
     call_error("signal is not loaded!");
   }
-  
-    /* transforming  (1, 2, 3, and 4 slots) */
-  if(m_fourier_spectra[CODE_WIN_T] == NULL)
-    m_fourier_spectra[CODE_WIN_T] = transforming(0, 1);
-  if(m_fourier_spectra[CODE_WIN_T2] == NULL)
+
+  /* filtering  ({0,2} slot) */
+  if(m_fourier_spectra.count(CODE_WIN_T2) == 0)
     m_fourier_spectra[CODE_WIN_T2] = transforming(0, 2);
-  if(m_fourier_spectra[CODE_WIN_D] == NULL)
+
+  /* filtering  ({0,1} slot) */
+  if(m_fourier_spectra.count(CODE_WIN_T) == 0)
+    m_fourier_spectra[CODE_WIN_T] = transforming(0, 1);
+
+  /* filtering  ({1,0} slot) */  
+  if(m_fourier_spectra.count(CODE_WIN_D) == 0)
     m_fourier_spectra[CODE_WIN_D] = transforming(1, 0);
-  if(m_fourier_spectra[CODE_WIN_D2] == NULL)
+  
+  /* filtering  ({2,0} slot) */  
+  if(m_fourier_spectra.count(CODE_WIN_D2) == 0)
     m_fourier_spectra[CODE_WIN_D2] = transforming(2, 0);
   
   /* make empty output object */
@@ -562,18 +577,26 @@ roj_real_matrix* roj_xxt_analyzer :: get_chirp_rate_by_d_estimator (){
     call_warning("in roj_xxt_analyzer :: get_chirp_rate_by_d_estimator");
     call_error("signal is not loaded!");
   }
-  
-  /* transforming  (0, 1, 2, 3, and 5 slots) */
-  if(m_fourier_spectra[CODE_WIN_T] == NULL)
-    m_fourier_spectra[CODE_WIN_T] = transforming(0, 1);
-  if(m_fourier_spectra[CODE_WIN_ZERO] == NULL)
-    m_fourier_spectra[CODE_WIN_ZERO] = transforming(0, 0);
-  if(m_fourier_spectra[CODE_WIN_D] == NULL)
-    m_fourier_spectra[CODE_WIN_D] = transforming(1, 0);
-  if(m_fourier_spectra[CODE_WIN_D2] == NULL)
-    m_fourier_spectra[CODE_WIN_D2] = transforming(2, 0);
-  if(m_fourier_spectra[CODE_WIN_DT] == NULL)
+
+  /* filtering  ({1,1} slot) */
+  if(m_fourier_spectra.count(CODE_WIN_DT) == 0)
     m_fourier_spectra[CODE_WIN_DT] = transforming(1, 1);
+
+  /* filtering  ({0,1} slot) */
+  if(m_fourier_spectra.count(CODE_WIN_T) == 0)
+    m_fourier_spectra[CODE_WIN_T] = transforming(0, 1);
+
+  /* filtering  ({0,0} slot) */
+  if(m_fourier_spectra.count(CODE_WIN_ZERO) == 0)
+    m_fourier_spectra[CODE_WIN_ZERO] = transforming(0, 0);
+
+  /* filtering  ({1,0} slot) */  
+  if(m_fourier_spectra.count(CODE_WIN_D) == 0)
+    m_fourier_spectra[CODE_WIN_D] = transforming(1, 0);
+  
+  /* filtering  ({2,0} slot) */  
+  if(m_fourier_spectra.count(CODE_WIN_D2) == 0)
+    m_fourier_spectra[CODE_WIN_D2] = transforming(2, 0);
   
   /* make empty output object */
   roj_real_matrix* output = create_empty_image();
@@ -619,18 +642,26 @@ roj_real_matrix* roj_xxt_analyzer :: get_chirp_rate_by_f_estimator (){
     call_error("signal is not loaded!");
   }
   
-  /* transforming  (1, 2, 3, 4, and 5 slots) */
-  if(m_fourier_spectra[CODE_WIN_T] == NULL)
-    m_fourier_spectra[CODE_WIN_T] = transforming(0, 1);
-  if(m_fourier_spectra[CODE_WIN_ZERO] == NULL)
-    m_fourier_spectra[CODE_WIN_ZERO] = transforming(0, 0);
-  if(m_fourier_spectra[CODE_WIN_D] == NULL)
-    m_fourier_spectra[CODE_WIN_D] = transforming(1, 0);
-  if(m_fourier_spectra[CODE_WIN_T2] == NULL)
-    m_fourier_spectra[CODE_WIN_T2] = transforming(0, 2);
-  if(m_fourier_spectra[CODE_WIN_DT] == NULL)
+  /* filtering  ({1,1} slot) */
+  if(m_fourier_spectra.count(CODE_WIN_DT) == 0)
     m_fourier_spectra[CODE_WIN_DT] = transforming(1, 1);
-  
+
+  /* filtering  ({0,1} slot) */
+  if(m_fourier_spectra.count(CODE_WIN_T) == 0)
+    m_fourier_spectra[CODE_WIN_T] = transforming(0, 1);
+
+  /* filtering  ({0,2} slot) */  
+  if(m_fourier_spectra.count(CODE_WIN_T2) == 0)
+    m_fourier_spectra[CODE_WIN_T2] = transforming(0, 2);
+
+  /* filtering  ({0,0} slot) */
+  if(m_fourier_spectra.count(CODE_WIN_ZERO) == 0)
+    m_fourier_spectra[CODE_WIN_ZERO] = transforming(0, 0);
+
+  /* filtering  ({1,0} slot) */  
+  if(m_fourier_spectra.count(CODE_WIN_D) == 0)
+    m_fourier_spectra[CODE_WIN_D] = transforming(1, 0);
+    
   /* make empty output object */
   roj_real_matrix* output = create_empty_image();
   
@@ -678,14 +709,18 @@ roj_real_matrix* roj_xxt_analyzer :: get_dof_density (){
     call_error("signal is not loaded!");
   }
   
-    /* transforming  (1, 2, and 3 slots) */
-  if(m_fourier_spectra[CODE_WIN_T] == NULL)
+  /* filtering ({0,1} slot) */
+  if(m_fourier_spectra.count(CODE_WIN_T) == 0)
     m_fourier_spectra[CODE_WIN_T] = transforming(0, 1);
-  if(m_fourier_spectra[CODE_WIN_ZERO] == NULL)
-    m_fourier_spectra[CODE_WIN_ZERO] = transforming(0, 0);
-  if(m_fourier_spectra[CODE_WIN_D] == NULL)
+  
+  /* filtering ({1,0} slot) */
+  if(m_fourier_spectra.count(CODE_WIN_D) == 0)
     m_fourier_spectra[CODE_WIN_D] = transforming(1, 0);
   
+  /* filtering  ({0,0} slot) */
+  if(m_fourier_spectra.count(CODE_WIN_ZERO) == 0)
+    m_fourier_spectra[CODE_WIN_ZERO] = transforming(0, 0);
+
   /* make empty output object */
   roj_real_matrix* output = create_empty_image();
   
