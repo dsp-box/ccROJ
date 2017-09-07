@@ -186,7 +186,7 @@ case-6:
 clean:	
 	${RM} $(TESTS) *~ \#* .\#*
 clear:
-	${RM} *.png *.txt mail2.wav pink.wav out.wav lfm.wav
+	${RM} *.png *.eps *.txt mail2.wav pink.wav out.wav # lfm.wav
 
 purge: clean clear
 
