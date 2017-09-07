@@ -30,12 +30,12 @@ class roj_stft_transform;
 
 /* macros */
 
-#define CODE_WIN_D2 0
-#define CODE_WIN_D 1
-#define CODE_WIN_ZERO 2
-#define CODE_WIN_T 3
-#define CODE_WIN_T2 4
-#define CODE_WIN_DT 5
+#define CODE_WIN_D2 {2, 0}
+#define CODE_WIN_D {1, 0}
+#define CODE_WIN_ZERO {0, 0}
+#define CODE_WIN_T {0, 1}
+#define CODE_WIN_T2 {0, 2}
+#define CODE_WIN_DT {1, 1}
 
 /* ************************************************************************************************************************* */
 /* fft analyzer class definition */
@@ -54,8 +54,8 @@ protected:
   roj_window_generator* m_window_gen;
   
   /* STFT for various windows */
-  complex double *** m_fourier_spectra;
-
+  std::map<std::pair<int, int>, complex double **> m_fourier_spectra;
+  
   /* allocate memory for stft */
   complex double ** allocate_stft();
   

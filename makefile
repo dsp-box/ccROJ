@@ -16,16 +16,17 @@ LIBS := -lm -lsndfile -lfftw3 -ansi
 FLAGS := -pedantic -w -Wall -O2 # -g
 CCFLAGS := $(FLAGS) $(LIBS)
 
+all: libroj.a test
+
 SRCS=$(wildcard *.cc)
 HTMLS=$(SRCS:.cc=.html)
 OBJS=$(SRCS:.cc=.o)
-
-all: libroj.a test
+print_obj:
+	$(info $(OBJS))
 
 %.o: %.cc %.hh
 	$(CC) $(CCFLAGS) -c -o $@ $<
 
-.PHONY: test *.o
 test: $(OBJS)
 	$(MAKE) -w -C testing
 
