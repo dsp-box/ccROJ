@@ -54,9 +54,7 @@ protected:
   roj_window_generator* m_window_gen;
   
   /* STFT for various windows */
-  // complex double *** m_fourier_spectra;
-
-  std::map<std::vector<int>, complex double **> m_fourier_spectra;
+  std::map<std::pair<int, int>, complex double **> m_fourier_spectra;
   
   /* allocate memory for stft */
   complex double ** allocate_stft();

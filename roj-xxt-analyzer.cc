@@ -88,15 +88,12 @@ roj_xxt_analyzer :: roj_xxt_analyzer (roj_array_config a_bank_conf, roj_window_g
 */
 roj_xxt_analyzer :: ~roj_xxt_analyzer(){
 
-  std::map<std::vector<int>, complex double **>::iterator i = m_fourier_spectra.begin();
-
+  std::map<std::pair<int, int>, complex double **>::iterator i = m_fourier_spectra.begin();
   for ( ; i != m_fourier_spectra.end(); ++i){
        
-    complex double ** matrix = m_fourier_spectra[i->first];
-       
     for(int n=0;n<get_width();n++)
-      delete [] matrix[n];
-    delete [] matrix;
+      delete [] i->second[n];
+    delete [] i->second;
     
     m_fourier_spectra.erase (i);
   }
@@ -661,10 +658,10 @@ roj_real_matrix* roj_xxt_analyzer :: get_chirp_rate_by_f_estimator (){
   /* filtering  ({1,0} slot) */  
   if(m_fourier_spectra.count(CODE_WIN_D) == 0)
     m_fourier_spectra[CODE_WIN_D] = transforming(1, 0);
-    
+  
   /* make empty output object */
   roj_real_matrix* output = create_empty_image();
-  
+
   /* calc chirp rate estimate */
   for(int k=0; k<get_height(); k++){
 
