@@ -777,6 +777,42 @@ roj_complex_signal* roj_complex_signal :: get_instantaneous_frequency (){
 
 /**
  * @type: method
+ * @brief: This routine estimates the instantaneous bandwidth (in the time domain). (HAVE TO BE TESTED)
+ *
+ * @return: A pointer to a new signal object which keeps the (signed) instantaneous bandwidth as the real part.
+ */
+roj_complex_signal* roj_complex_signal :: get_instantaneous_bandwidth (){
+  
+  roj_complex_signal* out = new roj_complex_signal(m_config);
+  roj_complex_signal* equiv = NULL;
+  complex double* waveform;
+
+  if(!check_imag()){
+    roj_hilbert_equiv *hilbert = new roj_hilbert_equiv(this);
+    equiv = hilbert->get_equivalent();
+    waveform = equiv->m_waveform;
+    delete hilbert;  
+  }
+  else
+    waveform = m_waveform;
+  
+  out->m_waveform[0] = m_config.rate * log(cabs(waveform[1])/cabs(waveform[0])) / TWO_PI;
+  out->m_waveform[m_config.length-1] = m_config.rate * 
+    log(cabs(waveform[m_config.length-1])/cabs(waveform[m_config.length-2])) / TWO_PI;
+
+  for(int n=1; n<m_config.length-1; n++){
+    double d1 = log(cabs(waveform[n+1])/cabs(waveform[n]));
+    double d2 = log(cabs(waveform[n])/cabs(waveform[n-1]));
+    out->m_waveform[n] = 0.5 * m_config.rate * (d1+d2) / TWO_PI;
+  }
+  
+  if(equiv)
+    delete equiv;
+  return out;
+}
+
+/**
+ * @type: method
  * @brief: This routine estimates the instantaneous chirp rate (in the time domain). (HAVE TO BE TESTED)
  *
  * @return: A pointer to a new signal object which keeps the instantaneous chirp rate as the real part.

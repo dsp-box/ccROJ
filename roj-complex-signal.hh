@@ -85,7 +85,8 @@ private:
   roj_complex_signal* get_instantaneous_complex_frequency ();
   roj_complex_signal* get_instantaneous_chirp_rate ();
   roj_complex_signal* get_instantaneous_frequency ();
-
+  roj_complex_signal* get_instantaneous_bandwidth ();
+  
   /* save to file */
   void save(char *);
   void save_wav(char *);
