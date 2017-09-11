@@ -196,7 +196,7 @@ roj_real_array* roj_median_filter :: smart_filtering (roj_real_array* a_arr, int
 /* ************************************************************************************************************************* */
 /**
 * @type: method
-* @brief: This routine performs a smart median filtering for a signal whose type is roj_complex_signal.
+* @brief: This routine performs a smart median filtering for a signal (abs) whose type is roj_complex_signal.
 *
 * @param [in] a_sig: A given signal for filtering.
 * @param [in] a_hop: A hop size between steps of filtering.
@@ -217,28 +217,23 @@ roj_complex_signal* roj_median_filter :: smart_filtering (roj_complex_signal* a_
 
   roj_signal_config sig_conf = a_sig->get_config();
   roj_array_config arr_conf = convert_config(sig_conf);
-  
-  roj_real_array *re_orr = NULL;
-  if(a_sig->check_real()){
-    roj_real_array *re_arr = a_sig->get_real();
-    re_orr = smart_filtering (re_arr, a_hop);
-    delete re_arr;
-  }
-  else
-    re_orr = new roj_real_array(arr_conf);
-  
-  roj_real_array *im_orr = NULL;
-  if(a_sig->check_imag()){
-    roj_real_array *im_arr = a_sig->get_imag();
-    roj_real_array *im_orr = smart_filtering (im_arr, a_hop);
-    delete im_arr;
-  }
 
-  roj_complex_signal* out_signal = new roj_complex_signal(re_orr, im_orr);
+  roj_real_array *in_abs = new roj_real_array(arr_conf);
+  for(int n=0; n<sig_conf.length; n++){
+    double energy = pow(creal(a_sig->m_waveform[n]),2) + pow(creal(a_sig->m_waveform[n]),2);
+    in_abs->m_data[n] = sqrt(energy);
+  }
+  
+  roj_real_array *out_abs = smart_filtering (in_abs, a_hop);
+  roj_complex_signal* out_signal = new roj_complex_signal(sig_conf);
 
-  delete re_orr;
-  if (im_orr)
-    delete im_orr;
+  for(int n=0; n<sig_conf.length; n++){
+    double phase = carg(a_sig->m_waveform[n]);    
+    out_signal->m_waveform[n] = out_abs->m_data[n] * cexp(1I * phase);
+  }
+  
+  delete in_abs;
+  delete out_abs;
 
   return out_signal;
 }
