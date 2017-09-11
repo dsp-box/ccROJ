@@ -76,11 +76,11 @@ roj-complex-signal.cc <br>
 </div>
 <br><div class='method'>
 <span class='key'>@brief</span>: This routine gets the real part. <br>
-<span class='key'>@return</span>: pointer to roj_real_array. <br>
+<span class='key'>@return</span>: pointer to roj_real_array. [HAS TO BE TESTED] <br>
 <span class='key'>@sign</span>: <span class='bold'>roj_real_array* <span class='range'>roj_complex_signal</span> <span class='range'></span>:: <span class='func'>get_real</span> <span class='func'></span>()</span><br>
 </div>
 <br><div class='method'>
-<span class='key'>@brief</span>: This routine gets the imag part. <br>
+<span class='key'>@brief</span>: This routine gets the imag part. [HAS TO BE TESTED] <br>
 <span class='key'>@return</span>: pointer to roj_real_array. <br>
 <span class='key'>@sign</span>: <span class='bold'>roj_real_array* <span class='range'>roj_complex_signal</span> <span class='range'></span>:: <span class='func'>get_imag</span> <span class='func'></span>()</span><br>
 </div>
@@ -167,6 +167,11 @@ roj-complex-signal.cc <br>
 <span class='key'>@brief</span>: This routine estimates the instantaneous frequency (in the time domain). (HAVE TO BE TESTED) <br>
 <span class='key'>@return</span>: A pointer to a new signal object which keeps the instantaneous frequency as the real part. <br>
 <span class='key'>@sign</span>: <span class='bold'>roj_complex_signal* <span class='range'>roj_complex_signal</span> <span class='range'></span>:: <span class='func'>get_instantaneous_frequency</span> <span class='func'></span>()</span><br>
+</div>
+<br><div class='method'>
+<span class='key'>@brief</span>: This routine estimates the instantaneous bandwidth (in the time domain). (HAVE TO BE TESTED) <br>
+<span class='key'>@return</span>: A pointer to a new signal object which keeps the (signed) instantaneous bandwidth as the real part. <br>
+<span class='key'>@sign</span>: <span class='bold'>roj_complex_signal* <span class='range'>roj_complex_signal</span> <span class='range'></span>:: <span class='func'>get_instantaneous_bandwidth</span> <span class='func'></span>()</span><br>
 </div>
 <br><div class='method'>
 <span class='key'>@brief</span>: This routine estimates the instantaneous chirp rate (in the time domain). (HAVE TO BE TESTED) <br>

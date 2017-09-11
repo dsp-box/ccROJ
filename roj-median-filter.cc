@@ -193,6 +193,62 @@ roj_real_array* roj_median_filter :: smart_filtering (roj_real_array* a_arr, int
   return output;
 }
 
+/**
+* @type: method
+* @brief: This routine performs a smart cyclic median filtering for an array whose type is roj_real_array.
+*
+* @param [in] a_arr: A given array for filtering.
+* @param [in] a_hop: A hop size between steps of filtering.
+*
+* @return: The filtered output array.
+*/
+roj_real_array* roj_median_filter :: smart_cyclic_filtering (roj_real_array* a_arr, int a_hop){
+  
+  if(a_arr == NULL){
+    call_warning("in roj_median_filter :: smart_filtering");
+    call_error("arg is NULL");
+  }
+
+  if(a_hop<=0){
+    call_warning("in roj_median_filter :: smart_filtering");
+    call_error("hop not positive");
+  }
+
+  roj_array_config conf = a_arr->get_config();
+  if(m_width*a_hop>conf.length){
+    call_warning("in roj_median_filter :: smart_filtering");
+    call_error("array is too short");
+  }
+
+  int radius = ((m_width-1) / 2) * a_hop;
+  int length = conf.length;
+  conf.length += 2 * radius;
+
+  roj_real_array* e_input = new roj_real_array(conf);
+  for (int n=0; n<radius; n++)
+    e_input->m_data[n] = a_arr->m_data[length-radius+n];
+
+  for (int n=0; n<length; n++)
+    e_input->m_data[n+radius] = a_arr->m_data[n];
+
+  for (int n=0; n<radius; n++)
+    e_input->m_data[radius+length+n] = a_arr->m_data[n];
+
+  roj_real_array* e_output = smart_filtering (e_input, a_hop);
+
+  conf = a_arr->get_config();
+  roj_real_array* output = new roj_real_array(conf);
+  
+  for(int n=0; n<conf.length; n++)
+    output->m_data[n] = e_output->m_data[radius+n];
+  
+  delete e_input;
+  delete e_output;
+  
+  return output;
+}
+
+
 /* ************************************************************************************************************************* */
 /**
 * @type: method

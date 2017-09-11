@@ -36,12 +36,12 @@ roj-process.cc <br>
 <span class='key'>@sign</span>: <span class='bold'>roj_complex_signal* <span class='func'>roj_remove_const</span> <span class='func'></span>(roj_complex_signal*<span class='arg'> a_signal</span>, int<span class='arg'> a_order_radius</span>)</span><br>
 </div>
 <br><div class='function'>
-<span class='key'>@brief</span>: This routine calculates short-time cross-correlation. [HAS TO BE TESTED] <br>
-<span class='key'>@param</span> [in]<span class='arg'> a_arr_1</span>: a pointer to input signal. <br>
-<span class='key'>@param</span> [in]<span class='arg'> a_arr_2</span>: a pointer to input signal. <br>
+<span class='key'>@brief</span>: This routine calculates short-time cross-correlation (Pearson). [HAS TO BE TESTED] <br>
+<span class='key'>@param</span> [in]<span class='arg'> a_arr_1</span>: a pointer to input array. <br>
+<span class='key'>@param</span> [in]<span class='arg'> a_arr_2</span>: a pointer to input array. <br>
 <span class='key'>@param</span> [in]<span class='arg'> a_width</span>: window width. <br>
 <span class='key'>@param</span> [in]<span class='arg'> a_hop</span>: hopsize. <br>
-<span class='key'>@return</span>: a pointer to output signal <br>
+<span class='key'>@return</span>: a pointer to output array <br>
 <span class='key'>@sign</span>: <span class='bold'>roj_real_array* <span class='func'>roj_short_time_correlation</span> <span class='func'></span>(roj_real_array*<span class='arg'> a_arr_1</span>, roj_real_array*<span class='arg'> a_arr_2</span>, int<span class='arg'> a_width</span>, int<span class='arg'> a_hop</span>)</span><br>
 </div>
 <br>
