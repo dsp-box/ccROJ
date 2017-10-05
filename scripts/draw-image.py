@@ -22,12 +22,12 @@ import re, sys
 # help
 
 def print_help(keys):
-    print("image-plot.py\n\nhas possible the following options:")
+    print("draw-image.py\n\nhas possible the following options:")
     for k in keys:
         print("--", "\b"+re.sub("=", " arg", k))
         
     print("\nexample:")
-    print("    ./image-plot.py \\")
+    print("    ./draw-image.py \\")
     print("         --infile data-c-rate.txt \\")
     print("         --zlabel 'chirp-rate (Hz/s)' \\")	
     print("         --ylabel 'frequency (kHz)' \\")
@@ -42,12 +42,11 @@ def print_help(keys):
 # init guplot
 
 def init_gnuplot():
-    proc = Popen(["gnuplot","--persist"], shell=True, stdin=PIPE)
+    proc = Popen(["gnuplot","--persist"], shell=True, stdin=PIPE, stdout=None, stderr=None, close_fds=True )
     def write_to_gnuplot(command):
         print("(debug)", command)
         commandn = command + "\n"
-        proc.stdin.write(commandn.encode("UTF-8"))
-        #proc.wait()
+        proc.stdin.write(commandn.encode("UTF-8"))                
     return write_to_gnuplot
 
 write_to_gnuplot = init_gnuplot()
@@ -162,7 +161,7 @@ if arg_format == "png":
 elif arg_format == "eps":
     write_to_gnuplot("set term postscript eps enhanced color font 'cmr10, 14' size 9.5cm,7.0cm")
 
-    # you can convert eps to png by:
+    # you can convert eps to png e.g. by:
     # convert -density 300 img-energy.eps -resize 800x600  -flatten -colorspace RGB img-energy.png
 
 else: assert False
@@ -189,7 +188,7 @@ def set_margins(l,r,b,t):
     write_to_gnuplot("set bmargin at screen %g" % b)
     write_to_gnuplot("set tmargin at screen %g" % t)
 
-set_margins(0.15, 0.8, 0.16, 0.955)
+set_margins(0.15, 0.8, 0.18, 0.955)
 
 # *************************************************** */
 # const settings
@@ -277,4 +276,4 @@ if arg_log:
 else: 
     write_to_gnuplot("splot '%s' u (%g*$1):(%g*$2):(%g*$3) notitle" % (arg_infile, arg_xfactor, arg_yfactor, arg_zfactor))
 write_to_gnuplot("print 'done!'")
-print("(info) wait a moment for results. It can takes few minutes...")
+print("(info) The process goes down to the background. Wait a moment for results. It can takes few minutes...")
