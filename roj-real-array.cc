@@ -93,6 +93,8 @@ roj_real_array :: roj_real_array (char* a_fname){
     call_warning("in roj_real_array :: roj_real_array");
     call_error("delta<=0");
   }
+  call_info("start: ", start);
+  call_info("delta: ", delta);
 
   double tmp;
   int count = 0;
