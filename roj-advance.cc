@@ -1,5 +1,5 @@
 /* *************************************************** *
- * This file is a part of ccROJ project (version 0-46) *
+ * This file is a part of ccROJ project (version 0-47) *
  * distributed under GNU General Public License v3.0.  *
  * Please visit the webpage: github.com/dsp-box/ccROJ  *
  * for more information.                               *
@@ -176,6 +176,29 @@ bool cmp_minimize(double a_x, double a_y){
 int roj_minimize_matrix (roj_real_matrix* a_multi_values, roj_real_matrix* a_multi_metrics, roj_real_matrix* a_values, roj_real_matrix* a_metrics){
 
   return roj_combine_matrix(cmp_minimize, a_multi_values, a_multi_metrics, a_values, a_metrics);
+}
+
+/* ************************************************************************************************************************* */
+/* internal function */
+bool cmp_absminimize(double a_x, double a_y){
+
+  return abs(a_x) <= abs(a_y) ? true : false;
+}
+
+/**
+* @type: function
+* @brief: This routine allows to modify (combine) a roj_real_matrix using other one based on minimalization of the basolute value of an associated metric. 
+*
+* @param [in,out] a_multi_values: A base distribution to optimize.
+* @param [in,out] a_multi_metrics: An associated metric, which is a TF distribution.
+* @param [in] a_values: A distribution used to optimize.
+* @param [in] a_metrics: An associated metric to a_values.
+*
+* @return: A number of modified points.
+*/
+int roj_absminimize_matrix (roj_real_matrix* a_multi_values, roj_real_matrix* a_multi_metrics, roj_real_matrix* a_values, roj_real_matrix* a_metrics){
+
+  return roj_combine_matrix(cmp_absminimize, a_multi_values, a_multi_metrics, a_values, a_metrics);
 }
 
 /* ************************************************************************************************************************* */

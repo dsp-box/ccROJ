@@ -1,5 +1,5 @@
 /* *************************************************** *
- * This file is a part of ccROJ project (version 0-46) *
+ * This file is a part of ccROJ project (version 0-47) *
  * distributed under GNU General Public License v3.0.  *
  * Please visit the webpage: github.com/dsp-box/ccROJ  *
  * for more information.                               *
@@ -40,6 +40,7 @@ roj_real_matrix* roj_calculate_frequency_compacting (roj_real_matrix*);
 /* multi-spectrogram */
 int roj_minimize_matrix (roj_real_matrix*, roj_real_matrix*, roj_real_matrix*, roj_real_matrix*);
 int roj_maximize_matrix (roj_real_matrix*, roj_real_matrix*, roj_real_matrix*, roj_real_matrix*);
+int roj_absminimize_matrix (roj_real_matrix*, roj_real_matrix*, roj_real_matrix*, roj_real_matrix*);
 
 /* save */
 void roj_save (char *, roj_real_matrix*, roj_real_matrix*);

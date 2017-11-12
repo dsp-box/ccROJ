@@ -1,5 +1,5 @@
 /* *************************************************** *
- * This file is a part of ccROJ project (version 0-46) *
+ * This file is a part of ccROJ project (version 0-47) *
  * distributed under GNU General Public License v3.0.  *
  * Please visit the webpage: github.com/dsp-box/ccROJ  *
  * for more information.                               *
@@ -36,7 +36,7 @@
 * @type: define
 * @brief: This is a const string, which defines the version number. Please do not change it manually. In order to change modify VERSION file and run 'make version'
 */
-#define ROJ_VERSION "0-46"
+#define ROJ_VERSION "0-47"
 
 /**
 * @type: define

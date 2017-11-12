@@ -36,6 +36,15 @@ roj-advance.cc <br>
 <span class='key'>@sign</span>: <span class='bold'>int <span class='func'>roj_minimize_matrix</span> <span class='func'></span>(roj_real_matrix*<span class='arg'> a_multi_values</span>, roj_real_matrix*<span class='arg'> a_multi_metrics</span>, roj_real_matrix*<span class='arg'> a_values</span>, roj_real_matrix*<span class='arg'> a_metrics</span>)</span><br>
 </div>
 <br><div class='function'>
+<span class='key'>@brief</span>: This routine allows to modify (combine) a roj_real_matrix using other one based on minimalization of the basolute value of an associated metric.  <br>
+<span class='key'>@param</span> [in,out]<span class='arg'> a_multi_values</span>: A base distribution to optimize. <br>
+<span class='key'>@param</span> [in,out]<span class='arg'> a_multi_metrics</span>: An associated metric, which is a TF distribution. <br>
+<span class='key'>@param</span> [in]<span class='arg'> a_values</span>: A distribution used to optimize. <br>
+<span class='key'>@param</span> [in]<span class='arg'> a_metrics</span>: An associated metric to<span class='arg'> a_values</span>. <br>
+<span class='key'>@return</span>: A number of modified points. <br>
+<span class='key'>@sign</span>: <span class='bold'>int <span class='func'>roj_absminimize_matrix</span> <span class='func'></span>(roj_real_matrix*<span class='arg'> a_multi_values</span>, roj_real_matrix*<span class='arg'> a_multi_metrics</span>, roj_real_matrix*<span class='arg'> a_values</span>, roj_real_matrix*<span class='arg'> a_metrics</span>)</span><br>
+</div>
+<br><div class='function'>
 <span class='key'>@brief</span>: This routine allows to modify (combine) a roj_real_matrix using other one based on maximalization of an associated metric.  <br>
 <span class='key'>@param</span> [in,out]<span class='arg'> a_multi_values</span>: A base distribution to optimize. <br>
 <span class='key'>@param</span> [in,out]<span class='arg'> a_multi_metrics</span>: An associated metric, which is a TF distribution. <br>
