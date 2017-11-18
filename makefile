@@ -34,6 +34,7 @@ libroj.a: $(OBJS)
 	ar rcs $@ $^
 
 INSTALL_DIR=/usr/local
+INSTALL_BINDIR=$(INSTALL_DIR)/bin
 INSTALL_LIBDIR=$(INSTALL_DIR)/lib
 INSTALL_INCDIR=$(INSTALL_DIR)/include/roj
 install:
@@ -42,12 +43,14 @@ install-as-root:
 	mkdir -p $(INSTALL_INCDIR)
 	${CP} *.hh *.h $(INSTALL_INCDIR)
 	${CP} libroj.a $(INSTALL_LIBDIR)
+	${CP} scripts/roj-draw.py $(INSTALL_BINDIR)
 
 uninstall:
 	su root -c "make uninstall-as-root"
 uninstall-as-root:
 	${RM} -r $(INSTALL_INCDIR)
 	${RM} $(INSTALL_LIBDIR)/libroj.a
+	${RM} $(INSTALL_BINDIR)/roj-draw.py
 
 VERSION := $(shell cat VERSION)
 zip: package

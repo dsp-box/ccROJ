@@ -22,12 +22,12 @@ import re, sys
 # help
 
 def print_help(keys):
-    print("draw-image.py\n\nhas possible the following options:")
+    print("roj-draw.py\n\nhas possible the following options:")
     for k in keys:
         print("--", "\b"+re.sub("=", " arg", k))
         
     print("\nexample:")
-    print("    ./draw-image.py \\")
+    print("    ./roj-draw.py \\")
     print("         --infile data-c-rate.txt \\")
     print("         --zlabel 'chirp-rate (Hz/s)' \\")	
     print("         --ylabel 'frequency (kHz)' \\")
@@ -36,21 +36,25 @@ def print_help(keys):
     print("         --format png \\")
     print("         --min 200 \\")
     print("         --max 1200 \\")
+    print("         --persist\\")
     sys.exit(0)
 
 # *************************************************** */
 # init guplot
 
-def init_gnuplot():
-    proc = Popen(["gnuplot","--persist"], shell=True, stdin=PIPE, stdout=None, stderr=None, close_fds=True )
+def init_gnuplot(args_str=""):
+    proc = Popen(["gnuplot", str(args_str)], shell=True, stdin=PIPE, stdout=None, stderr=None, close_fds=True )
     def write_to_gnuplot(command):
         print("(debug)", command)
         commandn = command + "\n"
         proc.stdin.write(commandn.encode("UTF-8"))                
     return write_to_gnuplot
 
-write_to_gnuplot = init_gnuplot()
-
+if "--persist" in sys.argv:
+    write_to_gnuplot = init_gnuplot("--persist")
+else:
+    write_to_gnuplot = init_gnuplot()
+    
 # *************************************************** */
 # options
 
@@ -152,6 +156,8 @@ for opt,arg in opts:
     if opt == "--yfactor": arg_yfactor = float(arg)
     if opt == "--zfactor": arg_zfactor = float(arg)
 
+    if opt == "--persist": pass
+    
 # *************************************************** */
 # check command line
 

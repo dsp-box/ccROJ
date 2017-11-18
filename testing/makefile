@@ -67,7 +67,7 @@ test: all
 # user cases:
 # please be sure that Gnuplot, Python and Mlayer is installed on your computer
 
-IMAGE_PLOTER := ../scripts/draw-image.py
+IMAGE_PLOTER := ../scripts/roj-draw.py
 
 case-0:
 	./test-complex-signal
