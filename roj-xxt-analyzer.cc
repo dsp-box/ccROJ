@@ -232,7 +232,7 @@ roj_image_config roj_xxt_analyzer :: get_image_config (){
   img_conf.y.length = get_height();
   img_conf.x.length = get_width();
   
-  img_conf.x.min = sig_conf.start + (double)win_width * 0.5 / sig_conf.rate;  
+  img_conf.x.min = sig_conf.start + (double)(win_width-1) * 0.5 / sig_conf.rate;  
   img_conf.x.max = img_conf.x.min + (double)((get_width()-1)*m_hop) / sig_conf.rate; 
   img_conf.y.min = m_bank_config.min;
   img_conf.y.max = m_bank_config.max;
