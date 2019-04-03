@@ -21,7 +21,8 @@ TESTS := \
 	test-fft-analyzer \
 	test-ode-analyzer \
 	test-cct-analyzer \
-	test-lfm-chirps 
+	test-lfm-chirps \
+	test-txt
 
 
 all: $(TESTS) 
@@ -52,6 +53,8 @@ test-ode-analyzer: check_main_dir test-ode-analyzer.cc $(OBJS)
 test-cct-analyzer: check_main_dir test-cct-analyzer.cc $(OBJS)
 	$(CC) $@.cc $(OBJS) $(CXXFLAGS) -o $@
 test-lfm-chirps: check_main_dir test-lfm-chirps.cc $(OBJS)
+	$(CC) $@.cc $(OBJS) $(CXXFLAGS) -o $@
+test-txt: check_main_dir test-txt.cc $(OBJS)
 	$(CC) $@.cc $(OBJS) $(CXXFLAGS) -o $@
 
 run: test

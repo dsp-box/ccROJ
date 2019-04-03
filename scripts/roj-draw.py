@@ -37,6 +37,7 @@ def print_help(keys):
     print("         --min 200 \\")
     print("         --max 1200 \\")
     print("         --persist\\")
+    print("         --blocking\\")
     sys.exit(0)
 
 # *************************************************** */
@@ -47,13 +48,13 @@ def init_gnuplot(args_str=""):
     def write_to_gnuplot(command):
         print("(debug)", command)
         commandn = command + "\n"
-        proc.stdin.write(commandn.encode("UTF-8"))                
-    return write_to_gnuplot
+        proc.stdin.write(commandn.encode("UTF-8"))
+    return write_to_gnuplot, proc
 
 if "--persist" in sys.argv:
-    write_to_gnuplot = init_gnuplot("--persist")
+    write_to_gnuplot, process = init_gnuplot("--persist")
 else:
-    write_to_gnuplot = init_gnuplot()
+    write_to_gnuplot, process = init_gnuplot()
     
 # *************************************************** */
 # options
@@ -106,8 +107,13 @@ keys.append("extra=")
 # help
 keys.append("help")
 
+# blocking
+keys.append("blocking")
+
 # *************************************************** */
 # parse command line
+
+arg_blocking = False
 
 arg_format = "png"
 arg_infile = None
@@ -156,6 +162,7 @@ for opt,arg in opts:
     if opt == "--yfactor": arg_yfactor = float(arg)
     if opt == "--zfactor": arg_zfactor = float(arg)
 
+    if opt == "--blocking": arg_blocking = True
     if opt == "--persist": pass
     
 # *************************************************** */
@@ -282,4 +289,9 @@ if arg_log:
 else: 
     write_to_gnuplot("splot '%s' u (%g*$1):(%g*$2):(%g*$3) notitle" % (arg_infile, arg_xfactor, arg_yfactor, arg_zfactor))
 write_to_gnuplot("print 'done!'")
-print("(info) The process goes down to the background. Wait a moment for results. It can takes few minutes...")
+
+# *************************************************** */
+# wait
+
+if arg_blocking:
+    process.communicate()
