@@ -445,3 +445,78 @@ roj_pair roj_linear_regression(roj_real_array* a_x, roj_real_array* a_y){
   out.y = (sumy * sumx2 - sumx * sumxy) / d;
   return out;
 }
+
+/* ************************************************************************************************************************* */
+
+/**
+* @type: function
+* @brief: This routine calculates weighted average. 
+*
+* @param [in] a_values: Distribution of a selected signal parameter.
+* @param [in] a_weights: An array which storing cossesponding weights
+*
+* @return: weighted average.
+*/
+double roj_calculate_weighted_average (roj_real_matrix* a_values, roj_real_matrix* a_weights){
+
+  /* get config */
+  roj_image_config conf = a_values->get_config();
+
+  /* check args cohesion */
+  if (!a_weights->compare_config(conf)){
+    call_warning("in roj_calculate_weighted_average");
+    call_error("images are not compact");
+  }
+
+  /* init */
+  double weight_sum = 0.0;
+  double tmp_product = 0.0;
+  
+  /* processing */
+  for(int n=0; n<conf.x.length; n++)
+    for(int k=0; k<conf.y.length; k++){
+
+      weight_sum += a_weights->m_data[n][k];
+      tmp_product += a_weights->m_data[n][k] * a_values->m_data[n][k];
+    }
+  
+  /* return */  
+  return tmp_product / weight_sum;
+}
+
+/**
+* @type: function
+* @brief: This routine calculates weighted variance. 
+*
+* @param [in] a_values: Distribution of a selected signal parameter.
+* @param [in] a_weights: An array which storing cossesponding weights
+*
+* @return: weighted variance.
+*/
+double roj_calculate_weighted_variance (roj_real_matrix* a_values, roj_real_matrix* a_weights){
+
+  /* get config */
+  roj_image_config conf = a_values->get_config();
+
+  /* check args cohesion */
+  if (!a_weights->compare_config(conf)){
+    call_warning("in roj_calculate_weighted_average");
+    call_error("images are not compact");
+  }
+
+  /* init */
+  double weight_sum = 0.0;
+  double tmp_product = 0.0;
+  
+  /* processing */
+  for(int n=0; n<conf.x.length; n++)
+    for(int k=0; k<conf.y.length; k++){
+
+      weight_sum += a_weights->m_data[n][k];
+      tmp_product += a_weights->m_data[n][k] * pow(a_values->m_data[n][k], 2.0);    
+    }
+
+  /* return */  
+  double weighted_mean = roj_calculate_weighted_average (a_values, a_weights);
+  return tmp_product / weight_sum - pow(weighted_mean, 2.0);
+}
