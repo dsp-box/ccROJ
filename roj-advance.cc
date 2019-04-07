@@ -1,5 +1,5 @@
 /* *************************************************** *
- * This file is a part of ccROJ project (version 0-47) *
+ * This file is a part of ccROJ project (version 0-48) *
  * distributed under GNU General Public License v3.0.  *
  * Please visit the webpage: github.com/dsp-box/ccROJ  *
  * for more information.                               *
@@ -457,7 +457,7 @@ roj_pair roj_linear_regression(roj_real_array* a_x, roj_real_array* a_y){
 *
 * @return: weighted average.
 */
-double roj_calculate_weighted_average (roj_real_matrix* a_values, roj_real_matrix* a_weights){
+double roj_calculate_weighted_mean (roj_real_matrix* a_values, roj_real_matrix* a_weights){
 
   /* get config */
   roj_image_config conf = a_values->get_config();
@@ -493,7 +493,7 @@ double roj_calculate_weighted_average (roj_real_matrix* a_values, roj_real_matri
 *
 * @return: weighted variance.
 */
-double roj_calculate_weighted_variance (roj_real_matrix* a_values, roj_real_matrix* a_weights){
+double roj_calculate_weighted_var (roj_real_matrix* a_values, roj_real_matrix* a_weights){
 
   /* get config */
   roj_image_config conf = a_values->get_config();
@@ -517,6 +517,6 @@ double roj_calculate_weighted_variance (roj_real_matrix* a_values, roj_real_matr
     }
 
   /* return */  
-  double weighted_mean = roj_calculate_weighted_average (a_values, a_weights);
+  double weighted_mean = roj_calculate_weighted_mean (a_values, a_weights);
   return tmp_product / weight_sum - pow(weighted_mean, 2.0);
 }

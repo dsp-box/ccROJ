@@ -1,5 +1,5 @@
 /* *************************************************** *
- * This file is a part of ccROJ project (version 0-47) *
+ * This file is a part of ccROJ project (version 0-48) *
  * distributed under GNU General Public License v3.0.  *
  * Please visit the webpage: github.com/dsp-box/ccROJ  *
  * for more information.                               *
@@ -367,6 +367,47 @@ double roj_real_array :: get_var (){
     sum += pow(m_data[n] - mean, 2.0);
 
   return sum / m_config.length;
+}
+
+/**
+* @type: method
+* @brief: This routine roj_calculates and returns the mean of all elements.
+*
+* @return: The mean.
+*/
+double roj_real_array :: get_arg_mean (){
+
+  double sum = 0.0;
+  double tmp = 0.0;
+  
+  for(int n=0; n<m_config.length; n++){
+    double arg = get_arg_by_index(n);
+    tmp += arg * m_data[n];
+    sum += m_data[n];
+  }
+
+  return tmp / sum;
+}
+
+/**
+* @type: method
+* @brief: This routine roj_calculates and returns the variance of all elements.
+*
+* @return: The variance.
+*/
+double roj_real_array :: get_arg_var (){
+
+  double sum = 0.0;
+  double tmp2 = 0.0;
+  double mean = get_arg_mean ();
+  
+  for(int n=0; n<m_config.length; n++){
+    double arg = get_arg_by_index(n);
+    tmp2 += pow(arg, 2.0) * m_data[n];
+    sum += m_data[n];
+  }
+
+  return tmp2 / sum;
 }
 
 /* ************************************************************************************************************************* */

@@ -1,5 +1,5 @@
 /* *************************************************** *
- * This file is a part of ccROJ project (version 0-47) *
+ * This file is a part of ccROJ project (version 0-48) *
  * distributed under GNU General Public License v3.0.  *
  * Please visit the webpage: github.com/dsp-box/ccROJ  *
  * for more information.                               *
@@ -49,6 +49,9 @@ public:
   double get_sum(); 
   double get_var(); 
 
+  double get_arg_mean();
+  double get_arg_var();
+  
   /* clear data */
   void clear();
   roj_array_config cut_head(int);

@@ -21,7 +21,7 @@ roj-reass.cc <br>
 <span class='key'>@param</span> [in]<span class='arg'> a_senergy</span>: Spectral energy. <br>
 <span class='key'>@param</span> [in,out]<span class='arg'> a_output</span>: Reassigned spectral energy. If it is NULL, then new output image is allocated and it has configuration of input arguments. <br>
 <span class='key'>@return</span>: A pointer to reassigned spectral energy. <br>
-<span class='key'>@sign</span>: <span class='bold'>roj_real_matrix* <span class='func'>roj_time_frequency_reassign</span> <span class='func'></span>(roj_real_matrix*<span class='arg'> a_sdelay</span>, roj_real_matrix*<span class='arg'> a_ifreq</span>, roj_real_matrix*<span class='arg'> a_senergy</span>, roj_real_matrix*<span class='arg'> a_output</span>)</span><br>
+<span class='key'>@sign</span>: <span class='bold'>roj_real_matrix* <span class='func'>roj_time_frequency_reassign</span><span class='func'></span> <span class='func'></span>(roj_real_matrix*<span class='arg'> a_sdelay</span>, roj_real_matrix*<span class='arg'> a_ifreq</span>, roj_real_matrix*<span class='arg'> a_senergy</span>, roj_real_matrix*<span class='arg'> a_output</span>)</span><br>
 </div>
 <br><div class='function'>
 <span class='key'>@brief</span>: Reassignment process only in frequency.  <br>
@@ -29,7 +29,7 @@ roj-reass.cc <br>
 <span class='key'>@param</span> [in]<span class='arg'> a_senergy</span>: Spectral energy. <br>
 <span class='key'>@param</span> [in,out]<span class='arg'> a_output</span>: Reassigned spectral energy. If it is NULL, then new output image is allocated and it has configuration of input arguments. <br>
 <span class='key'>@return</span>: A pointer to reassigned spectral energy. <br>
-<span class='key'>@sign</span>: <span class='bold'>roj_real_matrix* <span class='func'>roj_frequency_reassign</span> <span class='func'></span>(roj_real_matrix*<span class='arg'> a_ifreq</span>, roj_real_matrix*<span class='arg'> a_senergy</span>, roj_real_matrix*<span class='arg'> a_output</span>)</span><br>
+<span class='key'>@sign</span>: <span class='bold'>roj_real_matrix* <span class='func'>roj_frequency_reassign</span><span class='func'></span> <span class='func'></span>(roj_real_matrix*<span class='arg'> a_ifreq</span>, roj_real_matrix*<span class='arg'> a_senergy</span>, roj_real_matrix*<span class='arg'> a_output</span>)</span><br>
 </div>
 <br><div class='function'>
 <span class='key'>@brief</span>: This routine roj_calculates statistical relation (similar to histogram) between input arguments over time.  <br>
@@ -37,7 +37,7 @@ roj-reass.cc <br>
 <span class='key'>@param</span> [in]<span class='arg'> a_energy</span>: Spectral energy. <br>
 <span class='key'>@param</span> [in]<span class='arg'> a_arr_conf</span>: A configuration of the output profile. <br>
 <span class='key'>@return</span>: A pointer to the resultant distribution. <br>
-<span class='key'>@sign</span>: <span class='bold'>roj_real_matrix* <span class='func'>roj_calculate_profile_over_time</span> <span class='func'></span>(roj_real_matrix*<span class='arg'> a_values</span>, roj_real_matrix*<span class='arg'> a_energy</span>, roj_array_config<span class='arg'> a_arr_conf</span>)</span><br>
+<span class='key'>@sign</span>: <span class='bold'>roj_real_matrix* <span class='func'>roj_calculate_profile_over_time</span><span class='func'></span> <span class='func'></span>(roj_real_matrix*<span class='arg'> a_values</span>, roj_real_matrix*<span class='arg'> a_energy</span>, roj_array_config<span class='arg'> a_arr_conf</span>)</span><br>
 </div>
 <br><div class='function'>
 <span class='key'>@brief</span>: This routine roj_calculates statistical relation (similar to histogram) between input arguments.  <br>
@@ -45,7 +45,7 @@ roj-reass.cc <br>
 <span class='key'>@param</span> [in]<span class='arg'> a_energy</span>: Spectral energy. <br>
 <span class='key'>@param</span> [in]<span class='arg'> a_arr_conf</span>: A configuration of the output profile. <br>
 <span class='key'>@return</span>: A pointer to the resultant profile. <br>
-<span class='key'>@sign</span>: <span class='bold'>roj_real_array* <span class='func'>roj_calculate_profile</span> <span class='func'></span>(roj_real_matrix*<span class='arg'> a_values</span>, roj_real_matrix*<span class='arg'> a_energy</span>, roj_array_config<span class='arg'> a_arr_conf</span>)</span><br>
+<span class='key'>@sign</span>: <span class='bold'>roj_real_array* <span class='func'>roj_calculate_profile</span><span class='func'></span> <span class='func'></span>(roj_real_matrix*<span class='arg'> a_values</span>, roj_real_matrix*<span class='arg'> a_energy</span>, roj_array_config<span class='arg'> a_arr_conf</span>)</span><br>
 </div>
 <br><div class='function'>
 <span class='key'>@brief</span>: This routine roj_calculates statistical relation (similar to histogram) between input arguments.  <br>
@@ -53,7 +53,7 @@ roj-reass.cc <br>
 <span class='key'>@param</span> [in]<span class='arg'> a_energy</span>: Spectral energy. <br>
 <span class='key'>@param</span> [in,out]<span class='arg'> a_arr</span>: An array which storing the profile. This profile will be modify. <br>
 <span class='key'>@return</span>: A pointer to resultant profile. <br>
-<span class='key'>@sign</span>: <span class='bold'>roj_real_array* <span class='func'>roj_calculate_profile</span> <span class='func'></span>(roj_real_matrix*<span class='arg'> a_values</span>, roj_real_matrix*<span class='arg'> a_energy</span>, roj_real_array*<span class='arg'> a_arr</span>)</span><br>
+<span class='key'>@sign</span>: <span class='bold'>roj_real_array* <span class='func'>roj_calculate_profile</span><span class='func'></span> <span class='func'></span>(roj_real_matrix*<span class='arg'> a_values</span>, roj_real_matrix*<span class='arg'> a_energy</span>, roj_real_array*<span class='arg'> a_arr</span>)</span><br>
 </div>
 <br><div class='function'>
 <span class='key'>@brief</span>: This routine is can be used for add a single sample to a given profile.  <br>
@@ -61,28 +61,28 @@ roj-reass.cc <br>
 <span class='key'>@param</span> [in]<span class='arg'> a_energy</span>: A value of spectral energy. <br>
 <span class='key'>@param</span> [in,out]<span class='arg'> a_arr</span>: An array which storing the profile. This profile will be modify. <br>
 <span class='key'>@return</span>: True if the sample is added, false otherwise (e.g. if out of range). <br>
-<span class='key'>@sign</span>: <span class='bold'>bool <span class='func'>add_sample_to_profile</span> <span class='func'></span>(double<span class='arg'> a_value</span>, double<span class='arg'> a_energy</span>, roj_real_array*<span class='arg'> a_arr</span>)</span><br>
+<span class='key'>@sign</span>: <span class='bold'>bool <span class='func'>add_sample_to_profile</span><span class='func'></span> <span class='func'></span>(double<span class='arg'> a_value</span>, double<span class='arg'> a_energy</span>, roj_real_array*<span class='arg'> a_arr</span>)</span><br>
 </div>
 <br><div class='function'>
 <span class='key'>@brief</span>: This routine roj_calculates histogram for input first argument.  <br>
 <span class='key'>@param</span> [in]<span class='arg'> a_values</span>: Distribution of a selected signal parameter. <br>
 <span class='key'>@param</span> [in]<span class='arg'> a_arr_conf</span>: A configuration of the output histogram. <br>
 <span class='key'>@return</span>: A pointer to the resultant histogram. <br>
-<span class='key'>@sign</span>: <span class='bold'>roj_real_array* <span class='func'>roj_calculate_histogram</span> <span class='func'></span>(roj_real_matrix*<span class='arg'> a_values</span>, roj_array_config<span class='arg'> a_arr_conf</span>)</span><br>
+<span class='key'>@sign</span>: <span class='bold'>roj_real_array* <span class='func'>roj_calculate_histogram</span><span class='func'></span> <span class='func'></span>(roj_real_matrix*<span class='arg'> a_values</span>, roj_array_config<span class='arg'> a_arr_conf</span>)</span><br>
 </div>
 <br><div class='function'>
 <span class='key'>@brief</span>: This routine roj_calculates histogram for input first argument.  <br>
 <span class='key'>@param</span> [in]<span class='arg'> a_values</span>: Distribution of a selected signal parameter. <br>
 <span class='key'>@param</span> [in,out]<span class='arg'> a_arr</span>: An array which storing the histogram. This histogram will be modify. <br>
 <span class='key'>@return</span>: A pointer to the resultant histogram. <br>
-<span class='key'>@sign</span>: <span class='bold'>roj_real_array* <span class='func'>roj_calculate_histogram</span> <span class='func'></span>(roj_real_matrix*<span class='arg'> a_values</span>, roj_real_array*<span class='arg'> a_arr</span>)</span><br>
+<span class='key'>@sign</span>: <span class='bold'>roj_real_array* <span class='func'>roj_calculate_histogram</span><span class='func'></span> <span class='func'></span>(roj_real_matrix*<span class='arg'> a_values</span>, roj_real_array*<span class='arg'> a_arr</span>)</span><br>
 </div>
 <br><div class='function'>
 <span class='key'>@brief</span>: This routine is can be used for add a single sample to a given histogram.  <br>
 <span class='key'>@param</span> [in]<span class='arg'> a_value</span>: A value of a selected signal parameter. <br>
 <span class='key'>@param</span> [in,out]<span class='arg'> a_arr</span>: An array which storing the histogram. This histogram will be modify. <br>
 <span class='key'>@return</span>: True if the sample is added, false otherwise (e.g. if out of range). <br>
-<span class='key'>@sign</span>: <span class='bold'>bool <span class='func'>add_sample_to_histogram</span> <span class='func'></span>(double<span class='arg'> a_values</span>, roj_real_array*<span class='arg'> a_arr</span>)</span><br>
+<span class='key'>@sign</span>: <span class='bold'>bool <span class='func'>add_sample_to_histogram</span><span class='func'></span> <span class='func'></span>(double<span class='arg'> a_values</span>, roj_real_array*<span class='arg'> a_arr</span>)</span><br>
 </div>
 <br>
 </body>

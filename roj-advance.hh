@@ -1,5 +1,5 @@
 /* *************************************************** *
- * This file is a part of ccROJ project (version 0-47) *
+ * This file is a part of ccROJ project (version 0-48) *
  * distributed under GNU General Public License v3.0.  *
  * Please visit the webpage: github.com/dsp-box/ccROJ  *
  * for more information.                               *
@@ -50,7 +50,7 @@ roj_pair roj_calculate_interpolated_argmax (roj_real_matrix*);
 roj_pair roj_linear_regression(roj_real_array* , roj_real_array*);
 roj_pair roj_linear_regression(roj_real_array*);
 
-double roj_calculate_weighted_average (roj_real_matrix*, roj_real_matrix*);
-double roj_calculate_weighted_variance (roj_real_matrix*, roj_real_matrix*);
+double roj_calculate_weighted_mean (roj_real_matrix*, roj_real_matrix*);
+double roj_calculate_weighted_var (roj_real_matrix*, roj_real_matrix*);
 
 #endif

@@ -18,40 +18,40 @@ roj-filter-bank.cc <br>
 <span class='key'>@brief</span>: This is a constructor of roj_filter_bank. <br>
 <span class='key'>@param</span> [in]<span class='arg'> a_bank_conf</span>: A bank configuration as an array configuration. <br>
 <span class='key'>@param</span> [in]<span class='arg'> a_filter_gen</span>: A pointer to a filter generator. <br>
-<span class='key'>@sign</span>: <span class='bold'><span class='range'>roj_filter_bank</span> <span class='range'></span>:: <span class='func'>roj_filter_bank</span> <span class='func'></span>(roj_array_config<span class='arg'> a_bank_conf</span>, roj_filter_generator*<span class='arg'> a_filter_gen</span>)</span><br>
+<span class='key'>@sign</span>: <span class='bold'><span class='range'>roj_filter_bank</span><span class='range'></span> <span class='range'></span>:: <span class='func'>roj_filter_bank</span><span class='func'></span> <span class='func'></span>(roj_array_config<span class='arg'> a_bank_conf</span>, roj_filter_generator*<span class='arg'> a_filter_gen</span>)</span><br>
 </div>
 <br><div class='destructor'>
 <span class='key'>@brief</span>: This is a bank deconstructor. This function release also memory. <br>
-<span class='key'>@sign</span>: <span class='bold'><span class='range'>roj_filter_bank</span> <span class='range'></span>:: ~<span class='func'>roj_filter_bank</span> <span class='func'></span>()</span><br>
+<span class='key'>@sign</span>: <span class='bold'><span class='range'>roj_filter_bank</span><span class='range'></span> <span class='range'></span>:: ~<span class='func'>roj_filter_bank</span><span class='func'></span> <span class='func'></span>()</span><br>
 </div>
 <br><div class='method'>
 <span class='key'>@brief</span>: This routine returns bank parameters as a structure. <br>
 <span class='key'>@return</span>: The structure which contains the configuration. <br>
-<span class='key'>@sign</span>: <span class='bold'>roj_array_config <span class='range'>roj_filter_bank</span> <span class='range'></span>:: <span class='func'>get_config</span> <span class='func'></span>()</span><br>
+<span class='key'>@sign</span>: <span class='bold'>roj_array_config <span class='range'>roj_filter_bank</span><span class='range'></span> <span class='range'></span>:: <span class='func'>get_config</span><span class='func'></span> <span class='func'></span>()</span><br>
 </div>
 <br><div class='method'>
 <span class='key'>@brief</span>: This routine returns a handle to a filter as a pointer. <br>
 <span class='key'>@param</span> [in]<span class='arg'> a_index</span> (default 0): number of filter in the bank. <br>
 <span class='key'>@return</span>: pointer to returned filter. The filter is not copied. <br>
-<span class='key'>@sign</span>: <span class='bold'>roj_filter* <span class='range'>roj_filter_bank</span> <span class='range'></span>:: <span class='func'>get_filter</span> <span class='func'></span>(int<span class='arg'> a_index</span>)</span><br>
+<span class='key'>@sign</span>: <span class='bold'>roj_filter* <span class='range'>roj_filter_bank</span><span class='range'></span> <span class='range'></span>:: <span class='func'>get_filter</span><span class='func'></span> <span class='func'></span>(int<span class='arg'> a_index</span>)</span><br>
 </div>
 <br><div class='method'>
 <span class='key'>@brief</span>: This routine returns a currier frequency of a filter which has a given index. <br>
 <span class='key'>@param</span> [in]<span class='arg'> a_index</span> (default 0): number of filter in the bank. <br>
 <span class='key'>@return</span>: Currier frequency. <br>
-<span class='key'>@sign</span>: <span class='bold'>double <span class='range'>roj_filter_bank</span> <span class='range'></span>:: <span class='func'>get_frequency</span>(int<span class='arg'> a_index</span>)</span><br>
+<span class='key'>@sign</span>: <span class='bold'>double <span class='range'>roj_filter_bank</span><span class='range'></span> <span class='range'></span>:: <span class='func'>get_frequency</span><span class='func'></span>(int<span class='arg'> a_index</span>)</span><br>
 </div>
 <br><div class='method'>
 <span class='key'>@brief</span>: This routine performs filtering operation sample-by-sample. <br>
 <span class='key'>@param</span> [in]<span class='arg'> a_sample</span>: An input sample. <br>
-<span class='key'>@sign</span>: <span class='bold'>void <span class='range'>roj_filter_bank</span> <span class='range'></span>:: <span class='func'>filtering</span> <span class='func'></span>(complex double<span class='arg'> a_sample</span>)</span><br>
+<span class='key'>@sign</span>: <span class='bold'>void <span class='range'>roj_filter_bank</span><span class='range'></span> <span class='range'></span>:: <span class='func'>filtering</span><span class='func'></span> <span class='func'></span>(complex double<span class='arg'> a_sample</span>)</span><br>
 </div>
 <br><div class='method'>
 <span class='key'>@brief</span>: This routine performs filtering operation (the whole signal). <br>
 <span class='key'>@param</span> [in]<span class='arg'> a_sample</span>: An signal for filtering. <br>
 <span class='key'>@param</span> [in]<span class='arg'> a_hop</span> (default 1): A hopsize. <br>
 <span class='key'>@return</span>: A pointer to a pointer to output filtered signals. <br>
-<span class='key'>@sign</span>: <span class='bold'>roj_complex_signal** <span class='range'>roj_filter_bank</span> <span class='range'></span>:: <span class='func'>filtering</span> <span class='func'></span>(roj_complex_signal*<span class='arg'> a_sig</span>, int<span class='arg'> a_hop</span>)</span><br>
+<span class='key'>@sign</span>: <span class='bold'>roj_complex_signal** <span class='range'>roj_filter_bank</span><span class='range'></span> <span class='range'></span>:: <span class='func'>filtering</span><span class='func'></span> <span class='func'></span>(roj_complex_signal*<span class='arg'> a_sig</span>, int<span class='arg'> a_hop</span>)</span><br>
 </div>
 <br>
 </body>

@@ -18,13 +18,13 @@ roj-advance.cc <br>
 <span class='key'>@brief</span>: Calculation of T squeezing distribution.  <br>
 <span class='key'>@param</span> [in]<span class='arg'> a_sdelay</span>: Spectral delay. <br>
 <span class='key'>@return</span>: A pointer to squizeeing matrix. <br>
-<span class='key'>@sign</span>: <span class='bold'>roj_real_matrix* <span class='func'>roj_calculate_time_compacting</span> <span class='func'></span>(roj_real_matrix*<span class='arg'> a_sdelay</span>)</span><br>
+<span class='key'>@sign</span>: <span class='bold'>roj_real_matrix* <span class='func'>roj_calculate_time_compacting</span><span class='func'></span> <span class='func'></span>(roj_real_matrix*<span class='arg'> a_sdelay</span>)</span><br>
 </div>
 <br><div class='function'>
 <span class='key'>@brief</span>: Calculation of F squeezing distribution.  <br>
 <span class='key'>@param</span> [in]<span class='arg'> a_ifreq</span>: Instantaneous frequency. <br>
 <span class='key'>@return</span>: A pointer to matrix for which squizeeing is roj_calculated. <br>
-<span class='key'>@sign</span>: <span class='bold'>roj_real_matrix* <span class='func'>roj_calculate_frequency_compacting</span> <span class='func'></span>(roj_real_matrix*<span class='arg'> a_ifreq</span>)</span><br>
+<span class='key'>@sign</span>: <span class='bold'>roj_real_matrix* <span class='func'>roj_calculate_frequency_compacting</span><span class='func'></span> <span class='func'></span>(roj_real_matrix*<span class='arg'> a_ifreq</span>)</span><br>
 </div>
 <br><div class='function'>
 <span class='key'>@brief</span>: This routine allows to modify (combine) a roj_real_matrix using other one based on minimalization of an associated metric.  <br>
@@ -33,7 +33,7 @@ roj-advance.cc <br>
 <span class='key'>@param</span> [in]<span class='arg'> a_values</span>: A distribution used to optimize. <br>
 <span class='key'>@param</span> [in]<span class='arg'> a_metrics</span>: An associated metric to<span class='arg'> a_values</span>. <br>
 <span class='key'>@return</span>: A number of modified points. <br>
-<span class='key'>@sign</span>: <span class='bold'>int <span class='func'>roj_minimize_matrix</span> <span class='func'></span>(roj_real_matrix*<span class='arg'> a_multi_values</span>, roj_real_matrix*<span class='arg'> a_multi_metrics</span>, roj_real_matrix*<span class='arg'> a_values</span>, roj_real_matrix*<span class='arg'> a_metrics</span>)</span><br>
+<span class='key'>@sign</span>: <span class='bold'>int <span class='func'>roj_minimize_matrix</span><span class='func'></span> <span class='func'></span>(roj_real_matrix*<span class='arg'> a_multi_values</span>, roj_real_matrix*<span class='arg'> a_multi_metrics</span>, roj_real_matrix*<span class='arg'> a_values</span>, roj_real_matrix*<span class='arg'> a_metrics</span>)</span><br>
 </div>
 <br><div class='function'>
 <span class='key'>@brief</span>: This routine allows to modify (combine) a roj_real_matrix using other one based on minimalization of the basolute value of an associated metric.  <br>
@@ -42,7 +42,7 @@ roj-advance.cc <br>
 <span class='key'>@param</span> [in]<span class='arg'> a_values</span>: A distribution used to optimize. <br>
 <span class='key'>@param</span> [in]<span class='arg'> a_metrics</span>: An associated metric to<span class='arg'> a_values</span>. <br>
 <span class='key'>@return</span>: A number of modified points. <br>
-<span class='key'>@sign</span>: <span class='bold'>int <span class='func'>roj_absminimize_matrix</span> <span class='func'></span>(roj_real_matrix*<span class='arg'> a_multi_values</span>, roj_real_matrix*<span class='arg'> a_multi_metrics</span>, roj_real_matrix*<span class='arg'> a_values</span>, roj_real_matrix*<span class='arg'> a_metrics</span>)</span><br>
+<span class='key'>@sign</span>: <span class='bold'>int <span class='func'>roj_absminimize_matrix</span><span class='func'></span> <span class='func'></span>(roj_real_matrix*<span class='arg'> a_multi_values</span>, roj_real_matrix*<span class='arg'> a_multi_metrics</span>, roj_real_matrix*<span class='arg'> a_values</span>, roj_real_matrix*<span class='arg'> a_metrics</span>)</span><br>
 </div>
 <br><div class='function'>
 <span class='key'>@brief</span>: This routine allows to modify (combine) a roj_real_matrix using other one based on maximalization of an associated metric.  <br>
@@ -51,33 +51,47 @@ roj-advance.cc <br>
 <span class='key'>@param</span> [in]<span class='arg'> a_values</span>: A distribution used to optimize. <br>
 <span class='key'>@param</span> [in]<span class='arg'> a_metrics</span>: An associated metric to<span class='arg'> a_values</span>. <br>
 <span class='key'>@return</span>: A number of modified points. <br>
-<span class='key'>@sign</span>: <span class='bold'>int <span class='func'>roj_maximize_matrix</span> <span class='func'></span>(roj_real_matrix*<span class='arg'> a_multi_values</span>, roj_real_matrix*<span class='arg'> a_multi_metrics</span>, roj_real_matrix*<span class='arg'> a_values</span>, roj_real_matrix*<span class='arg'> a_metrics</span>)</span><br>
+<span class='key'>@sign</span>: <span class='bold'>int <span class='func'>roj_maximize_matrix</span><span class='func'></span> <span class='func'></span>(roj_real_matrix*<span class='arg'> a_multi_values</span>, roj_real_matrix*<span class='arg'> a_multi_metrics</span>, roj_real_matrix*<span class='arg'> a_values</span>, roj_real_matrix*<span class='arg'> a_metrics</span>)</span><br>
 </div>
 <br><div class='function'>
 <span class='key'>@brief</span>: The function saves 2 coherent roj_real_matrix objects to a single file.  <br>
 <span class='key'>@param</span> [in]<span class='arg'> a_fname</span>: a file name. <br>
 <span class='key'>@param</span> [in]<span class='arg'> a_matrix_1</span>: a first roj_real_matrix. <br>
 <span class='key'>@param</span> [in]<span class='arg'> a_matrix_2</span>: a second roj_real_matrix. <br>
-<span class='key'>@sign</span>: <span class='bold'>void <span class='func'>roj_save</span> <span class='func'></span>(char *a_fname, roj_real_matrix*<span class='arg'> a_matrix_1</span>, roj_real_matrix*<span class='arg'> a_matrix_2</span>)</span><br>
+<span class='key'>@sign</span>: <span class='bold'>void <span class='func'>roj_save</span><span class='func'></span> <span class='func'></span>(char *a_fname, roj_real_matrix*<span class='arg'> a_matrix_1</span>, roj_real_matrix*<span class='arg'> a_matrix_2</span>)</span><br>
 </div>
 <br><div class='function'>
 <span class='key'>@brief</span>: looking for arguments of the maximum <br>
 <span class='key'>@param</span> [in]<span class='arg'> a_matrix</span>: pointer to analyzed matrix <br>
 <span class='key'>@return</span>:  <br>
-<span class='key'>@sign</span>: <span class='bold'>roj_pair <span class='func'>roj_calculate_interpolated_argmax</span> <span class='func'></span>(roj_real_matrix*<span class='arg'> a_matrix</span>)</span><br>
+<span class='key'>@sign</span>: <span class='bold'>roj_pair <span class='func'>roj_calculate_interpolated_argmax</span><span class='func'></span> <span class='func'></span>(roj_real_matrix*<span class='arg'> a_matrix</span>)</span><br>
 </div>
 <br><div class='function'>
 <span class='key'>@brief</span>: calculation of linear regression by minimizing least square error <br>
 <span class='key'>@param</span> [in]<span class='arg'> a_vector</span>: data for regression <br>
 <span class='key'>@return</span>: out which is roj_pair that y = out.x * x + out.y <br>
-<span class='key'>@sign</span>: <span class='bold'>roj_pair <span class='func'>roj_linear_regression</span>(roj_real_array*<span class='arg'> a_vector</span>)</span><br>
+<span class='key'>@sign</span>: <span class='bold'>roj_pair <span class='func'>roj_linear_regression</span><span class='func'></span>(roj_real_array*<span class='arg'> a_vector</span>)</span><br>
 </div>
 <br><div class='function'>
 <span class='key'>@brief</span>: calculation of linear regression by minimizing least square error <br>
 <span class='key'>@param</span> [in]<span class='arg'> a_x</span>: x data for regression <br>
 <span class='key'>@param</span> [in]<span class='arg'> a_y</span>: y data for regression <br>
 <span class='key'>@return</span>: out which is roj_pair that y = out.x * x + out.y <br>
-<span class='key'>@sign</span>: <span class='bold'>roj_pair <span class='func'>roj_linear_regression</span>(roj_real_array*<span class='arg'> a_x</span>, roj_real_array*<span class='arg'> a_y</span>)</span><br>
+<span class='key'>@sign</span>: <span class='bold'>roj_pair <span class='func'>roj_linear_regression</span><span class='func'></span>(roj_real_array*<span class='arg'> a_x</span>, roj_real_array*<span class='arg'> a_y</span>)</span><br>
+</div>
+<br><div class='function'>
+<span class='key'>@brief</span>: This routine calculates weighted average.  <br>
+<span class='key'>@param</span> [in]<span class='arg'> a_values</span>: Distribution of a selected signal parameter. <br>
+<span class='key'>@param</span> [in]<span class='arg'> a_weights</span>: An array which storing cossesponding weights <br>
+<span class='key'>@return</span>: weighted average. <br>
+<span class='key'>@sign</span>: <span class='bold'>double <span class='func'>roj_calculate_weighted_mean</span><span class='func'></span> <span class='func'></span>(roj_real_matrix*<span class='arg'> a_values</span>, roj_real_matrix*<span class='arg'> a_weights</span>)</span><br>
+</div>
+<br><div class='function'>
+<span class='key'>@brief</span>: This routine calculates weighted variance.  <br>
+<span class='key'>@param</span> [in]<span class='arg'> a_values</span>: Distribution of a selected signal parameter. <br>
+<span class='key'>@param</span> [in]<span class='arg'> a_weights</span>: An array which storing cossesponding weights <br>
+<span class='key'>@return</span>: weighted variance. <br>
+<span class='key'>@sign</span>: <span class='bold'>double <span class='func'>roj_calculate_weighted_var</span><span class='func'></span> <span class='func'></span>(roj_real_matrix*<span class='arg'> a_values</span>, roj_real_matrix*<span class='arg'> a_weights</span>)</span><br>
 </div>
 <br>
 </body>

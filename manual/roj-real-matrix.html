@@ -23,69 +23,69 @@ roj-real-matrix.cc <br>
 <br><div class='constructor'>
 <span class='key'>@brief</span>: This is a constructor of roj_real_matrix which is dedicated for storing spectrografic data. <br>
 <span class='key'>@param</span> [in]<span class='arg'> a_conf</span>: a TF configuration. <br>
-<span class='key'>@sign</span>: <span class='bold'><span class='range'>roj_real_matrix</span> <span class='range'></span>:: <span class='func'>roj_real_matrix</span> <span class='func'></span>(roj_image_config<span class='arg'> a_conf</span>)</span><br>
+<span class='key'>@sign</span>: <span class='bold'><span class='range'>roj_real_matrix</span><span class='range'></span> <span class='range'></span>:: <span class='func'>roj_real_matrix</span><span class='func'></span> <span class='func'></span>(roj_image_config<span class='arg'> a_conf</span>)</span><br>
 </div>
 <br><div class='constructor'>
 <span class='key'>@brief</span>: This is a copy constructor of roj_real_matrix which is dedicated for storing spectrografic data. The new object is copy from a pointer to a given argument. <br>
 <span class='key'>@param</span> [in]<span class='arg'> a_matrix</span>: A pointer to a given matrix. <br>
-<span class='key'>@sign</span>: <span class='bold'><span class='range'>roj_real_matrix</span> <span class='range'></span>:: <span class='func'>roj_real_matrix</span> <span class='func'></span>(roj_real_matrix*<span class='arg'> a_matrix</span>)</span><br>
+<span class='key'>@sign</span>: <span class='bold'><span class='range'>roj_real_matrix</span><span class='range'></span> <span class='range'></span>:: <span class='func'>roj_real_matrix</span><span class='func'></span> <span class='func'></span>(roj_real_matrix*<span class='arg'> a_matrix</span>)</span><br>
 </div>
 <br><div class='destructor'>
 <span class='key'>@brief</span>: This is a generator deconstructor. The memory is also released. <br>
-<span class='key'>@sign</span>: <span class='bold'><span class='range'>roj_real_matrix</span> <span class='range'></span>:: ~<span class='func'>roj_real_matrix</span> <span class='func'></span>()</span><br>
+<span class='key'>@sign</span>: <span class='bold'><span class='range'>roj_real_matrix</span><span class='range'></span> <span class='range'></span>:: ~<span class='func'>roj_real_matrix</span><span class='func'></span> <span class='func'></span>()</span><br>
 </div>
 <br><div class='method'>
 <span class='key'>@brief</span>: This routine cleans data. <br>
-<span class='key'>@sign</span>: <span class='bold'>void <span class='range'>roj_real_matrix</span> <span class='range'></span>:: <span class='func'>clear</span> <span class='func'></span>()</span><br>
+<span class='key'>@sign</span>: <span class='bold'>void <span class='range'>roj_real_matrix</span><span class='range'></span> <span class='range'></span>:: <span class='func'>clear</span><span class='func'></span> <span class='func'></span>()</span><br>
 </div>
 <br><div class='method'>
 <span class='key'>@brief</span>: This routine replaces negative values with its absolute value.  <br>
-<span class='key'>@sign</span>: <span class='bold'>void <span class='range'>roj_real_matrix</span> <span class='range'></span>:: <span class='func'>abs</span> <span class='func'></span>()</span><br>
+<span class='key'>@sign</span>: <span class='bold'>void <span class='range'>roj_real_matrix</span><span class='range'></span> <span class='range'></span>:: <span class='func'>abs</span><span class='func'></span> <span class='func'></span>()</span><br>
 </div>
 <br><div class='method'>
 <span class='key'>@brief</span>: This routine replaces NaN values with 1E300.  <br>
-<span class='key'>@sign</span>: <span class='bold'>void <span class='range'>roj_real_matrix</span> <span class='range'></span>:: <span class='func'>remove_nan</span> <span class='func'></span>()</span><br>
+<span class='key'>@sign</span>: <span class='bold'>void <span class='range'>roj_real_matrix</span><span class='range'></span> <span class='range'></span>:: <span class='func'>remove_nan</span><span class='func'></span> <span class='func'></span>()</span><br>
 </div>
 <br><div class='method'>
 <span class='key'>@brief</span>: This routine calculates the sum of all values stored in the matrix. <br>
 <span class='key'>@return</span>: Cumulated values. <br>
-<span class='key'>@sign</span>: <span class='bold'>double <span class='range'>roj_real_matrix</span> <span class='range'></span>:: <span class='func'>get_sum</span> <span class='func'></span>()</span><br>
+<span class='key'>@sign</span>: <span class='bold'>double <span class='range'>roj_real_matrix</span><span class='range'></span> <span class='range'></span>:: <span class='func'>get_sum</span><span class='func'></span> <span class='func'></span>()</span><br>
 </div>
 <br><div class='method'>
 <span class='key'>@brief</span>: This routine finds the maximal value from stored in the matrix. <br>
 <span class='key'>@return</span>: Maximal value. <br>
-<span class='key'>@sign</span>: <span class='bold'>double <span class='range'>roj_real_matrix</span> <span class='range'></span>:: <span class='func'>get_max</span> <span class='func'></span>()</span><br>
+<span class='key'>@sign</span>: <span class='bold'>double <span class='range'>roj_real_matrix</span><span class='range'></span> <span class='range'></span>:: <span class='func'>get_max</span><span class='func'></span> <span class='func'></span>()</span><br>
 </div>
 <br><div class='method'>
 <span class='key'>@brief</span>: This routine roj_calculates a marginal distribution in the x domain which represents mean value also a wighted mean. <br>
 <span class='key'>@param</span> [in]<span class='arg'> a_energy</span> (default NULL): a distribution used for weighting <br>
 <span class='key'>@return</span>: a pointer to the array which contains the marginal distribution <br>
-<span class='key'>@sign</span>: <span class='bold'>roj_real_array* <span class='range'>roj_real_matrix</span> <span class='range'></span>:: <span class='func'>get_mean_over_x</span> <span class='func'></span>(roj_real_matrix*<span class='arg'> a_energy</span>)</span><br>
+<span class='key'>@sign</span>: <span class='bold'>roj_real_array* <span class='range'>roj_real_matrix</span><span class='range'></span> <span class='range'></span>:: <span class='func'>get_mean_over_x</span><span class='func'></span> <span class='func'></span>(roj_real_matrix*<span class='arg'> a_energy</span>)</span><br>
 </div>
 <br><div class='method'>
 <span class='key'>@brief</span>: This routine roj_calculates a marginal distribution in the y domain which represents mean value also a wighted mean. <br>
 <span class='key'>@param</span> [in]<span class='arg'> a_energy</span> (default NULL): a distribution used for weighting <br>
 <span class='key'>@return</span>: a pointer to the array which contains the marginal distribution <br>
-<span class='key'>@sign</span>: <span class='bold'>roj_real_array* <span class='range'>roj_real_matrix</span> <span class='range'></span>:: <span class='func'>get_mean_over_y</span> <span class='func'></span>(roj_real_matrix*<span class='arg'> a_energy</span>)</span><br>
+<span class='key'>@sign</span>: <span class='bold'>roj_real_array* <span class='range'>roj_real_matrix</span><span class='range'></span> <span class='range'></span>:: <span class='func'>get_mean_over_y</span><span class='func'></span> <span class='func'></span>(roj_real_matrix*<span class='arg'> a_energy</span>)</span><br>
 </div>
 <br><div class='method'>
 <span class='key'>@brief</span>: This routine roj_calculates a marginal distribution in the time domain which represents corresponded arguments of maximal values of a given enregy distribution. <br>
 <span class='key'>@param</span> [in]<span class='arg'> a_energy</span>: A distribution used for looking for maxima. <br>
 <span class='key'>@return</span>: A pointer to the array which contains the marginal distribution. <br>
-<span class='key'>@sign</span>: <span class='bold'>roj_real_array* <span class='range'>roj_real_matrix</span> <span class='range'></span>:: <span class='func'>get_max_over_x</span> <span class='func'></span>(roj_real_matrix*<span class='arg'> a_energy</span>)</span><br>
+<span class='key'>@sign</span>: <span class='bold'>roj_real_array* <span class='range'>roj_real_matrix</span><span class='range'></span> <span class='range'></span>:: <span class='func'>get_max_over_x</span><span class='func'></span> <span class='func'></span>(roj_real_matrix*<span class='arg'> a_energy</span>)</span><br>
 </div>
 <br><div class='method'>
 <span class='key'>@brief</span>: This routine roj_calculates a marginal distribution in the time domain which represents corresponded arguments of maximal values of a given enregy distribution. <br>
 <span class='key'>@param</span> [in]<span class='arg'> a_energy</span>: A distribution used for looking for maxima. <br>
 <span class='key'>@return</span>: A pointer to the array which contains the marginal distribution. <br>
-<span class='key'>@sign</span>: <span class='bold'>roj_real_array* <span class='range'>roj_real_matrix</span> <span class='range'></span>:: <span class='func'>get_max_over_y</span> <span class='func'></span>(roj_real_matrix*<span class='arg'> a_energy</span>)</span><br>
+<span class='key'>@sign</span>: <span class='bold'>roj_real_array* <span class='range'>roj_real_matrix</span><span class='range'></span> <span class='range'></span>:: <span class='func'>get_max_over_y</span><span class='func'></span> <span class='func'></span>(roj_real_matrix*<span class='arg'> a_energy</span>)</span><br>
 </div>
 <br><div class='method'>
 <span class='key'>@brief</span>: This routine roj_calculates a marginal distribution in the time domain which is a profil of energy. <br>
 <span class='key'>@param</span> [in]<span class='arg'> a_energy</span>: A corresponded energy. <br>
 <span class='key'>@param</span> [in]<span class='arg'> a_conf</span>: An range and resolution of obtained profile. <br>
 <span class='key'>@return</span>: A pointer to the array which contains the marginal distribution. <br>
-<span class='key'>@sign</span>: <span class='bold'>roj_real_array* <span class='range'>roj_real_matrix</span> <span class='range'></span>:: <span class='func'>get_dominant_over_x</span> <span class='func'></span>(roj_real_matrix*<span class='arg'> a_energy</span>, roj_array_config<span class='arg'> a_conf</span>)</span><br>
+<span class='key'>@sign</span>: <span class='bold'>roj_real_array* <span class='range'>roj_real_matrix</span><span class='range'></span> <span class='range'></span>:: <span class='func'>get_dominant_over_x</span><span class='func'></span> <span class='func'></span>(roj_real_matrix*<span class='arg'> a_energy</span>, roj_array_config<span class='arg'> a_conf</span>)</span><br>
 </div>
 <br><div class='method'>
 <span class='key'>@brief</span>: This routine roj_calculates a marginal distribution in the time domain which is a profil of energy. The algorithm makes correction using a corresponded group delay. <br>
@@ -93,53 +93,53 @@ roj-real-matrix.cc <br>
 <span class='key'>@param</span> [in]<span class='arg'> a_sdelay</span>: A spectral delay. <br>
 <span class='key'>@param</span> [in]<span class='arg'> a_conf</span>: An range and resolution of obtained profile. <br>
 <span class='key'>@return</span>: A pointer to the array which contains the marginal distribution. <br>
-<span class='key'>@sign</span>: <span class='bold'>roj_real_array* <span class='range'>roj_real_matrix</span> <span class='range'></span>:: <span class='func'>get_dominant_over_x</span> <span class='func'></span>(roj_real_matrix*<span class='arg'> a_energy</span>, roj_real_matrix*<span class='arg'> a_sdelay</span>, roj_array_config<span class='arg'> a_conf</span>)</span><br>
+<span class='key'>@sign</span>: <span class='bold'>roj_real_array* <span class='range'>roj_real_matrix</span><span class='range'></span> <span class='range'></span>:: <span class='func'>get_dominant_over_x</span><span class='func'></span> <span class='func'></span>(roj_real_matrix*<span class='arg'> a_energy</span>, roj_real_matrix*<span class='arg'> a_sdelay</span>, roj_array_config<span class='arg'> a_conf</span>)</span><br>
 </div>
 <br><div class='method'>
 <span class='key'>@brief</span>: This routine saves array to a TXT file. The results can be simply drawn using Gnuplot. <br>
 <span class='key'>@param</span> [in]<span class='arg'> a_fname</span>: Name of saved file. <br>
-<span class='key'>@sign</span>: <span class='bold'>void <span class='range'>roj_real_matrix</span> <span class='range'></span>:: <span class='func'>save</span> <span class='func'></span>(char*<span class='arg'> a_fname</span>)</span><br>
+<span class='key'>@sign</span>: <span class='bold'>void <span class='range'>roj_real_matrix</span><span class='range'></span> <span class='range'></span>:: <span class='func'>save</span><span class='func'></span> <span class='func'></span>(char*<span class='arg'> a_fname</span>)</span><br>
 </div>
 <br><div class='method'>
 <span class='key'>@brief</span>: This routine cut a piece from the base matrix. <br>
 <span class='key'>@param</span> [in]<span class='arg'> a_conf</span>: A pointer to a configuration of a new matrix. <br>
 <span class='key'>@return</span>: The new cropped matrix. <br>
-<span class='key'>@sign</span>: <span class='bold'>roj_real_matrix* <span class='range'>roj_real_matrix</span> <span class='range'></span>:: <span class='func'>cropping</span> <span class='func'></span>(roj_image_config<span class='arg'> a_conf</span>)</span><br>
+<span class='key'>@sign</span>: <span class='bold'>roj_real_matrix* <span class='range'>roj_real_matrix</span><span class='range'></span> <span class='range'></span>:: <span class='func'>cropping</span><span class='func'></span> <span class='func'></span>(roj_image_config<span class='arg'> a_conf</span>)</span><br>
 </div>
 <br><div class='operator'>
 <span class='key'>@brief</span>: Overloading of =' operator. <br>
 <span class='key'>@param</span> [in]<span class='arg'> a_number</span>: A number which is assigned. <br>
-<span class='key'>@sign</span>: <span class='bold'>void <span class='range'>roj_real_matrix</span> <span class='range'></span>:: operator =<span class='func'></span> <span class='func'></span>(double<span class='arg'> a_number</span>)</span><br>
+<span class='key'>@sign</span>: <span class='bold'>void <span class='range'>roj_real_matrix</span><span class='range'></span> <span class='range'></span>:: operator =<span class='func'></span> <span class='func'></span>(double<span class='arg'> a_number</span>)</span><br>
 </div>
 <br><div class='operator'>
 <span class='key'>@brief</span>: Overloading of '*=' operator. <br>
 <span class='key'>@param</span> [in]<span class='arg'> a_factor</span>: An factor which is used for multiplication. <br>
-<span class='key'>@sign</span>: <span class='bold'>void <span class='range'>roj_real_matrix</span> <span class='range'></span>:: operator *=<span class='func'></span> <span class='func'></span>(double<span class='arg'> a_factor</span>)</span><br>
+<span class='key'>@sign</span>: <span class='bold'>void <span class='range'>roj_real_matrix</span><span class='range'></span> <span class='range'></span>:: operator *=<span class='func'></span> <span class='func'></span>(double<span class='arg'> a_factor</span>)</span><br>
 </div>
 <br><div class='operator'>
 <span class='key'>@brief</span>: Overloading of '/=' operator. <br>
 <span class='key'>@param</span> [in]<span class='arg'> a_div</span>: A number which is used for division. <br>
-<span class='key'>@sign</span>: <span class='bold'>void <span class='range'>roj_real_matrix</span> <span class='range'></span>:: operator /=<span class='func'></span> <span class='func'></span>(double<span class='arg'> a_div</span>)</span><br>
+<span class='key'>@sign</span>: <span class='bold'>void <span class='range'>roj_real_matrix</span><span class='range'></span> <span class='range'></span>:: operator /=<span class='func'></span> <span class='func'></span>(double<span class='arg'> a_div</span>)</span><br>
 </div>
 <br><div class='operator'>
 <span class='key'>@brief</span>: Overloading of '+=' operator. <br>
 <span class='key'>@param</span> [in]<span class='arg'> a_component</span>: An component which is used for sum. <br>
-<span class='key'>@sign</span>: <span class='bold'>void <span class='range'>roj_real_matrix</span> <span class='range'></span>:: operator +=<span class='func'></span> <span class='func'></span>(double<span class='arg'> a_component</span>)</span><br>
+<span class='key'>@sign</span>: <span class='bold'>void <span class='range'>roj_real_matrix</span><span class='range'></span> <span class='range'></span>:: operator +=<span class='func'></span> <span class='func'></span>(double<span class='arg'> a_component</span>)</span><br>
 </div>
 <br><div class='operator'>
 <span class='key'>@brief</span>: Overloading of '-=' operator. <br>
 <span class='key'>@param</span> [in]<span class='arg'> a_subtrahend</span>: A number which is used for substraction. <br>
-<span class='key'>@sign</span>: <span class='bold'>void <span class='range'>roj_real_matrix</span> <span class='range'></span>:: operator -=<span class='func'></span> <span class='func'></span>(double<span class='arg'> a_number</span>)</span><br>
+<span class='key'>@sign</span>: <span class='bold'>void <span class='range'>roj_real_matrix</span><span class='range'></span> <span class='range'></span>:: operator -=<span class='func'></span> <span class='func'></span>(double<span class='arg'> a_number</span>)</span><br>
 </div>
 <br><div class='operator'>
 <span class='key'>@brief</span>: Overloading of '*=' operator. <br>
 <span class='key'>@param</span> [in]<span class='arg'> a_matrix</span>: A pointer to matrix which is used for multiplication (element-by-element). <br>
-<span class='key'>@sign</span>: <span class='bold'>void <span class='range'>roj_real_matrix</span> <span class='range'></span>:: operator *=<span class='func'></span> <span class='func'></span>(roj_real_matrix *a_matrix)</span><br>
+<span class='key'>@sign</span>: <span class='bold'>void <span class='range'>roj_real_matrix</span><span class='range'></span> <span class='range'></span>:: operator *=<span class='func'></span> <span class='func'></span>(roj_real_matrix *a_matrix)</span><br>
 </div>
 <br><div class='operator'>
 <span class='key'>@brief</span>: Overloading of '+=' operator. <br>
 <span class='key'>@param</span> [in]<span class='arg'> a_matrix</span>: A pointer to matrix which is used for adding. <br>
-<span class='key'>@sign</span>: <span class='bold'>void <span class='range'>roj_real_matrix</span> <span class='range'></span>:: operator +=<span class='func'></span> <span class='func'></span>(roj_real_matrix *a_matrix)</span><br>
+<span class='key'>@sign</span>: <span class='bold'>void <span class='range'>roj_real_matrix</span><span class='range'></span> <span class='range'></span>:: operator +=<span class='func'></span> <span class='func'></span>(roj_real_matrix *a_matrix)</span><br>
 </div>
 <br>
 </body>

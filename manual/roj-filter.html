@@ -18,29 +18,29 @@ roj-filter.cc <br>
 <span class='key'>@brief</span>: This is constructor of roj_filter. <br>
 <span class='key'>@param</span> [in]<span class='arg'> a_order</span>: filter order, length of internal shift buffer. <br>
 <span class='key'>@param</span> [in]<span class='arg'> a_outlen</span> (default 1): length of internal delay buffer. <br>
-<span class='key'>@sign</span>: <span class='bold'><span class='range'>roj_filter</span> <span class='range'></span>:: <span class='func'>roj_filter</span>(unsigned int<span class='arg'> a_order</span>, unsigned int<span class='arg'> a_outlen</span>)</span><br>
+<span class='key'>@sign</span>: <span class='bold'><span class='range'>roj_filter</span><span class='range'></span> <span class='range'></span>:: <span class='func'>roj_filter</span><span class='func'></span>(unsigned int<span class='arg'> a_order</span>, unsigned int<span class='arg'> a_outlen</span>)</span><br>
 </div>
 <br><div class='destructor'>
 <span class='key'>@brief</span>: This is destructor. <br>
-<span class='key'>@sign</span>: <span class='bold'><span class='range'>roj_filter</span> <span class='range'></span>:: ~<span class='func'>roj_filter</span>()</span><br>
+<span class='key'>@sign</span>: <span class='bold'><span class='range'>roj_filter</span><span class='range'></span> <span class='range'></span>:: ~<span class='func'>roj_filter</span><span class='func'></span>()</span><br>
 </div>
 <br><div class='method'>
 <span class='key'>@brief</span>: This routine processes a single sample. <br>
 <span class='key'>@param</span> [in]<span class='arg'> a_sample</span>: An input sample. <br>
 <span class='key'>@return</span>: A sample of filtered output. <br>
-<span class='key'>@sign</span>: <span class='bold'>complex double <span class='range'>roj_filter</span> <span class='range'></span>:: <span class='func'>process</span>(complex double<span class='arg'> a_sample</span>)</span><br>
+<span class='key'>@sign</span>: <span class='bold'>complex double <span class='range'>roj_filter</span><span class='range'></span> <span class='range'></span>:: <span class='func'>process</span><span class='func'></span>(complex double<span class='arg'> a_sample</span>)</span><br>
 </div>
 <br><div class='method'>
 <span class='key'>@brief</span>: This routine gets last output sample. <br>
 <span class='key'>@param</span> [in]<span class='arg'> a_shift</span> (default 1): an index of returned sample from output buffer. Give 0 to get non-delayed sample. Give 1 to get maximal delayed sample.  <br>
 <span class='key'>@return</span>: A sample of filtered output. <br>
-<span class='key'>@sign</span>: <span class='bold'>complex double <span class='range'>roj_filter</span> <span class='range'></span>:: <span class='func'>get_output</span>(unsigned int<span class='arg'> a_shift</span>)</span><br>
+<span class='key'>@sign</span>: <span class='bold'>complex double <span class='range'>roj_filter</span><span class='range'></span> <span class='range'></span>:: <span class='func'>get_output</span><span class='func'></span>(unsigned int<span class='arg'> a_shift</span>)</span><br>
 </div>
 <br><div class='method'>
 <span class='key'>@brief</span>: This routine processes a single sample. <br>
 <span class='key'>@param</span> [in]<span class='arg'> a_sig</span>: A pointer to input signal. <br>
 <span class='key'>@return</span>: A pointer to output signal. <br>
-<span class='key'>@sign</span>: <span class='bold'>roj_complex_signal* <span class='range'>roj_filter</span> <span class='range'></span>:: <span class='func'>process</span>(roj_complex_signal*<span class='arg'> a_sig</span>)</span><br>
+<span class='key'>@sign</span>: <span class='bold'>roj_complex_signal* <span class='range'>roj_filter</span><span class='range'></span> <span class='range'></span>:: <span class='func'>process</span><span class='func'></span>(roj_complex_signal*<span class='arg'> a_sig</span>)</span><br>
 </div>
 <br>
 </body>

@@ -17,14 +17,14 @@ roj-pulse-gener.cc <br>
 <br><div class='struct'>
 <span class='key'>@brief</span>: This is a structure for roj_pulse_generator configuration. <br>
 <span class='bold'><span class='key'>@sign</span>: <span class='bold'> <span class='range'>struct</span> roj_pulse_config</span> <span class='arg'></span></span><br>
-<span class='bold'>  double <span class='arg'>transition</span></span><br>
-<span class='bold'>  double <span class='arg'>period</span></span><br>
-<span class='bold'>  double <span class='arg'>width</span></span><br>
-<span class='bold'>  double <span class='arg'>amplitude</span></span><br>
-<span class='bold'>  double <span class='arg'>delay</span></span><br>
-<span class='bold'>  double <span class='arg'>phase</span></span><br>
-<span class='bold'>  double <span class='arg'>frequency</span></span><br>
-<span class='bold'>  double <span class='arg'>bandwidth</span></span><br>
+<span class='bold'>  double <span class='arg'>transition</span> <span class='arg'></span></span><br>
+<span class='bold'>  double <span class='arg'>period</span> <span class='arg'></span></span><br>
+<span class='bold'>  double <span class='arg'>width</span> <span class='arg'></span></span><br>
+<span class='bold'>  double <span class='arg'>amplitude</span> <span class='arg'></span></span><br>
+<span class='bold'>  double <span class='arg'>delay</span> <span class='arg'></span></span><br>
+<span class='bold'>  double <span class='arg'>phase</span> <span class='arg'></span></span><br>
+<span class='bold'>  double <span class='arg'>frequency</span> <span class='arg'></span></span><br>
+<span class='bold'>  double <span class='arg'>bandwidth</span> <span class='arg'></span></span><br>
 </div>
 <br><div class='field'>
 <span class='key'>@brief</span>: This field allows to set the transition of the Tukey window, which is an envelope of the pulse (0 <= transition <= 1). <br>
@@ -61,7 +61,7 @@ roj-pulse-gener.cc <br>
 </div>
 <br><div class='constructor'>
 <span class='key'>@brief</span>: This is a constructor of roj_pulse_generator which produces series of pulses which are tapering by Tukey window. <br>
-<span class='key'>@sign</span>: <span class='bold'><span class='range'>roj_pulse_generator</span> <span class='range'></span>:: <span class='func'>roj_pulse_generator</span> <span class='func'></span>()</span><br>
+<span class='key'>@sign</span>: <span class='bold'><span class='range'>roj_pulse_generator</span><span class='range'></span> <span class='range'></span>:: <span class='func'>roj_pulse_generator</span><span class='func'></span> <span class='func'></span>()</span><br>
 </div>
 <br><div class='destructor'>
 <span class='key'>@brief</span>: The deconstructor is default. <br>
@@ -70,25 +70,25 @@ roj-pulse-gener.cc <br>
 <span class='key'>@brief</span>: This routine roj_calculates a signal (series of pulses) and adds it to a given argument. <br>
 <span class='key'>@param</span> [in,out]<span class='arg'> a_sig</span>: A signal for modification.  <br>
 <span class='key'>@return</span>: The added energy. <br>
-<span class='key'>@sign</span>: <span class='bold'>double <span class='range'>roj_pulse_generator</span> <span class='range'></span>:: <span class='func'>add_harmonic</span> <span class='func'></span>(roj_complex_signal*<span class='arg'> a_sig</span>)</span><br>
+<span class='key'>@sign</span>: <span class='bold'>double <span class='range'>roj_pulse_generator</span><span class='range'></span> <span class='range'></span>:: <span class='func'>add_harmonic</span><span class='func'></span> <span class='func'></span>(roj_complex_signal*<span class='arg'> a_sig</span>)</span><br>
 </div>
 <br><div class='method'>
 <span class='key'>@brief</span>: This routine roj_calculates a signal (series of LFM pulses) and adds it to a given argument. <br>
 <span class='key'>@param</span> [in,out]<span class='arg'> a_sig</span>: A signal for modification.  <br>
 <span class='key'>@return</span>: The added energy. <br>
-<span class='key'>@sign</span>: <span class='bold'>double <span class='range'>roj_pulse_generator</span> <span class='range'></span>:: <span class='func'>add_lfm_chirp</span> <span class='func'></span>(roj_complex_signal*<span class='arg'> a_sig</span>)</span><br>
+<span class='key'>@sign</span>: <span class='bold'>double <span class='range'>roj_pulse_generator</span><span class='range'></span> <span class='range'></span>:: <span class='func'>add_lfm_chirp</span><span class='func'></span> <span class='func'></span>(roj_complex_signal*<span class='arg'> a_sig</span>)</span><br>
 </div>
 <br><div class='method'>
 <span class='key'>@brief</span>: This routine roj_calculates a signal (series of HFM pulses) and adds it to a given argument. <br>
 <span class='key'>@param</span> [in,out]<span class='arg'> a_sig</span>: a signal for modification.  <br>
 <span class='key'>@return</span>: The added energy. <br>
-<span class='key'>@sign</span>: <span class='bold'>double <span class='range'>roj_pulse_generator</span> <span class='range'></span>:: <span class='func'>add_hfm_chirp</span> <span class='func'></span>(roj_complex_signal*<span class='arg'> a_sig</span>)</span><br>
+<span class='key'>@sign</span>: <span class='bold'>double <span class='range'>roj_pulse_generator</span><span class='range'></span> <span class='range'></span>:: <span class='func'>add_hfm_chirp</span><span class='func'></span> <span class='func'></span>(roj_complex_signal*<span class='arg'> a_sig</span>)</span><br>
 </div>
 <br><div class='method'>
 <span class='key'>@brief</span>: This routine roj_calculates a random FSK signal and adds it to a given argument. <br>
 <span class='key'>@param</span> [in,out]<span class='arg'> a_sig</span>: A signal for modification.  <br>
 <span class='key'>@return</span>: The added energy. <br>
-<span class='key'>@sign</span>: <span class='bold'>double <span class='range'>roj_pulse_generator</span> <span class='range'></span>:: <span class='func'>add_random_fsk</span> <span class='func'></span>(roj_complex_signal*<span class='arg'> a_sig</span>)</span><br>
+<span class='key'>@sign</span>: <span class='bold'>double <span class='range'>roj_pulse_generator</span><span class='range'></span> <span class='range'></span>:: <span class='func'>add_random_fsk</span><span class='func'></span> <span class='func'></span>(roj_complex_signal*<span class='arg'> a_sig</span>)</span><br>
 </div>
 <br>
 </body>
