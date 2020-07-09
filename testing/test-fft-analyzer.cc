@@ -1,5 +1,5 @@
 /* *************************************************** *
- * This file is a part of ccROJ project (version 0-48) *
+ * This file is a part of ccROJ project (version 0-49) *
  * distributed under GNU General Public License v3.0.  *
  * Please visit the webpage: github.com/dsp-box/ccROJ  *
  * for more information.                               *
@@ -66,7 +66,6 @@ int main(void){
   rec_signal->save_wav("out.wav");
     
   /* cleanning */
-  delete tf_analyzer;
   delete s_energy;
   delete r_energy;
   delete s_delay;
@@ -75,6 +74,7 @@ int main(void){
 
   delete rec_signal;
   delete c_stft;
+  delete tf_analyzer;
   
   return EXIT_SUCCESS;
 }

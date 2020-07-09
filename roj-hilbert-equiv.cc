@@ -1,5 +1,5 @@
 /* *************************************************** *
- * This file is a part of ccROJ project (version 0-48) *
+ * This file is a part of ccROJ project (version 0-49) *
  * distributed under GNU General Public License v3.0.  *
  * Please visit the webpage: github.com/dsp-box/ccROJ  *
  * for more information.                               *
@@ -59,13 +59,12 @@ roj_complex_signal* roj_hilbert_equiv :: get_equivalent (){
   
   if(m_equivalent==NULL){
     roj_fourier_spectrum *spectrum = m_signal->get_spectrum(); 
-    roj_signal_config *conf = spectrum->get_config();
-    int half = conf->length/2;
+    roj_signal_config conf = spectrum->get_config();
+    int half = conf.length/2;
     for(int n=0; n<half; n++)
       spectrum->m_spectrum[n] = 0.0;
     m_equivalent = spectrum->get_signal();
     delete spectrum;
-    delete conf;
   }
   
   return m_equivalent;

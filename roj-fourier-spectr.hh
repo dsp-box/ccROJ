@@ -1,5 +1,5 @@
 /* *************************************************** *
- * This file is a part of ccROJ project (version 0-48) *
+ * This file is a part of ccROJ project (version 0-49) *
  * distributed under GNU General Public License v3.0.  *
  * Please visit the webpage: github.com/dsp-box/ccROJ  *
  * for more information.                               *
@@ -43,7 +43,7 @@ public:
   ~roj_fourier_spectrum();
 
   /* config methods */
-  roj_signal_config* get_config();
+  roj_signal_config get_config();
 
   /* inverse transform */
   roj_complex_signal* get_signal();

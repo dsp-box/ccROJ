@@ -1,5 +1,5 @@
 /* *************************************************** *
- * This file is a part of ccROJ project (version 0-48) *
+ * This file is a part of ccROJ project (version 0-49) *
  * distributed under GNU General Public License v3.0.  *
  * Please visit the webpage: github.com/dsp-box/ccROJ  *
  * for more information.                               *

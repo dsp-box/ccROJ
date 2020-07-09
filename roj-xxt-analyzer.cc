@@ -1,5 +1,5 @@
 /* *************************************************** *
- * This file is a part of ccROJ project (version 0-48) *
+ * This file is a part of ccROJ project (version 0-49) *
  * distributed under GNU General Public License v3.0.  *
  * Please visit the webpage: github.com/dsp-box/ccROJ  *
  * for more information.                               *
@@ -90,15 +90,15 @@ roj_xxt_analyzer :: ~roj_xxt_analyzer(){
 
   std::map<std::pair<int, int>, complex double **>::iterator i = m_fourier_spectra.begin();
   for ( ; i != m_fourier_spectra.end(); ++i){
-       
+
     for(int n=0;n<get_width();n++)
       delete [] i->second[n];
     delete [] i->second;
-    
+
     m_fourier_spectra.erase (i);
   }
-  
-   delete m_window_gen;
+
+  delete m_window_gen;
 }
 
 /* ************************************************************************************************************************* */
@@ -291,7 +291,7 @@ roj_stft_transform* roj_xxt_analyzer :: get_stft_transform (){
 roj_real_matrix* roj_xxt_analyzer :: get_spectral_energy (){
 
   roj_stft_transform* c_stft = get_stft_transform ();  
-  roj_real_matrix*output = c_stft->get_spectral_energy ();
+  roj_real_matrix* output = c_stft->get_spectral_energy ();
   
   delete c_stft;
   return output;
@@ -408,41 +408,41 @@ roj_real_matrix* roj_xxt_analyzer :: get_instantaneous_frequency_by_2_estimator 
 */
 roj_real_matrix* roj_xxt_analyzer :: get_spectral_delay (){
 
-  /* check input signal */
-  if(m_input_signal==NULL){
-    call_warning("in roj_xxt_analyzer :: get_spectral_delay");
-    call_error("signal is not loaded!");
-  }
+   /* check input signal */
+   if(m_input_signal==NULL){
+     call_warning("in roj_xxt_analyzer :: get_spectral_delay");
+     call_error("signal is not loaded!");
+   }
 
-  /* filtering ({0,1} slot) */
-  if(m_fourier_spectra.count(CODE_WIN_T) == 0)
-    m_fourier_spectra[CODE_WIN_T] = transforming(0, 1);
+   /* make empty output object */
+   roj_real_matrix* output = create_empty_image();
 
-  /* filtering  ({0,0} slot) */
-  if(m_fourier_spectra.count(CODE_WIN_ZERO) == 0)
-    m_fourier_spectra[CODE_WIN_ZERO] = transforming(0, 0);
-  
-  /* make empty output object */
-  roj_real_matrix* output = create_empty_image();
-  
-  /* calc spectral delay estimate */
-  for(int k=0; k<get_height(); k++){
-    for(int n=0; n<get_width(); n++){
+   /* filtering ({0,1} slot) */
+   if(m_fourier_spectra.count(CODE_WIN_T) == 0)
+     m_fourier_spectra[CODE_WIN_T] = transforming(0, 1);
 
-      complex double y = m_fourier_spectra[CODE_WIN_ZERO][n][k]; 
-      complex double yT = m_fourier_spectra[CODE_WIN_T][n][k]; 
+   /* filtering  ({0,0} slot) */
+   if(m_fourier_spectra.count(CODE_WIN_ZERO) == 0)
+     m_fourier_spectra[CODE_WIN_ZERO] = transforming(0, 0);
 
-      if(cabs(y)==0)
-	output->m_data[n][k] = 1E300;
-      else
-	output->m_data[n][k] = creal(yT/y);
-    }
+   /* calc spectral delay estimate */
+   for(int k=0; k<get_height(); k++){
+     for(int n=0; n<get_width(); n++){
 
-    print_progress(k+1, get_height(), "s-delay");
-  }
+       complex double y = m_fourier_spectra[CODE_WIN_ZERO][n][k]; 
+       complex double yT = m_fourier_spectra[CODE_WIN_T][n][k];
 
-  print_progress(0, 0, "s-delay");
-  return output;
+       if(cabs(y)==0)
+	 output->m_data[n][k] = 1E300;
+       else
+	 output->m_data[n][k] = creal(yT/y);
+     }
+
+     print_progress(k+1, get_height(), "s-delay");
+   }
+
+   print_progress(0, 0, "s-delay");
+   return output;
 }
 
 /* ************************************************************************************************************************* */
@@ -688,8 +688,6 @@ roj_real_matrix* roj_xxt_analyzer :: get_chirp_rate_by_f_estimator (){
   print_progress(0, 0, "c-rate");
   return output;
 }
-
-
 
 /* ************************************************************************************************************************* */
 /**

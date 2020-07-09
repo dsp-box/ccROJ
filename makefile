@@ -74,7 +74,7 @@ DOC_GENER := ./scripts/doc-gener.py
 	$(DOC_GENER) $? > manual/$@ 
 
 doc: $(HTMLS)
-	${CP} scripts/draw-image.py manual
+	${CP} scripts/roj-draw.py manual
 	${CP} MANIFEST manual/manifest.txt
 	${CP} README manual/readme.txt
 

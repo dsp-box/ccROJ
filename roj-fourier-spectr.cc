@@ -1,5 +1,5 @@
 /* *************************************************** *
- * This file is a part of ccROJ project (version 0-48) *
+ * This file is a part of ccROJ project (version 0-49) *
  * distributed under GNU General Public License v3.0.  *
  * Please visit the webpage: github.com/dsp-box/ccROJ  *
  * for more information.                               *
@@ -108,12 +108,12 @@ roj_complex_signal* roj_fourier_spectrum :: get_signal (){
 *
 * @return: A pointer to the structure which contains the configuration.
 */
-roj_signal_config* roj_fourier_spectrum :: get_config (){
+roj_signal_config roj_fourier_spectrum :: get_config (){
 
   roj_signal_config* conf = new roj_signal_config;
   memcpy(conf, &m_config, sizeof(roj_signal_config));
   
-  return conf;
+  return *conf;
 }
 
 /* ************************************************************************************************************************* */

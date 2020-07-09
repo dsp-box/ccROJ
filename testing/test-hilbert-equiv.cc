@@ -1,5 +1,5 @@
 /* *************************************************** *
- * This file is a part of ccROJ project (version 0-48) *
+ * This file is a part of ccROJ project (version 0-49) *
  * distributed under GNU General Public License v3.0.  *
  * Please visit the webpage: github.com/dsp-box/ccROJ  *
  * for more information.                               *
@@ -39,17 +39,17 @@ int main(void){
   arr_conf.length = 1024*4;
   arr_conf.min = -1500;
   arr_conf.max = 1500;
-  
+
   /* finite window definition ************* */
   roj_window_generator* win_gen = new roj_window_generator(rate);
   win_gen->set_chirp_rate(0.0);
   win_gen->set_length(150);
   win_gen->set_type(0);
- 
+
   /* create TF Fourier analyzer */
   roj_fft_analyzer* tf_analyzer = new roj_fft_analyzer(arr_conf, win_gen); 
   delete win_gen;
-    
+
   /* set signal */
   int hop = 10;
   tf_analyzer->set_signal(in_signal, hop);
@@ -57,14 +57,14 @@ int main(void){
   /* signal is copied, 
      so it can be removed after used */
   delete in_signal;
-  
+
   /* get and save spectral energy */
   roj_real_matrix* s_energy = tf_analyzer->get_spectral_energy();
   s_energy->save("data-s-energy.txt"); 
-  
+
   /* get and save instantaneous frequency */
   roj_real_matrix* i_freq = tf_analyzer->get_instantaneous_frequency();
-  
+
   /* get and save spectral delay */
   roj_real_matrix* s_delay = tf_analyzer->get_spectral_delay();
 
@@ -77,7 +77,7 @@ int main(void){
   img_conf.y.min = 1000;
   img_conf.y.max = 1100;
   img_conf.x.length = 900;
-  
+
   roj_real_matrix* r_energy = new roj_real_matrix(img_conf);
   roj_time_frequency_reassign(s_delay, i_freq, s_energy, r_energy);
   r_energy->save("data-r-energy.txt");
