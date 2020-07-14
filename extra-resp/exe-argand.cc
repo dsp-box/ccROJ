@@ -2,7 +2,7 @@
 call the program as follows:
 
 ./convert.sh Ada_1A_007Sel_U.txt > _Ada_1A_007Sel_U.txt
-./exe-argang _Ada_1A_007Sel_U.txt > sig.txt
+./exe-argand _Ada_1A_007Sel_U.txt > sig.txt
 gnuplot -e "plot 'sig.txt' u 2:3 with lines; pause -1"
 
 */
