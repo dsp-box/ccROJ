@@ -28,7 +28,8 @@ int main(int argc, char **argv){
   double mass_ibw = 0.0;
   for (int n=0; n<conf.length; n++){
     double ibw = creal(icf->m_waveform[n]);
-    mass_ibw += ibw;
+    if (ibw>0) mass_ibw += ibw;
+    else mass_ibw -= ibw;
   }
 
   cout << "==============================\n";
