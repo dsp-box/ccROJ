@@ -27,7 +27,7 @@ int main(int argc, char **argv){
 
   double mass_ibw = 0.0;
   for (int n=0; n<conf.length; n++){
-    double ibw = cabs(icf->m_waveform[n]);
+    double ibw = creal(icf->m_waveform[n]);
     mass_ibw += ibw;
   }
 
