@@ -1,5 +1,7 @@
 # !/usr/bin/pythn3.6
 
+# any python greater or eqal 3.6
+
 import subprocess as sp
 import shlex
 import os
@@ -39,7 +41,7 @@ while offset < duration - window:
         if not "Final" in line and not "final" in line: continue
         _, _, _, result = line.split("\t")
         _, value, _ = result.split()
-        collector.append(value)
+        collector.append(float(value))
 assert collector
         
 denominator = len(collector)
