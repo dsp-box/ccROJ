@@ -53,7 +53,7 @@ int main(int argc, char **argv){
     double cv = 100 * s / ev;
     cout << "Part " << (n+1) * 360 / ring_conf.length << ":\toffset: "
 	 << offset << "\twindow: " << window << "\tresult: "
-	 << cv << "%\n";
+	 << cv << " %\n";
 
     avg += cv * ring_n->m_data[n];
     mass += ring_n->m_data[n];    
@@ -61,7 +61,7 @@ int main(int argc, char **argv){
 
   cout << "Final mean:\toffset: "
        << offset << "\twindow: " << window << "\tresult: "
-       << avg / mass << "%\n";
+       << avg / mass << " %\n";
     
   return 0;
 }
